@@ -1,6 +1,6 @@
        Đồ án lập trình web và ứng dụng
 
-Đề tài: Trang web bán hoa 
+Đề tài: Website bán hoa 
 Nhóm: 3
 Thành viên:
 1. Nguyễn Phước Lộc		MSSV: 3124410198
