@@ -1,9 +1,8 @@
-       Đồ án lập trình web và ứng dụng
-
 Đề tài: Website bán hoa 
 
-Thành viên:
-1. Nguyễn Phước Lộc		MSSV: 3124410198
-2. Nguyễn Cao Kỳ		MSSV: 3124410181
-3. Lê Nguyễn Băng Châu	MSSV: 3124410023
-4. Hoàng Ngọc Đại		MSSV: 3124560017
+|   MSSV     |         Họ tên	         |                 GitHub                  |
+--------------------------------------------------------------------------------------------------------------------------
+| 3124410181 |       Nguyễn Cao Kỳ          | https://github.com/nguyencaoky671-cloud |
+| 3124410198 |	Nguyễn Phước Lộc       | https://github.com/phuocloc06           |
+| 3124410023 |       Lê Nguyễn Băng Châu    | https://github.com/lenguyenbangchau511  |
+| 3124560017 |	Hoàng Ngọc Đại         | https://github.com/dai35263gE           |
