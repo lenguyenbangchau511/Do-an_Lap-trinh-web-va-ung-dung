@@ -1,3 +1,3 @@
-ĐỒ ÁN LẬP TRÌNH WEB VÀ ỨNG 
+ĐỒ ÁN LẬP TRÌNH WEB VÀ ỨNG DỤNG
 
 ĐỀ TÀI: WEBSITE BÁN HOA
