@@ -1,0 +1,72 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Playwrite+DE+SAS:wght@100..400&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    box-sizing: border-box !important;
+}
+
+:root {
+    --color-text: #DB1956;
+    --color-2: #EA2769;
+    --color-3: #FFFFFF;
+    --font:"Inria Serif", serif;
+}
+
+body {
+    font-family: var(--font);
+}
+
+.container {
+    display: grid;
+    width: 100%;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button {
+    background: var(--color-2);
+    color: rgb(255, 255, 255);
+    padding: 5px 25px;
+    border: 1px solid rgba(0, 0, 0, 0.307);
+    font-size: 17px;
+    border-radius: 13px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+
+
+.button-2:hover{
+    color: #FFC800;
+}
+
+a {
+    text-decoration: none !important;
+}
+@media (max-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 540px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        max-width: 100%;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
