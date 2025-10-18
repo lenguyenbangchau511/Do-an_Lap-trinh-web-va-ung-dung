@@ -1,73 +1,640 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Florist</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bloom - Cửa hàng hoa tươi</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-<!-- Thanh hotline -->
-<div class="hotline">
-    HOTLINE: 1900 633 045 | 0865 160 360
-</div>
+  <!-- SITE WRAPPER -->
+  <div class="site-wrapper">
 
-<!-- Header -->
-<header>
-    <div class="logo">🌸 FLORIST</div>
-    <nav>
-        <ul>
-            <li><a href="#">Tìm kiếm</a></li>
-            <li><a href="#">Trang chủ</a></li>
-            <li><a href="#">Danh mục</a></li>
-            <li><a href="#">Liên hệ</a></li>
-            <li><a href="#">Đã thích</a></li>
-            <li><a href="#">Giỏ hàng</a></li>
-            <li><a href="#">Tài khoản</a></li>
-        </ul>
-    </nav>
-</header>
+    <!-- HEADER ĐÃ SỬA - BỎ TÌM KIẾM TRÊN HEADER -->
+    <header class="bloom-header">
+      <div class="bloom-container">
+        <div class="bloom-logo">
+          <svg class="logo-icon" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+            <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+            <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+            <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+            <circle cx="50" cy="50" r="12" fill="#9370db"/>
+            <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+          </svg>
+          <span>Bloom</span>
+        </div>
 
-<!-- Banner -->
-<section class="banner">
-    <h2>Making beautiful flowers a part of your life.</h2>
-    <p>Fresh flower & Gift shop</p>
-    <button>Xem Ngay</button>
-</section>
+        <!-- ĐÃ XÓA PHẦN TÌM KIẾM TRÊN HEADER -->
 
-<!-- Danh sách sản phẩm -->
-<section class="products">
-    <h2>Hoa Tươi Giảm Đến 30%</h2>
-    <div class="product-list">
-        <div class="product">
-            <img src="images/hoa1.jpg" alt="Caffeine">
-            <h3>Caffeine</h3>
-            <p class="price">530,000 VND <span class="old-price">590,000 VND</span></p>
-            <button>Đặt Hàng</button>
-        </div>
-        <div class="product">
-            <img src="images/hoa2.jpg" alt="Say Đắm">
-            <h3>Say Đắm</h3>
-            <p class="price">560,000 VND <span class="old-price">690,000 VND</span></p>
-            <button>Đặt Hàng</button>
-        </div>
-        <div class="product">
-            <img src="images/hoa3.jpg" alt="Ban Mai">
-            <h3>Ban Mai</h3>
-            <p class="price">630,000 VND <span class="old-price">710,000 VND</span></p>
-            <button>Đặt Hàng</button>
-        </div>
-        <div class="product">
-            <img src="images/hoa4.jpg" alt="Be Happy">
-            <h3>Be Happy</h3>
-            <p class="price">720,000 VND <span class="old-price">810,000 VND</span></p>
-            <button>Đặt Hàng</button>
-        </div>
-    </div>
-</section>
+        <nav class="bloom-nav">
+          <a href="index.html">Trang chủ</a>
+          <a href="cart.html" title="Giỏ hàng"><i class="fa-solid fa-bag-shopping"></i></a>
+          <a href="order-history.html" title="Lịch sử"><i class="fa-regular fa-clock"></i></a>
+          <a href="login.html" title="Tài khoản"><i class="fa-regular fa-circle-user"></i></a>
+        </nav>
+        
+        <!-- Menu mobile -->
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
 
-<!-- Footer -->
-<footer>
-    <p>📞 091 849 1941 | 086 516 0360 - FlowerCorner.vn</p>
-</footer>
+    <script>
+      window.addEventListener('scroll', () => {
+        const header = document.querySelector('.bloom-header');
+        if (window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+      });
+      
+      // Mobile menu toggle
+      document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+        document.querySelector('.bloom-nav').classList.toggle('active');
+      });
+    </script>
+
+    <!-- ==== HERO ==== -->
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <h1>Lan tỏa hương sắc thiên nhiên</h1>
+        <p>Những bó hoa Bloom mang hơi thở của sự tinh tế, thuần khiết và chân thành.</p>
+        <button class="btn-hero">Khám phá ngay</button>
+      </div>
+    </section>
+
+    <!-- DANH MỤC -->
+    <section class="categories container">
+      <ul>
+        <li class="active"><a href="#">Tất cả sản phẩm</a></li>
+        <li><a href="#">Bó hoa</a></li>
+        <li><a href="#">Lẵng hoa</a></li>
+        <li><a href="#">Kệ hoa</a></li>
+      </ul>
+    </section>
+
+    <!-- TÌM KIẾM NÂNG CAO -->
+    <section class="advanced-search container">
+      <div class="search-toggle">
+        <button class="toggle-btn active" data-tab="basic">Tìm kiếm cơ bản</button>
+        <button class="toggle-btn" data-tab="advanced">Tìm kiếm nâng cao</button>
+      </div>
+
+      <!-- Tìm kiếm cơ bản -->
+      <div class="search-tab active" id="basic-search">
+        <div class="basic-search-form">
+          <div class="search-input-group">
+            <input type="text" placeholder="Nhập tên sản phẩm bạn muốn tìm..." class="search-input" id="basic-search-input">
+            <button class="search-btn" id="basic-search-btn">
+              <i class="fas fa-search"></i>
+              Tìm kiếm
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tìm kiếm nâng cao -->
+      <div class="search-tab" id="advanced-search">
+        <div class="advanced-search-form">
+          <div class="search-row">
+            <div class="search-group">
+              <label for="product-name">Tên sản phẩm</label>
+              <input type="text" id="product-name" placeholder="Nhập tên sản phẩm...">
+            </div>
+            
+            <div class="search-group">
+              <label for="category">Phân loại</label>
+              <select id="category">
+                <option value="">Tất cả phân loại</option>
+                <option value="bo-hoa">Bó hoa</option>
+                <option value="lang-hoa">Lẵng hoa</option>
+                <option value="ke-hoa">Kệ hoa</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="search-row">
+            <div class="search-group">
+              <label for="min-price">Giá từ</label>
+              <div class="price-input-group">
+                <input type="number" id="min-price" placeholder="0" min="0">
+                <span class="currency">₫</span>
+              </div>
+            </div>
+            
+            <div class="search-group">
+              <label for="max-price">Đến</label>
+              <div class="price-input-group">
+                <input type="number" id="max-price" placeholder="10,000,000" min="0">
+                <span class="currency">₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="search-actions">
+            <button type="reset" class="btn-outline" id="reset-btn">
+              <i class="fas fa-redo"></i>
+              Đặt lại
+            </button>
+            <button type="button" class="btn-primary search-submit" id="advanced-search-btn">
+              <i class="fas fa-search"></i>
+              Tìm kiếm nâng cao
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KẾT QUẢ TÌM KIẾM -->
+    <section class="search-results container" id="search-results" style="display: none;">
+      <div class="results-header">
+        <h2>Kết quả tìm kiếm</h2>
+        <div class="results-info">
+          <span class="results-count">Tìm thấy <strong id="results-count">0</strong> sản phẩm</span>
+          <div class="sort-options">
+            <label for="sort-by">Sắp xếp:</label>
+            <select id="sort-by">
+              <option value="popular">Phổ biến nhất</option>
+              <option value="newest">Mới nhất</option>
+              <option value="price-low">Giá thấp đến cao</option>
+              <option value="price-high">Giá cao đến thấp</option>
+              <option value="name">Tên A-Z</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-grid" id="search-results-grid">
+        <!-- Kết quả tìm kiếm sẽ hiển thị ở đây -->
+      </div>
+
+      <!-- PHÂN TRANG -->
+      <div class="pagination">
+        <a href="#" class="page-nav disabled">
+          <i class="fas fa-chevron-left"></i>
+        </a>
+        <a href="#" class="page-number active">1</a>
+        <a href="#" class="page-number">2</a>
+        <a href="#" class="page-number">3</a>
+        <span class="page-ellipsis">...</span>
+        <a href="#" class="page-number">8</a>
+        <a href="#" class="page-nav">
+          <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- SẢN PHẨM MẶC ĐỊNH -->
+    <main id="products" class="container">
+      <div class="product-grid" id="default-products">
+        <article class="product">
+          <img src="images/hoa1.jpg" alt="Nhiệt Ái">
+          <h3>Nhiệt Ái</h3>
+          <p class="price">700.000₫</p>
+          <button class="btn-outline">Thêm vào giỏ</button>
+        </article>
+
+        <article class="product">
+          <img src="images/hoa2.jpg" alt="Peach">
+          <h3>Peach</h3>
+          <p class="price">770.000₫</p>
+          <button class="btn-outline">Thêm vào giỏ</button>
+        </article>
+
+        <article class="product">
+          <img src="images/hoa3.jpg" alt="Blueberry">
+          <h3>Blueberry</h3>
+          <p class="price">650.000₫</p>
+          <button class="btn-outline">Thêm vào giỏ</button>
+        </article>
+
+        <article class="product">
+          <img src="images/hoa4.jpg" alt="Lemon">
+          <h3>Lemon</h3>
+          <p class="price">250.000₫</p>
+          <button class="btn-outline">Thêm vào giỏ</button>
+        </article>
+
+        <article class="product">
+          <img src="images/hoa5.jpg" alt="Vườn Xuân Ca">
+          <h3>Vườn Xuân Ca</h3>
+          <p class="price">670.000₫</p>
+          <button class="btn-outline">Thêm vào giỏ</button>
+        </article>
+
+        <article class="product">
+          <img src="images/langhoa1.webp" alt="Shimmer Grace">
+          <h3>Shimmer Grace</h3>
+          <p class="price">1.150.000₫</p>
+          <button class="btn-outline">Thêm vào giỏ</button>
+        </article>
+
+        <article class="product">
+          <img src="images/langhoa2.jpg" alt="BlueSky">
+          <h3>BlueSky</h3>
+          <p class="price">1.450.000₫</p>
+          <button class="btn-outline">Thêm vào giỏ</button>
+        </article>
+
+        <article class="product">
+          <img src="images/langhoa3.png" alt="Sen Xanh">
+          <h3>Sen Xanh</h3>
+          <p class="price">1.500.000₫</p>
+          <button class="btn-outline">Thêm vào giỏ</button>
+        </article>
+
+        <article class="product">
+            <img src="images/kehoa1.jpg" alt="Sắc Màu">
+            <h3>Sắc Màu</h3>
+            <p class="price">3.500.000₫</p>
+            <button class="btn-outline">Thêm vào giỏ</button>
+        </article>
+
+        <article class="product">
+            <img src="images/kehoa2.jpg" alt="Hồng Phát">
+            <h3>Hồng Phát</h3>
+            <p class="price">1.900.000₫</p>
+            <button class="btn-outline">Thêm vào giỏ</button>
+        </article>
+
+        <article class="product">
+            <img src="images/kehoa3.jpg" alt="Tương Lai">
+            <h3>Tương Lai</h3>
+            <p class="price">2.100.000₫</p>
+            <button class="btn-outline">Thêm vào giỏ</button>
+        </article>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-main">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+                <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+                <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+                <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+                <circle cx="50" cy="50" r="12" fill="#9370db"/>
+                <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+              </svg>
+              <span>Bloom</span>
+            </div>
+            <p class="footer-tagline">Lan tỏa hương sắc thiên nhiên</p>
+          </div>
+
+          <div class="footer-contact">
+            <h4>Thông Tin Liên Hệ</h4>
+            <div class="contact-info">
+              <div class="contact-item">
+                <i class="fas fa-globe"></i>
+                <span>bloom.vn</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>123 Đường Hoa, Quận 1, TP.HCM</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <a href="tel:0931303836">090 123 4567</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:info@bloom.vn">info@bloom.vn</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-clock"></i>
+                <span>T2 – CN: 8h30 – 21h00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div> <!-- /site-wrapper -->
+
+  <!-- JAVASCRIPT TÌM KIẾM -->
+  <script>
+    // Dữ liệu mẫu cho sản phẩm
+    const sampleProducts = [
+      {
+        id: 1,
+        name: "Nhiệt Ái",
+        price: 700000,
+        category: "bo-hoa",
+        image: "images/hoa1.jpg",
+        description: "Bó hoa thể hiện trọn vẹn sự mãnh liệt và lãng mạn của tình yêu"
+      },
+      {
+        id: 2,
+        name: "Peach",
+        price: 770000,
+        category: "bo-hoa",
+        image: "images/hoa2.jpg",
+        description: "Bó hoa hồng phấn dịu dàng và thanh lịch"
+      },
+      {
+        id: 3,
+        name: "Blueberry",
+        price: 250000,
+        category: "bo-hoa",
+        image: "images/hoa3.jpg",
+        description: "Sắc tím quyến rũ và bí ẩn"
+      },
+      {
+        id: 4,
+        name: "Lemon",
+        price: 650000,
+        category: "bo-hoa",
+        image: "images/hoa4.jpg",
+        description: "Lẵng hoa tươi sáng và tràn đầy năng lượng"
+      },
+      {
+        id: 5,
+        name: "Vườn Xuân Ca",
+        price: 670000,
+        category: "bo-hoa",
+        image: "images/hoa5.jpg",
+        description: "Kệ hoa đa sắc màu cho không gian rộng"
+      },
+      {
+        id: 6,
+        name: "Shimmer Grace",
+        price: 1150000,
+        category: "lang-hoa",
+        image: "images/langhoa1.webp",
+        description: "Lẵng hoa trắng tinh khôi và thanh khiết"
+      },
+      {
+        id: 7,
+        name: "BlueSky",
+        price: 1450000,
+        category: "lang-hoa",
+        image: "images/langhoa2.jpg",
+        description: "Kệ hoa phong cách hiện đại"
+      },
+      {
+        id: 8,
+        name: "Sen Xanh",
+        price: 1500000,
+        category: "lang-hoa",
+        image: "images/langhoa3.png",
+        description: "Lẵng hoa sen thanh tao và quý phái"
+      }, 
+      {
+        id: 9,
+        name: "Sắc Màu",
+        price: 3500000,
+        category: "ke-hoa",
+        image: "images/kehoa1.jpg",
+        description: "Kệ hoa đa sắc màu rực rỡ"
+    },
+    {
+        id: 10,
+        name: "Hồng Phát",
+        price: 1900000,
+        category: "ke-hoa",
+        image: "images/kehoa2.jpg",
+        description: "Kệ hoa mang đến may mắn và tài lộc"
+    },
+    {
+        id: 11,
+        name: "Tương Lai",
+        price: 2100000,
+        category: "ke-hoa",
+        image: "images/kehoa3.jpg",
+        description: "Kệ hoa hiện đại hướng đến tương lai"
+    }
+];
+
+    // Hàm tìm kiếm sản phẩm
+    function searchProducts(filters) {
+      return sampleProducts.filter(product => {
+        // Lọc theo tên sản phẩm
+        if (filters.name && !product.name.toLowerCase().includes(filters.name.toLowerCase())) {
+          return false;
+        }
+        
+        // Lọc theo phân loại
+        if (filters.category && product.category !== filters.category) {
+          return false;
+        }
+        
+        // Lọc theo khoảng giá
+        if (filters.minPrice && product.price < filters.minPrice) {
+          return false;
+        }
+        if (filters.maxPrice && product.price > filters.maxPrice) {
+          return false;
+        }
+        
+        return true;
+      });
+    }
+
+    // Hàm hiển thị kết quả tìm kiếm
+    function displaySearchResults(products, sortBy = 'popular') {
+      const resultsContainer = document.getElementById('search-results-grid');
+      const resultsCount = document.getElementById('results-count');
+      const resultsSection = document.getElementById('search-results');
+      const defaultProducts = document.getElementById('default-products');
+      
+      // Sắp xếp sản phẩm
+      const sortedProducts = sortProducts(products, sortBy);
+      
+      // Cập nhật số lượng kết quả
+      resultsCount.textContent = sortedProducts.length;
+      
+      // Xóa kết quả cũ
+      resultsContainer.innerHTML = '';
+      
+      // Hiển thị kết quả mới
+      if (sortedProducts.length === 0) {
+        resultsContainer.innerHTML = `
+          <div class="no-results" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+            <i class="fas fa-search" style="font-size: 3rem; color: #ddd; margin-bottom: 20px;"></i>
+            <h3 style="color: #6b8b7a; margin-bottom: 15px;">Không tìm thấy sản phẩm phù hợp</h3>
+            <p style="color: #6b8b7a;">Hãy thử điều chỉnh tiêu chí tìm kiếm của bạn</p>
+          </div>
+        `;
+      } else {
+        sortedProducts.forEach(product => {
+          const productElement = createProductElement(product);
+          resultsContainer.appendChild(productElement);
+        });
+      }
+      
+      // Ẩn sản phẩm mặc định và hiển thị kết quả tìm kiếm
+      defaultProducts.style.display = 'none';
+      resultsSection.style.display = 'block';
+      
+      // Cuộn đến kết quả
+      resultsSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+
+    // Hàm hiển thị sản phẩm mặc định
+    function showDefaultProducts() {
+      const resultsSection = document.getElementById('search-results');
+      const defaultProducts = document.getElementById('default-products');
+      
+      resultsSection.style.display = 'none';
+      defaultProducts.style.display = 'grid';
+    }
+
+    // Hàm sắp xếp sản phẩm
+    function sortProducts(products, sortBy) {
+      switch (sortBy) {
+        case 'newest':
+          return [...products].sort((a, b) => b.id - a.id);
+        case 'price-low':
+          return [...products].sort((a, b) => a.price - b.price);
+        case 'price-high':
+          return [...products].sort((a, b) => b.price - a.price);
+        case 'name':
+          return [...products].sort((a, b) => a.name.localeCompare(b.name));
+        default: // popular
+          return products;
+      }
+    }
+
+    // Hàm tạo HTML cho sản phẩm
+    function createProductElement(product) {
+      const productDiv = document.createElement('article');
+      productDiv.className = 'product';
+      productDiv.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+        <h3>${product.name}</h3>
+        <p class="price">${product.price.toLocaleString()}₫</p>
+        <button class="btn-outline" onclick="addToCart(${product.id})">Thêm vào giỏ</button>
+      `;
+      return productDiv;
+    }
+
+    // Hàm thêm vào giỏ hàng (giả lập)
+    function addToCart(productId) {
+      const product = sampleProducts.find(p => p.id === productId);
+      if (product) {
+        alert(`Đã thêm "${product.name}" vào giỏ hàng!`);
+      }
+    }
+
+    // JavaScript chính khi trang load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Chuyển đổi giữa các tab tìm kiếm
+      const toggleBtns = document.querySelectorAll('.toggle-btn');
+      const searchTabs = document.querySelectorAll('.search-tab');
+      
+      toggleBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const targetTab = this.getAttribute('data-tab');
+          
+          // Cập nhật trạng thái active cho nút
+          toggleBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Hiển thị tab tương ứng
+          searchTabs.forEach(tab => {
+            tab.classList.remove('active');
+            if (tab.id === `${targetTab}-search`) {
+              tab.classList.add('active');
+            }
+          });
+        });
+      });
+      
+      // Xử lý tìm kiếm cơ bản
+      const basicSearchBtn = document.getElementById('basic-search-btn');
+      const basicSearchInput = document.getElementById('basic-search-input');
+      
+      basicSearchBtn.addEventListener('click', function() {
+        const searchTerm = basicSearchInput.value.trim();
+        if (!searchTerm) {
+          alert('Vui lòng nhập từ khóa tìm kiếm');
+          return;
+        }
+        
+        const filters = {
+          name: searchTerm
+        };
+        
+        const results = searchProducts(filters);
+        displaySearchResults(results);
+      });
+      
+      // Xử lý tìm kiếm nâng cao
+      const advancedSearchBtn = document.getElementById('advanced-search-btn');
+      
+      advancedSearchBtn.addEventListener('click', function() {
+        const filters = {
+          name: document.getElementById('product-name').value.trim(),
+          category: document.getElementById('category').value,
+          minPrice: document.getElementById('min-price').value ? parseInt(document.getElementById('min-price').value) : null,
+          maxPrice: document.getElementById('max-price').value ? parseInt(document.getElementById('max-price').value) : null
+        };
+        
+        const results = searchProducts(filters);
+        displaySearchResults(results);
+      });
+      
+      // Xử lý sắp xếp
+      const sortSelect = document.getElementById('sort-by');
+      sortSelect.addEventListener('change', function() {
+        const currentProducts = Array.from(document.querySelectorAll('#search-results-grid .product'))
+          .map(el => {
+            const name = el.querySelector('h3').textContent;
+            return sampleProducts.find(p => p.name === name);
+          })
+          .filter(p => p !== undefined);
+        
+        displaySearchResults(currentProducts, this.value);
+      });
+      
+      // Đặt lại form
+      const resetBtn = document.getElementById('reset-btn');
+      resetBtn.addEventListener('click', function() {
+        // Reset tất cả input trong form tìm kiếm nâng cao
+        document.getElementById('product-name').value = '';
+        document.getElementById('category').value = '';
+        document.getElementById('min-price').value = '';
+        document.getElementById('max-price').value = '';
+        
+        // Hiển thị sản phẩm mặc định
+        showDefaultProducts();
+      });
+      
+      // Xử lý phân trang (giả lập)
+      const pageNumbers = document.querySelectorAll('.page-number');
+      pageNumbers.forEach(page => {
+        page.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Cập nhật trạng thái active
+          pageNumbers.forEach(p => p.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      // Cho phép nhấn Enter để tìm kiếm
+      basicSearchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          basicSearchBtn.click();
+        }
+      });
+    });
+  </script>
 </body>
 </html>

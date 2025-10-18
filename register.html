@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng ký - Bloom</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="site-wrapper">
+    <!-- HEADER -->
+    <header class="bloom-header">
+      <div class="bloom-container">
+        <div class="bloom-logo">
+          <a href="index.html">
+            <svg class="logo-icon" viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+              <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+              <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+              <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+              <circle cx="50" cy="50" r="12" fill="#9370db"/>
+              <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+            </svg>
+            <span>Bloom</span>
+          </a>
+        </div>
+
+        <nav class="bloom-nav">
+          <a href="index.html">Trang chủ</a>
+          <a href="products.html">Sản phẩm</a>
+          <a href="cart.html" title="Giỏ hàng"><i class="fa-solid fa-bag-shopping"></i></a>
+          <a href="order-history.html" title="Lịch sử"><i class="fa-regular fa-clock"></i></a>
+          <a href="login.html" title="Tài khoản"><i class="fa-regular fa-circle-user"></i></a>
+        </nav>
+        
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="auth-container">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h1>Đăng ký tài khoản</h1>
+          <p>Tạo tài khoản để trải nghiệm mua sắm tốt hơn</p>
+        </div>
+        
+        <form class="auth-form" id="registerForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">Họ và tên đệm*</label>
+              <input type="text" id="firstName" name="firstName" autocomplete="family-name" placeholder="Ví dụ: Nguyễn Văn" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Tên*</label>
+              <input type="text" id="lastName" name="lastName" autocomplete="given-name" placeholder="Ví dụ: Anh" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="Nhập email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Số điện thoại*</label>
+            <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Mật khẩu*</label>
+            <input type="password" id="password" name="password" placeholder="Tạo mật khẩu" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="confirmPassword">Xác nhận mật khẩu*</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+          </div>
+          
+          <div class="form-options">
+            <label class="checkbox-container">
+              <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+              <span class="checkmark"></span>
+              <span class="checkbox-text">Tôi đồng ý với <a href="#">Điều khoản dịch vụ</a> và <a href="#">Chính sách bảo mật</a></span>
+            </label>
+          </div>
+          
+          <button type="submit" class="btn-primary">Đăng ký</button>
+        </form>
+        
+        <div class="auth-footer">
+          <p>Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a></p>
+        </div>
+      </div>
+    </main>
+
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+    document.querySelector('.bloom-nav').classList.toggle('active');
+    });
+
+    // Form validation - KHÔNG KIỂM TRA GÌ CẢ
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Luôn thành công bất kể nhập gì
+    alert('Đăng ký thành công!');
+    window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
