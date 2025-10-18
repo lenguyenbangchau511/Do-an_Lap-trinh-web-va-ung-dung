@@ -9,21 +9,31 @@
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="/Do_an_Web1/css/base.css">
-    <link rel="stylesheet" href="/Do_an_Web1/css/style.css">
-    <link rel="stylesheet" href="/Do_an_Web1/css/reset.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/reset.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
 <body>
     <!-- <script> src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <div class="top">
         <div class="inner-wrap">
             <div class="top-hotline">HOTLINE: 1900 633 045 | 0865 160 360</div>
             <div class="top-menu">
-                <div class="menu"><i class="fa-solid fa-user"></i>Tài khoản</div>
-                <div class="menu"><i class="fa-solid fa-cart-shopping"></i>Giỏ hàng</div>
+                <div class="menu btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+                        class="fa-solid fa-user"></i>Tài khoản
+                    <div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Đăng nhập</a></li>
+                            <li><a class="dropdown-item" href="#">Đăng ký</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu"><i class="fa-solid fa-cart-shopping"></i>Giỏ hàng
+                </div>
                 <div class="menu"><i class="fa-solid fa-credit-card"></i>Thanh toán</div>
             </div>
         </div>
@@ -40,7 +50,7 @@
                         </ul>
                     </div>
                     <div class="inner-logo">
-                        <a href="#"><img src="/Do_an_Web1/image/logo.jpg" alt=""></a>
+                        <a href="#"><img src="/image/logo.jpg" alt=""></a>
                     </div>
                     <div class="inner-search">
                         <form action="" class="form-search">
@@ -51,15 +61,75 @@
                     </div>
                 </div>
                 <div class="header-top">
-                    <ul>
-                        <li class="menu-1">HOA SINH NHẬT</li>
-                        <li class="menu-2">HOA KHAI TRƯƠNG</li>
-                        <li class="menu-3">LAN HỒ ĐIỆP</li>
-                        <li class="menu-4">CHỦ ĐỀ</li>
-                        <li class="menu-5">THIẾT KẾ</li>
-                        <li class="menu-6">HOA TƯƠI</li>
-                        <li class="menu-7">HOA TƯƠI GIẢM 30%</li>
-                    </ul>
+                    <div class="menu-1 dropdown">
+                        <div class="btn btn-secondary" type="button">
+                            Hoa sinh nhật
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">HOA SINH NHẬT TRANG TRỌNG</a></li>
+                            <li><a class="dropdown-item" href="#">HOA SINH NHẬT GIÁ RẺ</a></li>
+                            <li><a class="dropdown-item" href="#">HOA TẶNG MẸ</a></li>
+                            <li><a class="dropdown-item" href="#">HOA TẶNG BẠN</a></li>
+                            <li><a class="dropdown-item" href="#">HOA TẶNG NGƯỜI YÊU</a></li>
+                            <li><a class="dropdown-item" href="#">GIỎ HOA SINH NHẬT</a></li>
+                        </ul>
+                    </div>
+                    <div class="menu-2 dropdown">
+                        <div class="btn btn-secondary" type="button">
+                            HOA KHAI TRƯƠNG
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">HOA KHAI TRƯƠNG ĐỂ BÀN</a></li>
+                            <li><a class="dropdown-item" href="#">KỆ HOA KHAI TRƯƠNG</a></li>
+                            <li><a class="dropdown-item" href="#">HOA KHAI TRƯƠNG GIÁ RẺ</a></li>
+                        </ul>
+                    </div>
+                    <div class="menu-3 dropdown">
+                        <div class="btn btn-secondary" type="button">
+                            LAN HỒ ĐIỆP
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">LAN HỒ ĐIỆP MINI</a></li>
+                            <li><a class="dropdown-item" href="#">LAN HỒ ĐIỆP VÀNG </a></li>
+                            <li><a class="dropdown-item" href="#">LAN HỒ ĐIỆP TRẮNG</a></li>
+                            <li><a class="dropdown-item" href="#">LAN HỒ ĐIỆP 3 CÀNH</a></li>
+                            <li><a class="dropdown-item" href="#">LAN HỒ ĐIỆP 5 CÀNH</a></li>
+                        </ul>
+                    </div>
+                    <div class="menu-4 dropdown">
+                        <div class="btn btn-secondary" type="button">
+                            CHỦ ĐỀ
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">HOA CHÚC MỪNG</a></li>
+                            <li><a class="dropdown-item" href="#">GIÁNG SINH</a></li>
+                            <li><a class="dropdown-item" href="#">20/10</a></li>
+                        </ul>
+                    </div>
+                    <div class="menu-5 dropdown">
+                        <div class="btn btn-secondary" type="button">
+                            THIẾT KẾ
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">BÓ HOA</a></li>
+                            <li><a class="dropdown-item" href="#">LÃNG HOA</a></li>
+                        </ul>
+                    </div>
+                    <div class="menu-6 dropdown">
+                        <div class="btn btn-secondary" type="button">
+                           HOA TƯƠI
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">HOA HỒNG</a></li>
+                            <li><a class="dropdown-item" href="#">HOA LY</a></li>
+                            <li><a class="dropdown-item" href="#">HOA CẨM TÚ CẦU</a></li>
+                        </ul>
+                    </div>
+                    <div class="menu-7 dropdown">
+                        <a class="btn btn-secondary" type="button" href="#">
+                            HOA TƯƠI GIẢM 30%
+                        </a>
+                    </div>
                 </div>
                 <div class="header-title">Hotline Đặt Hoa Nhanh - TP HCM: 1900 633 045 - Hà Nội: 094 200 7921</div>
             </div>
@@ -101,16 +171,16 @@
             <div class="home-slider">
                 <div class="slideshow" id="slideshow">
                     <div class="mySlides ">
-                        <img src="/Do_an_Web1/image/1.jpg">
+                        <img src="/image/1.jpg">
                     </div>
                     <div class="mySlides ">
-                        <img src="/Do_an_Web1/image/2.jpg">
+                        <img src="/image/2.jpg">
                     </div>
                     <div class="mySlides ">
-                        <img src="/Do_an_Web1/image/3.jpg">
+                        <img src="/image/3.jpg">
                     </div>
                     <div class="mySlides ">
-                        <img src="/Do_an_Web1/image/4.jpg">
+                        <img src="/image/4.jpg">
                     </div>
                     <a class="prev" onclick="plusSlides(-1)">❮</a>
                     <a class="next" onclick="plusSlides(1)">❯</a>
@@ -130,12 +200,13 @@
     <h2 class="text-center mb-4 mt-4">HOA CHÚC MỪNG 20-10</h2>
     <div class="product">
         <div class="container">
-            <div class="row"  style="margin-bottom: 50px;">
+            <div class="row" style="margin-bottom: 50px;">
                 <div class="col-xl-3">
                     <div class="product-thumb-1">
                         <div class="image">
                             <a href="#">
-                                <img src="/Do_an_Web1/image/5.jpg" alt="Ẩn Dấu" width="261" height="326" title="Ẩn Dấu" class="img-fluid lozad">
+                                <img src="/image/5.jpg" alt="Ẩn Dấu" width="261" height="326" title="Ẩn Dấu"
+                                    class="img-fluid lozad">
                                 <span class="percent-off-rounded">11%<br>GIẢM</span>
                             </a>
                         </div>
@@ -144,7 +215,8 @@
                                 <h3><a class="product-item-title" href="https://www.flowercorner.vn/san-pham/an-dau">Ẩn
                                         Dấu</a></h3>
                                 <div class="price">
-                                    <span class="price-new">490,000VND</span> <span class="price-old"><del> 550,000 VND</del></span>
+                                    <span class="price-new">490,000VND</span> <span class="price-old"><del> 550,000
+                                            VND</del></span>
                                 </div>
                             </div>
                             <div class="button text-center">
@@ -160,7 +232,7 @@
                     <div class="product-thumb-2">
                         <div class="image">
                             <a href="#">
-                                <img src="/Do_an_Web1/image/6.jpg" width="261" height="326" alt="Coral Pink" title="Coral Pink"
+                                <img src="/image/6.jpg" width="261" height="326" alt="Coral Pink" title="Coral Pink"
                                     class="img-fluid lozad" data-loaded="true">
                                 <span class="percent-off-rounded">8%<br>GIẢM</span>
                             </a>
@@ -169,7 +241,8 @@
                             <div class="description">
                                 <h3><a class="product-item-title" href="#">Coral Pink</a></h3>
                                 <div class="price">
-                                    <span class="price-new">490,000VND</span> <span class="price-old"><del>530,000VND</del></span>
+                                    <span class="price-new">490,000VND</span> <span
+                                        class="price-old"><del>530,000VND</del></span>
                                 </div>
                             </div>
                             <div class="button text-center">
@@ -185,7 +258,7 @@
                     <div class="product-thumb-3">
                         <div class="image">
                             <a href="#">
-                                <img src="/Do_an_Web1/image/7.jpg" width="261" height="326" alt="Kiều Diễm" title="Kiều Diễm"
+                                <img src="/image/7.jpg" width="261" height="326" alt="Kiều Diễm" title="Kiều Diễm"
                                     class="img-fluid lozad" data-loaded="true">
                                 <span class="percent-off-rounded">9%<br>GIẢM</span>
                             </a>
@@ -194,7 +267,8 @@
                             <div class="description">
                                 <h3><a class="product-item-title" href="#">Kiều Diễm</a></h3>
                                 <div class="price">
-                                    <span class="price-new">490,000VND</span> <span class="price-old"><del>540,000VND</del></span>
+                                    <span class="price-new">490,000VND</span> <span
+                                        class="price-old"><del>540,000VND</del></span>
                                 </div>
                             </div>
                             <div class="button text-center">
@@ -210,8 +284,8 @@
                     <div class="product-thumb-4">
                         <div class="image">
                             <a href="#">
-                                <img src="/Do_an_Web1/image/8.jpg" width="261" height="326" alt="Bó hoa 20-10 - 01" title="Bó hoa 20-10 - 01"
-                                    class="img-fluid lozad" data-loaded="true">
+                                <img src="/image/8.jpg" width="261" height="326" alt="Bó hoa 20-10 - 01"
+                                    title="Bó hoa 20-10 - 01" class="img-fluid lozad" data-loaded="true">
                             </a>
                         </div>
                         <div class="content">
@@ -219,121 +293,126 @@
                                 <h3><a class="product-item-title" href="#">Bó hoa 20-10 - 01</a></h3>
                                 <div class="price">
                                     <span class="price-new">90,000VND</span>
+                                </div>
+                                <div class="button text-center">
+                                    <a href="#">ĐẶT HÀNG</a>
+                                </div>
                             </div>
-                            <div class="button text-center">
-                                <a href="#">ĐẶT HÀNG</a>
-                            </div>
+                            <input type="hidden" name="product_id" value="5256">
+                            <input type="hidden" name="quantity" value="1">
                         </div>
-                        <input type="hidden" name="product_id" value="5256">
-                        <input type="hidden" name="quantity" value="1">
                     </div>
                 </div>
-            </div>
 
                 <h2 class="text-center mb-4 mt-4">ĐẶT NHIỀU NHẤT</h2>
-            <div class="row">
-                <div class="col-xl-3">
-                    <div class="product-thumb-1">
-                        <div class="image">
-                            <a href="#">
-                                <img src="/Do_an_Web1/image/9.jpg" alt="Ẩn Dấu" width="261" height="326" title="Ẩn Dấu" class="img-fluid lozad">
-                                <span class="percent-off-rounded">11%<br>GIẢM</span>
-                            </a>
-                        </div>
-                        <div class="content">
-                            <div class="description">
-                                <h3><a class="product-item-title" href="https://www.flowercorner.vn/san-pham/an-dau">Ẩn
-                                        Dấu</a></h3>
-                                <div class="price">
-                                    <span class="price-new">490,000VND</span> <span class="price-old"><del> 550,000 VND</del></span>
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="product-thumb-1">
+                            <div class="image">
+                                <a href="#">
+                                    <img src="/image/9.jpg" alt="Ẩn Dấu" width="261" height="326" title="Ẩn Dấu"
+                                        class="img-fluid lozad">
+                                    <span class="percent-off-rounded">11%<br>GIẢM</span>
+                                </a>
+                            </div>
+                            <div class="content">
+                                <div class="description">
+                                    <h3><a class="product-item-title"
+                                            href="https://www.flowercorner.vn/san-pham/an-dau">Ẩn
+                                            Dấu</a></h3>
+                                    <div class="price">
+                                        <span class="price-new">490,000VND</span> <span class="price-old"><del> 550,000
+                                                VND</del></span>
+                                    </div>
+                                </div>
+                                <div class="button text-center">
+                                    <a href="#">ĐẶT HÀNG</a>
                                 </div>
                             </div>
-                            <div class="button text-center">
-                                <a href="#">ĐẶT HÀNG</a>
-                            </div>
+                            <input type="hidden" name="product_id" value="5256">
+                            <input type="hidden" name="quantity" value="1">
                         </div>
-                        <input type="hidden" name="product_id" value="5256">
-                        <input type="hidden" name="quantity" value="1">
                     </div>
-                </div>
 
-                <div class="col-xl-3">
-                    <div class="product-thumb-2">
-                        <div class="image">
-                            <a href="#">
-                                <img src="/Do_an_Web1/image/10.jpg" width="261" height="326" alt="Coral Pink" title="Coral Pink"
-                                    class="img-fluid lozad" data-loaded="true">
-                                <span class="percent-off-rounded">8%<br>GIẢM</span>
-                            </a>
-                        </div>
-                        <div class="content">
-                            <div class="description">
-                                <h3><a class="product-item-title" href="#">Coral Pink</a></h3>
-                                <div class="price">
-                                    <span class="price-new">490,000VND</span> <span class="price-old"><del>530,000VND</del></span>
+                    <div class="col-xl-3">
+                        <div class="product-thumb-2">
+                            <div class="image">
+                                <a href="#">
+                                    <img src="/image/10.jpg" width="261" height="326" alt="Coral Pink"
+                                        title="Coral Pink" class="img-fluid lozad" data-loaded="true">
+                                    <span class="percent-off-rounded">8%<br>GIẢM</span>
+                                </a>
+                            </div>
+                            <div class="content">
+                                <div class="description">
+                                    <h3><a class="product-item-title" href="#">Coral Pink</a></h3>
+                                    <div class="price">
+                                        <span class="price-new">490,000VND</span> <span
+                                            class="price-old"><del>530,000VND</del></span>
+                                    </div>
+                                </div>
+                                <div class="button text-center">
+                                    <a href="#">ĐẶT HÀNG</a>
                                 </div>
                             </div>
-                            <div class="button text-center">
-                                <a href="#">ĐẶT HÀNG</a>
-                            </div>
+                            <input type="hidden" name="product_id" value="5256">
+                            <input type="hidden" name="quantity" value="1">
                         </div>
-                        <input type="hidden" name="product_id" value="5256">
-                        <input type="hidden" name="quantity" value="1">
                     </div>
-                </div>
 
-                <div class="col-xl-3">
-                    <div class="product-thumb-3">
-                        <div class="image">
-                            <a href="#">
-                                <img src="/Do_an_Web1/image/11.jpg" width="261" height="326" alt="Kiều Diễm" title="Kiều Diễm"
-                                    class="img-fluid lozad" data-loaded="true">
-                                <span class="percent-off-rounded">9%<br>GIẢM</span>
-                            </a>
-                        </div>
-                        <div class="content">
-                            <div class="description">
-                                <h3><a class="product-item-title" href="#">Kiều Diễm</a></h3>
-                                <div class="price">
-                                    <span class="price-new">490,000VND</span> <span class="price-old"><del>540,000VND</del></span>
+                    <div class="col-xl-3">
+                        <div class="product-thumb-3">
+                            <div class="image">
+                                <a href="#">
+                                    <img src="/image/11.jpg" width="261" height="326" alt="Kiều Diễm" title="Kiều Diễm"
+                                        class="img-fluid lozad" data-loaded="true">
+                                    <span class="percent-off-rounded">9%<br>GIẢM</span>
+                                </a>
+                            </div>
+                            <div class="content">
+                                <div class="description">
+                                    <h3><a class="product-item-title" href="#">Kiều Diễm</a></h3>
+                                    <div class="price">
+                                        <span class="price-new">490,000VND</span> <span
+                                            class="price-old"><del>540,000VND</del></span>
+                                    </div>
+                                </div>
+                                <div class="button text-center">
+                                    <a href="#">ĐẶT HÀNG</a>
                                 </div>
                             </div>
-                            <div class="button text-center">
-                                <a href="#">ĐẶT HÀNG</a>
-                            </div>
+                            <input type="hidden" name="product_id" value="5256">
+                            <input type="hidden" name="quantity" value="1">
                         </div>
-                        <input type="hidden" name="product_id" value="5256">
-                        <input type="hidden" name="quantity" value="1">
                     </div>
-                </div>
 
-                <div class="col-xl-3"  style="margin-bottom: 50px;">
-                    <div class="product-thumb-4">
-                        <div class="image">
-                            <a href="#">
-                                <img src="/Do_an_Web1/image/12.jpg" width="261" height="326" alt="Bó hoa 20-10 - 01" title="Bó hoa 20-10 - 01"
-                                    class="img-fluid lozad" data-loaded="true">
-                            </a>
-                        </div>
-                        <div class="content">
-                            <div class="description">
-                                <h3><a class="product-item-title" href="#">Bó hoa 20-10 - 01</a></h3>
-                                <div class="price">
-                                    <span class="price-new">90,000VND</span>
+                    <div class="col-xl-3" style="margin-bottom: 50px;">
+                        <div class="product-thumb-4">
+                            <div class="image">
+                                <a href="#">
+                                    <img src="/image/12.jpg" width="261" height="326" alt="Bó hoa 20-10 - 01"
+                                        title="Bó hoa 20-10 - 01" class="img-fluid lozad" data-loaded="true">
+                                </a>
                             </div>
-                            <div class="button text-center">
-                                <a href="#">ĐẶT HÀNG</a>
+                            <div class="content">
+                                <div class="description">
+                                    <h3><a class="product-item-title" href="#">Bó hoa 20-10 - 01</a></h3>
+                                    <div class="price">
+                                        <span class="price-new">90,000VND</span>
+                                    </div>
+                                    <div class="button text-center">
+                                        <a href="#">ĐẶT HÀNG</a>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="product_id" value="5256">
+                                <input type="hidden" name="quantity" value="1">
                             </div>
                         </div>
-                        <input type="hidden" name="product_id" value="5256">
-                        <input type="hidden" name="quantity" value="1">
                     </div>
+
+
                 </div>
             </div>
-
-
-        </div>
-    </div>
 
 
 
