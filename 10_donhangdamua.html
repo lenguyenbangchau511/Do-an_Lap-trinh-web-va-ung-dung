@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chi tiết đơn hàng - Bloom - Cửa hàng hoa tươi</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- SITE WRAPPER -->
+  <div class="site-wrapper">
+
+    <!-- HEADER -->
+    <header class="bloom-header">
+      <div class="bloom-container">
+        <div class="bloom-logo">
+          <svg class="logo-icon" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+            <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+            <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+            <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+            <circle cx="50" cy="50" r="12" fill="#9370db"/>
+            <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+          </svg>
+          <span>Bloom</span>
+        </div>
+
+        <nav class="bloom-nav">
+          <a href="index.html">Trang chủ</a>
+          <a href="cart.html" title="Giỏ hàng"><i class="fa-solid fa-bag-shopping"></i></a>
+          <a href="order-history.html" title="Lịch sử"><i class="fa-regular fa-clock"></i></a>
+          <a href="profile.html" title="Tài khoản"><i class="fa-regular fa-circle-user"></i></a>
+          <a href="login.html" class="logout-btn" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></a>
+        </nav>
+        
+        <!-- Menu mobile -->
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <script>
+      window.addEventListener('scroll', () => {
+        const header = document.querySelector('.bloom-header');
+        if (window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+      });
+      
+      // Mobile menu toggle
+      document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+        document.querySelector('.bloom-nav').classList.toggle('active');
+      });
+    </script>
+
+    <!-- MAIN CONTENT -->
+    <div class="order-detail-container">
+      <div class="order-detail-header">
+        <button class="btn-outline" onclick="window.location.href='9_lichsudonhang.html'">
+          <i class="fas fa-arrow-left"></i>
+          Quay lại lịch sử đơn hàng
+        </button>
+        <h1>Chi tiết đơn hàng #BL202400123</h1>
+        <div class="order-status-badge status-completed">
+          <i class="fas fa-check-circle"></i>
+          Đã giao hàng
+        </div>
+      </div>
+
+      <div class="order-detail-content">
+        <div class="order-info-section">
+          <div class="order-info-card">
+            <h3><i class="fas fa-info-circle"></i> Thông tin đơn hàng</h3>
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-label">Mã đơn hàng:</span>
+                <span class="info-value">#BL202400123</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Ngày đặt:</span>
+                <span class="info-value">15/12/2024 - 14:30</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Ngày giao:</span>
+                <span class="info-value">16/12/2024 - 10:15</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Phương thức thanh toán:</span>
+                <span class="info-value">Thanh toán khi nhận hàng</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Trạng thái:</span>
+                <span class="info-value status-completed">Đã giao hàng</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-info-card">
+            <h3><i class="fas fa-truck"></i> Thông tin giao hàng</h3>
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-label">Người nhận:</span>
+                <span class="info-value">Nguyễn Văn A</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Điện thoại:</span>
+                <span class="info-value">090 123 4567</span>
+              </div>
+              <div class="info-item full-width">
+                <span class="info-label">Địa chỉ:</span>
+                <span class="info-value">03 Đường Hoa, Phường 1, Quận 1, TP.HCM</span>
+              </div>
+              <div class="info-item full-width">
+                <span class="info-label">Ghi chú:</span>
+                <span class="info-value">Giao hàng giờ hành chính, gọi điện trước khi giao</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-items-section">
+          <div class="order-items-card">
+            <h3><i class="fas fa-shopping-bag"></i> Sản phẩm đã đặt</h3>
+            
+            <div class="order-item-detail">
+              <div class="item-image">
+                <img src="images/hoa1.jpg" alt="Nhiệt Ái">
+              </div>
+              <div class="item-info">
+                <h4>Nhiệt Ái</h4>
+                <p class="item-description">Bó hoa thể hiện trọn vẹn sự mãnh liệt và lãng mạn của tình yêu</p>
+                <div class="item-meta">
+                  <span class="item-price">700.000₫</span>
+                  <span class="item-quantity">Số lượng: 1</span>
+                </div>
+              </div>
+              <div class="item-total">
+                700.000₫
+              </div>
+            </div>
+
+            <div class="order-item-detail">
+              <div class="item-image">
+                <img src="images/hoa2.jpg" alt="Peach">
+              </div>
+              <div class="item-info">
+                <h4>Peach</h4>
+                <p class="item-description">Bó hoa hồng phấn dịu dàng và thanh lịch</p>
+                <div class="item-meta">
+                  <span class="item-price">770.000₫</span>
+                  <span class="item-quantity">Số lượng: 2</span>
+                </div>
+              </div>
+              <div class="item-total">
+                1.540.000₫
+              </div>
+            </div>
+
+            <div class="order-item-detail">
+              <div class="item-image">
+                <img src="images/langhoa1.webp" alt="Shimmer Grace">
+              </div>
+              <div class="item-info">
+                <h4>Shimmer Grace</h4>
+                <p class="item-description">Lẵng hoa trắng tinh khôi và thanh khiết</p>
+                <div class="item-meta">
+                  <span class="item-price">1.150.000₫</span>
+                  <span class="item-quantity">Số lượng: 1</span>
+                </div>
+              </div>
+              <div class="item-total">
+                1.150.000₫
+              </div>
+            </div>
+          </div>
+
+          <div class="order-summary-card">
+            <h3><i class="fas fa-receipt"></i> Tổng kết đơn hàng</h3>
+            <div class="summary-details">
+              <div class="summary-row">
+                <span>Tạm tính:</span>
+                <span>2.620.000₫</span>
+              </div>
+              <div class="summary-row">
+                <span>Phí vận chuyển:</span>
+                <span>30.000₫</span>
+              </div>
+              <div class="summary-row">
+                <span>Giảm giá:</span>
+                <span class="discount">-50.000₫</span>
+              </div>
+              <div class="summary-row total">
+                <span>Tổng cộng:</span>
+                <span class="total-amount">2.600.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-actions">
+            <button class="btn-outline" onclick="window.print()">
+              <i class="fas fa-print"></i>
+              In hóa đơn
+            </button>
+            <button class="btn-primary" onclick="window.location.href='index.html'">
+              <i class="fas fa-shopping-bag"></i>
+              Mua lại đơn hàng
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-main">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+                <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+                <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+                <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+                <circle cx="50" cy="50" r="12" fill="#9370db"/>
+                <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+              </svg>
+              <span>Bloom</span>
+            </div>
+            <p class="footer-tagline">Lan tỏa hương sắc thiên nhiên</p>
+          </div>
+
+          <div class="footer-contact">
+            <h4>Thông Tin Liên Hệ</h4>
+            <div class="contact-info">
+              <div class="contact-item">
+                <i class="fas fa-globe"></i>
+                <span>bloom.vn</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>123 Đường Hoa, Quận 1, TP.HCM</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <a href="tel:0931303836">090 123 4567</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:info@bloom.vn">info@bloom.vn</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-clock"></i>
+                <span>T2 – CN: 8h30 – 21h00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div> <!-- /site-wrapper -->
+</body>
+</html>

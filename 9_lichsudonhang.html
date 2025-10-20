@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lịch sử đơn hàng - Bloom - Cửa hàng hoa tươi</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- SITE WRAPPER -->
+  <div class="site-wrapper">
+
+    <!-- HEADER -->
+    <header class="bloom-header">
+      <div class="bloom-container">
+        <div class="bloom-logo">
+          <svg class="logo-icon" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+            <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+            <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+            <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+            <circle cx="50" cy="50" r="12" fill="#9370db"/>
+            <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+          </svg>
+          <span>Bloom</span>
+        </div>
+
+        <nav class="bloom-nav">
+          <a href="index.html">Trang chủ</a>
+          <a href="cart.html" title="Giỏ hàng"><i class="fa-solid fa-bag-shopping"></i></a>
+          <a href="order-history.html" title="Lịch sử" class="active"><i class="fa-regular fa-clock"></i></a>
+          <a href="profile.html" title="Tài khoản"><i class="fa-regular fa-circle-user"></i></a>
+          <a href="login.html" class="logout-btn" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></a>
+        </nav>
+        
+        <!-- Menu mobile -->
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <script>
+      window.addEventListener('scroll', () => {
+        const header = document.querySelector('.bloom-header');
+        if (window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+      });
+      
+      // Mobile menu toggle
+      document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+        document.querySelector('.bloom-nav').classList.toggle('active');
+      });
+    </script>
+
+    <!-- MAIN CONTENT -->
+    <div class="orders-container">
+      <div class="orders-header">
+        <h1>Lịch sử đơn hàng</h1>
+        <p>Theo dõi các đơn hàng bạn đã đặt tại Bloom</p>
+      </div>
+
+      <div class="order-card">
+        <div class="order-header">
+          <div>
+            <div class="order-id">Đơn hàng #BL202400123</div>
+            <div class="order-date">Đặt ngày: 15/12/2024</div>
+          </div>
+          <div class="order-status status-completed">Đã giao hàng</div>
+        </div>
+        <div class="order-items-preview">
+          <img src="images/hoa1.jpg" alt="Nhiệt Ái" class="order-item-preview">
+          <img src="images/hoa2.jpg" alt="Peach" class="order-item-preview">
+          <img src="images/langhoa1.webp" alt="Shimmer Grace" class="order-item-preview">
+        </div>
+        <div class="order-footer">
+          <div class="order-total">2.600.000₫</div>
+          <button class="btn-outline">Xem chi tiết</button>
+        </div>
+      </div>
+
+      <div class="order-card">
+        <div class="order-header">
+          <div>
+            <div class="order-id">Đơn hàng #BL202400122</div>
+            <div class="order-date">Đặt ngày: 10/12/2024</div>
+          </div>
+          <div class="order-status status-completed">Đã giao hàng</div>
+        </div>
+        <div class="order-items-preview">
+          <img src="images/hoa3.jpg" alt="Blueberry" class="order-item-preview">
+          <img src="images/hoa4.jpg" alt="Lemon" class="order-item-preview">
+        </div>
+        <div class="order-footer">
+          <div class="order-total">900.000₫</div>
+          <button class="btn-outline">Xem chi tiết</button>
+        </div>
+      </div>
+
+      <div class="order-card">
+        <div class="order-header">
+          <div>
+            <div class="order-id">Đơn hàng #BL202400121</div>
+            <div class="order-date">Đặt ngày: 05/12/2024</div>
+          </div>
+          <div class="order-status status-completed">Đã giao hàng</div>
+        </div>
+        <div class="order-items-preview">
+          <img src="images/kehoa2.jpg" alt="Hồng Phát" class="order-item-preview">
+        </div>
+        <div class="order-footer">
+          <div class="order-total">1.900.000₫</div>
+          <button class="btn-outline">Xem chi tiết</button>
+        </div>
+      </div>
+
+      <div class="order-card">
+        <div class="order-header">
+          <div>
+            <div class="order-id">Đơn hàng #BL202400120</div>
+            <div class="order-date">Đặt ngày: 01/12/2024</div>
+          </div>
+          <div class="order-status status-completed">Đã giao hàng</div>
+        </div>
+        <div class="order-items-preview">
+          <img src="images/hoa5.jpg" alt="Vườn Xuân Ca" class="order-item-preview">
+          <img src="images/langhoa3.png" alt="Sen Xanh" class="order-item-preview">
+        </div>
+        <div class="order-footer">
+          <div class="order-total">2.170.000₫</div>
+          <button class="btn-outline">Xem chi tiết</button>
+        </div>
+      </div>
+
+      <!-- Phân trang -->
+      <div class="pagination">
+        <a href="#" class="page-nav disabled">
+          <i class="fas fa-chevron-left"></i>
+        </a>
+        <a href="#" class="page-number active">1</a>
+        <a href="#" class="page-number">2</a>
+        <a href="#" class="page-number">3</a>
+        <span class="page-ellipsis">...</span>
+        <a href="#" class="page-number">5</a>
+        <a href="#" class="page-nav">
+          <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-main">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+                <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+                <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+                <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+                <circle cx="50" cy="50" r="12" fill="#9370db"/>
+                <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+              </svg>
+              <span>Bloom</span>
+            </div>
+            <p class="footer-tagline">Lan tỏa hương sắc thiên nhiên</p>
+          </div>
+
+          <div class="footer-contact">
+            <h4>Thông Tin Liên Hệ</h4>
+            <div class="contact-info">
+              <div class="contact-item">
+                <i class="fas fa-globe"></i>
+                <span>bloom.vn</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>123 Đường Hoa, Quận 1, TP.HCM</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <a href="tel:0931303836">090 123 4567</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:info@bloom.vn">info@bloom.vn</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-clock"></i>
+                <span>T2 – CN: 8h30 – 21h00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div> <!-- /site-wrapper -->
+</body>
+</html>
