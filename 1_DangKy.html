@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng ký - Bloom</title>
+  <meta name="description" content="Đăng ký tài khoản Bloom để trải nghiệm mua sắm hoa tươi tốt nhất">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="1_DangKy.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <a href="#main-content" class="skip-to-main">Chuyển đến nội dung chính</a>
+  
+  <div class="site-wrapper">
+    <!-- HEADER -->
+    <header class="bloom-header">
+      <div class="bloom-container">
+        <a href="index.html" class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
+          <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+            <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+            <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+            <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+            <circle cx="50" cy="50" r="12" fill="#9370db"/>
+            <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+          </svg>
+          <span>Bloom</span>
+        </a>
+
+        <nav class="bloom-nav" aria-label="Menu chính">
+          <a href="index.html">Trang chủ</a>
+          <a href="11_Loi.html" title="Giỏ hàng" aria-label="Giỏ hàng">
+            <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+          </a>
+          <a href="11_Loi.html" title="Lịch sử đơn hàng" aria-label="Lịch sử đơn hàng">
+            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+          </a>
+          <a href="2_DangNhap.html" title="Tài khoản" aria-label="Tài khoản">
+            <i class="fa-regular fa-circle-user" aria-hidden="true"></i>
+          </a>
+        </nav>
+        
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="auth-container" id="main-content">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h1>Đăng ký tài khoản</h1>
+          <p>Tạo tài khoản để trải nghiệm mua sắm tốt hơn</p>
+        </div>
+        
+        <form class="auth-form" id="registerForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">Họ và tên đệm *</label>
+              <input type="text" id="firstName" name="firstName" autocomplete="family-name" placeholder="Ví dụ: Nguyễn Văn" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Tên *</label>
+              <input type="text" id="lastName" name="lastName" autocomplete="given-name" placeholder="Ví dụ: Anh" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="Nhập email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Số điện thoại *</label>
+            <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Mật khẩu *</label>
+            <input type="password" id="password" name="password" placeholder="Tạo mật khẩu" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="confirmPassword">Xác nhận mật khẩu *</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+          </div>
+          
+          <div class="form-options">
+            <label class="checkbox-container">
+              <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+              <span class="checkmark"></span>
+              <span class="checkbox-text">Tôi đồng ý với <a href="#" target="_blank">Điều khoản dịch vụ</a> và <a href="#" target="_blank">Chính sách bảo mật</a></span>
+            </label>
+          </div>
+          
+          <button type="submit" class="btn-primary">Đăng ký</button>
+        </form>
+        
+        <div class="auth-footer">
+          <p>Đã có tài khoản? <a href="2_DangNhap.html">Đăng nhập ngay</a></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" aria-labelledby="footer-heading">
+      <div class="container footer-inner">
+        <h2 id="footer-heading" class="visually-hidden">Thông tin liên hệ</h2>
+        <div class="footer-main">
+          <div class="footer-brand">
+            <a href="index.html" class="footer-logo">
+              <svg width="60" height="60" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+                <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+                <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+                <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+                <circle cx="50" cy="50" r="12" fill="#9370db"/>
+                <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+              </svg>
+              <span>Bloom</span>
+            </a>
+            <p class="footer-tagline">Lan tỏa hương sắc thiên nhiên</p>
+          </div>
+
+          <div class="footer-contact">
+            <h3>Thông Tin Liên Hệ</h3>
+            <div class="contact-info">
+              <div class="contact-item">
+                <i class="fas fa-globe" aria-hidden="true"></i>
+                <span>bloom.vn</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                <span>123 Đường Hoa, Quận 1, TP.HCM</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                <a href="tel:+84901234567">090 123 4567</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope" aria-hidden="true"></i>
+                <a href="mailto:info@bloom.vn">info@bloom.vn</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-clock" aria-hidden="true"></i>
+                <span>T2 – CN: 8h30 – 21h00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+      document.querySelector('.bloom-nav').classList.toggle('active');
+    });
+
+    // Form submission
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Kiểm tra mật khẩu khớp
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      
+      if (password !== confirmPassword) {
+        alert('Mật khẩu xác nhận không khớp!');
+        return;
+      }
+      
+      // Kiểm tra điều khoản
+      if (!document.getElementById('agreeTerms').checked) {
+        alert('Vui lòng đồng ý với điều khoản dịch vụ!');
+        return;
+      }
+      
+      // Đăng ký thành công
+      alert('Đăng ký thành công!');
+      window.location.href = '2_DangNhap.html';
+    });
+  </script>
+</body>
+</html>

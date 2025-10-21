@@ -3,22 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bloom - Hoa tươi cao cấp</title>
-  <meta name="description" content="Bloom - Shop hoa tươi cao cấp với những bó hoa, lẵng hoa và kệ hoa đẹp nhất. Lan tỏa hương sắc thiên nhiên.">
+  <title>Bloom - Cửa hàng hoa tươi</title>
   <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="5_DaDangNhap.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="preload" href="images/hoa1.jpg" as="image">
-  <link rel="preload" href="images/hoa2.jpg" as="image">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- SITE WRAPPER -->
   <div class="site-wrapper">
 
-    <!-- HEADER -->
+    <!-- HEADER ĐÃ ĐĂNG NHẬP -->
     <header class="bloom-header">
       <div class="bloom-container">
-        <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
+        <div class="bloom-logo">
           <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
             <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
             <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
@@ -31,10 +29,18 @@
         </div>
 
         <nav class="bloom-nav" aria-label="Menu chính">
-          <a href="index.html" aria-current="page">Trang chủ</a>
-          <a href="2_DangNhap.html" title="Đăng nhập" aria-label="Đăng nhập" class="login-link">
+          <a href="5_DaDangNhap.html" aria-current="page">Trang chủ</a>
+          <a href="6_GioHang.html" title="Giỏ hàng" aria-label="Giỏ hàng">
+            <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+          </a>
+          <a href="9_LichSuDonHang.html" title="Lịch sử đơn hàng" aria-label="Lịch sử đơn hàng">
+            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+          </a>
+          <a href="3_ThongTinCaNhan.html" title="Tài khoản" aria-label="Tài khoản">
             <i class="fa-regular fa-circle-user" aria-hidden="true"></i>
-            <span>Đăng nhập</span>
+          </a>
+          <a href="index.html" class="logout-btn" title="Đăng xuất" aria-label="Đăng xuất">
+            <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
           </a>
         </nav>
         
@@ -45,11 +51,21 @@
       </div>
     </header>
 
+    <!-- LỜI CHÀO KHÁCH HÀNG ĐÃ ĐĂNG NHẬP -->
+    <section class="welcome-section" aria-labelledby="welcome-heading">
+      <div class="container">
+        <div class="welcome-content">
+          <h1 id="welcome-heading">Chào mừng trở lại, <span class="user-name">Nguyễn Văn A</span>! 🌸</h1>
+          <p>Hôm nay bạn muốn mang điều gì đặc biệt đến với người thương yêu?</p>
+        </div>
+      </div>
+    </section>
+
     <!-- ==== HERO ==== -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-content">
         <h1 id="hero-title">Lan tỏa hương sắc thiên nhiên</h1>
-        <p>Những bó hoa Bloom mang hơi thở của sự tinh tế, thuần khiết và chân thành. </p>
+        <p>Những bó hoa Bloom mang hơi thở của sự tinh tế, thuần khiết và chân thành.</p>
         <button class="btn-hero" onclick="scrollToProducts()">Khám phá ngay</button>
       </div>
     </section>
@@ -204,7 +220,7 @@
       </div>
     </main>
 
-    <!-- THÊM SAU PHẦN SẢN PHẨM MẶC ĐỊNH -->
+    <!-- PHÂN TRANG SẢN PHẨM -->
     <div class="pagination" id="default-pagination" aria-label="Phân trang sản phẩm">
         <a href="#" class="page-nav disabled" aria-label="Trang trước" aria-disabled="true">
             <i class="fas fa-chevron-left" aria-hidden="true"></i>
@@ -274,7 +290,7 @@
 
   </div> <!-- /site-wrapper -->
 
-  <!-- JAVASCRIPT TÌM KIẾM -->
+  <!-- JAVASCRIPT -->
   <script>
     // Dữ liệu mẫu cho sản phẩm
     const sampleProducts = [
@@ -661,7 +677,7 @@
       }
     }
 
-    // Hàm tạo HTML cho sản phẩm (CHỈ HIỂN THỊ, KHÔNG CÓ NÚT THÊM VÀO GIỎ)
+    // Hàm tạo HTML cho sản phẩm (CÓ NÚT THÊM VÀO GIỎ - ĐÃ ĐĂNG NHẬP)
     function createProductElement(product) {
       const productDiv = document.createElement('article');
       productDiv.className = 'product';
@@ -675,16 +691,36 @@
         >
         <h3>${product.name}</h3>
         <p class="price">${product.price.toLocaleString('vi-VN')}₫</p>
-        <button class="btn-outline" onclick="redirectToLogin()" aria-label="Đăng nhập để thêm ${product.name} vào giỏ hàng">
-          Đăng nhập để mua
+        <button class="btn-outline" onclick="addToCart(${product.id})" aria-label="Thêm ${product.name} vào giỏ hàng">
+          Thêm vào giỏ
         </button>
       `;
       return productDiv;
     }
 
-    // Hàm chuyển hướng đến trang đăng nhập
-    function redirectToLogin() {
-      window.location.href = '2_DangNhap.html';
+    // Hàm thêm vào giỏ hàng (ĐÃ ĐĂNG NHẬP)
+    function addToCart(productId) {
+      const product = sampleProducts.find(p => p.id === productId);
+      if (product) {
+        // Tạo thông báo toast
+        const toast = document.createElement('div');
+        toast.className = 'cart-toast success';
+        toast.innerHTML = `
+          <i class="fas fa-check-circle" aria-hidden="true"></i>
+          <span>Đã thêm "${product.name}" vào giỏ hàng!</span>
+          <button onclick="this.parentElement.remove()" aria-label="Đóng thông báo">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+        document.body.appendChild(toast);
+        
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+          if (toast.parentElement) {
+            toast.remove();
+          }
+        }, 3000);
+      }
     }
 
     // JavaScript chính khi trang load
@@ -823,6 +859,14 @@
         nav.classList.toggle('active');
         this.setAttribute('aria-expanded', !isExpanded);
       });
+
+      // Logout confirmation
+      document.querySelector('.logout-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (confirm('Bạn có chắc muốn đăng xuất?')) {
+          window.location.href = 'index.html';
+        }
+      });
     });
 
     // Thêm CSS animation cho toast
@@ -835,6 +879,33 @@
       @keyframes slideOut {
         from { transform: translateX(0); opacity: 1; }
         to { transform: translateX(100%); opacity: 0; }
+      }
+      .cart-toast {
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: var(--green-main);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .cart-toast button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+      }
+      .cart-toast button:hover {
+        background: rgba(255,255,255,0.2);
       }
     `;
     document.head.appendChild(style);

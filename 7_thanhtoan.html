@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Thanh toán - Bloom - Cửa hàng hoa tươi</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/checkout.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 </head>
@@ -29,8 +30,8 @@
 
         <nav class="bloom-nav">
           <a href="index.html">Trang chủ</a>
-          <a href="cart.html" title="Giỏ hàng"><i class="fa-solid fa-bag-shopping"></i></a>
-          <a href="order-history.html" title="Lịch sử"><i class="fa-regular fa-clock"></i></a>
+          <a href="giohang.html" title="Giỏ hàng"><i class="fa-solid fa-bag-shopping"></i></a>
+          <a href="lichsudonhang.html" title="Lịch sử"><i class="fa-regular fa-clock"></i></a>
           <a href="profile.html" title="Tài khoản"><i class="fa-regular fa-circle-user"></i></a>
           <a href="login.html" class="logout-btn" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></a>
         </nav>
@@ -42,24 +43,10 @@
       </div>
     </header>
 
-    <script>
-      window.addEventListener('scroll', () => {
-        const header = document.querySelector('.bloom-header');
-        if (window.scrollY > 50) header.classList.add('scrolled');
-        else header.classList.remove('scrolled');
-      });
-      
-      // Mobile menu toggle
-      document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-        document.querySelector('.bloom-nav').classList.toggle('active');
-      });
-    </script>
-
-    <!-- MAIN CONTENT -->
     <!-- MAIN CONTENT -->
     <div class="checkout-container">
       <div class="checkout-steps">
-        <div class="step active">
+        <div class="step completed">
           <div class="step-number">1</div>
           <span>Giỏ hàng</span>
         </div>
@@ -75,57 +62,59 @@
 
       <div class="checkout-content">
         <div class="checkout-form">
-          <div class="checkout-section">
-            <h3>Thông tin giao hàng</h3>
-            <div class="form-group">
-              <label for="full-name">Họ và tên</label>
-              <input type="text" id="full-name" value="Nguyễn Văn A" required>
+          <form id="checkout-form">
+            <div class="checkout-section">
+              <h3>Thông tin giao hàng</h3>
+              <div class="form-group">
+                <label for="full-name">Họ và tên</label>
+                <input type="text" id="full-name" value="Nguyễn Văn A" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Số điện thoại</label>
+                <input type="tel" id="phone" value="090 123 4567" required>
+              </div>
+              <div class="form-group">
+                <label for="address">Địa chỉ giao hàng</label>
+                <textarea id="address" rows="3" required>03 Đường Hoa, Phường 1, Quận 1, TP.HCM</textarea>
+              </div>
+              <div class="form-group">
+                <label for="note">Ghi chú giao hàng (tùy chọn)</label>
+                <textarea id="note" rows="3" placeholder="Ví dụ: Giao hàng giờ hành chính, gọi điện trước khi giao, để tại cổng..."></textarea>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="phone">Số điện thoại</label>
-              <input type="tel" id="phone" value="090 123 4567" required>
-            </div>
-            <div class="form-group">
-              <label for="address">Địa chỉ giao hàng</label>
-              <textarea id="address" rows="3" required>03 Đường Hoa, Phường 1, Quận 1, TP.HCM</textarea>
-            </div>
-            <div class="form-group">
-              <label for="note">Ghi chú giao hàng (tùy chọn)</label>
-              <textarea id="note" rows="3" placeholder="Ví dụ: Giao hàng giờ hành chính, gọi điện trước khi giao, để tại cổng..."></textarea>
-            </div>
-          </div>
 
-          <div class="checkout-section">
-            <h3>Phương thức thanh toán</h3>
-            <div class="payment-methods">
-              <label class="payment-method selected">
-                <input type="radio" name="payment" value="cash" checked>
-                <i class="fas fa-money-bill-wave"></i>
-                <span>Thanh toán khi nhận hàng (COD)</span>
-              </label>
-              <label class="payment-method">
-                <input type="radio" name="payment" value="bank">
-                <i class="fas fa-university"></i>
-                <span>Chuyển khoản ngân hàng</span>
-              </label>
-              <label class="payment-method">
-                <input type="radio" name="payment" value="card">
-                <i class="fas fa-credit-card"></i>
-                <span>Thẻ tín dụng/ghi nợ</span>
-              </label>
+            <div class="checkout-section">
+              <h3>Phương thức thanh toán</h3>
+              <div class="payment-methods">
+                <label class="payment-method selected">
+                  <input type="radio" name="payment" value="cash" checked>
+                  <i class="fas fa-money-bill-wave"></i>
+                  <span>Thanh toán khi nhận hàng (COD)</span>
+                </label>
+                <label class="payment-method">
+                  <input type="radio" name="payment" value="bank">
+                  <i class="fas fa-university"></i>
+                  <span>Chuyển khoản ngân hàng</span>
+                </label>
+                <label class="payment-method">
+                  <input type="radio" name="payment" value="card">
+                  <i class="fas fa-credit-card"></i>
+                  <span>Thẻ tín dụng/ghi nợ</span>
+                </label>
+              </div>
             </div>
-          </div>
 
-          <div class="checkout-actions">
-            <button class="btn-outline" onclick="window.location.href='giohang.html'">
-              <i class="fas fa-arrow-left"></i>
-              Quay lại giỏ hàng
-            </button>
-            <button class="btn-primary" onclick="window.location.href='xacnhandonhang.html'">
-              <i class="fas fa-check"></i>
-              Hoàn tất đơn hàng
-            </button>
-          </div>
+            <div class="checkout-actions">
+              <button type="button" class="btn-outline" onclick="window.location.href='giohang.html'">
+                <i class="fas fa-arrow-left"></i>
+                Quay lại giỏ hàng
+              </button>
+              <button type="submit" class="btn-primary">
+                <i class="fas fa-check"></i>
+                Hoàn tất đơn hàng
+              </button>
+            </div>
+          </form>
         </div>
 
         <div class="order-summary">
@@ -213,5 +202,8 @@
     </footer>
 
   </div> <!-- /site-wrapper -->
+
+  <script src="js/checkout.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

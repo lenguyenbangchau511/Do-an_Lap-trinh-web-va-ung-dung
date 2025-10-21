@@ -4,934 +4,114 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nhiệt Ái - Bloom</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="4_ChiTietSanPham.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-  <style>
-    /* Reset và biến màu */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --mint-1: #eaf8f0;
-      --mint-2: #d8f3e8;
-      --accent: #2e7d68;
-      --green-main: #2e7d68;
-      --dark: #2b2b2b;
-      --muted: #6b8b7a;
-      --card-bg: #ffffff;
-      --shadow: 0 2px 15px rgba(0,0,0,0.05);
-      --pastel-purple: #b19cd9;
-      --pastel-purple-dark: #9370db;
-      --red-accent: #c44569;
-      --light-red: #f8e9ec;
-    }
-
-    /* Container chung */
-    .container {
-      width: min(1200px, 92%);
-      margin: 0 auto;
-    }
-
-    /* Body */
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(90deg, var(--mint-2) 0%, #f7fffb 100%);
-      color: #163b33;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* HEADER */
-    .bloom-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(15px);
-      background: rgba(255, 255, 255, 0.65);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: var(--shadow);
-      transition: background 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .bloom-header.scrolled {
-      background: rgba(25, 25, 25, 0.85);
-      box-shadow: 0 2px 15px rgba(0,0,0,0.2);
-    }
-
-    .bloom-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 10px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    /* Logo */
-    .bloom-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Playfair Display', serif;
-      font-size: 26px;
-      font-weight: 600;
-      color: var(--green-main);
-      cursor: pointer;
-      user-select: none;
-      flex-shrink: 0;
-    }
-
-    .logo-icon {
-      width: 42px;
-      height: 42px;
-      transition: transform 0.3s ease;
-    }
-
-    .bloom-logo:hover .logo-icon {
-      transform: rotate(-5deg) scale(1.08);
-    }
-
-    /* Search */
-    .bloom-search {
-      flex: 1;
-      max-width: 450px;
-      position: relative;
-    }
-    .bloom-search input {
-      width: 100%;
-      padding: 10px 42px 10px 18px;
-      border-radius: 25px;
-      border: 1px solid rgba(0,0,0,0.15);
-      background: rgba(255,255,255,0.8);
-      color: #333;
-      font-size: 14px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      transition: all 0.3s ease;
-    }
-    .bloom-search input:focus {
-      outline: none;
-      border-color: var(--green-main);
-      box-shadow: 0 0 8px rgba(109,190,141,0.4);
-    }
-    .bloom-search i {
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #555;
-    }
-
-    /* Navigation */
-    .bloom-nav {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-    .bloom-nav a {
-      color: #222;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease, transform 0.2s ease;
-      display: flex;
-      align-items: center;
-    }
-    .bloom-nav a i {
-      font-size: 18px;
-    }
-    .bloom-nav a:hover {
-      color: var(--green-main);
-      transform: translateY(-2px);
-    }
-
-    .bloom-header.scrolled .bloom-nav a {
-      color: #f5f5f5;
-    }
-    .bloom-header.scrolled .bloom-nav a:hover {
-      color: var(--pastel-purple);
-    }
-
-    /* Mobile menu toggle */
-    .mobile-menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: var(--green-main);
-      cursor: pointer;
-    }
-
-    /* Breadcrumb */
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 20px 0;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    
-    .breadcrumb a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    
-    .breadcrumb a:hover {
-      color: var(--green-main);
-    }
-    
-    .breadcrumb i {
-      font-size: 0.8rem;
-    }
-
-    /* Product Detail */
-    .product-detail-container {
-      max-width: 1200px;
-      margin: 20px auto 60px;
-      padding: 0 20px;
-    }
-
-    .product-detail {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      background: white;
-      border-radius: 16px;
-      padding: 40px;
-      box-shadow: 0 8px 25px rgba(20, 50, 40, 0.08);
-    }
-
-    .product-gallery {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .main-image {
-      width: 100%;
-      height: 500px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-
-    .main-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .main-image:hover img {
-      transform: scale(1.03);
-    }
-
-    .image-thumbnails {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    .thumbnail {
-      width: 80px;
-      height: 80px;
-      border-radius: 8px;
-      object-fit: cover;
-      cursor: pointer;
-      opacity: 0.7;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-    }
-
-    .thumbnail:hover, .thumbnail.active {
-      opacity: 1;
-      border-color: var(--green-main);
-    }
-
-    .product-info h1 {
-      font-family: 'Playfair Display', serif;
-      color: #1a4d2b;
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-      line-height: 1.2;
-    }
-
-    .product-price {
-      font-size: 1.8rem;
-      color: var(--red-accent);
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .product-rating {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 25px;
-    }
-
-    .stars {
-      color: #ffc107;
-    }
-
-    .rating-text {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .product-description {
-      color: #6b8b7a;
-      line-height: 1.6;
-      margin-bottom: 25px;
-      font-size: 1.05rem;
-    }
-
-    .product-actions {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 25px;
-      flex-wrap: wrap;
-    }
-
-    .quantity-selector {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .quantity-selector label {
-      font-weight: 500;
-      color: var(--green-main);
-    }
-
-    .quantity-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .quantity-btn {
-      width: 35px;
-      height: 35px;
-      border: 1px solid #e0e0e0;
-      background: white;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-
-    .quantity-btn:hover {
-      background: var(--mint-1);
-      border-color: var(--green-main);
-    }
-
-    .quantity-input {
-      width: 60px;
-      text-align: center;
-      padding: 8px;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-
-    .add-to-cart {
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--green-main) 0%, #3a9c7f 100%);
-      color: white;
-      border: none;
-      padding: 14px 24px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: 100%;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(46, 125, 104, 0.3);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--green-main);
-      color: var(--green-main);
-      padding: 12px 24px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 600;
-      text-decoration: none;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .btn-outline:hover {
-      background: var(--green-main);
-      color: white;
-      transform: translateY(-2px);
-    }
-
-    .product-meta {
-      border-top: 1px solid #eee;
-      padding-top: 20px;
-    }
-
-    .meta-item {
-      display: flex;
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #f5f5f5;
-    }
-
-    .meta-item:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-    }
-
-    .meta-label {
-      color: var(--muted);
-      font-weight: 500;
-      min-width: 150px;
-    }
-
-    .meta-value {
-      color: #1a4d2b;
-      flex: 1;
-    }
-
-    .meta-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 5px;
-    }
-
-    .tag {
-      background: var(--light-red);
-      color: var(--red-accent);
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    /* Product Features */
-    .product-features {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .feature-card {
-      background: white;
-      border-radius: 12px;
-      padding: 25px;
-      text-align: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      transition: transform 0.3s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .feature-icon {
-      width: 60px;
-      height: 60px;
-      background: var(--mint-1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 15px;
-      color: var(--green-main);
-      font-size: 1.5rem;
-    }
-
-    .feature-card h3 {
-      color: #1a4d2b;
-      margin-bottom: 10px;
-      font-size: 1.1rem;
-    }
-
-    .feature-card p {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    /* Related Products */
-    .related-products {
-      margin-top: 60px;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      color: #1a4d2b;
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 30px;
-      margin: 40px 0;
-    }
-
-    .product {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 8px 25px rgba(20, 50, 40, 0.08);
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(135deg, var(--green-main) 0%, #3a9c7f 100%);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .product:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(15, 45, 35, 0.15);
-    }
-
-    .product:hover::before {
-      transform: scaleX(1);
-    }
-
-    .product img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      border-radius: 12px;
-      transition: transform 0.3s ease;
-    }
-
-    .product:hover img {
-      transform: scale(1.05);
-    }
-
-    .product h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      color: #1a4d2b;
-      margin-top: 8px;
-      font-weight: 600;
-    }
-
-    .price {
-      color: var(--green-main);
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    /* Footer */
-    .site-footer {
-      background: linear-gradient(135deg, #0f2b22 0%, #1a3d32 100%);
-      color: #cfeee0;
-      padding: 50px 0 20px;
-      position: relative;
-      overflow: hidden;
-      margin-top: 60px;
-    }
-
-    .site-footer::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    }
-
-    .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .footer-main {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      margin-bottom: 40px;
-      align-items: start;
-    }
-
-    .footer-brand {
-      text-align: left;
-    }
-
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 15px;
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .footer-tagline {
-      font-size: 16px;
-      color: #a8d5ba;
-      font-style: italic;
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    .footer-contact h4 {
-      color: #fff;
-      font-size: 20px;
-      margin-bottom: 25px;
-      font-weight: 600;
-      position: relative;
-      padding-bottom: 10px;
-    }
-
-    .footer-contact h4::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 40px;
-      height: 2px;
-      background: linear-gradient(135deg, #57cc99, #38a169);
-      border-radius: 2px;
-    }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 15px;
-      padding: 8px 0;
-      transition: transform 0.3s ease;
-    }
-
-    .contact-item:hover {
-      transform: translateX(5px);
-    }
-
-    .contact-item i {
-      color: #57cc99;
-      font-size: 16px;
-      width: 20px;
-      text-align: center;
-      margin-top: 2px;
-      flex-shrink: 0;
-    }
-
-    .contact-item span,
-    .contact-item a {
-      color: #cfeee0;
-      text-decoration: none;
-      line-height: 1.5;
-      transition: color 0.3s ease;
-    }
-
-    .contact-item a:hover {
-      color: #57cc99;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 25px;
-      text-align: center;
-    }
-
-    .footer-bottom p {
-      color: #a8d5ba;
-      font-size: 14px;
-      margin: 0;
-    }
-
-    /* Responsive */
-    @media (max-width: 1200px) {
-      .product-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (max-width: 900px) {
-      .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .product-features {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .bloom-container {
-        padding: 10px 20px;
-        flex-wrap: wrap;
-      }
-      
-      .bloom-search {
-        order: 3;
-        max-width: 100%;
-        margin-top: 10px;
-      }
-      
-      .mobile-menu-toggle {
-        display: block;
-      }
-      
-      .bloom-nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        flex-direction: column;
-        padding: 20px;
-        gap: 15px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      }
-      
-      .bloom-nav.active {
-        display: flex;
-      }
-      
-      .bloom-header.scrolled .bloom-nav {
-        background: rgba(25, 25, 25, 0.95);
-      }
-      
-      .product-detail {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        padding: 25px;
-      }
-      
-      .main-image {
-        height: 400px;
-      }
-      
-      .product-features {
-        grid-template-columns: 1fr;
-      }
-      
-      .footer-main {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        text-align: center;
-      }
-      
-      .footer-brand {
-        text-align: center;
-      }
-      
-      .footer-logo {
-        justify-content: center;
-      }
-      
-      .footer-contact h4::after {
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      
-      .contact-item {
-        justify-content: center;
-        text-align: left;
-      }
-      
-      .contact-info {
-        align-items: center;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .product-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .product-actions {
-        flex-direction: column;
-      }
-      
-      .add-to-cart {
-        min-width: 100%;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .product-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .footer-inner {
-        padding: 0 15px;
-      }
-      
-      .footer-main {
-        gap: 30px;
-      }
-      
-      .footer-logo {
-        font-size: 24px;
-      }
-      
-      .footer-logo svg {
-        width: 50px;
-        height: 50px;
-      }
-      
-      .footer-contact h4 {
-        font-size: 18px;
-      }
-      
-      .contact-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
-      }
-      
-      .contact-item i {
-        margin-top: 0;
-      }
-    }
-  </style>
 </head>
 <body>
+  <!-- SITE WRAPPER -->
   <div class="site-wrapper">
+
     <!-- HEADER -->
     <header class="bloom-header">
       <div class="bloom-container">
         <div class="bloom-logo">
-          <svg class="logo-icon" viewBox="0 0 100 100" fill="none">
-            <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
-            <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
-            <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
-            <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
-            <circle cx="50" cy="50" r="12" fill="#9370db"/>
-            <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
-          </svg>
-          <span>Bloom</span>
+          <a href="5_DaDangNhap.html" aria-label="Bloom - Trở về trang chủ">
+            <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+              <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+              <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+              <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+              <circle cx="50" cy="50" r="12" fill="#9370db"/>
+              <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+            </svg>
+            <span>Bloom</span>
+          </a>
         </div>
 
-        <div class="bloom-search">
-          <input type="text" placeholder="Tìm kiếm hoa tươi, quà tặng...">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-
-        <nav class="bloom-nav">
-          <a href="index.html">Trang chủ</a>
-          <a href="cart.html" title="Giỏ hàng"><i class="fa-solid fa-bag-shopping"></i></a>
-          <a href="order-history.html" title="Lịch sử"><i class="fa-regular fa-clock"></i></a>
-          <a href="profile.html" title="Tài khoản"><i class="fa-regular fa-circle-user"></i></a>
+        <nav class="bloom-nav" aria-label="Menu chính">
+          <a href="5_DaDangNhap.html">Trang chủ</a>
+          <a href="6_GioHang.html" title="Giỏ hàng" aria-label="Giỏ hàng">
+            <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+          </a>
+          <a href="9_LichSuDonHang.html" title="Lịch sử đơn hàng" aria-label="Lịch sử đơn hàng">
+            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+          </a>
+          <a href="3_ThongTinCaNhan.html" title="Tài khoản" aria-label="Tài khoản">
+            <i class="fa-regular fa-circle-user" aria-hidden="true"></i>
+          </a>
+          <a href="index.html" class="logout-btn" title="Đăng xuất" aria-label="Đăng xuất">
+            <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+          </a>
         </nav>
         
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">
-          <i class="fas fa-bars"></i>
+        <!-- Menu mobile -->
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
       </div>
     </header>
 
-    <script>
-      window.addEventListener('scroll', () => {
-        const header = document.querySelector('.bloom-header');
-        if (window.scrollY > 50) header.classList.add('scrolled');
-        else header.classList.remove('scrolled');
-      });
-      
-      document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-        document.querySelector('.bloom-nav').classList.toggle('active');
-      });
-      
-      // Thumbnail selection
-      document.querySelectorAll('.thumbnail').forEach(thumb => {
-        thumb.addEventListener('click', function() {
-          document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-          this.classList.add('active');
-          document.querySelector('.main-image img').src = this.src;
-        });
-      });
-      
-      // Quantity controls
-      document.querySelector('.quantity-btn.minus').addEventListener('click', function() {
-        const input = document.querySelector('.quantity-input');
-        if (parseInt(input.value) > 1) {
-          input.value = parseInt(input.value) - 1;
-        }
-      });
-      
-      document.querySelector('.quantity-btn.plus').addEventListener('click', function() {
-        const input = document.querySelector('.quantity-input');
-        input.value = parseInt(input.value) + 1;
-      });
-    </script>
-
     <!-- BREADCRUMB -->
-    <nav class="breadcrumb container">
-      <a href="index.html">Trang chủ</a>
-      <i class="fas fa-chevron-right"></i>
-      <a href="#">Bó hoa</a>
-      <i class="fas fa-chevron-right"></i>
-      <span>Nhiệt Ái</span>
+    <nav class="breadcrumb container" aria-label="Breadcrumb">
+      <a href="5_DaDangNhap.html">Trang chủ</a>
+      <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      <a href="5_DaDangNhap.html" onclick="filterProducts('bo-hoa')">Bó hoa</a>
+      <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      <span aria-current="page">Nhiệt Ái</span>
     </nav>
 
     <!-- PRODUCT DETAIL -->
-    <main class="product-detail-container">
-      <div class="product-detail">
-        <div class="product-gallery">
-          <div class="main-image">
-            <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Nhiệt Ái" class="product-image">
-          </div>
-          <div class="image-thumbnails">
-            <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Nhiệt Ái 1" class="thumbnail active">
-            <img src="https://images.unsplash.com/photo-1487070183337-61c0f6c2d2d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Nhiệt Ái 2" class="thumbnail">
-            <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Nhiệt Ái 3" class="thumbnail">
-          </div>
+  <main class="product-detail-container" aria-labelledby="product-title">
+    <div class="product-detail">
+      <div class="product-gallery">
+        <div class="main-image">
+          <img 
+            src="images/hoa1.jpg" 
+            alt="Nhiệt Ái - Bó hoa hồng đỏ thể hiện trọn vẹn sự mãnh liệt và lãng mạn của tình yêu" 
+            class="product-image"
+            id="main-product-image"
+          >
+          <button class="zoom-btn" aria-label="Phóng to ảnh" onclick="openImageZoom()">
+            <i class="fas fa-expand" aria-hidden="true"></i>
+          </button>
         </div>
+        <div class="image-thumbnails">
+          <button class="thumbnail active" onclick="changeImage('images/hoa1.jpg')" aria-label="Xem ảnh Nhiệt Ái 1" aria-current="true">
+            <img src="images/hoa1.jpg" alt="Nhiệt Ái góc nhìn 1">
+          </button>
+          <button class="thumbnail" onclick="changeImage('images/hoa2.jpg')" aria-label="Xem ảnh Nhiệt Ái 2">
+            <img src="images/hoa2.jpg" alt="Nhiệt Ái góc nhìn 2">
+          </button>
+          <button class="thumbnail" onclick="changeImage('images/hoa3.jpg')" aria-label="Xem ảnh Nhiệt Ái 3">
+            <img src="images/hoa3.jpg" alt="Nhiệt Ái góc nhìn 3">
+          </button>
+        </div>
+      </div>
 
         <div class="product-info">
-          <h1>Nhiệt Ái</h1>
-          <p class="product-price">700.000₫</p>
-          <div class="product-rating">
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
+          <div class="product-header">
+            <h1 id="product-title">Nhiệt Ái</h1>
+            <div class="product-rating">
+              <div class="stars" aria-label="Đánh giá 4.5 sao">
+                <i class="fas fa-star" aria-hidden="true"></i>
+                <i class="fas fa-star" aria-hidden="true"></i>
+                <i class="fas fa-star" aria-hidden="true"></i>
+                <i class="fas fa-star" aria-hidden="true"></i>
+                <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+              </div>
+              <span class="rating-text">(4.5/5 từ 12 đánh giá)</span>
+              <a href="#reviews" class="see-reviews">Xem đánh giá</a>
             </div>
-            <span class="rating-text">(4.5/5 từ 12 đánh giá)</span>
+          </div>
+          
+          <div class="product-price-section">
+            <p class="product-price">700.000₫</p>
+            <div class="stock-status in-stock">
+              <i class="fas fa-check-circle" aria-hidden="true"></i>
+              Còn hàng
+            </div>
           </div>
           
           <div class="product-description">
@@ -940,105 +120,606 @@
 
           <div class="product-actions">
             <div class="quantity-selector">
-              <label>Số lượng:</label>
+              <label for="quantity">Số lượng:</label>
               <div class="quantity-controls">
-                <button class="quantity-btn minus">-</button>
-                <input type="number" class="quantity-input" value="1" min="1">
-                <button class="quantity-btn plus">+</button>
+                <button class="quantity-btn minus" onclick="decreaseQuantity()" aria-label="Giảm số lượng">
+                  <i class="fas fa-minus" aria-hidden="true"></i>
+                </button>
+                <input 
+                  type="number" 
+                  id="quantity" 
+                  class="quantity-input" 
+                  value="1" 
+                  min="1" 
+                  max="10"
+                  aria-label="Số lượng sản phẩm"
+                >
+                <button class="quantity-btn plus" onclick="increaseQuantity()" aria-label="Tăng số lượng">
+                  <i class="fas fa-plus" aria-hidden="true"></i>
+                </button>
               </div>
             </div>
-            <div class="add-to-cart">
-              <button class="btn-primary">Thêm vào giỏ hàng</button>
+            
+            <div class="action-buttons">
+              <button class="btn-primary add-to-cart" onclick="addToCart()">
+                <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                Thêm vào giỏ hàng
+              </button>
+              <button class="btn-outline buy-now" onclick="buyNow()">
+                <i class="fas fa-bolt" aria-hidden="true"></i>
+                Mua ngay
+              </button>
             </div>
           </div>
 
           <div class="product-meta">
             <div class="meta-item">
-              <div class="meta-label">Nguyên liệu:</div>
+              <div class="meta-label">
+                <i class="fas fa-leaf" aria-hidden="true"></i>
+                Nguyên liệu:
+              </div>
               <div class="meta-value">
                 <ul>
-                  <li>Hoa hồng đỏ</li>
+                  <li>Hoa hồng đỏ cao cấp</li>
                   <li>Lá khuynh diệp bạc</li>
                   <li>Phụ kiện trang trí cao cấp</li>
+                  <li>Giấy gói chuyên dụng</li>
                 </ul>
               </div>
             </div>
             
             <div class="meta-item">
-              <div class="meta-label">Phong cách:</div>
+              <div class="meta-label">
+                <i class="fas fa-palette" aria-hidden="true"></i>
+                Phong cách:
+              </div>
               <div class="meta-value">Cổ điển, lãng mạn, sang trọng</div>
             </div>
             
             <div class="meta-item">
-              <div class="meta-label">Dịp tặng:</div>
+              <div class="meta-label">
+                <i class="fas fa-gift" aria-hidden="true"></i>
+                Dịp tặng:
+              </div>
               <div class="meta-value">
                 <div class="meta-tags">
                   <span class="tag">Lễ Tình Nhân (Valentine)</span>
                   <span class="tag">Kỷ niệm ngày cưới</span>
                   <span class="tag">Sinh nhật</span>
+                  <span class="tag">Ngày kỷ niệm</span>
                 </div>
               </div>
             </div>
             
             <div class="meta-item">
-              <div class="meta-label">Thông điệp:</div>
+              <div class="meta-label">
+                <i class="fas fa-comment" aria-hidden="true"></i>
+                Thông điệp:
+              </div>
               <div class="meta-value">Tình yêu sâu sắc, sự cam kết và lòng nhiệt thành</div>
+            </div>
+          </div>
+
+          <div class="social-share">
+            <span>Chia sẻ:</span>
+            <div class="share-buttons">
+              <button class="share-btn facebook" aria-label="Chia sẻ lên Facebook">
+                <i class="fab fa-facebook-f" aria-hidden="true"></i>
+              </button>
+              <button class="share-btn zalo" aria-label="Chia sẻ lên Zalo">
+                <i class="fab fa-facebook-messenger" aria-hidden="true"></i>
+              </button>
+              <button class="share-btn twitter" aria-label="Chia sẻ lên Twitter">
+                <i class="fab fa-twitter" aria-hidden="true"></i>
+              </button>
+              <button class="share-btn copy-link" aria-label="Sao chép liên kết">
+                <i class="fas fa-link" aria-hidden="true"></i>
+              </button>
             </div>
           </div>
         </div>
       </div>
 
       <!-- PRODUCT FEATURES -->
-      <div class="product-features">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-truck"></i>
+      <section class="product-features" aria-labelledby="features-heading">
+        <h2 id="features-heading" class="visually-hidden">Đặc điểm sản phẩm</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-truck" aria-hidden="true"></i>
+            </div>
+            <h3>Giao hàng miễn phí</h3>
+            <p>Miễn phí giao hàng trong nội thành với đơn từ 500.000đ</p>
           </div>
-          <h3>Giao hàng miễn phí</h3>
-          <p>Miễn phí giao hàng trong nội thành với đơn từ 500.000đ</p>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-gift" aria-hidden="true"></i>
+            </div>
+            <h3>Đóng gói quà tặng</h3>
+            <p>Miễn phí đóng gói quà tặng và thiệp chúc mừng</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-leaf" aria-hidden="true"></i>
+            </div>
+            <h3>Hoa tươi 100%</h3>
+            <p>Cam kết hoa tươi mới, bảo hành tươi trong 7 ngày</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt" aria-hidden="true"></i>
+            </div>
+            <h3>Đảm bảo chất lượng</h3>
+            <p>Hoàn tiền 100% nếu không hài lòng với chất lượng</p>
+          </div>
         </div>
+      </section>
+
+      <!-- PRODUCT TABS -->
+      <section class="product-tabs" aria-labelledby="tabs-heading">
+        <h2 id="tabs-heading" class="visually-hidden">Thông tin chi tiết sản phẩm</h2>
         
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-gift"></i>
-          </div>
-          <h3>Đóng gói quà tặng</h3>
-          <p>Miễn phí đóng gói quà tặng và thiệp chúc mừng</p>
+        <div class="tabs-header">
+          <button class="tab-btn active" data-tab="description" onclick="switchTab('description')" aria-selected="true">
+            Mô tả sản phẩm
+          </button>
+          <button class="tab-btn" data-tab="specifications" onclick="switchTab('specifications')" aria-selected="false">
+            Thông số kỹ thuật
+          </button>
+          <button class="tab-btn" data-tab="reviews" onclick="switchTab('reviews')" aria-selected="false" id="reviews">
+            Đánh giá (12)
+          </button>
+          <button class="tab-btn" data-tab="shipping" onclick="switchTab('shipping')" aria-selected="false">
+            Vận chuyển &amp; Trả hàng
+          </button>
         </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-leaf"></i>
+
+        <div class="tabs-content">
+          <div class="tab-panel active" id="description-tab" role="tabpanel" aria-labelledby="description">
+            <h3>Chi Tiết Sản Phẩm</h3>
+            <p>Bó hoa Nhiệt Ái được thiết kế dành riêng cho những khoảnh khắc đặc biệt của tình yêu. Với sự kết hợp hoàn hảo giữa những bông hồng đỏ thắm tượng trưng cho tình yêu nồng cháy và lá khuynh diệp bạc mang đến vẻ đẹp tinh tế.</p>
+            
+            <h4>Đặc điểm nổi bật:</h4>
+            <ul>
+              <li>Hoa hồng đỏ cao cấp nhập khẩu</li>
+              <li>Thiết kế cổ điển sang trọng</li>
+              <li>Phù hợp cho các dịp lễ quan trọng</li>
+              <li>Kèm thiệp chúc mừng cá nhân hóa</li>
+            </ul>
+
+            <h4>Kích thước:</h4>
+            <p>Chiều cao: 45cm, Đường kính: 35cm</p>
           </div>
-          <h3>Hoa tươi 100%</h3>
-          <p>Cam kết hoa tươi mới, bảo hành tươi trong 7 ngày</p>
+
+          <div class="tab-panel" id="specifications-tab" role="tabpanel" aria-labelledby="specifications">
+            <h3>Thông Số Kỹ Thuật</h3>
+            <div class="specs-grid">
+              <div class="spec-item">
+                <span class="spec-label">Loại hoa chính:</span>
+                <span class="spec-value">Hoa hồng đỏ</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Số lượng hoa:</span>
+                <span class="spec-value">24 bông</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Phụ liệu:</span>
+                <span class="spec-value">Lá khuynh diệp, giấy gói</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Trọng lượng:</span>
+                <span class="spec-value">1.2kg</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Bảo quản:</span>
+                <span class="spec-value">Nhiệt độ phòng, tránh ánh nắng</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Tuổi thọ:</span>
+                <span class="spec-value">7-10 ngày</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="reviews-tab" role="tabpanel" aria-labelledby="reviews">
+            <h3>Đánh Giá Từ Khách Hàng</h3>
+            <div class="reviews-summary">
+              <div class="overall-rating">
+                <div class="rating-score">4.5</div>
+                <div class="rating-stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="rating-count">12 đánh giá</div>
+              </div>
+              
+              <div class="rating-bars">
+                <div class="rating-bar">
+                  <span>5 sao</span>
+                  <div class="bar">
+                    <div class="fill" style="width: 70%;"></div>
+                  </div>
+                  <span>8</span>
+                </div>
+                <div class="rating-bar">
+                  <span>4 sao</span>
+                  <div class="bar">
+                    <div class="fill" style="width: 20%;"></div>
+                  </div>
+                  <span>3</span>
+                </div>
+                <div class="rating-bar">
+                  <span>3 sao</span>
+                  <div class="bar">
+                    <div class="fill" style="width: 10%;"></div>
+                  </div>
+                  <span>1</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="reviews-list">
+              <div class="review-item">
+                <div class="review-header">
+                  <div class="reviewer">Trần Thị B</div>
+                  <div class="review-date">15/12/2024</div>
+                </div>
+                <div class="review-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">Hoa rất đẹp và tươi, giao hàng đúng hẹn. Bạn gái tôi rất thích!</p>
+              </div>
+
+              <div class="review-item">
+                <div class="review-header">
+                  <div class="reviewer">Nguyễn Văn C</div>
+                  <div class="review-date">10/12/2024</div>
+                </div>
+                <div class="review-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">Chất lượng hoa tốt, thơm và tươi lâu. Sẽ ủng hộ shop dài dài.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="shipping-tab" role="tabpanel" aria-labelledby="shipping">
+            <h3>Chính Sách Vận Chuyển & Trả Hàng</h3>
+            
+            <h4>Vận chuyển:</h4>
+            <ul>
+              <li>Miễn phí vận chuyển cho đơn hàng từ 500.000đ trong nội thành</li>
+              <li>Phí vận chuyển 30.000đ cho đơn hàng dưới 500.000đ</li>
+              <li>Giao hàng trong 2-4 giờ đối với nội thành</li>
+              <li>Giao hàng toàn quốc, thời gian 1-3 ngày</li>
+            </ul>
+
+            <h4>Trả hàng & Đổi trả:</h4>
+            <ul>
+              <li>Được trả hàng trong vòng 24h nếu không hài lòng</li>
+              <li>Hoàn tiền 100% nếu sản phẩm không đúng mô tả</li>
+              <li>Liên hệ hotline 090 123 4567 để được hỗ trợ</li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </section>
 
       <!-- RELATED PRODUCTS -->
-      <div class="related-products">
-        <h2 class="section-title">Sản phẩm tương tự</h2>
+      <section class="related-products" aria-labelledby="related-heading">
+        <h2 id="related-heading" class="section-title">Sản phẩm tương tự</h2>
         <div class="product-grid">
           <article class="product">
-            <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Peach">
+            <img src="images/hoa2.jpg" alt="Peach - Bó hoa hồng phấn dịu dàng và thanh lịch">
             <h3>Peach</h3>
             <p class="price">770.000₫</p>
-            <button class="btn-outline">Đặt hàng</button>
+            <button class="btn-outline" onclick="window.location.href='4_ChiTietSanPham.html'">Xem chi tiết</button>
           </article>
 
           <article class="product">
-            <img src="https://images.unsplash.com/photo-1487070183337-61c0f6c2d2d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Blueberry">
+            <img src="images/hoa3.jpg" alt="Blueberry - Sắc tím quyến rũ và bí ẩn">
             <h3>Blueberry</h3>
             <p class="price">250.000₫</p>
-            <button class="btn-outline">Đặt hàng</button>
+            <button class="btn-outline" onclick="window.location.href='4_ChiTietSanPham.html'">Xem chi tiết</button>
           </article>
 
           <article class="product">
-            <img src="https://images.unsplash.com/photo-1578948856697-db91d246b7b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Lemon">
+            <img src="images/hoa4.jpg" alt="Lemon - Bó hoa tươi sáng và tràn đầy năng lượng">
             <h3>Lemon</h3>
             <p class="price">650.000₫</p>
-            <button class="btn-outline">Đặt hàng</button>
+            <button class="btn-outline" onclick="window.location.href='4_ChiTietSanPham.html'">Xem chi tiết</button>
           </article>
 
           <article class="product">
-            <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=c
+            <img src="images/hoa5.jpg" alt="Vườn Xuân Ca - Sự kết hợp hài hòa của nhiều loại hoa">
+            <h3>Vườn Xuân Ca</h3>
+            <p class="price">670.000₫</p>
+            <button class="btn-outline" onclick="window.location.href='4_ChiTietSanPham.html'">Xem chi tiết</button>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" aria-labelledby="footer-heading">
+      <div class="container footer-inner">
+        <h2 id="footer-heading" class="visually-hidden">Thông tin liên hệ</h2>
+        <div class="footer-main">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <svg width="60" height="60" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+                <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+                <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+                <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+                <circle cx="50" cy="50" r="12" fill="#9370db"/>
+                <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+              </svg>
+              <span>Bloom</span>
+            </div>
+            <p class="footer-tagline">Lan tỏa hương sắc thiên nhiên</p>
+          </div>
+
+          <div class="footer-contact">
+            <h3>Thông Tin Liên Hệ</h3>
+            <div class="contact-info">
+              <div class="contact-item">
+                <i class="fas fa-globe" aria-hidden="true"></i>
+                <span>bloom.vn</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                <span>123 Đường Hoa, Quận 1, TP.HCM</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                <a href="tel:+84901234567">090 123 4567</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope" aria-hidden="true"></i>
+                <a href="mailto:info@bloom.vn">info@bloom.vn</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-clock" aria-hidden="true"></i>
+                <span>T2 – CN: 8h30 – 21h00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div> <!-- /site-wrapper -->
+
+  <!-- IMAGE ZOOM MODAL -->
+  <div class="image-zoom-modal" id="imageZoomModal" aria-hidden="true" role="dialog" aria-labelledby="zoom-modal-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="zoom-modal-title" class="visually-hidden">Xem ảnh phóng to</h3>
+        <button class="close-modal" onclick="closeImageZoom()" aria-label="Đóng">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="" alt="" id="zoomed-image">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+      const nav = document.querySelector('.bloom-nav');
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      
+      nav.classList.toggle('active');
+      this.setAttribute('aria-expanded', !isExpanded);
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.bloom-header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Image Gallery
+    function changeImage(src) {
+      const mainImage = document.getElementById('main-product-image');
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      
+      // Update main image
+      mainImage.src = src;
+      
+      // Update active thumbnail
+      thumbnails.forEach(thumb => {
+        thumb.classList.remove('active');
+        thumb.setAttribute('aria-current', 'false');
+      });
+      
+      event.currentTarget.classList.add('active');
+      event.currentTarget.setAttribute('aria-current', 'true');
+    }
+
+    // Quantity Controls
+    function decreaseQuantity() {
+      const quantityInput = document.getElementById('quantity');
+      if (parseInt(quantityInput.value) > 1) {
+        quantityInput.value = parseInt(quantityInput.value) - 1;
+      }
+    }
+
+    function increaseQuantity() {
+      const quantityInput = document.getElementById('quantity');
+      if (parseInt(quantityInput.value) < 10) {
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+      }
+    }
+
+    // Image Zoom Modal
+    function openImageZoom() {
+      const modal = document.getElementById('imageZoomModal');
+      const mainImage = document.getElementById('main-product-image');
+      const zoomedImage = document.getElementById('zoomed-image');
+      
+      zoomedImage.src = mainImage.src;
+      zoomedImage.alt = mainImage.alt;
+      modal.setAttribute('aria-hidden', 'false');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageZoom() {
+      const modal = document.getElementById('imageZoomModal');
+      modal.setAttribute('aria-hidden', 'true');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeImageZoom();
+      }
+    });
+
+    // Tab Switching
+    function switchTab(tabName) {
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabPanels = document.querySelectorAll('.tab-panel');
+      
+      // Update tab buttons
+      tabBtns.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      
+      // Update tab panels
+      tabPanels.forEach(panel => {
+        panel.classList.remove('active');
+      });
+      
+      // Activate selected tab
+      document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+      document.querySelector(`[data-tab="${tabName}"]`).setAttribute('aria-selected', 'true');
+      document.getElementById(`${tabName}-tab`).classList.add('active');
+    }
+
+    // Add to Cart Functionality
+    function addToCart() {
+      const quantity = document.getElementById('quantity').value;
+      const product = {
+        id: 1,
+        name: 'Nhiệt Ái',
+        price: 700000,
+        quantity: parseInt(quantity),
+        image: 'images/hoa1.jpg'
+      };
+      
+      // Show success notification
+      showNotification(`Đã thêm ${quantity} "${product.name}" vào giỏ hàng!`, 'success');
+      
+      // Simulate adding to cart (in real app, this would update cart state)
+      const addBtn = document.querySelector('.add-to-cart');
+      const originalText = addBtn.innerHTML;
+      
+      addBtn.innerHTML = '<i class="fas fa-check"></i> Đã thêm!';
+      addBtn.disabled = true;
+      
+      setTimeout(() => {
+        addBtn.innerHTML = originalText;
+        addBtn.disabled = false;
+      }, 2000);
+    }
+
+    // Buy Now Functionality
+    function buyNow() {
+      const quantity = document.getElementById('quantity').value;
+      // In real app, this would redirect to checkout with product
+      showNotification(`Chuyển hướng đến trang thanh toán với ${quantity} sản phẩm...`, 'info');
+      
+      setTimeout(() => {
+        window.location.href = '7_ThanhToan.html';
+      }, 1000);
+    }
+
+    // Share Functionality
+    document.querySelectorAll('.share-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const type = this.classList[1]; // facebook, zalo, etc.
+        const productUrl = window.location.href;
+        const productName = 'Nhiệt Ái - Bloom';
+        
+        let shareUrl = '';
+        switch(type) {
+          case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}`;
+            break;
+          case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(productName)}&url=${encodeURIComponent(productUrl)}`;
+            break;
+          case 'copy-link':
+            navigator.clipboard.writeText(productUrl).then(() => {
+              showNotification('Đã sao chép liên kết!', 'success');
+            });
+            return;
+          default:
+            return;
+        }
+        
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+      });
+    });
+
+    // Notification System
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+        <span>${message}</span>
+        <button onclick="this.parentElement.remove()" aria-label="Đóng thông báo">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        if (notification.parentElement) {
+          notification.remove();
+        }
+      }, 5000);
+    }
+
+    // Logout confirmation
+    document.querySelector('.logout-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      if (confirm('Bạn có chắc muốn đăng xuất?')) {
+        window.location.href = 'index.html';
+      }
+    });
+  </script>
+</body>
+</html>
