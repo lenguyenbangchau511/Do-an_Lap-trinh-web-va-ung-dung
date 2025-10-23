@@ -108,10 +108,10 @@
           <div class="order-footer">
             <div class="order-total">2.600.000₫</div>
             <div class="order-actions">
-              <button class="btn-outline" onclick="viewOrderDetails('BL202400123')">
-                <i class="fas fa-eye" aria-hidden="true"></i>
-                Xem chi tiết
-              </button>
+          <button class="btn-outline" onclick="window.location.href='10_DonHangDaMua.html'">
+            <i class="fas fa-eye" aria-hidden="true"></i>
+            Xem chi tiết
+          </button>
               <button class="btn-secondary" onclick="reorder('BL202400123')">
                 <i class="fas fa-redo" aria-hidden="true"></i>
                 Đặt lại
@@ -141,10 +141,10 @@
           <div class="order-footer">
             <div class="order-total">900.000₫</div>
             <div class="order-actions">
-              <button class="btn-outline" onclick="viewOrderDetails('BL202400122')">
-                <i class="fas fa-eye" aria-hidden="true"></i>
-                Xem chi tiết
-              </button>
+            <button class="btn-outline" onclick="window.location.href='10_DonHangDaMua.html'">
+              <i class="fas fa-eye" aria-hidden="true"></i>
+              Xem chi tiết
+            </button>
               <button class="btn-secondary" onclick="reorder('BL202400122')">
                 <i class="fas fa-redo" aria-hidden="true"></i>
                 Đặt lại
@@ -307,10 +307,7 @@
   <script>
     // Hàm xem chi tiết đơn hàng
     function viewOrderDetails(orderId) {
-      // Trong thực tế, sẽ chuyển hướng đến trang chi tiết đơn hàng
-      // Hiện tại hiển thị thông báo
-      alert(`Xem chi tiết đơn hàng ${orderId}`);
-      // window.location.href = `10_DonHangDaMua.html?id=${orderId}`;
+      window.location.href = '10_DonHangDaMua.html';
     }
 
     // Hàm đặt lại đơn hàng
