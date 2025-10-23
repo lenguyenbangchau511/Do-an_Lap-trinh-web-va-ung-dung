@@ -3,10 +3,17 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Quản lý khách hàng - Bloom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quản lý danh mục - Bloom</title>
+
+  <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Hiệu ứng -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="admin.css">
 </head>
@@ -29,40 +36,35 @@
       </div>
       <a href="users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
       <a href="products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
-      <a href="category.html" class="active"><i class="fa-solid fa-chart-line me-2"></i>Quản lý danh mục</a>
+      <a href="category.html" class="active"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
     </div>
   </div>
-
   <!-- MAIN -->
   <div class="main-content">
     <div class="header">
-      <div class="header__title"><i class="fa-solid fa-users me-2"></i>Quản lý danh mục</div>
+      <div class="header__title"><i class="fa-solid fa-folder-tree me-2"></i> Quản lý danh mục</div>
       <div class="header__info">
-        <span class="text-muted small">Xin chào, Admin</span>
-        <a href=""><i class="fa-solid fa-user-tie"></i></a>
+        <span class="text-muted small me-2">Xin chào, Admin</span>
+        <i class="fa-solid fa-user-tie"></i>
       </div>
     </div>
 
-    <div class="container-fluid function" data-aos="fade-up">
-      <div class="d-flex justify-content-between content" style="margin-bottom: 20px;">
-        <div>
-          <button class="btn btn-outline-danger" id="addUserBtn"><i class="fa-solid fa-user-plus"></i> Thêm danh
-            mục</button>
-          <button class="btn btn-outline-secondary" id="refreshUsers"><i class="fa-solid fa-rotate"></i> Tải
-            lại</button>
-        </div>
+    <!-- CHỨC NĂNG -->
+    <div class="container-fluid" data-aos="fade-up">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <button class="btn btn-success" id="addCategoryBtn"><i class="fa-solid fa-folder-plus"></i> Thêm danh
+          mục</button>
 
         <!-- Tìm kiếm -->
-        <div class="d-flex gap-1 search">
-          <div class="searchUser">
-            <input id="searchUser" class="control__search" placeholder="Tìm kiếm...">
+        <div class="d-flex">
+          <div class="searchCategory">
+            <input id="searchCategory" class="control__search" placeholder="Tìm kiếm...">
             <button class="search__btn"><i class="search__btn__icon fa-solid fa-magnifying-glass"></i></button>
           </div>
         </div>
-        <!-- hết tìm kiếm -->
-
       </div>
-      <!-- content -->
+
+      <!-- BẢNG DANH MỤC -->
       <div class="card shadow-sm">
         <div class="card-body">
           <div class="table-responsive">
@@ -71,7 +73,7 @@
                 <tr>
                   <th>STT</th>
                   <th>Tên Danh Mục</th>
-                  <th class="desc_sp" style="width: 400px;">Mô tả</th>
+                  <th class="desc_sp">Mô tả</th>
                   <th>Tổng sản phẩm</th>
                   <th>Tổng số lượng</th>
                   <th>Thao tác</th>
@@ -79,32 +81,33 @@
               </thead>
               <tbody id="categoryTableBody"></tbody>
             </table>
+            <ul id="pagination">
+              </li>
+              <li class="pagination-item">
+                <a href="category.html" class="pagination-item__link active">1</a>
+              </li>
+              <li class="pagination-item">
+                <a href="category.html" class="pagination-item__link " target="_self">2</a>
+              </li>
+              <li class="pagination-item">
+                <a href="category.html" class="pagination-item__link " target="_self">3</a>
+              </li>
+              <li class="pagination-item">
+                <a href="category.html" class="pagination-item__link " target="_self">4</a>
+              </li>
+              <li class="pagination-item">
+                <a href="category.html" class="pagination-item__link " target="_self">5</a>
+              </li>
+            </ul>
           </div>
-          <ul id="pagination">
-            </li>
-            <li class="pagination-item">
-              <a href="category.html" class="pagination-item__link active">1</a>
-            </li>
-            <li class="pagination-item">
-              <a href="category.html" class="pagination-item__link " target="_self">2</a>
-            </li>
-            <li class="pagination-item">
-              <a href="category.html" class="pagination-item__link " target="_self">3</a>
-            </li>
-            <li class="pagination-item">
-              <a href="category.html" class="pagination-item__link " target="_self">4</a>
-            </li>
-            <li class="pagination-item">
-              <a href="category.html" class="pagination-item__link " target="_self">5</a>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
   </div>
-  <!-- Modal -->
+
+  <!-- MODAL THÊM / SỬA DANH MỤC -->
   <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title fw-bold" id="categoryModalLabel">Thêm danh mục</h5>
@@ -112,218 +115,175 @@
         </div>
         <div class="modal-body">
           <form id="categoryForm">
-            <input type="hidden" id="categoryId" />
+            <input type="hidden" id="categoryId">
             <div class="mb-3">
               <label for="categoryName" class="form-label">Tên danh mục</label>
-              <input type="text" id="categoryName" class="form-control" required />
+              <input type="text" id="categoryName" class="form-control" placeholder="Nhập tên danh mục..." required>
             </div>
             <div class="mb-3">
               <label for="categoryDesc" class="form-label">Mô tả</label>
-              <input type="text" id="categoryDesc" class="form-control" required />
+              <textarea id="categoryDesc" class="form-control" rows="3" placeholder="Nhập mô tả danh mục..."
+                required></textarea>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-          <button type="submit" form="categoryForm" class="btn btn-primary" id="saveCategory">Lưu</button>
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="submit" form="categoryForm" class="btn btn-primary">Lưu</button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- TOAST -->
+  <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080" id="toastContainer"></div>
 
-  <div id="toastContainer" style="position: fixed; top: 1rem; right: 1rem; z-index: 1060;">
-  </div>
+  <!-- Script -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
 
-// Dữ liệu mặc định danh mục
-const defaultCategorys = [
-  { stt: '01', name: 'Bó Hoa', desc: 'Dùng để tặng trong các dịp như sinh nhật, chúc mừng, hoặc hẹn hò.', qty1: '30', qty: '78' },
-  { stt: '02', name: 'Lẵng hoa', desc: 'Sang trọng, trang nhã.', qty1: '25', qty: '78' },
-  { stt: '03', name: 'Kệ hoa', desc: 'Phù hợp để trang trí sân khấu, hội nghị, hoặc làm quà tặng cho những dịp quan trọng như khai trương, tang lễ.', qty1: '59', qty: '78' },
-];
+    // ==== DỮ LIỆU MẶC ĐỊNH ====
+    const defaultCategories = [
+      { stt: '01', name: 'Bó hoa', desc: 'Dùng để tặng trong các dịp như sinh nhật, chúc mừng, hoặc hẹn hò.', qty1: '30', qty: '78' },
+      { stt: '02', name: 'Lẵng hoa', desc: 'Sang trọng, trang nhã.', qty1: '25', qty: '60' },
+      { stt: '03', name: 'Kệ hoa', desc: 'Phù hợp để trang trí sân khấu, hội nghị, hoặc làm quà tặng khai trương.', qty1: '15', qty: '40' },
+    ];
 
-// Lấy dữ liệu từ localStorage nếu có, nếu không dùng mặc định
-let categorys = defaultCategorys;
+    // ==== KHỞI TẠO DỮ LIỆU TỪ LOCALSTORAGE ====
+    let categories =  defaultCategories;
 
-// Lưu danh mục vào localStorage
-const saveCategorys = () => localStorage.setItem('categorys', JSON.stringify(categorys));
+    // ==== LƯU DỮ LIỆU ====
+    const saveCategories = () => localStorage.setItem('categories', JSON.stringify(categories));
 
-const tbody = document.getElementById('categoryTableBody');
-
-// Hàm hiển thị thông báo toast
-function showToast(msg, type = 'success') {
-  const container = document.getElementById('toastContainer');
-  const color = type === 'success' ? 'bg-success' : 'bg-danger';
-  const toast = document.createElement('div');
-  toast.className = `toast align-items-center text-white ${color} border-0 show mb-2`;
-  toast.style.minWidth = '200px';
-  toast.setAttribute('role', 'alert');
-  toast.setAttribute('aria-live', 'assertive');
-  toast.setAttribute('aria-atomic', 'true');
-  toast.innerHTML = `
+    // ==== TOAST THÔNG BÁO ====
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const color = type === 'success' ? 'bg-success' : 'bg-danger';
+      const toast = document.createElement('div');
+      toast.className = `toast align-items-center text-white ${color} border-0 show mb-2`;
+      toast.innerHTML = `
     <div class="d-flex">
-      <div class="toast-body">${msg}</div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-  `;
-  container.appendChild(toast);
-
-  setTimeout(() => {
-    toast.classList.remove('show');
-    toast.classList.add('hide');
-    toast.addEventListener('transitionend', () => toast.remove());
-  }, 3000);
-}
-
-// Render danh sách danh mục ra bảng
-function renderCategorys(list) {
-  tbody.innerHTML = '';
-  list.forEach(u => {
-    tbody.innerHTML += `
-      <tr>
-        <td>${u.stt}</td>
-        <td>${u.name}</td>
-        <td>${u.desc}</td>
-        <td>${u.qty1}</td>
-        <td>${u.qty}</td>
-        <td>
-          <button class="btn btn-sm btn-outline-primary me-1 edit-btn" data-id="${u.stt}"><i class="fa-solid fa-pen"></i> Sửa</button>
-          <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${u.stt}"><i class="fa-solid fa-trash"></i> Xóa</button>
-        </td>
-      </tr>`;
-  });
-}
-
-// Hàm lọc danh mục theo từ khóa tìm kiếm
-function filterCategorys() {
-  const keyword = document.getElementById('searchUser').value.toLowerCase();
-  return categorys.filter(c => c.name.toLowerCase().includes(keyword) || c.desc.toLowerCase().includes(keyword));
-}
-
-// Sự kiện tìm kiếm realtime
-document.getElementById('searchUser').addEventListener('input', () => {
-  renderCategorys(filterCategorys());
-});
-
-// Nút tải lại dữ liệu
-document.getElementById('refreshUsers').onclick = () => {
-  localStorage.removeItem('categorys');
-  location.reload();
-};
-
-// Hiển thị modal thêm danh mục
-document.getElementById('addUserBtn').addEventListener('click', () => {
-  document.getElementById('categoryForm').reset();
-  document.getElementById('categoryId').value = '';
-  document.getElementById('categoryModalLabel').innerText = 'Thêm danh mục';
-  const categoryModal = new bootstrap.Modal(document.getElementById('categoryModal'));
-  categoryModal.show();
-});
-
-// Xử lý submit form (thêm hoặc sửa)
-document.getElementById('categoryForm').addEventListener('submit', e => {
-  e.preventDefault();
-
-  const id = document.getElementById('categoryId').value;
-  const name = document.getElementById('categoryName').value.trim();
-  const desc = document.getElementById('categoryDesc').value.trim();
-
-  if (!name || !desc) {
-    showToast('Vui lòng nhập đầy đủ thông tin', 'error');
-    return;
-  }
-
-  if (id) {
-    // Sửa danh mục
-    const idx = categorys.findIndex(c => c.stt === id);
-    if (idx !== -1) {
-      categorys[idx].name = name;
-      categorys[idx].desc = desc;
-      renderCategorys(categorys);
-      showToast('Cập nhật danh mục thành công', 'success');
+      <div class="toast-body">${message}</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
     }
-  } else {
-    // Thêm danh mục mới
-    let maxStt = 0;
-    categorys.forEach(c => {
-      const sttNum = parseInt(c.stt);
-      if (sttNum > maxStt) maxStt = sttNum;
-    });
-    const newStt = (maxStt + 1).toString().padStart(2, '0');
 
-    categorys.push({
-      stt: newStt,
-      name: name,
-      desc: desc,
-      qty1: '0',
-      qty: '0'
-    });
-    renderCategorys(categorys);
-    showToast('Thêm danh mục thành công', 'success');
-  }
-
-  // Đóng modal
-  const categoryModal = bootstrap.Modal.getInstance(document.getElementById('categoryModal'));
-  categoryModal.hide();
-  e.target.reset();
-});
-function updateSTT() {
-  categorys.forEach((c, index) => {
-    c.stt = (index + 1).toString().padStart(2, '0');
-  });
-}
-
-// Xử lý click sửa và xóa
-document.addEventListener('click', e => {
-  const id = e.target.closest('[data-id]')?.dataset.id;
-  if (!id) return;
-
-  const idx = categorys.findIndex(u => u.stt === id);
-  if (idx === -1) return;
-
-  if (e.target.closest('.edit-btn')) {
-    // Mở modal sửa
-    document.getElementById('categoryId').value = categorys[idx].stt;
-    document.getElementById('categoryName').value = categorys[idx].name;
-    document.getElementById('categoryDesc').value = categorys[idx].desc;
-    document.getElementById('categoryModalLabel').innerText = 'Sửa danh mục';
-    const categoryModal = new bootstrap.Modal(document.getElementById('categoryModal'));
-    categoryModal.show();
-  }
-
-  if (e.target.closest('.delete-btn')) {
-    if (confirm('Xóa danh mục ' + categorys[idx].name + '?')) {
-      categorys.splice(idx, 1);
-      updateSTT();
-      renderCategorys(categorys);
-      showToast('Xóa danh mục thành công', 'success');
+    // ==== RENDER BẢNG ====
+    const tbody = document.getElementById('categoryTableBody');
+    function renderCategories(list = categories) {
+      tbody.innerHTML = list.map(c => `
+    <tr>
+      <td>${c.stt}</td>
+      <td>${c.name}</td>
+      <td class="text-start">${c.desc}</td>
+      <td>${c.qty1}</td>
+      <td>${c.qty}</td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary me-1 edit-btn" data-id="${c.stt}">
+          <i class="fa-solid fa-pen"></i> Sửa
+        </button>
+        <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${c.stt}">
+          <i class="fa-solid fa-trash"></i> Xóa
+        </button>
+      </td>
+    </tr>
+  `).join('');
     }
-  }
-});
 
-// Khởi tạo hiển thị danh mục
-renderCategorys(categorys);
+    // ==== TÌM KIẾM ====
+    document.getElementById('searchCategory').addEventListener('input', e => {
+      const keyword = e.target.value.toLowerCase();
+      const filtered = categories.filter(c =>
+        c.name.toLowerCase().includes(keyword) ||
+        c.desc.toLowerCase().includes(keyword)
+      );
+      renderCategories(filtered);
+    });
 
-// Xử lý phân trang (nếu cần)
-const pagination = document.getElementById('pagination');
-pagination.addEventListener('click', e => {
-  if (e.target.classList.contains('pagination-item__link')) {
-    e.preventDefault();
-    const currentActive = pagination.querySelector('.pagination-item__link.active');
-    if (currentActive) currentActive.classList.remove('active');
-    e.target.classList.add('active');
-  }
-});
+    // ==== MỞ MODAL THÊM DANH MỤC ====
+    document.getElementById('addCategoryBtn').addEventListener('click', () => {
+      document.getElementById('categoryForm').reset();
+      document.getElementById('categoryId').value = '';
+      document.getElementById('categoryModalLabel').innerText = 'Thêm danh mục';
+      new bootstrap.Modal('#categoryModal').show();
+    });
 
+    // ==== LƯU FORM ====
+    document.getElementById('categoryForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const id = document.getElementById('categoryId').value;
+      const name = document.getElementById('categoryName').value.trim();
+      const desc = document.getElementById('categoryDesc').value.trim();
 
+      if (!name || !desc) {
+        showToast('Vui lòng nhập đầy đủ thông tin', 'error');
+        return;
+      }
 
+      if (id) {
+        // Cập nhật danh mục
+        const idx = categories.findIndex(c => c.stt === id);
+        if (idx !== -1) {
+          categories[idx].name = name;
+          categories[idx].desc = desc;
+          showToast('Cập nhật danh mục thành công');
+        }
+      } else {
+        // Thêm danh mục mới
+        const newStt = (categories.length + 1).toString().padStart(2, '0');
+        categories.push({ stt: newStt, name, desc, qty1: '0', qty: '0' });
+        showToast('Thêm danh mục thành công');
+      }
+      renderCategories(categories);
+      bootstrap.Modal.getInstance(document.getElementById('categoryModal')).hide();
+      e.target.reset();
+    });
+
+    // ==== SỬA / XÓA DANH MỤC ====
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('[data-id]');
+      if (!btn) return;
+      const id = btn.dataset.id;
+      const idx = categories.findIndex(c => c.stt === id);
+      if (idx === -1) return;
+
+      if (btn.classList.contains('edit-btn')) {
+        document.getElementById('categoryId').value = categories[idx].stt;
+        document.getElementById('categoryName').value = categories[idx].name;
+        document.getElementById('categoryDesc').value = categories[idx].desc;
+        document.getElementById('categoryModalLabel').innerText = 'Sửa danh mục';
+        new bootstrap.Modal('#categoryModal').show();
+      }
+
+      if (btn.classList.contains('delete-btn')) {
+        if (confirm(`Bạn có chắc muốn xóa danh mục "${categories[idx].name}" không?`)) {
+          categories.splice(idx, 1);
+          // Cập nhật lại STT
+          categories.forEach((c, i) => c.stt = (i + 1).toString().padStart(2, '0'));
+          renderCategories(categories);
+          showToast('Xóa danh mục thành công','denger');
+        }
+      }
+    });
+
+    // ==== KHỞI TẠO ====
+    renderCategories(categories);
+
+    
+    const pagination = document.getElementById('pagination');
+    pagination.addEventListener('click', e => {
+      if (e.target.classList.contains('pagination-item__link')) {
+        e.preventDefault();
+        const currentActive = pagination.querySelector('.pagination-item__link.active');
+        if (currentActive) currentActive.classList.remove('active');
+        e.target.classList.add('active');
+      }
+    });
   </script>
-
-
 </body>
 
 </html>

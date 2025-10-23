@@ -7,8 +7,12 @@
   <title>Quản lý khách hàng - Bloom</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="admin.css">
+
 </head>
 
 <body>
@@ -35,42 +39,37 @@
 
   <!-- Main -->
   <div class="main-content">
-    <!-- Header  -->
     <div class="header">
       <div class="header__title"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</div>
       <div class="header__info">
         <span class="text-muted small">Xin chào, Admin</span>
-        <a href=""><i class="fa-solid fa-user-tie"></i></a>
+        <a href=""><i class="fa-solid fa-user-tie ms-2"></i></a>
       </div>
     </div>
 
-    <!-- function -->
-    <div class="container-fluid function"  data-aos="fade-up">
-      <div class="d-flex justify-content-between content" style="margin-bottom: 20px;">
+    <div class="container-fluid function" data-aos="fade-up">
+      <div class="d-flex justify-content-between mb-3">
         <div>
-          <button class="btn btn-outline-danger" id="addUserBtn"><i class="fa-solid fa-user-plus"></i> Thêm khách
+          <button class="btn btn-success" id="addUserBtn"><i class="fa-solid fa-user-plus"></i> Thêm khách
             hàng</button>
-          <button class="btn btn-outline-secondary" id="refreshUsers"><i class="fa-solid fa-rotate"></i> Tải
-            lại</button>
         </div>
 
-        <!-- Tìm kiếm -->
-        <div class="d-flex gap-1 search">
-          <div class="searchUser">
-            <input id="searchUser" class="control__search" placeholder="Tìm kiếm...">
-            <button class="search__btn"><i class="search__btn__icon fa-solid fa-magnifying-glass"></i></button>
+        <div class="d-flex gap-1">
+          <div class="d-flex gap-1 search">
+            <div class="searchUser">
+              <input id="searchUser" class="control__search" placeholder="Tìm kiếm...">
+              <button class="search__btn"><i class="search__btn__icon fa-solid fa-magnifying-glass"></i></button>
+            </div>
           </div>
-
           <select id="filterStatus" class="control_select">
             <option value="">Tất cả trạng thái</option>
             <option value="active">Hoạt động</option>
             <option value="locked">Đã khóa</option>
           </select>
         </div>
-        <!-- hết tìm kiếm -->
-
       </div>
-      <!-- content -->
+
+      <!-- Bảng -->
       <div class="card shadow-sm">
         <div class="card-body">
           <div class="table-responsive">
@@ -79,110 +78,185 @@
                 <tr>
                   <th>ID</th>
                   <th>Họ tên</th>
+                  <th>Tên tài khoản</th>
                   <th>Email</th>
                   <th>Điện thoại</th>
+                  <th>Địa chỉ</th>
+                  <th>Ngày tạo</th>
+                  <th>Đơn hàng</th>
                   <th>Trạng thái</th>
                   <th>Hành động</th>
                 </tr>
               </thead>
               <tbody id="userTableBody"></tbody>
             </table>
+            <ul id="pagination">
+              </li>
+              <li class="pagination-item">
+                <a href="users.html" class="pagination-item__link active">1</a>
+              </li>
+              <li class="pagination-item">
+                <a href="users.html" class="pagination-item__link " target="_self">2</a>
+              </li>
+              <li class="pagination-item">
+                <a href="users.html" class="pagination-item__link " target="_self">3</a>
+              </li>
+              <li class="pagination-item">
+                <a href="users.html" class="pagination-item__link " target="_self">4</a>
+              </li>
+              <li class="pagination-item">
+                <a href="users.html" class="pagination-item__link " target="_self">5</a>
+              </li>
+            </ul>
           </div>
-          <ul id="pagination">
-            </li>
-            <li class="pagination-item">
-              <a href="users.html" class="pagination-item__link active">1</a>
-            </li>
-            <li class="pagination-item">
-              <a href="users.html" class="pagination-item__link " target="_self">2</a>
-            </li>
-            <li class="pagination-item">
-              <a href="users.html" class="pagination-item__link " target="_self">3</a>
-            </li>
-            <li class="pagination-item">
-              <a href="users.html" class="pagination-item__link " target="_self">4</a>
-            </li>
-            <li class="pagination-item">
-              <a href="users.html" class="pagination-item__link " target="_self">5</a>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="userModal" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title fw-bold">Thêm khách hàng</h5><button class="btn-close"
-              data-bs-dismiss="modal"></button>
+    <footer class="mt-4">
+      <p class="text-center text-muted">&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="userModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold">Thêm khách hàng</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <form id="userForm">
+          <input type="hidden" id="userId">
+
+          <!-- Họ tên + Email chung 1 hàng -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Họ tên</label>
+              <input id="userName" class="form-control" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Email</label>
+              <input id="userEmail" type="email" class="form-control" required>
+            </div>
           </div>
-          <div class="modal-body">
-            <form id="userForm">
-              <input type="hidden" id="userId">
-              <div class="mb-3"><label class="form-label">Họ tên</label><input id="userName" class="form-control"
-                  required></div>
-              <div class="mb-3"><label class="form-label">Email</label><input id="userEmail" type="email"
-                  class="form-control" required></div>
-              <div class="mb-3"><label class="form-label">Số điện thoại</label><input id="userPhone"
-                  class="form-control" required></div>
-              <div class="form-check form-switch mb-3"><input class="form-check-input" type="checkbox"
-                  id="userLocked"><label for="userLocked" class="form-check-label">Khóa tài khoản</label></div>
-            </form>
+
+          <div class="mb-3">
+            <label class="form-label">Tên tài khoản</label>
+            <input id="userUsername" class="form-control" required>
           </div>
-          <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button><button
-              class="btn btn-danger" id="saveUser">Lưu</button></div>
-        </div>
+
+          <div class="mb-3 position-relative">
+            <label class="form-label">Mật khẩu</label>
+            <input id="userPassword" type="password" class="form-control" required>
+            <button type="button" class="btn btn-sm btn-outline-secondary position-absolute" id="togglePassword">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Số điện thoại</label>
+            <input id="userPhone" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Địa chỉ</label>
+            <input id="userAddress" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Ngày tạo</label>
+            <input type="date" id="userCreatedAt" class="form-control">
+          </div>
+
+          <!-- Số đơn hàng + Trạng thái + Khóa tài khoản chung 1 hàng -->
+          <div class="row align-items-center" id="asdf">
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Số đơn hàng</label>
+              <input type="number" id="userOrders" class="form-control">
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Trạng thái</label>
+              <select id="userStatus" class="form-select">
+                <option value="active">Hoạt động</option>
+                <option value="inactive">Không hoạt động</option>
+              </select>
+            </div>
+
+            <div class="col-md-3 mb-3 d-flex align-items-center">
+              <div class="form-check mt-4">
+                <input class="form-check-input" type="checkbox" id="userLocked">
+                <label class="form-check-label" for="userLocked">Khóa tài khoản</label>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-primary" id="saveUser">Lưu</button>
       </div>
     </div>
   </div>
-
-  <!-- Toast + Loading -->
-
-<div id="toastContainer" 
-     style="position: fixed; top: 1rem; right: 1rem; z-index: 1060;">
 </div>
+
+
+  <!-- Toast container -->
+  <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080" id="toastContainer"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
+
     const defaultUsers = [
-      { id: 'KH001', name: 'Nguyễn Văn A', email: 'a@example.com', phone: '0123456789', locked: false },
-      { id: 'KH002', name: 'Trần Thị B', email: 'b@example.com', phone: '0912345678', locked: true },
-      { id: 'KH003', name: 'Lê Văn C', email: 'c@example.com', phone: '0987654321', locked: false },
-      { id: 'KH004', name: 'Phạm Thị D', email: 'd@example.com', phone: '0909888777', locked: false },
-      { id: 'KH005', name: 'Hoàng Văn E', email: 'e@example.com', phone: '0977666555', locked: true },
-      { id: 'KH006', name: 'Cao Văn Toàn', email: 'e@example.com', phone: '0977666555', locked: true },
-      { id: 'KH007', name: 'Hoàng Văn An', email: 'e@example.com', phone: '0977666555', locked: true },
-      { id: 'KH008', name: 'Nguyễn Quốc Cư', email: 'e@example.com', phone: '0977666555', locked: true },
-      { id: 'KH009', name: 'Hoàng Văn E', email: 'e@example.com', phone: '0977666555', locked: true },
-      { id: 'KH010', name: 'Hoàng Văn E', email: 'e@example.com', phone: '0977666555', locked: true },
-      { id: 'KH011', name: 'Hoàng Văn E', email: 'e@example.com', phone: '0977666555', locked: true },
-      { id: 'KH012', name: 'Hoàng Văn E', email: 'e@example.com', phone: '0977666555', locked: true },
-      { id: 'KH013', name: 'Hoàng Văn E', email: 'e@example.com', phone: '0977666555', locked: true },
-      { id: 'KH014', name: 'Hoàng Văn E', email: 'e@example.com', phone: '0977666555', locked: true },
+      { id: 'K001', name: 'Nguyễn Văn A', username: 'nguyena', password: '123456', email: 'a@email.com', phone: '0123456789', address: '12 Ngũ lão Hà Nội', createdAt: '2025-10-24', orders: 5, status: 'active', locked: false },
+      { id: 'K002', name: 'Trần Thị B', username: 'tranb', password: '123456', email: 'b@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
+      { id: 'K003', name: 'Hoàng Văn C', username: 'hoangc', password: '123456', email: 'c@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'inactive', locked: true },
+      { id: 'K004', name: 'THân Thị D', username: 'thanc1', password: '123456', email: 'd@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
+      { id: 'K005', name: 'Trần Thị F', username: 'afety2', password: '123456', email: 'e@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
+      { id: 'K006', name: 'Cao văn G', username: 'gertrn1', password: '123456', email: 'f@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
+      { id: 'K007', name: 'Huỳnh Tấn H', username: 'huynh1', password: '123456', email: 'g@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
+      { id: 'K008', name: 'Doàn Hữu K', username: 'doantr', password: '123456', email: 'h@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
+      { id: 'K009', name: 'Nguyễn Văn X', username: '90thuy', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
+      { id: 'K010', name: 'Trần Thị P', username: 'yhu89', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
+      { id: 'K011', name: 'Hoàng Ngọc  R', username: 'tranb223', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'inactive', locked: false },
+      { id: 'K012', name: 'Trần Hoàng C', username: 'tran43b', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
+      { id: 'K013', name: 'Trần Thị N', username: 'tra54nb', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'inactive', locked: false },
     ];
+
     let users = defaultUsers;
     const saveUsers = () => localStorage.setItem('users', JSON.stringify(users));
     const tbody = document.getElementById('userTableBody');
 
-    /* Toast */
+    const userModal = new bootstrap.Modal('#userModal');
+
     function showToast(msg, type = 'success') {
-      const container = document.getElementById('toastContainer');
-      const color = type === 'success' ? 'bg-success' : 'bg-danger';
-      const toast = document.createElement('div');
-      toast.className = `toast align-items-center text-white ${color} border-0 show mb-2`;
-      toast.innerHTML = `<div class="d-flex"><div class="toast-body">${msg}</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div>`;
-      container.appendChild(toast);
-      setTimeout(() => toast.remove(), 3000);
+      const toastEl = document.createElement('div');
+      toastEl.className = `toast align-items-center text-bg-${type} border-0 show mb-2`;
+      toastEl.setAttribute('role', 'alert');
+      toastEl.setAttribute('aria-live', 'assertive');
+      toastEl.setAttribute('aria-atomic', 'true');
+      toastEl.innerHTML = `
+        <div class="d-flex">
+          <div class="toast-body">${msg}</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>`;
+      document.getElementById('toastContainer').appendChild(toastEl);
+      setTimeout(() => bootstrap.Toast.getOrCreateInstance(toastEl).hide(), 3000);
     }
 
     function filterUsers() {
       const key = document.getElementById('searchUser').value.trim().toLowerCase();
       const st = document.getElementById('filterStatus').value;
       return users.filter(u => {
-        const target = (u.name + u.email + u.id + u.phone).toLowerCase();
+        const target = (u.name + u.email + u.id + u.phone + u.username + u.address).toLowerCase();
         return target.includes(key) && (st === '' || (st === 'active' && !u.locked) || (st === 'locked' && u.locked));
       });
     }
@@ -191,84 +265,107 @@
       tbody.innerHTML = '';
       list.forEach(u => {
         tbody.innerHTML += `
-      <tr>
-        <td>${u.id}</td><td>${u.name}</td><td>${u.email}</td><td>${u.phone}</td>
-        <td><span class="badge ${u.locked ? 'bg-secondary' : 'bg-success'}">${u.locked ? 'Đã khóa' : 'Hoạt động'}</span></td>
-        <td>
-          <button class="btn btn-sm btn-outline-primary me-1 edit-btn" data-id="${u.id}"><i class="fa-solid fa-pen"></i> Sửa</button>
-          <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${u.id}"><i class="fa-solid fa-trash"></i> Xóa</button>
-          <button class="btn btn-sm btn-outline-warning me-1 lock-btn" data-id="${u.id}" title="${u.locked ? 'Mở khóa' : 'Khóa'}"><i class="fa-solid ${u.locked ? 'fa-lock-open' : 'fa-lock'}"></i></button>
-          
-        </td></tr>`;
+        <tr>
+          <td>${u.id}</td>
+          <td>${u.name}</td>
+          <td>${u.username}</td>
+          <td>${u.email}</td>
+          <td>${u.phone}</td>
+          <td>${u.address}</td>
+          <td>${u.createdAt}</td>
+          <td>${u.orders}</td>
+          <td><span class="badge ${u.locked ? 'bg-secondary' : 'bg-success'}">${u.locked ? 'Đã khóa' : 'Hoạt động'}</span></td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary me-1 edit-btn" data-id="${u.id}"><i class="fa-solid fa-pen"></i></button>
+            <button class="btn btn-sm btn-outline-danger del-btn" data-id="${u.id}"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        </tr>`;
       });
+
+      document.querySelectorAll('.edit-btn').forEach(btn => btn.onclick = () => editUser(btn.dataset.id));
+      document.querySelectorAll('.del-btn').forEach(btn => btn.onclick = () => deleteUser(btn.dataset.id));
     }
 
-
-    /* realtime search */
-    document.getElementById('searchUser').addEventListener('input', () => { renderUsers(filterUsers()); });
-    document.getElementById('filterStatus').onchange = () => { renderUsers(filterUsers()); };
-    document.getElementById('refreshUsers').onclick = () => { localStorage.removeItem('users'); location.reload(); };
-
-    /* CRUD */
-    const userModal = new bootstrap.Modal('#userModal');
-    document.getElementById('addUserBtn').onclick = () => {
-      document.querySelector('#userModal .modal-title').textContent = 'Thêm khách hàng';
+    function resetForm() {
       document.getElementById('userForm').reset();
       document.getElementById('userId').value = '';
-      userModal.show();
-    };
+    }
 
-    document.addEventListener('click', async e => {
-      const id = e.target.closest('[data-id]')?.dataset.id;
-      if (!id) return;
-      const idx = users.findIndex(u => u.id === id);
-      const u = users[idx];
-      if (e.target.closest('.edit-btn')) {
-        document.querySelector('#userModal .modal-title').textContent = 'Chỉnh sửa khách hàng';
-        document.getElementById('userId').value = u.id;
-        document.getElementById('userName').value = u.name;
-        document.getElementById('userEmail').value = u.email;
-        document.getElementById('userPhone').value = u.phone;
-        document.getElementById('userLocked').checked = u.locked;
-        userModal.show();
-      }
-      if (e.target.closest('.lock-btn')) {
-        setTimeout(() => {
-          users[idx].locked = !users[idx].locked;
-          renderUsers(filterUsers());
-          showToast(users[idx].locked ? 'Đã khóa tài khoản' : 'Đã mở khóa tài khoản');
-        }, 500);
-      }
-      if (e.target.closest('.delete-btn')) {
-        if (confirm('Xóa khách hàng ' + u.name + '?')) {
-          setTimeout(() => {
-            users.splice(idx, 1);
-             renderUsers(filterUsers());
-            showToast('Đã xóa khách hàng', 'error');
-          }, 500);
-        }
-      }
-    });
+    document.getElementById('addUserBtn').onclick = () => {
+      resetForm();
+      userModal.show();
+      document.querySelector('#userModal .modal-title').innerText = 'Thêm khách hàng';
+    }
 
     document.getElementById('saveUser').onclick = () => {
-      setTimeout(() => {
-        const id = document.getElementById('userId').value.trim();
-        const name = document.getElementById('userName').value.trim();
-        const email = document.getElementById('userEmail').value.trim();
-        const phone = document.getElementById('userPhone').value.trim();
-        const locked = document.getElementById('userLocked').checked;
-        if (!name || !email) { showToast('Vui lòng nhập đầy đủ thông tin!', 'error'); return; }
-        const newUser = { id: id || 'KH' + Date.now().toString().slice(-4), name, email, phone, locked };
-        const idx = users.findIndex(u => u.id === newUser.id);
-        if (idx > -1) { users[idx] = newUser; showToast('Đã cập nhật khách hàng'); }
-        else { users.unshift(newUser); showToast('Đã thêm khách hàng mới'); }
-        saveUsers(); userModal.hide(); renderUsers(filterUsers());
-      }, 600);
-    };
+      const idInput = document.getElementById('userId').value;
+      const u = {
+        id: idInput || `KH${(users.length + 1).toString().padStart(3, '0')}`,
+        name: document.getElementById('userName').value,
+        username: document.getElementById('userUsername').value,
+        password: document.getElementById('userPassword').value,
+        email: document.getElementById('userEmail').value,
+        phone: document.getElementById('userPhone').value,
+        address: document.getElementById('userAddress').value,
+        createdAt: document.getElementById('userCreatedAt').value || new Date().toISOString().split('T')[0],
+        orders: parseInt(document.getElementById('userOrders').value) || 0,
+        status: document.getElementById('userStatus').value,
+        locked: document.getElementById('userLocked').checked
+      };
 
+      if (idInput) {
+        users = users.map(user => user.id === idInput ? u : user);
+        showToast('Cập nhật khách hàng thành công');
+      } else {
+        users.push(u);
+        showToast('Thêm khách hàng thành công');
+      }
+      renderUsers(filterUsers());
+      userModal.hide();
+    }
+
+    function editUser(id) {
+      const u = users.find(x => x.id === id);
+      document.getElementById('userId').value = u.id;
+      document.getElementById('userName').value = u.name;
+      document.getElementById('userUsername').value = u.username;
+      document.getElementById('userPassword').value = u.password;
+      document.getElementById('userEmail').value = u.email;
+      document.getElementById('userPhone').value = u.phone;
+      document.getElementById('userAddress').value = u.address;
+      document.getElementById('userCreatedAt').value = u.createdAt;
+      document.getElementById('userOrders').value = u.orders;
+      document.getElementById('userStatus').value = u.status;
+      document.getElementById('userLocked').checked = u.locked;
+      document.querySelector('#userModal .modal-title').innerText = 'Sửa khách hàng';
+      userModal.show();
+    }
+
+    function deleteUser(id) {
+      if (confirm('Bạn có chắc muốn xóa khách hàng này?')) {
+        users = users.filter(u => u.id !== id);
+        renderUsers(filterUsers());
+        showToast('Xóa khách hàng thành công', 'warning');
+      }
+    }
+
+    document.getElementById('searchUser').oninput = () => renderUsers(filterUsers());
+    document.getElementById('filterStatus').onchange = () => renderUsers(filterUsers());
+    
     renderUsers(filterUsers());
+    
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('userPassword');
 
-
+    togglePasswordBtn.onclick = () => {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        togglePasswordBtn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+      } else {
+        passwordInput.type = 'password';
+        togglePasswordBtn.innerHTML = '<i class="fa-solid fa-eye"></i>';
+      }
+    }
     const pagination = document.getElementById('pagination');
     pagination.addEventListener('click', e => {
       if (e.target.classList.contains('pagination-item__link')) {
@@ -278,8 +375,6 @@
         e.target.classList.add('active');
       }
     });
-
-
   </script>
 </body>
 

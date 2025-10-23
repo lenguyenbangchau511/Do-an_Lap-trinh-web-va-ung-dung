@@ -3,19 +3,22 @@ a {
 }
 
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: #f8f9fa;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(90deg, var(--mint-2) 0%, #f7fffb 100%);
+  color: #163b33;
+  -webkit-font-smoothing: antialiased;
 }
 
-:root{
+:root {
   --mint-1: #eaf8f0;
   --mint-2: #d8f3e8;
   --accent: #2e7d68;
-  --green-main: #2e7d68; /* Thêm biến này */
+  --green-main: #2e7d68;
+  /* Thêm biến này */
   --dark: #2b2b2b;
   --muted: #6b8b7a;
   --card-bg: #ffffff;
-  --shadow: 0 2px 15px rgba(0,0,0,0.05);
+  --shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
   --pastel-purple: #b19cd9;
   --pastel-purple-dark: #9370db;
 }
@@ -57,7 +60,7 @@ body {
   padding: 12px 20px;
   color: var(--sidebar-text);
   text-decoration: none;
-  font-weight: 500; 
+  font-weight: 500;
   transition: 0.3s;
 }
 
@@ -105,6 +108,7 @@ body {
   border-radius: 8px;
   font-size: 17px;
 }
+
 /* Hết .sidebar */
 
 
@@ -120,6 +124,7 @@ body {
   align-items: center;
   border-radius: 8px;
 }
+
 .header__title {
   position: relative;
   font-size: 30px;
@@ -127,6 +132,7 @@ body {
   color: var(--accent);
   left: 50px;
 }
+
 .header__info {
   position: absolute;
   font-size: 23px;
@@ -139,6 +145,7 @@ body {
   font-size: 25px;
   color: #425e4e;
 }
+
 /* Hết header */
 
 
@@ -150,27 +157,32 @@ body {
 
 /* Tìm kiếm */
 .function {
-  padding-bottom: 50px ;
+  padding-bottom: 50px;
 }
+
+/* Users  */
 #searchUser {
- width: 400px;
- padding: 8px 5px;
+  width: 400px;
+  padding: 8px 5px;
   border-radius: 7px;
   border: none;
 }
+
 .searchUser {
   display: flex;
   align-items: center;
-  border: 2px solid var(--mint-2) ;
+  border: 2px solid var(--mint-2);
   border-radius: 7px;
 }
+
 .searchUser .search__btn {
-  border: 1px solid var(--mint-2) ;
+  border: 1px solid var(--mint-2);
   padding: 8px 15px;
   border-radius: 7px;
   font-size: 17px;
 }
-.searchUser .search__btn:hover{
+
+.searchUser .search__btn:hover {
   background-color: #bad3c5;
 }
 
@@ -202,9 +214,63 @@ body {
 .suggestions-list li:hover {
   background-color: #f0f0f0;
 }
+
 .function {
   margin-bottom: 30px;
 }
+
+/* Category */
+#searchCategory {
+  width: 400px;
+  padding: 8px 5px;
+  border-radius: 7px;
+  border: none;
+}
+
+.searchCategory {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--mint-2);
+  border-radius: 7px;
+}
+
+.searchCategory .search__btn {
+  border: 1px solid var(--mint-2);
+  padding: 8px 15px;
+  border-radius: 7px;
+  font-size: 17px;
+}
+
+.searchCategory .search__btn:hover {
+  background-color: #bad3c5;
+}
+
+/* Product */
+#searchProduct {
+  width: 400px;
+  padding: 8px 5px;
+  border-radius: 7px;
+  border: none;
+}
+
+.searchProduct {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--mint-2);
+  border-radius: 7px;
+}
+
+.searchProduct .search__btn {
+  border: 1px solid var(--mint-2);
+  padding: 8px 15px;
+  border-radius: 7px;
+  font-size: 17px;
+}
+
+.searchProduct .search__btn:hover {
+  background-color: #bad3c5;
+}
+
 /* Hết tìm kiếm  */
 
 
@@ -219,10 +285,6 @@ body {
   transition: background 0.3s;
 }
 
-body.dark .navbar {
-  background: #2b2b3a;
-  color: var(--text-color);
-}
 
 .card {
   background: var(--card-bg);
@@ -310,16 +372,17 @@ body.dark .theme-toggle {
   list-style-type: none;
 }
 
-#pagination .active{
+#pagination .active {
   color: var(--dark);
   background-color: #69c997;
-  
+
 }
 
-#pagination .pagination-item__link:hover{
+#pagination .pagination-item__link:hover {
   color: var(--dark);
   background-color: #69c997;
 }
+
 .pagination-item__link {
   font-size: 1.2rem;
   color: var(--accent);
@@ -327,13 +390,14 @@ body.dark .theme-toggle {
   display: block;
   height: 30px;
   line-height: 30px;
-  min-width: 30px ;
+  min-width: 30px;
   border-radius: 2px;
 }
 
 .pagination-item {
   margin: 0 4px;
 }
+
 /* Heets phaan trang */
 
 
@@ -342,5 +406,19 @@ body.dark .theme-toggle {
   text-align: center;
 }
 
+#userModal {
+  padding: 30px;
+}
 
+#togglePassword {
+  position: absolute;
+  border: none;
+  font-size: 18px;
+  top: 35px;
+  right: 0;
+}
 
+#togglePassword:hover {
+  background: none;
+  color: #000;
+}

@@ -7,6 +7,9 @@
   <title>Quản lý sản phẩm - Bloom</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="admin.css">
 </head>
@@ -16,19 +19,20 @@
   <div class="sidebar">
     <div class="sidebar">
       <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
-          <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
-            <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
-            <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
-            <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
-            <circle cx="50" cy="50" r="12" fill="#9370db"/>
-            <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
-          </svg>
-          <span>Bloom</span>
-        </div>
-      <a href="users.html" ><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
+        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9" />
+          <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
+            fill="#eaf8f0" />
+          <circle cx="40" cy="35" r="8" fill="#b19cd9" />
+          <circle cx="60" cy="35" r="8" fill="#b19cd9" />
+          <circle cx="50" cy="50" r="12" fill="#9370db" />
+          <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
+        </svg>
+        <span>Bloom</span>
+      </div>
+      <a href="users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
       <a href="products.html" class="active"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
-      <a href="category.html"><i class="fa-solid fa-chart-line me-2"></i>Quản lý danh mục</a>
+      <a href="category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
     </div>
   </div>
 
@@ -46,13 +50,14 @@
     <div class="container-fluid" data-aos="fade-up">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-          <button class="btn btn-outline-danger" id="openAddModal"><i class="fa-solid fa-plus"></i> Thêm sản
+          <button class="btn btn-success" id="openAddModal"><i class="fa-solid fa-plus"></i> Thêm sản
             phẩm</button>
-          <button class="btn btn-outline-secondary" id="refreshProducts"><i class="fa-solid fa-rotate"></i> Tải
-            lại</button>
         </div>
         <div class="d-flex gap-2">
-          <input id="searchProduct" class="form-control" placeholder=" Tìm sản phẩm...">
+          <div class="searchProduct">
+            <input id="searchProduct" class="control__search" placeholder="Tìm kiếm...">
+            <button class="search__btn"><i class="search__btn__icon fa-solid fa-magnifying-glass"></i></button>
+          </div>
           <select id="filterCategory" class="form-select w-auto">
             <option value="">Tất cả loại</option>
             <option>Bó hoa</option>
@@ -78,249 +83,295 @@
               </thead>
               <tbody id="productTableBody"></tbody>
             </table>
+            <ul id="pagination">
+              </li>
+              <li class="pagination-item">
+                <a href="products.html" class="pagination-item__link active">1</a>
+              </li>
+              <li class="pagination-item">
+                <a href="products.html" class="pagination-item__link " target="_self">2</a>
+              </li>
+              <li class="pagination-item">
+                <a href="products.html" class="pagination-item__link " target="_self">3</a>
+              </li>
+              <li class="pagination-item">
+                <a href="products.html" class="pagination-item__link " target="_self">4</a>
+              </li>
+              <li class="pagination-item">
+                <a href="products.html" class="pagination-item__link " target="_self">5</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <ul id="pagination">
-            </li>
-            <li class="pagination-item">
-              <a href="products.html" class="pagination-item__link active">1</a>
-            </li>
-            <li class="pagination-item">
-              <a href="products.html" class="pagination-item__link " target="_self">2</a>
-            </li>
-            <li class="pagination-item">
-              <a href="products.html" class="pagination-item__link " target="_self">3</a>
-            </li>
-            <li class="pagination-item">
-              <a href="products.html" class="pagination-item__link " target="_self">4</a>
-            </li>
-            <li class="pagination-item">
-              <a href="products.html" class="pagination-item__link " target="_self">5</a>
-            </li>
-          </ul>
+
     </div>
 
     <!-- Modal thêm/sửa -->
+    <!-- Modal Thêm / Sửa Sản Phẩm -->
     <div class="modal fade" id="productModal" tabindex="-1">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
+
+          <!-- Tiêu đề -->
           <div class="modal-header">
-            <h5 class="modal-title" id="productModalTitle">Thêm sản phẩm</h5>
-            <button class="btn-close" data-bs-dismiss="modal"></button>
+            <h5 class="modal-title fw-bold" id="productModalTitle">Thêm sản phẩm</h5>
+            <button class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
           </div>
+
+          <!-- Nội dung -->
           <div class="modal-body">
             <form id="productForm">
+
               <div class="row g-3">
+                <!-- Mã & Tên sản phẩm -->
                 <div class="col-md-6">
-                  <label class="form-label">Mã sản phẩm</label>
-                  <input id="p_code" class="form-control" required>
+                  <label for="p_code" class="form-label">Mã sản phẩm</label>
+                  <input type="text" id="p_code" class="form-control" placeholder="VD: SP001" required>
                 </div>
+
                 <div class="col-md-6">
-                  <label class="form-label">Tên sản phẩm</label>
-                  <input id="p_name" class="form-control" required>
+                  <label for="p_name" class="form-label">Tên sản phẩm</label>
+                  <input type="text" id="p_name" class="form-control" placeholder="VD: Bó hoa hồng đỏ" required>
                 </div>
+
+                <!-- Loại & Số lượng -->
                 <div class="col-md-6">
-                  <label class="form-label">Loại</label>
+                  <label for="p_category" class="form-label">Loại sản phẩm</label>
                   <select id="p_category" class="form-select">
-                    <option>Bó hoa</option>
-                    <option>Lẵng hoa</option>
-                    <option>Kệ hoa</option>
+                    <option value="bo-hoa">Bó hoa</option>
+                    <option value="lang-hoa">Lẵng hoa</option>
+                    <option value="ke-hoa">Kệ hoa</option>
                   </select>
                 </div>
-                <div class="col-md-4">
-                  <label class="form-label">Số lượng</label>
-                  <input id="p_qty" type="number" class="form-control" value="10" required>
+
+                <div class="col-md-6">
+                  <label for="p_qty" class="form-label">Số lượng</label>
+                  <input type="number" id="p_qty" class="form-control" value="10" min="1" required>
                 </div>
-                <div class="col-md-8">
-                  <label class="form-label">Ảnh sản phẩm</label>
-                  <input id="p_image" type="file" accept="image/*" class="form-control">
-                  <div class="mt-2 text-center">
-                    <img id="previewImage" src="../images/hoa1.png" alt="Preview" class="rounded-3"
-                      style="max-height: 120px; object-fit: cover;">
+
+                <!-- Ảnh sản phẩm -->
+                <div class="col-12">
+                  <label for="p_image" class="form-label">Ảnh sản phẩm</label>
+                  <input type="file" id="p_image" accept="image/*" class="form-control">
+
+                  <div class="mt-3 text-center">
+                    <img id="previewImage" src="../images/hoa1.png" alt="Xem trước ảnh sản phẩm"
+                      class="img-fluid rounded-3 border" style="max-height: 350px; object-fit: contain;">
                   </div>
                 </div>
+
+                <!-- Mô tả -->
                 <div class="col-12">
-                  <label class="form-label">Mô tả</label>
-                  <textarea id="p_desc" class="form-control" rows="3"></textarea>
+                  <label for="p_desc" class="form-label">Mô tả sản phẩm</label>
+                  <textarea id="p_desc" class="form-control" rows="4"
+                    placeholder="Nhập mô tả ngắn gọn về sản phẩm..."></textarea>
                 </div>
               </div>
+
             </form>
           </div>
+
+          <!-- Nút hành động -->
           <div class="modal-footer">
             <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-            <button class="btn btn-danger" id="saveProduct">Lưu</button>
+            <button class="btn btn-primary" id="saveProduct">Lưu sản phẩm</button>
           </div>
+
         </div>
       </div>
     </div>
+
   </div>
+  <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080" id="toastContainer"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init();
-    const defaultProducts = [
-  { code: 'P001', name: 'Nhiệt Ái', category: 'Bó hoa', qty: 15, image: '../images/hoa1.jpg', desc: 'Mềm Mại' },
-  { code: 'P002', name: 'Peach', category: 'Bó hoa', qty: 30, image: '../images/hoa2.jpg', desc: 'Đẹp' },
-  { code: 'P003', name: 'Blueberry', category: 'Bó hoa', qty: 20, image: '../images/hoa3.jpg', desc: 'Sinh nhật' },
-  { code: 'P004', name: 'Lemon', category: 'Bó hoa', qty: 12, image: '../images/hoa4.jpg', desc: 'Giáng sinh' },
-  { code: 'P005', name: 'Shimmer Grace', category: 'Lẵng hoa', qty: 8, image: '../images/langhoa1.webp', desc: 'Thơm' },
-  { code: 'P006', name: 'BlueSky', category: 'Lẵng hoa', qty: 6, image: '../images/langhoa2.jpg', desc: 'Noel' },
-  { code: 'P007', name: 'Sen Xanh', category: 'Lẵng hoa', qty: 10, image: '../images/langhoa3.png', desc: 'Đám cưới' },
-  { code: 'P008', name: 'Sắc Màu', category: 'Kệ hoa', qty: 4, image: '../images/kehoa1.jpg', desc: 'Ưu ái' },
-  { code: 'P009', name: 'Hồng Phát', category: 'Kệ hoa', qty: 6, image: '../images/kehoa2.jpg', desc: 'Lịch sự' },
-  { code: 'P010', name: 'Tương Lai', category: 'Kệ hoa', qty: 5, image: '../images/kehoa3.jpg', desc: 'Trang trọng' },
-];
-let products = JSON.parse(localStorage.getItem('products')) || defaultProducts;
-const saveProducts = () => localStorage.setItem('products', JSON.stringify(products));
+  AOS.init();
 
-const tbody = document.getElementById('productTableBody');
+  /* ==================== DỮ LIỆU MẶC ĐỊNH ==================== */
+  const defaultProducts = [
+    { code: 'P001', name: 'Nhiệt Ái', category: 'Bó hoa', qty: 15, image: '../images/hoa1.jpg', desc: 'Mềm Mại' },
+    { code: 'P002', name: 'Peach', category: 'Bó hoa', qty: 30, image: '../images/hoa2.jpg', desc: 'Đẹp' },
+    { code: 'P003', name: 'Blueberry', category: 'Bó hoa', qty: 20, image: '../images/hoa3.jpg', desc: 'Sinh nhật' },
+    { code: 'P004', name: 'Lemon', category: 'Bó hoa', qty: 12, image: '../images/hoa4.jpg', desc: 'Giáng sinh' },
+    { code: 'P005', name: 'Shimmer Grace', category: 'Lẵng hoa', qty: 8, image: '../images/langhoa1.webp', desc: 'Thơm' },
+    { code: 'P006', name: 'BlueSky', category: 'Lẵng hoa', qty: 6, image: '../images/langhoa2.jpg', desc: 'Noel' },
+    { code: 'P007', name: 'Sen Xanh', category: 'Lẵng hoa', qty: 10, image: '../images/langhoa3.png', desc: 'Đám cưới' },
+    { code: 'P008', name: 'Sắc Màu', category: 'Kệ hoa', qty: 4, image: '../images/kehoa1.jpg', desc: 'Ưu ái' },
+    { code: 'P009', name: 'Hồng Phát', category: 'Kệ hoa', qty: 6, image: '../images/kehoa2.jpg', desc: 'Lịch sự' },
+    { code: 'P010', name: 'Tương Lai', category: 'Kệ hoa', qty: 5, image: '../images/kehoa3.jpg', desc: 'Trang trọng' },
+  ];
+  let products = defaultProducts;
 
-function renderTable(data) {
-  tbody.innerHTML = '';
-  data.forEach((p, i) => {
-    tbody.innerHTML += `
-      <tr>
-        <td>${p.code}</td>
-        <td><img src="${p.image}" width="60" height="60" class="rounded-2" style="object-fit:cover"></td>
-        <td>${p.name}</td>
-        <td>${p.category}</td>
-        <td>${p.qty}</td>
-        <td>
-          <button class="btn btn-sm btn-outline-primary me-1 edit-btn" data-index="${i}""><i class="fa-solid fa-pen"></i> Sửa</button>
-          <button class="btn btn-sm btn-outline-danger delete-btn" data-index="${i}""><i class="fa-solid fa-trash"></i> Xóa</button>
-        </td>
-      </tr>`;
-  });
-}
-renderTable(products);
+  const tbody = document.getElementById('productTableBody');
 
-    /* ========== LƯU DỮ LIỆU ========== */
-    function saveData() {
-      localStorage.setItem('products', JSON.stringify(products));
-    }
-
-    /* ========== MỞ MODAL ========== */
-    const productModal = new bootstrap.Modal(document.getElementById('productModal'));
-    const openAddModalBtn = document.getElementById('openAddModal');
-    const modalTitle = document.getElementById('productModalTitle');
-    const saveBtn = document.getElementById('saveProduct');
-    let editIndex = null;
-
-    /* ========== UPLOAD ẢNH + PREVIEW ========== */
-    const imageInput = document.getElementById('p_image');
-    const previewImg = document.getElementById('previewImage');
-
-    imageInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          previewImg.src = event.target.result;
-          previewImg.dataset.uploaded = event.target.result; // lưu tạm base64
-        };
-        reader.readAsDataURL(file);
-      }
+  /* ==================== HIỂN THỊ BẢNG ==================== */
+  function renderTable(data) {
+    tbody.innerHTML = '';
+    data.forEach((p, i) => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${p.code}</td>
+          <td><img src="${p.image}" width="60" height="60" class="rounded-2" style="object-fit:cover"></td>
+          <td>${p.name}</td>
+          <td>${p.category}</td>
+          <td>${p.qty}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary me-1 edit-btn" data-index="${i}"><i class="fa-solid fa-pen"></i> Sửa</button>
+            <button class="btn btn-sm btn-outline-danger delete-btn" data-index="${i}"><i class="fa-solid fa-trash"></i> Xóa</button>
+          </td>
+        </tr>`;
     });
+  }
+  renderTable(products);
 
-    openAddModalBtn.addEventListener('click', () => {
-      modalTitle.textContent = 'Thêm sản phẩm';
-      document.getElementById('productForm').reset();
-      editIndex = null;
-      productModal.show();
-    });
+  /* ==================== HÀM HIỂN THỊ TOAST ==================== */
+  function showToast(message, type = 'success') {
+    const toastContainer = document.getElementById('toastContainer');
+    const bgColor = type === 'success' ? 'bg-success' :
+                    type === 'error' ? 'bg-danger' : 'bg-warning';
 
-    /* ========== THÊM  SẢN PHẨM ========== */
-    saveBtn.addEventListener('click', () => {
-      const p = {
-        code: document.getElementById('p_code').value.trim(),
-        name: document.getElementById('p_name').value.trim(),
-        category: document.getElementById('p_category').value,
-        qty: parseInt(document.getElementById('p_qty').value) || 0,
-        image: previewImg.dataset.uploaded || '../images/noimg.png',
-        desc: document.getElementById('p_desc').value.trim()
+    const toast = document.createElement('div');
+    toast.className = `toast align-items-center text-white border-0 ${bgColor}`;
+    toast.role = 'alert';
+    toast.innerHTML = `
+      <div class="d-flex">
+        <div class="toast-body">${message}</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>`;
+    toastContainer.appendChild(toast);
+
+    const bsToast = new bootstrap.Toast(toast, { delay: 2000 });
+    bsToast.show();
+    toast.addEventListener('hidden.bs.toast', () => toast.remove());
+  }
+
+  /* ==================== MODAL & FORM ==================== */
+  const productModal = new bootstrap.Modal(document.getElementById('productModal'));
+  const openAddModalBtn = document.getElementById('openAddModal');
+  const modalTitle = document.getElementById('productModalTitle');
+  const saveBtn = document.getElementById('saveProduct');
+  let editIndex = null;
+
+  const imageInput = document.getElementById('p_image');
+  const previewImg = document.getElementById('previewImage');
+
+  imageInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        previewImg.src = event.target.result;
+        previewImg.dataset.uploaded = event.target.result;
       };
+      reader.readAsDataURL(file);
+    }
+  });
 
-      if (!p.code || !p.name) {
-        alert('Vui lòng nhập mã và tên sản phẩm.');
-        return;
-      }
+  openAddModalBtn.addEventListener('click', () => {
+    modalTitle.textContent = 'Thêm sản phẩm';
+    document.getElementById('productForm').reset();
+    previewImg.src = '../images/hoa1.png';
+    delete previewImg.dataset.uploaded;
+    editIndex = null;
+    productModal.show();
+  });
 
-      if (editIndex !== null) {
-        products[editIndex] = p;
-      } else {
-        products.push(p);
-      }
-      saveData();
-      renderTable(products);
-      productModal.hide();
-    });
+  /* ==================== LƯU (THÊM / SỬA) ==================== */
+  saveBtn.addEventListener('click', () => {
+    const p = {
+      code: document.getElementById('p_code').value.trim(),
+      name: document.getElementById('p_name').value.trim(),
+      category: document.getElementById('p_category').value,
+      qty: parseInt(document.getElementById('p_qty').value) || 0,
+      image: previewImg.dataset.uploaded || '../images/noimg.png',
+      desc: document.getElementById('p_desc').value.trim()
+    };
 
-    /* ========== NÚT SỬA ========== */
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.edit-btn');
-      if (!btn) return; // không bấm vào nút edit thì bỏ qua
-      const index = parseInt(btn.dataset.index);
-      const p = products[index];
-      if (!p) return;
-
-      modalTitle.textContent = 'Chỉnh sửa sản phẩm';
-      document.getElementById('p_code').value = p.code;
-      document.getElementById('p_name').value = p.name;
-      document.getElementById('p_category').value = p.category;
-      document.getElementById('p_qty').value = p.qty;
-      document.getElementById('p_desc').value = p.desc || '';
-
-      // reset file input
-      document.getElementById('p_image').value = '';
-      previewImg.src = p.image || '../images/noimg.png';
-      previewImg.dataset.uploaded = p.image;
-
-      editIndex = index;
-      productModal.show();
-    });
-
-    /* ========== NÚT XÓA ========== */
-    document.addEventListener('click', (e) => {
-      if (e.target.closest('.delete-btn')) {
-        const index = e.target.closest('.delete-btn').dataset.index;
-        const p = products[index];
-        if (confirm(`Bạn có chắc muốn xóa "${p.name}"?`)) {
-          products.splice(index, 1);
-          saveData();
-          renderTable(products);
-        }
-      }
-    });
-
-    /* ========== TÌM KIẾM & LỌC ========== */
-    document.getElementById('searchProduct').addEventListener('input', filterProducts);
-    document.getElementById('filterCategory').addEventListener('change', filterProducts);
-
-    function filterProducts() {
-      const keyword = document.getElementById('searchProduct').value.toLowerCase();
-      const category = document.getElementById('filterCategory').value;
-      const filtered = products.filter(p =>
-        (p.name.toLowerCase().includes(keyword) || p.code.toLowerCase().includes(keyword)) &&
-        (category === '' || p.category === category)
-      );
-      renderTable(filtered);
+    if (!p.code || !p.name) {
+      showToast('Vui lòng nhập mã và tên sản phẩm.', 'error');
+      return;
     }
 
-    /* ========== NÚT TẢI LẠI ========== */
-    document.getElementById('refreshProducts').addEventListener('click', () => {
-      localStorage.removeItem('products');
-      products = [...defaultProducts];
+    if (editIndex !== null) {
+      products[editIndex] = p;
+      showToast('Cập nhật sản phẩm thành công!', 'success');
+    } else {
+      products.push(p);
+      showToast('Thêm sản phẩm thành công!', 'success');
+    }
+
+    renderTable(products);
+    productModal.hide();
+  });
+
+  /* ==================== CHỈNH SỬA ==================== */
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.edit-btn');
+    if (!btn) return;
+    const index = parseInt(btn.dataset.index);
+    const p = products[index];
+    if (!p) return;
+
+    modalTitle.textContent = 'Chỉnh sửa sản phẩm';
+    document.getElementById('p_code').value = p.code;
+    document.getElementById('p_name').value = p.name;
+    document.getElementById('p_category').value = p.category;
+    document.getElementById('p_qty').value = p.qty;
+    document.getElementById('p_desc').value = p.desc || '';
+    previewImg.src = p.image || '../images/noimg.png';
+    previewImg.dataset.uploaded = p.image;
+
+    editIndex = index;
+    productModal.show();
+  });
+
+  /* ==================== XÓA ==================== */
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.delete-btn');
+    if (!btn) return;
+    const index = btn.dataset.index;
+    const p = products[index];
+    if (confirm(`Bạn có chắc muốn xóa "${p.name}"?`)) {
+      products.splice(index, 1);
       renderTable(products);
+      showToast('Xóa sản phẩm thành công!', 'danger');
+    }
+  });
+
+  /* ==================== TÌM KIẾM & LỌC ==================== */
+  const searchInput = document.getElementById('searchProduct');
+  const categorySelect = document.getElementById('filterCategory');
+
+  function filterProducts() {
+    const keyword = searchInput.value.trim().toLowerCase();
+    const category = categorySelect.value;
+
+    const filtered = products.filter(p => {
+      const matchesKeyword =
+        p.name.toLowerCase().includes(keyword) ||
+        p.code.toLowerCase().includes(keyword);
+      const matchesCategory = !category || p.category.toLowerCase() === category.toLowerCase();
+      return matchesKeyword && matchesCategory;
     });
-    const pagination = document.getElementById('pagination');
-    pagination.addEventListener('click', e => {
-      if (e.target.classList.contains('pagination-item__link')) {
-        e.preventDefault();
-        const currentActive = pagination.querySelector('.pagination-item__link.active');
-        if (currentActive) currentActive.classList.remove('active');
-        e.target.classList.add('active');
-      }
-    });
+    renderTable(filtered);
+  }
+
+  searchInput.addEventListener('input', filterProducts);
+  categorySelect.addEventListener('change', filterProducts);
+
+  /* ==================== PHÂN TRANG (GIẢ LẬP) ==================== */
+  const pagination = document.getElementById('pagination');
+  pagination.addEventListener('click', e => {
+    if (e.target.classList.contains('pagination-item__link')) {
+      e.preventDefault();
+      const currentActive = pagination.querySelector('.pagination-item__link.active');
+      if (currentActive) currentActive.classList.remove('active');
+      e.target.classList.add('active');
+    }
+  });
+
   </script>
+</body>
