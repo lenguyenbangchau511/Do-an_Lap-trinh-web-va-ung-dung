@@ -1340,3 +1340,13 @@ body{
     font-size: 0.9rem;
   }
 }
+
+.product a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.product img {
+  cursor: pointer;
+}
