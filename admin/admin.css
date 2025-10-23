@@ -299,30 +299,6 @@ body.dark .theme-toggle {
   transform: rotate(20deg);
 }
 
-/* DARK MODE FIX FOR MODAL */
-body.dark .modal-content {
-  background-color: #2b2b3a;
-  color: #f5f5f5;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-body.dark .modal-header,
-body.dark .modal-footer {
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-body.dark .form-control,
-body.dark .form-select,
-body.dark textarea {
-  background-color: #1e1e2d;
-  color: #fff;
-  border-color: #444;
-}
-
-body.dark .form-control::placeholder {
-  color: #bbb;
-}
-
 
 /* Phaan trang */
 #pagination {
@@ -359,3 +335,12 @@ body.dark .form-control::placeholder {
   margin: 0 4px;
 }
 /* Heets phaan trang */
+
+
+.desc_sp {
+  width: 500px;
+  text-align: center;
+}
+
+
+
