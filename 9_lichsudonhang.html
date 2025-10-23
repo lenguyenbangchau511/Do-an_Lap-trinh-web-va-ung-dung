@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lịch sử đơn hàng - Bloom - Cửa hàng hoa tươi</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="9_LichSuDonHang.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 </head>
@@ -15,8 +16,9 @@
     <!-- HEADER -->
     <header class="bloom-header">
       <div class="bloom-container">
-        <div class="bloom-logo">
-          <svg class="logo-icon" viewBox="0 0 100 100" fill="none">
+      <div class="bloom-logo">
+        <a href="5_DaDangNhap.html" class="logo-link" aria-label="Bloom - Trở về trang chủ">
+          <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
             <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
             <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
             <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
@@ -24,139 +26,236 @@
             <circle cx="50" cy="50" r="12" fill="#9370db"/>
             <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
           </svg>
-          <span>Bloom</span>
-        </div>
+          <span class="logo-text">Bloom</span>
+        </a>
+      </div>
 
-        <nav class="bloom-nav">
-          <a href="index.html">Trang chủ</a>
-          <a href="cart.html" title="Giỏ hàng"><i class="fa-solid fa-bag-shopping"></i></a>
-          <a href="order-history.html" title="Lịch sử" class="active"><i class="fa-regular fa-clock"></i></a>
-          <a href="profile.html" title="Tài khoản"><i class="fa-regular fa-circle-user"></i></a>
-          <a href="login.html" class="logout-btn" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></a>
+        <nav class="bloom-nav" aria-label="Menu chính">
+          <a href="5_DaDangNhap.html">Trang chủ</a>
+          <a href="6_GioHang.html" title="Giỏ hàng" aria-label="Giỏ hàng">
+            <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+          </a>
+          <a href="9_LichSuDonHang.html" title="Lịch sử đơn hàng" aria-label="Lịch sử đơn hàng" aria-current="page">
+            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+          </a>
+          <a href="3_ThongTinCaNhan.html" title="Tài khoản" aria-label="Tài khoản">
+            <i class="fa-regular fa-circle-user" aria-hidden="true"></i>
+          </a>
+          <a href="index.html" class="logout-btn" title="Đăng xuất" aria-label="Đăng xuất">
+            <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+          </a>
         </nav>
         
         <!-- Menu mobile -->
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">
-          <i class="fas fa-bars"></i>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
       </div>
     </header>
 
-    <script>
-      window.addEventListener('scroll', () => {
-        const header = document.querySelector('.bloom-header');
-        if (window.scrollY > 50) header.classList.add('scrolled');
-        else header.classList.remove('scrolled');
-      });
-      
-      // Mobile menu toggle
-      document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-        document.querySelector('.bloom-nav').classList.toggle('active');
-      });
-    </script>
-
     <!-- MAIN CONTENT -->
-    <div class="orders-container">
+    <main class="orders-container container" aria-labelledby="orders-heading">
       <div class="orders-header">
-        <h1>Lịch sử đơn hàng</h1>
+        <h1 id="orders-heading">Lịch sử đơn hàng</h1>
         <p>Theo dõi các đơn hàng bạn đã đặt tại Bloom</p>
       </div>
 
-      <div class="order-card">
-        <div class="order-header">
-          <div>
-            <div class="order-id">Đơn hàng #BL202400123</div>
-            <div class="order-date">Đặt ngày: 15/12/2024</div>
-          </div>
-          <div class="order-status status-completed">Đã giao hàng</div>
+      <!-- Bộ lọc đơn hàng -->
+      <div class="order-filters">
+        <div class="filter-group">
+          <label for="status-filter">Lọc theo trạng thái:</label>
+          <select id="status-filter" aria-label="Lọc đơn hàng theo trạng thái">
+            <option value="all">Tất cả đơn hàng</option>
+            <option value="completed">Đã giao hàng</option>
+            <option value="processing">Đang xử lý</option>
+            <option value="cancelled">Đã hủy</option>
+          </select>
         </div>
-        <div class="order-items-preview">
-          <img src="images/hoa1.jpg" alt="Nhiệt Ái" class="order-item-preview">
-          <img src="images/hoa2.jpg" alt="Peach" class="order-item-preview">
-          <img src="images/langhoa1.webp" alt="Shimmer Grace" class="order-item-preview">
-        </div>
-        <div class="order-footer">
-          <div class="order-total">2.600.000₫</div>
-          <button class="btn-outline">Xem chi tiết</button>
-        </div>
-      </div>
-
-      <div class="order-card">
-        <div class="order-header">
-          <div>
-            <div class="order-id">Đơn hàng #BL202400122</div>
-            <div class="order-date">Đặt ngày: 10/12/2024</div>
-          </div>
-          <div class="order-status status-completed">Đã giao hàng</div>
-        </div>
-        <div class="order-items-preview">
-          <img src="images/hoa3.jpg" alt="Blueberry" class="order-item-preview">
-          <img src="images/hoa4.jpg" alt="Lemon" class="order-item-preview">
-        </div>
-        <div class="order-footer">
-          <div class="order-total">900.000₫</div>
-          <button class="btn-outline">Xem chi tiết</button>
+        
+        <div class="filter-group">
+          <label for="date-filter">Lọc theo thời gian:</label>
+          <select id="date-filter" aria-label="Lọc đơn hàng theo thời gian">
+            <option value="all">Tất cả thời gian</option>
+            <option value="30days">30 ngày gần đây</option>
+            <option value="3months">3 tháng gần đây</option>
+            <option value="6months">6 tháng gần đây</option>
+          </select>
         </div>
       </div>
 
-      <div class="order-card">
-        <div class="order-header">
-          <div>
-            <div class="order-id">Đơn hàng #BL202400121</div>
-            <div class="order-date">Đặt ngày: 05/12/2024</div>
+      <!-- Danh sách đơn hàng -->
+      <div class="orders-list" id="orders-list" role="list" aria-label="Danh sách đơn hàng">
+        <!-- Đơn hàng 1 -->
+        <div class="order-card" role="listitem">
+          <div class="order-header">
+            <div>
+              <div class="order-id">Đơn hàng #BL202400123</div>
+              <div class="order-date">Đặt ngày: 15/12/2024</div>
+            </div>
+            <div class="order-status status-completed">
+              <i class="fas fa-check-circle" aria-hidden="true"></i>
+              Đã giao hàng
+            </div>
           </div>
-          <div class="order-status status-completed">Đã giao hàng</div>
+          
+          <div class="order-items-preview">
+            <img src="images/hoa1.jpg" alt="Nhiệt Ái" class="order-item-preview">
+            <img src="images/hoa2.jpg" alt="Peach" class="order-item-preview">
+            <img src="images/langhoa1.webp" alt="Shimmer Grace" class="order-item-preview">
+            <div class="more-items">+2 sản phẩm khác</div>
+          </div>
+          
+          <div class="order-footer">
+            <div class="order-total">2.600.000₫</div>
+            <div class="order-actions">
+          <button class="btn-outline" onclick="window.location.href='10_DonHangDaMua.html'">
+            <i class="fas fa-eye" aria-hidden="true"></i>
+            Xem chi tiết
+          </button>
+              <button class="btn-secondary" onclick="reorder('BL202400123')">
+                <i class="fas fa-redo" aria-hidden="true"></i>
+                Đặt lại
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="order-items-preview">
-          <img src="images/kehoa2.jpg" alt="Hồng Phát" class="order-item-preview">
+
+        <!-- Đơn hàng 2 -->
+        <div class="order-card" role="listitem">
+          <div class="order-header">
+            <div>
+              <div class="order-id">Đơn hàng #BL202400122</div>
+              <div class="order-date">Đặt ngày: 10/12/2024</div>
+            </div>
+            <div class="order-status status-completed">
+              <i class="fas fa-check-circle" aria-hidden="true"></i>
+              Đã giao hàng
+            </div>
+          </div>
+          
+          <div class="order-items-preview">
+            <img src="images/hoa3.jpg" alt="Blueberry" class="order-item-preview">
+            <img src="images/hoa4.jpg" alt="Lemon" class="order-item-preview">
+          </div>
+          
+          <div class="order-footer">
+            <div class="order-total">900.000₫</div>
+            <div class="order-actions">
+            <button class="btn-outline" onclick="window.location.href='10_DonHangDaMua.html'">
+              <i class="fas fa-eye" aria-hidden="true"></i>
+              Xem chi tiết
+            </button>
+              <button class="btn-secondary" onclick="reorder('BL202400122')">
+                <i class="fas fa-redo" aria-hidden="true"></i>
+                Đặt lại
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="order-footer">
-          <div class="order-total">1.900.000₫</div>
-          <button class="btn-outline">Xem chi tiết</button>
+
+        <!-- Đơn hàng 3 -->
+        <div class="order-card" role="listitem">
+          <div class="order-header">
+            <div>
+              <div class="order-id">Đơn hàng #BL202400121</div>
+              <div class="order-date">Đặt ngày: 05/12/2024</div>
+            </div>
+            <div class="order-status status-completed">
+              <i class="fas fa-check-circle" aria-hidden="true"></i>
+              Đã giao hàng
+            </div>
+          </div>
+          
+          <div class="order-items-preview">
+            <img src="images/kehoa2.jpg" alt="Hồng Phát" class="order-item-preview">
+          </div>
+          
+          <div class="order-footer">
+            <div class="order-total">1.900.000₫</div>
+            <div class="order-actions">
+              <button class="btn-outline" onclick="viewOrderDetails('BL202400121')">
+                <i class="fas fa-eye" aria-hidden="true"></i>
+                Xem chi tiết
+              </button>
+              <button class="btn-secondary" onclick="reorder('BL202400121')">
+                <i class="fas fa-redo" aria-hidden="true"></i>
+                Đặt lại
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Đơn hàng 4 -->
+        <div class="order-card" role="listitem">
+          <div class="order-header">
+            <div>
+              <div class="order-id">Đơn hàng #BL202400120</div>
+              <div class="order-date">Đặt ngày: 01/12/2024</div>
+            </div>
+            <div class="order-status status-completed">
+              <i class="fas fa-check-circle" aria-hidden="true"></i>
+              Đã giao hàng
+            </div>
+          </div>
+          
+          <div class="order-items-preview">
+            <img src="images/hoa5.jpg" alt="Vườn Xuân Ca" class="order-item-preview">
+            <img src="images/langhoa3.png" alt="Sen Xanh" class="order-item-preview">
+          </div>
+          
+          <div class="order-footer">
+            <div class="order-total">2.170.000₫</div>
+            <div class="order-actions">
+              <button class="btn-outline" onclick="viewOrderDetails('BL202400120')">
+                <i class="fas fa-eye" aria-hidden="true"></i>
+                Xem chi tiết
+              </button>
+              <button class="btn-secondary" onclick="reorder('BL202400120')">
+                <i class="fas fa-redo" aria-hidden="true"></i>
+                Đặt lại
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="order-card">
-        <div class="order-header">
-          <div>
-            <div class="order-id">Đơn hàng #BL202400120</div>
-            <div class="order-date">Đặt ngày: 01/12/2024</div>
-          </div>
-          <div class="order-status status-completed">Đã giao hàng</div>
+      <!-- Thông báo không có đơn hàng (ẩn mặc định) -->
+      <div class="no-orders" id="no-orders" hidden>
+        <div class="no-orders-icon">
+          <i class="fas fa-shopping-bag" aria-hidden="true"></i>
         </div>
-        <div class="order-items-preview">
-          <img src="images/hoa5.jpg" alt="Vườn Xuân Ca" class="order-item-preview">
-          <img src="images/langhoa3.png" alt="Sen Xanh" class="order-item-preview">
-        </div>
-        <div class="order-footer">
-          <div class="order-total">2.170.000₫</div>
-          <button class="btn-outline">Xem chi tiết</button>
-        </div>
+        <h2>Chưa có đơn hàng nào</h2>
+        <p>Bạn chưa có đơn hàng nào phù hợp với bộ lọc hiện tại.</p>
+        <button class="btn-primary" onclick="window.location.href='5_DaDangNhap.html'">
+          <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+          Mua sắm ngay
+        </button>
       </div>
 
       <!-- Phân trang -->
-      <div class="pagination">
-        <a href="#" class="page-nav disabled">
-          <i class="fas fa-chevron-left"></i>
+      <nav class="pagination" aria-label="Phân trang lịch sử đơn hàng">
+        <a href="#" class="page-nav disabled" aria-label="Trang trước" aria-disabled="true">
+          <i class="fas fa-chevron-left" aria-hidden="true"></i>
         </a>
-        <a href="#" class="page-number active">1</a>
-        <a href="#" class="page-number">2</a>
-        <a href="#" class="page-number">3</a>
-        <span class="page-ellipsis">...</span>
-        <a href="#" class="page-number">5</a>
-        <a href="#" class="page-nav">
-          <i class="fas fa-chevron-right"></i>
+        <a href="#" class="page-number active" aria-label="Trang 1" aria-current="page">1</a>
+        <a href="#" class="page-number" aria-label="Trang 2">2</a>
+        <a href="#" class="page-number" aria-label="Trang 3">3</a>
+        <span class="page-ellipsis" aria-hidden="true">...</span>
+        <a href="#" class="page-number" aria-label="Trang 5">5</a>
+        <a href="#" class="page-nav" aria-label="Trang sau">
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
         </a>
-      </div>
-    </div>
+      </nav>
+    </main>
 
     <!-- FOOTER -->
-    <footer class="site-footer">
+    <footer class="site-footer" aria-labelledby="footer-heading">
       <div class="container footer-inner">
+        <h2 id="footer-heading" class="visually-hidden">Thông tin liên hệ</h2>
         <div class="footer-main">
           <div class="footer-brand">
             <div class="footer-logo">
-              <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
+              <svg width="60" height="60" viewBox="0 0 100 100" fill="none" aria-hidden="true">
                 <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
                 <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
                 <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
@@ -170,26 +269,26 @@
           </div>
 
           <div class="footer-contact">
-            <h4>Thông Tin Liên Hệ</h4>
+            <h3>Thông Tin Liên Hệ</h3>
             <div class="contact-info">
               <div class="contact-item">
-                <i class="fas fa-globe"></i>
+                <i class="fas fa-globe" aria-hidden="true"></i>
                 <span>bloom.vn</span>
               </div>
               <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
+                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                 <span>123 Đường Hoa, Quận 1, TP.HCM</span>
               </div>
               <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <a href="tel:0931303836">090 123 4567</a>
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                <a href="tel:+84901234567">090 123 4567</a>
               </div>
               <div class="contact-item">
-                <i class="fas fa-envelope"></i>
+                <i class="fas fa-envelope" aria-hidden="true"></i>
                 <a href="mailto:info@bloom.vn">info@bloom.vn</a>
               </div>
               <div class="contact-item">
-                <i class="fas fa-clock"></i>
+                <i class="fas fa-clock" aria-hidden="true"></i>
                 <span>T2 – CN: 8h30 – 21h00</span>
               </div>
             </div>
@@ -203,5 +302,146 @@
     </footer>
 
   </div> <!-- /site-wrapper -->
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Hàm xem chi tiết đơn hàng
+    function viewOrderDetails(orderId) {
+      window.location.href = '10_DonHangDaMua.html';
+    }
+
+    // Hàm đặt lại đơn hàng
+    function reorder(orderId) {
+      if (confirm(`Bạn có muốn đặt lại đơn hàng ${orderId}?`)) {
+        // Thêm sản phẩm vào giỏ hàng
+        const toast = document.createElement('div');
+        toast.className = 'cart-toast success';
+        toast.innerHTML = `
+          <i class="fas fa-check-circle" aria-hidden="true"></i>
+          <span>Đã thêm sản phẩm từ đơn hàng ${orderId} vào giỏ hàng!</span>
+          <button onclick="this.parentElement.remove()" aria-label="Đóng thông báo">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+        document.body.appendChild(toast);
+        
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+          if (toast.parentElement) {
+            toast.remove();
+          }
+        }, 3000);
+      }
+    }
+
+    // JavaScript chính khi trang load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Header scroll effect
+      window.addEventListener('scroll', () => {
+        const header = document.querySelector('.bloom-header');
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+      
+      // Mobile menu toggle
+      document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+        const nav = document.querySelector('.bloom-nav');
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        
+        nav.classList.toggle('active');
+        this.setAttribute('aria-expanded', !isExpanded);
+      });
+
+      // Logout confirmation
+      document.querySelector('.logout-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (confirm('Bạn có chắc muốn đăng xuất?')) {
+          window.location.href = 'index.html';
+        }
+      });
+
+      // Lọc đơn hàng
+      const statusFilter = document.getElementById('status-filter');
+      const dateFilter = document.getElementById('date-filter');
+      
+      [statusFilter, dateFilter].forEach(filter => {
+        filter.addEventListener('change', function() {
+          filterOrders();
+        });
+      });
+
+      // Xử lý lỗi ảnh
+      document.querySelectorAll('.order-item-preview').forEach(img => {
+        img.addEventListener('error', function() {
+          this.src = 'https://images.unsplash.com/photo-1487070183333-13a8a54b5f14?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+          this.alt = 'Hình ảnh sản phẩm tạm thời không khả dụng';
+        });
+      });
+    });
+
+    // Hàm lọc đơn hàng
+    function filterOrders() {
+      const statusFilter = document.getElementById('status-filter').value;
+      const dateFilter = document.getElementById('date-filter').value;
+      const ordersList = document.getElementById('orders-list');
+      const noOrders = document.getElementById('no-orders');
+      
+      // Trong thực tế, sẽ gọi API để lọc đơn hàng
+      // Hiện tại chỉ hiển thị/ẩn phần tử không có đơn hàng
+      
+      // Giả lập: nếu chọn "Đã hủy" sẽ không có đơn hàng
+      if (statusFilter === 'cancelled') {
+        ordersList.style.display = 'none';
+        noOrders.hidden = false;
+      } else {
+        ordersList.style.display = 'block';
+        noOrders.hidden = true;
+      }
+    }
+
+    // Thêm CSS animation cho toast
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+      }
+      .cart-toast {
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: var(--green-main);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .cart-toast button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+      }
+      .cart-toast button:hover {
+        background: rgba(255,255,255,0.2);
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
 </body>
 </html>

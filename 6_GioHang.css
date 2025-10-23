@@ -336,3 +336,35 @@
     width: 50px;
   }
 }
+
+/* Sửa logo để click được */
+.bloom-logo .logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.bloom-logo .logo-link:hover {
+  opacity: 0.8;
+}
+
+.bloom-logo .logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a4d2b;
+  /* Giữ nguyên các style chữ cũ */
+}
+
+/* Đảm bảo không bị ghi đè bởi CSS khác */
+.bloom-logo a.logo-link,
+.bloom-logo a.logo-link:hover,
+.bloom-logo a.logo-link:visited {
+  text-decoration: none;
+  color: inherit;
+  background: none;
+  border: none;
+}

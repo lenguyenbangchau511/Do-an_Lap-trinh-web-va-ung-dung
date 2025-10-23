@@ -4,20 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Thanh toán - Bloom - Cửa hàng hoa tươi</title>
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/checkout.css">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="7_ThanhToan.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- SITE WRAPPER -->
   <div class="site-wrapper">
+    <a href="#main-checkout" class="skip-to-main">Skip to main content</a>
 
     <!-- HEADER -->
     <header class="bloom-header">
       <div class="bloom-container">
-        <div class="bloom-logo">
-          <svg class="logo-icon" viewBox="0 0 100 100" fill="none">
+      <div class="bloom-logo">
+        <a href="5_DaDangNhap.html" class="logo-link" aria-label="Bloom - Trở về trang chủ">
+          <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
             <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
             <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
             <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
@@ -25,26 +27,39 @@
             <circle cx="50" cy="50" r="12" fill="#9370db"/>
             <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
           </svg>
-          <span>Bloom</span>
-        </div>
+          <span class="logo-text">Bloom</span>
+        </a>
+      </div>
 
-        <nav class="bloom-nav">
-          <a href="index.html">Trang chủ</a>
-          <a href="giohang.html" title="Giỏ hàng"><i class="fa-solid fa-bag-shopping"></i></a>
-          <a href="lichsudonhang.html" title="Lịch sử"><i class="fa-regular fa-clock"></i></a>
-          <a href="profile.html" title="Tài khoản"><i class="fa-regular fa-circle-user"></i></a>
-          <a href="login.html" class="logout-btn" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></a>
+        <nav class="bloom-nav" aria-label="Menu chính">
+          <a href="5_DaDangNhap.html">Trang chủ</a>
+          <a href="6_GioHang.html" title="Giỏ hàng" aria-label="Giỏ hàng">
+            <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+            <span class="nav-text">Giỏ hàng</span>
+          </a>
+          <a href="9_LichSuDonHang.html" title="Lịch sử đơn hàng" aria-label="Lịch sử đơn hàng">
+            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+            <span class="nav-text">Lịch sử</span>
+          </a>
+          <a href="3_ThongTinCaNhan.html" title="Tài khoản" aria-label="Tài khoản">
+            <i class="fa-regular fa-circle-user" aria-hidden="true"></i>
+            <span class="nav-text">Tài khoản</span>
+          </a>
+          <a href="index.html" class="logout-btn" title="Đăng xuất" aria-label="Đăng xuất">
+            <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+            <span class="nav-text">Đăng xuất</span>
+          </a>
         </nav>
         
         <!-- Menu mobile -->
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">
-          <i class="fas fa-bars"></i>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
       </div>
     </header>
 
     <!-- MAIN CONTENT -->
-    <div class="checkout-container">
+    <main id="main-checkout" class="checkout-container">
       <div class="checkout-steps">
         <div class="step completed">
           <div class="step-number">1</div>
@@ -67,15 +82,15 @@
               <h3>Thông tin giao hàng</h3>
               <div class="form-group">
                 <label for="full-name">Họ và tên</label>
-                <input type="text" id="full-name" value="Nguyễn Văn A" required>
+                <input type="text" id="full-name" value="Nguyễn Văn A" required aria-required="true">
               </div>
               <div class="form-group">
                 <label for="phone">Số điện thoại</label>
-                <input type="tel" id="phone" value="090 123 4567" required>
+                <input type="tel" id="phone" value="090 123 4567" required aria-required="true">
               </div>
               <div class="form-group">
                 <label for="address">Địa chỉ giao hàng</label>
-                <textarea id="address" rows="3" required>03 Đường Hoa, Phường 1, Quận 1, TP.HCM</textarea>
+                <textarea id="address" rows="3" required aria-required="true">03 Đường Hoa, Phường 1, Quận 1, TP.HCM</textarea>
               </div>
               <div class="form-group">
                 <label for="note">Ghi chú giao hàng (tùy chọn)</label>
@@ -87,30 +102,30 @@
               <h3>Phương thức thanh toán</h3>
               <div class="payment-methods">
                 <label class="payment-method selected">
-                  <input type="radio" name="payment" value="cash" checked>
-                  <i class="fas fa-money-bill-wave"></i>
+                  <input type="radio" name="payment" value="cash" checked aria-checked="true">
+                  <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
                   <span>Thanh toán khi nhận hàng (COD)</span>
                 </label>
                 <label class="payment-method">
-                  <input type="radio" name="payment" value="bank">
-                  <i class="fas fa-university"></i>
+                  <input type="radio" name="payment" value="bank" aria-checked="false">
+                  <i class="fas fa-university" aria-hidden="true"></i>
                   <span>Chuyển khoản ngân hàng</span>
                 </label>
                 <label class="payment-method">
-                  <input type="radio" name="payment" value="card">
-                  <i class="fas fa-credit-card"></i>
+                  <input type="radio" name="payment" value="card" aria-checked="false">
+                  <i class="fas fa-credit-card" aria-hidden="true"></i>
                   <span>Thẻ tín dụng/ghi nợ</span>
                 </label>
               </div>
             </div>
 
             <div class="checkout-actions">
-              <button type="button" class="btn-outline" onclick="window.location.href='giohang.html'">
-                <i class="fas fa-arrow-left"></i>
+              <button type="button" class="btn-outline" onclick="window.location.href='6_GioHang.html'">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
                 Quay lại giỏ hàng
               </button>
               <button type="submit" class="btn-primary">
-                <i class="fas fa-check"></i>
+                <i class="fas fa-check" aria-hidden="true"></i>
                 Hoàn tất đơn hàng
               </button>
             </div>
@@ -147,48 +162,51 @@
           </div>
         </div>
       </div>
-    </div>
+    </main>
 
     <!-- FOOTER -->
-    <footer class="site-footer">
+    <footer class="site-footer" aria-labelledby="footer-heading">
       <div class="container footer-inner">
+        <h2 id="footer-heading" class="visually-hidden">Thông tin liên hệ</h2>
         <div class="footer-main">
           <div class="footer-brand">
             <div class="footer-logo">
-              <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
-                <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
-                <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
-                <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
-                <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
-                <circle cx="50" cy="50" r="12" fill="#9370db"/>
-                <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
-              </svg>
-              <span>Bloom</span>
+              <a href="index.html" aria-label="Bloom - Trở về trang chủ">
+                <svg width="60" height="60" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                  <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+                  <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+                  <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+                  <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+                  <circle cx="50" cy="50" r="12" fill="#9370db"/>
+                  <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+                </svg>
+                <span>Bloom</span>
+              </a>
             </div>
             <p class="footer-tagline">Lan tỏa hương sắc thiên nhiên</p>
           </div>
 
           <div class="footer-contact">
-            <h4>Thông Tin Liên Hệ</h4>
+            <h3>Thông Tin Liên Hệ</h3>
             <div class="contact-info">
               <div class="contact-item">
-                <i class="fas fa-globe"></i>
+                <i class="fas fa-globe" aria-hidden="true"></i>
                 <span>bloom.vn</span>
               </div>
               <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
+                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                 <span>123 Đường Hoa, Quận 1, TP.HCM</span>
               </div>
               <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <a href="tel:0931303836">090 123 4567</a>
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                <a href="tel:+84901234567">090 123 4567</a>
               </div>
               <div class="contact-item">
-                <i class="fas fa-envelope"></i>
+                <i class="fas fa-envelope" aria-hidden="true"></i>
                 <a href="mailto:info@bloom.vn">info@bloom.vn</a>
               </div>
               <div class="contact-item">
-                <i class="fas fa-clock"></i>
+                <i class="fas fa-clock" aria-hidden="true"></i>
                 <span>T2 – CN: 8h30 – 21h00</span>
               </div>
             </div>
@@ -203,7 +221,74 @@
 
   </div> <!-- /site-wrapper -->
 
-  <script src="js/checkout.js"></script>
-  <script src="js/main.js"></script>
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+      const nav = document.querySelector('.bloom-nav');
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      
+      nav.classList.toggle('active');
+      this.setAttribute('aria-expanded', !isExpanded);
+    });
+
+    // Payment method selection
+    document.querySelectorAll('.payment-method').forEach(method => {
+      method.addEventListener('click', function() {
+        document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+        this.classList.add('selected');
+        const radio = this.querySelector('input[type="radio"]');
+        radio.checked = true;
+        radio.setAttribute('aria-checked', 'true');
+        
+        // Update other radios
+        document.querySelectorAll('.payment-method input[type="radio"]').forEach(r => {
+          if (r !== radio) {
+            r.setAttribute('aria-checked', 'false');
+          }
+        });
+      });
+    });
+
+    // Form submission
+    document.getElementById('checkout-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Validate form
+      const fullName = document.getElementById('full-name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+      
+      if (!fullName || !phone || !address) {
+        alert('Vui lòng điền đầy đủ thông tin bắt buộc');
+        return;
+      }
+      
+      // Simulate successful order
+      const orderData = {
+        fullName: fullName,
+        phone: phone,
+        address: address,
+        note: document.getElementById('note').value.trim(),
+        paymentMethod: document.querySelector('input[name="payment"]:checked').value,
+        total: '2.600.000₫'
+      };
+      
+      // Store order data for confirmation page
+      localStorage.setItem('currentOrder', JSON.stringify(orderData));
+      
+      // Redirect to confirmation page
+      window.location.href = '8_XacNhanDonHang.html';
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.bloom-header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
 </body>
 </html>

@@ -19,6 +19,7 @@
     <header class="bloom-header">
       <div class="bloom-container">
         <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
+          <a href="index.html" aria-label="Bloom - Trở về trang chủ"></a>
           <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
             <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
             <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
@@ -667,16 +668,18 @@
       productDiv.className = 'product';
       productDiv.setAttribute('role', 'listitem');
       productDiv.innerHTML = `
-        <img 
-          src="${product.image}" 
-          alt="${product.name} - ${product.description}" 
-          loading="lazy"
-          onerror="handleImageError(this)"
-        >
+        <a href="4_ChiTietSanPham.html">
+          <img 
+            src="${product.image}" 
+            alt="${product.name} - ${product.description}" 
+            loading="lazy"
+            onerror="handleImageError(this)"
+          >
+        </a>
         <h3>${product.name}</h3>
         <p class="price">${product.price.toLocaleString('vi-VN')}₫</p>
-        <button class="btn-outline" onclick="redirectToLogin()" aria-label="Đăng nhập để thêm ${product.name} vào giỏ hàng">
-          Đăng nhập để mua
+        <button class="btn-outline" onclick="${document.getElementById('search-results').hidden ? 'addToCart(' + product.id + ')' : 'redirectToLogin()'}">
+          ${document.getElementById('search-results').hidden ? 'Thêm vào giỏ' : 'Đăng nhập để mua'}
         </button>
       `;
       return productDiv;
