@@ -1,0 +1,361 @@
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: #f8f9fa;
+}
+
+:root{
+  --mint-1: #eaf8f0;
+  --mint-2: #d8f3e8;
+  --accent: #2e7d68;
+  --green-main: #2e7d68; /* Thêm biến này */
+  --dark: #2b2b2b;
+  --muted: #6b8b7a;
+  --card-bg: #ffffff;
+  --shadow: 0 2px 15px rgba(0,0,0,0.05);
+  --pastel-purple: #b19cd9;
+  --pastel-purple-dark: #9370db;
+}
+
+
+body {
+  background-color: var(--light-bg);
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 240px;
+  height: 100vh;
+  background: var(--card-bg);
+  color: var(--dark);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s, color 0.3s;
+}
+
+.sidebar .brand {
+  background: var(--primary);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar a {
+  display: block;
+  padding: 12px 20px;
+  color: var(--sidebar-text);
+  text-decoration: none;
+  font-weight: 500; 
+  transition: 0.3s;
+}
+
+
+
+.bloom-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--green-main);
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  text-decoration: none;
+  position: relative;
+  left: 40px;
+  padding: 10px;
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  transition: transform 0.3s ease;
+}
+
+.bloom-logo:hover .logo-icon {
+  transform: rotate(-5deg) scale(1.08);
+}
+
+.bloom-logo:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: #ccded5;
+  color: var(--light-bg);
+  border-radius: 8px;
+  font-size: 17px;
+}
+/* Hết .sidebar */
+
+
+/* header customer */
+.header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--muted);
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  margin-bottom: 30px;
+  align-items: center;
+  border-radius: 8px;
+}
+.header__title {
+  position: relative;
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--accent);
+  left: 50px;
+}
+.header__info {
+  position: absolute;
+  font-size: 23px;
+  right: 100px;
+  font-weight: 500;
+}
+
+.header__info a {
+  margin-left: 10px;
+  font-size: 25px;
+  color: #425e4e;
+}
+/* Hết header */
+
+
+.main-content {
+  margin-left: 240px;
+  padding: 10px 30px;
+  transition: 0.3s;
+}
+
+/* Tìm kiếm */
+.function {
+  padding-bottom: 50px ;
+}
+#searchUser {
+ width: 400px;
+ padding: 8px 5px;
+  border-radius: 7px;
+  border: none;
+}
+.searchUser {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--mint-2) ;
+  border-radius: 7px;
+}
+.searchUser .search__btn {
+  border: 1px solid var(--mint-2) ;
+  padding: 8px 15px;
+  border-radius: 7px;
+  font-size: 17px;
+}
+.searchUser .search__btn:hover{
+  background-color: #bad3c5;
+}
+
+
+#filterStatus {
+  padding: 8px 5px;
+  border-radius: 7px;
+  border: 2px solid var(--mint-2);
+}
+
+.suggestions-list {
+  position: absolute;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  margin-top: 2px;
+  padding-left: 0;
+  list-style: none;
+  z-index: 999;
+}
+
+.suggestions-list li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0;
+}
+.function {
+  margin-bottom: 30px;
+}
+/* Hết tìm kiếm  */
+
+
+.navbar {
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+body.dark .navbar {
+  background: #2b2b3a;
+  color: var(--text-color);
+}
+
+.card {
+  background: var(--card-bg);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s, color 0.3s;
+  color: var(--text-color);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.stat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background: rgba(214, 40, 40, 0.1);
+  color: var(--primary);
+}
+
+body.dark .stat-icon {
+  background: rgba(214, 40, 40, 0.25);
+  color: var(--dark);
+}
+
+.text-muted {
+  color: var(--muted-color) !important;
+}
+
+.table {
+  color: var(--text-color);
+}
+
+.table-light th {
+  color: #000;
+}
+
+body.dark .table-light th {
+  background: #2b2b3a;
+  color: #f1f1f1;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted-color);
+  margin-top: 40px;
+}
+
+.badge {
+  font-size: 0.8rem;
+}
+
+.theme-toggle {
+  border: none;
+  background: transparent;
+  color: var(--primary);
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s, color 0.3s;
+}
+
+body.dark .theme-toggle {
+  color: #ffcc00;
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg);
+}
+
+/* DARK MODE FIX FOR MODAL */
+body.dark .modal-content {
+  background-color: #2b2b3a;
+  color: #f5f5f5;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark .modal-header,
+body.dark .modal-footer {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+body.dark .form-control,
+body.dark .form-select,
+body.dark textarea {
+  background-color: #1e1e2d;
+  color: #fff;
+  border-color: #444;
+}
+
+body.dark .form-control::placeholder {
+  color: #bbb;
+}
+
+
+/* Phaan trang */
+#pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 48px;
+  margin-bottom: 32px;
+  list-style-type: none;
+}
+
+#pagination .active{
+  color: var(--dark);
+  background-color: #69c997;
+  
+}
+
+#pagination .pagination-item__link:hover{
+  color: var(--dark);
+  background-color: #69c997;
+}
+.pagination-item__link {
+  font-size: 1.2rem;
+  color: var(--accent);
+  text-align: center;
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  min-width: 30px ;
+  border-radius: 2px;
+}
+
+.pagination-item {
+  margin: 0 4px;
+}
+/* Heets phaan trang */
