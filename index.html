@@ -662,7 +662,7 @@
       }
     }
 
-    // Hàm tạo HTML cho sản phẩm (CHỈ HIỂN THỊ, KHÔNG CÓ NÚT THÊM VÀO GIỎ)
+    // Hàm tạo HTML cho sản phẩm - LUÔN HIỂN THỊ NÚT "ĐĂNG NHẬP ĐỂ MUA"
     function createProductElement(product) {
       const productDiv = document.createElement('article');
       productDiv.className = 'product';
@@ -678,13 +678,12 @@
         </a>
         <h3>${product.name}</h3>
         <p class="price">${product.price.toLocaleString('vi-VN')}₫</p>
-        <button class="btn-outline" onclick="${document.getElementById('search-results').hidden ? 'addToCart(' + product.id + ')' : 'redirectToLogin()'}">
-          ${document.getElementById('search-results').hidden ? 'Thêm vào giỏ' : 'Đăng nhập để mua'}
+        <button class="btn-outline" onclick="redirectToLogin()">
+          Đăng nhập để mua
         </button>
       `;
       return productDiv;
     }
-
     // Hàm chuyển hướng đến trang đăng nhập
     function redirectToLogin() {
       window.location.href = '2_DangNhap.html';
