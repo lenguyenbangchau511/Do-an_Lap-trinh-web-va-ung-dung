@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin - Quản lý Giá bán & Lợi nhuận</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="header-nav">
+      <a href="admin_list.html" class="nav-link left-link">Trang Chủ Admin</a>
+      <a href="admin_login.html" class="logout-link right-link">Đăng Xuất</a>
+    </div>
+
+    <h2 class="page-header">
+      <a href="admin_list.html" class="back-link">&#x25C0; Trang Chủ Admin</a>
+      <span style="margin-left: 20px">💰 Quản lý giá bán & lợi nhuận</span>
+    </h2>
+
+    <div class="section-box">
+      <h3>1. Cập nhật Tỉ lệ Lợi nhuận (%)</h3>
+
+      <form id="updateProfitForm">
+        <div class="update-form-container">
+          <div class="update-form-item">
+            <label for="loaiSanPham">Loại Sản phẩm</label>
+            <select id="loaiSanPham">
+              <option>Hoa bó (Bouquet)</option>
+              <option>Bình hoa (Vase)</option>
+              <option>Kệ hoa (Stand)</option>
+            </select>
+          </div>
+
+          <div class="update-form-item">
+            <label for="tiLeLoiNhuan">Tỉ lệ Lợi nhuận (%)</label>
+            <div style="display: flex; align-items: center">
+              <input
+                type="number"
+                id="tiLeLoiNhuan"
+                value="35"
+                style="width: 80px"
+              />
+              %
+            </div>
+          </div>
+
+          <button type="submit" id="updateButton" class="action-btn">
+            Cập nhật
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="section-box">
+      <h3>2. Tra cứu Giá Vốn và Giá Bán</h3>
+
+      <div class="lookup-form">
+        <label for="sanpham">Chọn Sản phẩm:</label>
+        <select id="sanpham">
+          <option>Hoa Ẩn Dấu</option>
+          <option>Hoa Nhiệt Ái</option>
+          <option>Hoa Peach</option>
+          <option>Hoa Blueberry</option>
+          <option>Hoa Lemon</option>
+          <option>Hoa Vườn Xuân Ca</option>
+          <option>Hoa Shimmer Grace</option>
+          <option>Hoa Blue Sky</option>
+          <option>Hoa Sen Xanh</option>
+        </select>
+        <button class="action-btn">Tra cứu</button>
+      </div>
+
+      <div class="result-container">
+        <div class="result-row result-header">
+          <div class="result-cell product-name">Sản phẩm</div>
+          <div class="result-cell">Giá Vốn (Trung bình)</div>
+          <div class="result-cell">% Lợi nhuận áp dụng</div>
+          <div class="result-cell selling-price">Giá Bán (Lẻ)</div>
+        </div>
+
+        <div class="result-row">
+          <div class="result-cell product-name">SP001 - Hoa Ẩn Dấu</div>
+          <div class="result-cell">45,000 VNĐ</div>
+          <div class="result-cell highlight">35%</div>
+          <div class="result-cell selling-price">60,750 VNĐ</div>
+        </div>
+
+        <div class="result-row">
+          <div class="result-cell product-name">SP002 - Hoa Nhiệt Ái</div>
+          <div class="result-cell">60,000 VNĐ</div>
+          <div class="result-cell highlight">30%</div>
+          <div class="result-cell selling-price">78,000 VNĐ</div>
+        </div>
+
+        <div class="result-row">
+          <div class="result-cell product-name">SP002 - Hoa Peach</div>
+          <div class="result-cell">60,000 VNĐ</div>
+          <div class="result-cell highlight">30%</div>
+          <div class="result-cell selling-price">78,000 VNĐ</div>
+        </div>
+
+        <div class="result-row">
+          <div class="result-cell product-name">SP002 - Hoa Blueberry</div>
+          <div class="result-cell">60,000 VNĐ</div>
+          <div class="result-cell highlight">30%</div>
+          <div class="result-cell selling-price">78,000 VNĐ</div>
+        </div>
+
+        <div class="result-row">
+          <div class="result-cell product-name">SP002 - Hoa Lemon</div>
+          <div class="result-cell">60,000 VNĐ</div>
+          <div class="result-cell highlight">30%</div>
+          <div class="result-cell selling-price">78,000 VNĐ</div>
+        </div>
+
+        <div class="result-row">
+          <div class="result-cell product-name">SP002 - Hoa Vườn Xuân Ca</div>
+          <div class="result-cell">60,000 VNĐ</div>
+          <div class="result-cell highlight">30%</div>
+          <div class="result-cell selling-price">78,000 VNĐ</div>
+        </div>
+
+        <div class="result-row">
+          <div class="result-cell product-name">SP002 -Hoa Shimmer Grace</div>
+          <div class="result-cell">60,000 VNĐ</div>
+          <div class="result-cell highlight">30%</div>
+          <div class="result-cell selling-price">78,000 VNĐ</div>
+        </div>
+
+        <div class="result-row">
+          <div class="result-cell product-name">SP002 -Hoa Blue Sky</div>
+          <div class="result-cell">60,000 VNĐ</div>
+          <div class="result-cell highlight">30%</div>
+          <div class="result-cell selling-price">78,000 VNĐ</div>
+        </div>
+
+        <div class="result-row">
+          <div class="result-cell product-name">SP002 -Hoa Sen Xanh</div>
+          <div class="result-cell">60,000 VNĐ</div>
+          <div class="result-cell highlight">30%</div>
+          <div class="result-cell selling-price">78,000 VNĐ</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin - Quản lý Phiếu Nhập Hoa</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div class="header-nav">
+      <a href="admin_list.html" class="back-link">&#x25C0; Trang Chủ Admin</a>
+      <a href="admin_login.html" class="logout-link">Đăng Xuất</a>
+    </div>
+
+    <div class="page-title">
+      <h2>Quản lý Phiếu Nhập Hoa</h2>
+    </div>
+
+    <div class="section-box">
+      <h3 id="openAddInputModalButton" style="cursor: pointer; color: #007bff">
+        ➕ Thêm phiếu nhập mới
+      </h3>
+    </div>
+
+    <div class="section-box">
+      <h3>📋 Danh sách Phiếu Nhập</h3>
+
+      <div class="list-container">
+        <div class="list-row list-header">
+          <div class="list-cell">STT</div>
+          <div class="list-cell">Tổng SL</div>
+          <div class="list-cell">Mã Phiếu</div>
+          <div class="list-cell">Tên sản phẩm</div>
+          <div class="list-cell">Trạng thái</div>
+          <div class="list-cell">Ngày Nhập</div>
+        </div>
+        <div class="list-row">
+          <div class="list-cell">1</div>
+          <div class="list-cell">250</div>
+          <div class="list-cell">PN001</div>
+          <div class="list-cell">Hoa Nhiệt Ái</div>
+          <div class="list-cell status-pending">Chưa hoàn thành</div>
+          <div class="list-cell">2025-10-20</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination-container">
+      <ul class="pagination-list">
+        <li><button class="page-btn" disabled>&laquo;</button></li>
+        <li><button class="page-btn active">1</button></li>
+        <li><button class="page-btn">2</button></li>
+        <li><button class="page-btn">&raquo;</button></li>
+      </ul>
+    </div>
+
+    <div id="addInputModal" class="modal">
+      <div class="modal-content" style="max-width: 500px">
+        <span class="close-btn add-close-btn">&times;</span>
+        <div class="modal-body">
+          <h3 class="success-title" style="color: #2eb739">
+            ➕ Thêm phiếu nhập mới
+          </h3>
+          <form id="addInputForm">
+            <div class="input-row-modal">
+              <label for="modalMaPhieu">Mã Phiếu</label>
+              <input type="text" id="modalMaPhieu" required />
+            </div>
+
+            <div class="input-row-modal">
+              <label for="modalTenSanPham">Tên Sản Phẩm</label>
+              <input type="text" id="modalTenSanPham" required />
+            </div>
+
+            <div class="input-row-modal">
+              <label for="modalSoLuong">Số Lượng Thêm Vào</label>
+              <input
+                type="number"
+                id="modalSoLuong"
+                value="1"
+                min="1"
+                required
+              />
+            </div>
+
+            <div class="input-row-modal">
+              <label for="modalMoTa">Mô tả sản phẩm</label>
+              <textarea id="modalMoTa"></textarea>
+            </div>
+
+            <div class="input-row-modal">
+              <label for="modalNgayNhap">Ngày Nhập</label>
+              <input type="date" id="modalNgayNhap" required />
+            </div>
+
+            <div style="margin-top: 20px; text-align: right">
+              <button
+                type="button"
+                id="huyAddInputBtn"
+                class="action-btn"
+                style="background-color: #6c757d"
+              >
+                Hủy
+              </button>
+              <button
+                type="submit"
+                id="saveModalButton"
+                class="action-btn save-btn"
+              >
+                Xác nhận
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn success-close-btn">&times;</span>
+        <div class="modal-body">
+          <h3 class="success-title">✅ Cập nhật thành công</h3>
+          <p>Phiếu Nhập mới đã được thêm vào danh sách.</p>
+          <button id="modalCloseBtn" class="action-btn">Đóng</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="detailModal" class="modal" style="display: none"></div>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
