@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quản lý giá bán - Bloom</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="price.css" />
+  <link rel="stylesheet" href="admin.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- sidebar -->
+  <div class="sidebar">
+    <div class="sidebar">
+      <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
+        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9" />
+          <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
+            fill="#eaf8f0" />
+          <circle cx="40" cy="35" r="8" fill="#b19cd9" />
+          <circle cx="60" cy="35" r="8" fill="#b19cd9" />
+          <circle cx="50" cy="50" r="12" fill="#9370db" />
+          <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
+        </svg>
+        <span>Bloom</span>
+      </div>
+      <a href="0_dashboard.html"><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
+      <a href="1_users.html" ><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
+      <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
+      <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
+      <a href="4_price.html" class="active"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
+      <a href=""><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
+      <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
+      <a href="#"><i class="fa-sharp fa-solid fa-truck"></i> Quản lý tồn kho</a>
+      <div class="logout_admin"><a href="../index.html" id="logout-link">Đăng xuất</a></div>
+      <script>
+        document.getElementById("logout-link").addEventListener("click", function (event) {
+          event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
+          const confirmLogout = confirm("Bạn có chắc chắn muốn đăng xuất không?");
+
+          if (confirmLogout) {
+            window.location.href = this.href; // Chuyển đến trang đăng xuất nếu xác nhận
+          }
+        });
+      </script>
+    </div>
+  </div>
+
+  <main data aos="fade-up">
+    <div class="header">
+      <div class="header__title"><i class="fa-solid fa-users me-2"></i>Quản lý giá bán</div>
+      <div class="header__info">
+        <span class="text-muted small">Xin chào, Admin</span>
+        <a href=""><i class="fa-solid fa-user-tie ms-2"></i></a>
+      </div>
+    </div>
+
+    <div class="filter-section">
+      <label for="category">Chọn Danh mục:</label>
+      <select id="category" onchange="filterCategory()">
+        <option value="all">Hiện tất cả</option>
+        <option value="bohoa">Bó hoa</option>
+        <option value="langhoa">Lẵng hoa</option>
+        <option value="kehoa">Kệ hoa</option>
+      </select>
+      <button id="editBtn" onclick="openEditPopup()">
+        <i class="fas fa-edit"></i> Chỉnh sửa
+      </button>
+    </div>
+
+    <table id="priceTable" >
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Mã SP</th>
+          <th>Tên sản phẩm</th>
+          <th>Giá vốn (VND)</th>
+          <th>Giá bán (VND)</th>
+          <th>Lợi nhuận (%)</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+
+    <section id="history">
+      <h3><i class="fas fa-scroll"></i> Lịch sử chỉnh sửa</h3>
+      <ul id="historyList"></ul>
+    </section>
+  </main>
+
+  <!-- 🔹 Popup chỉnh sửa -->
+  <div id="editPopup" class="popup">
+    <div class="popup-content">
+      <h3><i class="fas fa-pen"></i> Chỉnh sửa giá sản phẩm</h3>
+
+      <label>Mã sản phẩm:</label>
+      <input type="text" id="productCode" placeholder="VD: P001" />
+
+      <label>Tên sản phẩm:</label>
+      <input type="text" id="productName" readonly style="background-color: #f0f0f0" />
+
+      <label>Giá vốn (VND):</label>
+      <input type="number" id="costPrice" placeholder="60000" />
+
+      <label>Giá bán (VND):</label>
+      <input type="number" id="sellPrice" placeholder="78000" />
+
+      <label>Lợi nhuận (%):</label>
+      <input type="text" id="profitPercent" readonly style="background-color: #f0f0f0; font-weight: bold" />
+
+      <div class="popup-actions">
+        <button onclick="saveEdit()"><i class="fas fa-check"></i> Lưu</button>
+        <button onclick="closePopup()">
+          <i class="fas fa-times"></i> Hủy
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="price.js"></script>
+</body>
+
+</html>

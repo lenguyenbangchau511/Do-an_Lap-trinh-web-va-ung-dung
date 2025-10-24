@@ -31,9 +31,25 @@
         </svg>
         <span>Bloom</span>
       </div>
-      <a href="users.html" class="active"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
-      <a href="products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
-      <a href="category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
+      <a href="0_dashboard.html"><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
+      <a href="1_users.html" class="active"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
+      <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
+      <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
+      <a href="4_price.html"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
+      <a href=""><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
+      <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
+      <a href="#"><i class="fa-sharp fa-solid fa-truck"></i> Quản lý tồn kho</a>
+      <div class="logout_admin"><a href="../index.html" id="logout-link">Đăng xuất</a></div>
+      <script>
+        document.getElementById("logout-link").addEventListener("click", function (event) {
+          event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
+          const confirmLogout = confirm("Bạn có chắc chắn muốn đăng xuất không?");
+
+          if (confirmLogout) {
+            window.location.href = this.href; // Chuyển đến trang đăng xuất nếu xác nhận
+          }
+        });
+      </script>
     </div>
   </div>
 
@@ -50,7 +66,7 @@
     <div class="container-fluid function" data-aos="fade-up">
       <div class="d-flex justify-content-between mb-3">
         <div>
-          <button class="btn btn-success" id="addUserBtn"><i class="fa-solid fa-user-plus"></i> Thêm khách
+          <button class="btn btn-success" style="padding: 10px;" id="addUserBtn"><i class="fa-solid fa-user-plus"></i> Thêm khách
             hàng</button>
         </div>
 
@@ -120,87 +136,87 @@
 
   <!-- Modal -->
   <div class="modal fade" id="userModal" tabindex="-1">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title fw-bold">Thêm khách hàng</h5>
-        <button class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold">Thêm khách hàng</h5>
+          <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
 
-      <div class="modal-body">
-        <form id="userForm">
-          <input type="hidden" id="userId">
+        <div class="modal-body">
+          <form id="userForm">
+            <input type="hidden" id="userId">
 
-          <!-- Họ tên + Email chung 1 hàng -->
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label class="form-label" placeholder="VD: Lê Văn A" required>Họ tên</label>
-              <input id="userName" class="form-control" required>
-            </div>
+            <!-- Họ tên + Email chung 1 hàng -->
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label" placeholder="VD: Lê Văn A" required>Họ tên</label>
+                <input id="userName" class="form-control" required>
+              </div>
 
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Email</label>
-              <input id="userEmail" type="email" class="form-control" placeholder="VD: a@gmail.com" required>
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Tên tài khoản</label>
-            <input id="userUsername" class="form-control" placeholder="VD: abc123" required>
-          </div>
-
-          <div class="mb-3 position-relative">
-            <label class="form-label">Mật khẩu</label>
-            <input id="userPassword" type="password" class="form-control" placeholder="VD: 123456789" required>
-            <button type="button" class="btn btn-sm btn-outline-secondary position-absolute" id="togglePassword">
-              <i class="fa-solid fa-eye"></i>
-            </button>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Số điện thoại</label>
-            <input id="userPhone" type="number" class="form-control" placeholder="0987654321" required>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Địa chỉ</label>
-            <input id="userAddress" class="form-control" placeholder="VD: 13 An Dương Vương Q8 HCM">
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Ngày tạo</label>
-            <input type="date" id="userCreatedAt" class="form-control" placeholder="VD: 10/10/2025">
-          </div>
-
-          <!-- Số đơn hàng + Trạng thái + Khóa tài khoản chung 1 hàng -->
-          <div class="row align-items-center" id="asdf">
-            <div class="col-md-3 mb-3">
-              <label class="form-label">Số đơn hàng</label>
-              <input type="number" id="userOrders" class="form-control" placeholder="VD: 6">
-            </div>
-            <div class="col-md-3 mb-3">
-
-            </div>
-
-
-            <div class="col-md-3 mb-3 d-flex align-items-center">
-              <div class="form-check mt-4">
-                <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" id="userLocked">
-                <label class="form-check-label" for="userLocked">Khóa tài khoản</label>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Email</label>
+                <input id="userEmail" type="email" class="form-control" placeholder="VD: a@gmail.com" required>
               </div>
             </div>
-          </div>
 
-        </form>
-      </div>
+            <div class="mb-3">
+              <label class="form-label">Tên tài khoản</label>
+              <input id="userUsername" class="form-control" placeholder="VD: abc123" required>
+            </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-        <button type="button" class="btn btn-primary" id="saveUser">Lưu</button>
+            <div class="mb-3 position-relative">
+              <label class="form-label">Mật khẩu</label>
+              <input id="userPassword" type="password" class="form-control" placeholder="VD: 123456789" required>
+              <button type="button" class="btn btn-sm btn-outline-secondary position-absolute" id="togglePassword">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Số điện thoại</label>
+              <input id="userPhone" type="number" class="form-control" placeholder="0987654321" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Địa chỉ</label>
+              <input id="userAddress" class="form-control" placeholder="VD: 13 An Dương Vương Q8 HCM">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Ngày tạo</label>
+              <input type="date" id="userCreatedAt" class="form-control" placeholder="VD: 10/10/2025">
+            </div>
+
+            <!-- Số đơn hàng + Trạng thái + Khóa tài khoản chung 1 hàng -->
+            <div class="row align-items-center" id="asdf">
+              <div class="col-md-3 mb-3">
+                <label class="form-label">Số đơn hàng</label>
+                <input type="number" id="userOrders" class="form-control" placeholder="VD: 6">
+              </div>
+              <div class="col-md-3 mb-3">
+
+              </div>
+
+
+              <div class="col-md-3 mb-3 d-flex align-items-center">
+                <div class="form-check mt-4">
+                  <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" id="userLocked">
+                  <label class="form-check-label" for="userLocked">Khóa tài khoản</label>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="button" class="btn btn-primary" id="saveUser">Lưu</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
   <!-- Toast container -->
@@ -209,7 +225,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init();
+    AOS.init(); // thư viện
 
     const defaultUsers = [
       { id: 'K001', name: 'Nguyễn Văn A', username: 'nguyena', password: '123456', email: 'a@email.com', phone: '0123456789', address: '12 Ngũ lão Hà Nội', createdAt: '2025/10/24', orders: 5, status: 'active', locked: false },
@@ -225,7 +241,7 @@
       { id: 'K011', name: 'Hoàng Ngọc  R', username: 'tranb223', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'inactive', locked: false },
       { id: 'K012', name: 'Trần Hoàng C', username: 'tran43b', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'active', locked: false },
       { id: 'K013', name: 'Trần Thị N', username: 'tra54nb', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'inactive', locked: false },
-    ];
+    ]; //dữ liệu mẫu
 
     let users = defaultUsers;
     const saveUsers = () => localStorage.setItem('users', JSON.stringify(users));
@@ -233,6 +249,8 @@
 
     const userModal = new bootstrap.Modal('#userModal');
 
+
+    // thống báo khi thêm, xóa, sửa
     function showToast(msg, type = 'success') {
       const toastEl = document.createElement('div');
       toastEl.className = `toast align-items-center text-bg-${type} border-0 show mb-2`;
@@ -256,6 +274,22 @@
         return target.includes(key) && (st === '' || (st === 'active' && !u.locked) || (st === 'locked' && u.locked));
       });
     }
+    const searchButton = document.querySelector('.search__btn');
+    const searchInput = document.getElementById('searchUser');
+
+    // Khi click nút tìm kiếm
+    searchButton.addEventListener('click', function (e) {
+      e.preventDefault();
+      renderUsers(filterUsers());
+    });
+
+    // Khi nhấn Enter trong ô input
+    searchInput.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        renderUsers(filterUsers());
+      }
+    });
 
     function renderUsers(list) {
       tbody.innerHTML = '';
@@ -345,9 +379,9 @@
 
     document.getElementById('searchUser').oninput = () => renderUsers(filterUsers());
     document.getElementById('filterStatus').onchange = () => renderUsers(filterUsers());
-    
+
     renderUsers(filterUsers());
-    
+
     const togglePasswordBtn = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('userPassword');
 

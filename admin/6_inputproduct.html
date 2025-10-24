@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quản lý nhập hàng - Bloom</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="inputproduct.css" />
+</head>
+
+<body>
+  <!-- sidebar -->
+  <div class="sidebar">
+    <div class="sidebar">
+      <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
+        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9" />
+          <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
+            fill="#eaf8f0" />
+          <circle cx="40" cy="35" r="8" fill="#b19cd9" />
+          <circle cx="60" cy="35" r="8" fill="#b19cd9" />
+          <circle cx="50" cy="50" r="12" fill="#9370db" />
+          <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
+        </svg>
+        <span>Bloom</span>
+      </div>
+      <a href="0_dashboard.html"><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
+      <a href="1_users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
+      <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
+      <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
+      <a href="4_price.html" ><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
+      <a href=""><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
+      <a href="6_inputproduct.html" class="active"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
+      <a href="#"><i class="fa-sharp fa-solid fa-truck"></i> Quản lý tồn kho</a>
+      <div class="logout_admin"><a href="../index.html" id="logout-link">Đăng xuất</a></div>
+      <script>
+        document.getElementById("logout-link").addEventListener("click", function (event) {
+          event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
+          const confirmLogout = confirm("Bạn có chắc chắn muốn đăng xuất không?");
+
+          if (confirmLogout) {
+            window.location.href = this.href; // Chuyển đến trang đăng xuất nếu xác nhận
+          }
+        });
+      </script>
+    </div>
+  </div>
+  <div class="container">
+    <h2>📦 Quản lý Phiếu Nhập</h2>
+    <button id="addNewBtn">+ Thêm phiếu nhập mới</button>
+
+    <!-- Form thêm phiếu nhập -->
+    <div id="inputForm" class="hidden">
+      <h3>Thêm Thông Tin Phiếu Nhập</h3>
+
+      <!-- Khung thông báo -->
+      <div id="messageBox" class="message-box"></div>
+
+      <label>Tên SP:</label>
+      <select id="tensp">
+        <option value="">-- Chọn sản phẩm --</option>
+        <option value="Nhiệt Ái">Nhiệt Ái</option>
+        <option value="Peach">Peach</option>
+        <option value="Blueberry">Blueberry</option>
+        <option value="Lemon">Lemon</option>
+        <option value="Shimmer Grace">Shimmer Grace</option>
+        <option value="Bluesky">Bluesky</option>
+        <option value="Sen Xanh">Sen Xanh</option>
+        <option value="Sắc Màu">Sắc Màu</option>
+        <option value="Hồng Phát">Hồng Phát</option>
+        <option value="Tương Lai">Tương Lai</option>
+      </select><br />
+
+      <label>Mã SP:</label>
+      <input type="text" id="masp" readonly /><br />
+
+      <label>Số lượng thêm vào:</label>
+      <input type="number" id="soluong" min="1" value="1" /><br />
+
+      <label>Số lượng hiện có:</label>
+      <input type="number" id="tonkho" min="0" value="0" readonly /><br />
+
+      <label>Giá nhập (VNĐ):</label>
+      <input type="number" id="gianhap" min="1000" value="10000" /><br />
+
+      <label>Tình trạng:</label>
+      <select id="tinhtrang">
+        <option value="Tốt">Tốt</option>
+        <option value="Hư hỏng">Hư hỏng</option>
+      </select><br />
+
+      <label>Nhà cung cấp:</label>
+      <input type="text" id="nhacungcap" placeholder="VD: FlowerFarm" /><br />
+
+      <button id="saveBtn">Lưu phiếu nhập</button>
+      <button id="cancelBtn">Hủy</button>
+    </div>
+
+    <!-- Danh sách phiếu nhập -->
+    <div class="list-section">
+      <h3>📋 Danh sách Phiếu Nhập</h3>
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Mã SP</th>
+            <th>Tên SP</th>
+            <th>Số lượng</th>
+            <th>Thời gian</th>
+            <th>Giá nhập</th>
+            <th>Tình trạng</th>
+            <th>Tồn kho</th>
+            <th>Nhà cung cấp</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="inputproduct.js"></script>
+</body>
+
+</html>

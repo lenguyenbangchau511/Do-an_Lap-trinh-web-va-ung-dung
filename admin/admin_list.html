@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Chào mừng, Admin!</h1>
+      <a href="admin_login.html" class="logout-link">Đăng Xuất</a>
+    </header>
+
+    <div class="container">
+      <nav>
+        <h2>🛠️ Quản Lý</h2>
+        <ul>
+          <li><a href="admin_list.html">Bảng điều khiển</a></li>
+          <li><a href="#">Quản lý Khách hàng</a></li>
+          <li><a href="#">Quản lý Loại sản phẩm</a></li>
+          <li><a href="#">Quản lý Sản phẩm (Hoa)</a></li>
+
+          <li><a href="admin_inputproduct.html">Quản lý Nhập hàng</a></li>
+
+          <li><a href="admin_price.html">Quản lý Giá bán</a></li>
+
+          <li><a href="#">Quản lý Đơn hàng</a></li>
+          <li><a href="#">Quản lý Tồn kho</a></li>
+        </ul>
+      </nav>
+      <main>
+        <h2>📊 Tổng quan</h2>
+        <p>
+          Đây là trang tổng quan. Bạn có thể nhấn vào **Quản lý Nhập hàng** hoặc
+          **Quản lý Giá bán** ở menu bên trái.
+        </p>
+      </main>
+
+      <div class="list-row">
+    <div class="list-cell">
+        <a href="#" class="action-edit open-detail-modal" data-id="PN001">Sửa</a> |
+        <a href="#" class="action-complete">Hoàn thành</a>
+    </div>
+</div>
+
+<div class="list-row">
+    <div class="list-cell">
+        <a href="#" class="action-view">Xem</a> |
+        <a href="#" class="action-delete">Xóa</a>
+    </div>
+</div>
+    </div>
+  </body>
+</html>
