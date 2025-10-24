@@ -39,9 +39,9 @@
       <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
       <a href="3_category.html" class="active"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
       <a href="4_price.html"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
-      <a href=""><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
+      <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
       <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
-      <a href="#"><i class="fa-sharp fa-solid fa-truck"></i> Quản lý tồn kho</a>
+      <a href="7_inventory.html"><i class="fa-sharp fa-solid fa-truck"></i> Quản lý tồn kho</a>
       <div class="logout_admin"><a href="../index.html" id="logout-link">Đăng xuất</a></div>
       <script>
         document.getElementById("logout-link").addEventListener("click", function (event) {
@@ -119,37 +119,49 @@
         </div>
       </div>
     </div>
+    <footer class="mt-4">
+      <p class="text-center text-muted">&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+    </footer>
   </div>
+  
 
-  <!-- MODAL THÊM / SỬA DANH MỤC -->
-  <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title fw-bold" id="categoryModalLabel">Thêm danh mục</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-        </div>
-        <div class="modal-body">
-          <form id="categoryForm">
-            <input type="hidden" id="categoryId">
-            <div class="mb-3">
-              <label for="categoryName" class="form-label">Tên danh mục</label>
-              <input type="text" id="categoryName" class="form-control" placeholder="Nhập tên danh mục..." required>
-            </div>
-            <div class="mb-3">
-              <label for="categoryDesc" class="form-label">Mô tả</label>
-              <textarea id="categoryDesc" class="form-control" rows="3" placeholder="Nhập mô tả danh mục..."
-                required></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-          <button type="submit" form="categoryForm" class="btn btn-primary">Lưu</button>
-        </div>
+  <!-- MODAL THÊM / SỬA DANH MỤC (SỬA MỚI) -->
+<div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content shadow-lg border-0 rounded-4">
+      <div class="modal-header bg-success text-white rounded-top-4">
+        <h5 class="modal-title fw-bold" id="categoryModalLabel">Thêm danh mục</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Đóng"></button>
       </div>
+
+      <form id="categoryForm" class="needs-validation" novalidate>
+        <div class="modal-body">
+          <input type="hidden" id="categoryId">
+          <div class="mb-3">
+            <label for="categoryName" class="form-label fw-semibold">Tên danh mục</label>
+            <input type="text" id="categoryName" class="form-control form-control-lg" placeholder="Nhập tên danh mục..." required>
+            <div class="invalid-feedback">Vui lòng nhập tên danh mục.</div>
+          </div>
+          <div class="mb-3">
+            <label for="categoryDesc" class="form-label fw-semibold">Mô tả</label>
+            <textarea id="categoryDesc" class="form-control" rows="3" placeholder="Nhập mô tả danh mục..." required></textarea>
+            <div class="invalid-feedback">Vui lòng nhập mô tả danh mục.</div>
+          </div>
+        </div>
+
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">
+            <i class="fa-solid fa-xmark me-1"></i> Hủy
+          </button>
+          <button type="submit" class="btn btn-success px-4" id="saveCategoryBtn">
+            <i class="fa-solid fa-floppy-disk me-1"></i> Lưu
+          </button>
+        </div>
+      </form>
     </div>
   </div>
+</div>
+
 
   <!-- TOAST -->
   <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080" id="toastContainer"></div>
@@ -194,7 +206,7 @@
       tbody.innerHTML = list.map(c => `
     <tr>
       <td>${c.stt}</td>
-      <td>${c.name}</td>
+      <td style="font-size: 17px"><b>${c.name}<b></td>
       <td class="text-start">${c.desc}</td>
       <td>${c.qty1}</td>
       <td>${c.qty}</td>
@@ -254,7 +266,6 @@
         categories.push({ stt: newStt, name, desc, qty1: '0', qty: '0' });
         showToast('Thêm danh mục thành công');
       }
-      renderCategories(categories);
       bootstrap.Modal.getInstance(document.getElementById('categoryModal')).hide();
       e.target.reset();
     });
@@ -280,7 +291,6 @@
           categories.splice(idx, 1);
           // Cập nhật lại STT
           categories.forEach((c, i) => c.stt = (i + 1).toString().padStart(2, '0'));
-          renderCategories(categories);
           showToast('Xóa danh mục thành công','denger');
         }
       }

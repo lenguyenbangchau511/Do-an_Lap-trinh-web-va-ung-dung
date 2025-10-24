@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quản lý đơn hàng - Bloom</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar">
+      <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
+        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9" />
+          <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
+            fill="#eaf8f0" />
+          <circle cx="40" cy="35" r="8" fill="#b19cd9" />
+          <circle cx="60" cy="35" r="8" fill="#b19cd9" />
+          <circle cx="50" cy="50" r="12" fill="#9370db" />
+          <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
+        </svg>
+        <span>Bloom</span>
+      </div>
+      <a href="0_dashboard.html"><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
+      <a href="1_users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
+      <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
+      <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
+      <a href="4_price.html"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
+      <a href="5_orders.html" class="active"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
+      <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
+      <a href="7_inventory.html"><i class="fa-sharp fa-solid fa-truck"></i> Quản lý tồn kho</a>
+      <div class="logout_admin"><a href="../index.html" id="logout-link">Đăng xuất</a></div>
+      <script>
+        document.getElementById("logout-link").addEventListener("click", function (event) {
+          event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
+          const confirmLogout = confirm("Bạn có chắc chắn muốn đăng xuất không?");
+
+          if (confirmLogout) {
+            window.location.href = this.href; // Chuyển đến trang đăng xuất nếu xác nhận
+          }
+        });
+      </script>
+    </div>
+  </div>
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="header">
+      <div class="header__title"><i class="fa-regular fa-rectangle-list me-2"></i>Quản lý đơn hàng</div>
+      <div class="header__info">
+        <span class="text-muted small">Xin chào, Admin</span>
+        <a href=""><i class="fa-solid fa-user-tie"></i></a>
+      </div>
+    </div>
+
+    <div class="container-fluid" data-aos="fade-up">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <button class="btn btn-success" id="openAddOrderModal"><i class="fa-solid fa-plus"></i> Thêm đơn hàng</button>
+        </div>
+        <div class="d-flex gap-2">
+          <input id="searchOrder" class="form-control" placeholder="Tìm kiếm theo mã hoặc khách hàng...">
+          <select id="filterStatus" class="form-select" style="width: 400px;">
+            <option value="">Tất cả trạng thái</option>
+            <option value="Chờ xử lý">Chờ xử lý</option>
+            <option value="Đang giao">Đang giao</option>
+            <option value="Hoàn thành">Hoàn thành</option>
+            <option value="Hủy">Hủy</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle text-center">
+              <thead class="table-light">
+                <tr>
+                  <th>Mã đơn</th>
+                  <th>Khách hàng</th>
+                  <th>Ngày đặt</th>
+                  <th>Địa chỉ</th>
+                  <th>Sản phẩm</th>
+                  <th>Tổng tiền (VNĐ)</th>
+                  <th>Trạng thái</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="orderTableBody"></tbody>
+            </table>
+            <ul id="pagination">
+              </li>
+              <li class="pagination-item">
+                <a href="5_orders.html" class="pagination-item__link active">1</a>
+              </li>
+              <li class="pagination-item">
+                <a href="5_orders.html" class="pagination-item__link " target="_self">2</a>
+              </li>
+              <li class="pagination-item">
+                <a href="5_orders.html" class="pagination-item__link " target="_self">3</a>
+              </li>
+              <li class="pagination-item">
+                <a href="5_orders.html" class="pagination-item__link " target="_self">4</a>
+              </li>
+              <li class="pagination-item">
+                <a href="5_orders.html" class="pagination-item__link " target="_self">5</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+       <footer class="mt-4">
+      <p class="text-center text-muted">&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+    </footer>
+    </div>
+
+    <!-- Modal thêm/sửa đơn hàng -->
+<div class="modal fade" id="orderModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content shadow-lg border-0 rounded-4 overflow-hidden">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title fw-bold" id="orderModalTitle">Thêm đơn hàng</h5>
+        <button class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Đóng"></button>
+      </div>
+      <div class="modal-body">
+        <form id="orderForm">
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label for="o_code" class="form-label fw-semibold">Mã đơn hàng</label>
+              <input type="text" id="o_code" class="form-control" placeholder="VD: DH001" required>
+            </div>
+            <div class="col-md-6">
+              <label for="o_customer" class="form-label fw-semibold">Khách hàng</label>
+              <input type="text" id="o_customer" class="form-control" placeholder="Tên khách hàng" required>
+            </div>
+            <div class="col-md-12">
+              <label for="o_address" class="form-label fw-semibold">Địa chỉ</label>
+              <input type="text" id="o_address" class="form-control" placeholder="Địa chỉ" required>
+            </div>
+            <div class="col-md-6">
+              <label for="o_date" class="form-label fw-semibold">Ngày đặt</label>
+              <input type="date" id="o_date" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label for="o_status" class="form-label fw-semibold">Trạng thái</label>
+              <select id="o_status" class="form-select">
+                <option value="Chờ xử lý">Chờ xử lý</option>
+                <option value="Đang giao">Đang giao</option>
+                <option value="Hoàn thành">Hoàn thành</option>
+                <option value="Hủy">Hủy</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Bảng nhập sản phẩm -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Sản phẩm</label>
+            <table class="table table-bordered" id="productsTable">
+              <thead>
+                <tr>
+                  <th>Tên sản phẩm</th>
+                  <th>Số lượng</th>
+                  <th>Đơn giá (VNĐ)</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <button type="button" class="btn btn-sm btn-outline-success" id="addProductBtn"><i class="fa-solid fa-plus"></i> Thêm sản phẩm</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer bg-light">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button class="btn btn-success" id="saveOrder"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Modal Hóa đơn đẹp hơn -->
+    <div class="modal fade" id="invoiceModal" tabindex="-1">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title"><i class="fa-solid fa-receipt me-2"></i>Hóa đơn</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body" id="invoiceContent">
+            <!-- Nội dung hóa đơn sẽ được JS chèn vào -->
+          </div>
+          <div class="modal-footer d-flex justify-content-between bg-light">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
+                class="fa-solid fa-xmark me-1"></i> Đóng</button>
+            <button type="button" class="btn btn-primary" id="printInvoiceBtn"><i class="fa-solid fa-print me-1"></i> In
+              hóa đơn</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080" id="toastContainer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    let orders = [
+      {
+        code: 'DH001',
+        customer: 'Nguyễn Văn A',
+        date: '2025-10-14',
+        address: '11 Hòa Hao Q10 HCM',
+        products: [{ name: 'Peach', quantity: 1, price: 770000 }, { name: 'Nhiệt ái', quantity: 1, price: 700000 }],
+        total: 1470000,
+        status: 'Chờ xử lý'
+      },
+      {
+        code: 'DH002',
+        customer: 'Trần Thị B',
+        date: '2025-10-21',
+        address: '53 Nguyễn Thái Học, Huế',
+        products: [{ name: 'Lẵng hoa sinh nhật', quantity: 1, price: 350000 }],
+        total: 350000,
+        status: 'Đang giao'
+      },
+      {
+        code: 'DH003',
+        customer: 'Đoàn Thị H',
+        date: '2025-10-22',
+        address: '85 Trường Chinh, TP.HCM',
+        products: [{ name: 'Tương lai', quantity: 1, price: 2100000 },
+          { name: 'BlueSky', quantity: 1, price: 1450000 },
+          { name: 'Hồng Phát', quantity: 1, price: 1900000 }
+        ],
+        total: 5400000,
+        status: 'Hoàn thành'
+      },
+      {
+        code: 'DH004',
+        customer: 'Hàng Văn B',
+        date: '2025-10-22',
+        address: '31 Lê Thánh Tôn, Nha Trang',
+        products: [{ name: 'BlueBerry', quantity: 4, price: 2100000 },
+        ],
+        total: 8400000,
+        status: 'Hoàn thành'
+      },
+      {
+        code: 'DH005',
+        customer: 'Nguyễn Thị L',
+        date: '2025-10-21',
+        address: '64 Nguyễn Huệ, Quy Nhơn',
+        products: [{ name: 'Sen Xanh', quantity: 1, price: 900000 }
+        ],
+        total: 900000,
+        status: 'Hoàn thành'
+      },
+      {
+        code: 'DH006',
+        customer: 'Lê Văn C',
+        date: '2025-10-20',
+        address: '29 Hòa Bình, Biên Hòa',
+        products: [{ name: 'Peach', quantity: 1, price: 770000 },
+        ],
+        total: 770000,
+        status: 'Hủy'
+      },
+      {
+        code: 'DH007',
+        customer: 'Lê Văn C',
+        date: '2025-10-24',
+        address: '17 Lạc Long Quân, TP.HCM',
+        products: [{ name: 'Bluberry', quantity: 1, price: 250000 },
+          { name: 'Lemon', quantity: 2, price: 1300000 }
+        ],
+        total: 2850000,
+        status: 'Đang giao'
+      }
+    ];
+
+    // -------------------- DOM --------------------
+const tbody = document.getElementById('orderTableBody');
+const toastContainer = document.getElementById('toastContainer');
+const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
+const invoiceModal = new bootstrap.Modal(document.getElementById('invoiceModal'));
+const orderForm = document.getElementById('orderForm');
+const saveOrderBtn = document.getElementById('saveOrder');
+const openAddOrderBtn = document.getElementById('openAddOrderModal');
+const productsTableBody = document.querySelector('#productsTable tbody');
+const addProductBtn = document.getElementById('addProductBtn');
+let editIndex = null;
+
+// -------------------- TOAST --------------------
+function showToast(message, type = 'success') {
+  const bgColor = type === 'success' ? 'bg-success' :
+                  type === 'error' ? 'bg-danger' : 'bg-warning';
+  const toast = document.createElement('div');
+  toast.className = `toast align-items-center text-white border-0 ${bgColor}`;
+  toast.role = 'alert';
+  toast.innerHTML = `
+    <div class="d-flex">
+      <div class="toast-body">${message}</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  `;
+  toastContainer.appendChild(toast);
+  const bsToast = new bootstrap.Toast(toast, { delay: 2000 });
+  bsToast.show();
+  toast.addEventListener('hidden.bs.toast', () => toast.remove());
+}
+
+// -------------------- RENDER BẢNG --------------------
+function renderTable(data) {
+  tbody.innerHTML = '';
+  data.forEach((o, i) => {
+    const productSummary = o.products.map(p => `${p.name} x${p.quantity}`).join(', ');
+    tbody.innerHTML += `
+      <tr>
+        <td>${o.code}</td>
+        <td>${o.customer}</td>
+        <td>${o.date}</td>
+        <td style="width: 200px;">${o.address}</td>
+        <td style="width: 250px;" >${productSummary}</td>
+        <td>${o.total.toLocaleString()}</td>
+        <td>${o.status}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-primary me-1 edit-btn" data-index="${i}">
+            <i class="fa-solid fa-pen"></i> 
+          </button>
+          <button class="btn btn-sm btn-outline-danger delete-btn" data-index="${i}">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+          <button class="btn btn-sm btn-outline-info invoice-btn" data-index="${i}">
+            <i class="fa-solid fa-file-invoice"></i> 
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+}
+renderTable(orders);
+
+// -------------------- MODAL THÊM/SỬA --------------------
+openAddOrderBtn.addEventListener('click', () => {
+  editIndex = null;
+  document.getElementById('orderModalTitle').textContent = 'Thêm đơn hàng';
+  orderForm.reset();
+  productsTableBody.innerHTML = '';
+  addProductRow();
+  orderModal.show();
+});
+
+function addProductRow(product = { name: '', quantity: 1, price: 0 }) {
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td><input type="text" class="form-control product-name" value="${product.name}" required></td>
+    <td><input type="number" class="form-control product-quantity" value="${product.quantity}" min="1" required></td>
+    <td><input type="number" class="form-control product-price" value="${product.price}" min="0" required></td>
+    <td><button type="button" class="btn btn-sm btn-outline-danger remove-product">
+      <i class="fa-solid fa-trash"></i></button></td>
+  `;
+  productsTableBody.appendChild(row);
+  row.querySelector('.remove-product').addEventListener('click', () => row.remove());
+}
+
+addProductBtn.addEventListener('click', () => addProductRow());
+
+// -------------------- LƯU ĐƠN HÀNG --------------------
+saveOrderBtn.addEventListener('click', () => {
+  const o_code = document.getElementById('o_code').value.trim();
+  const o_customer = document.getElementById('o_customer').value.trim();
+  const o_date = document.getElementById('o_date').value;
+  const o_address = document.getElementById('o_address').value.trim();
+  const o_status = document.getElementById('o_status').value;
+
+  if (!o_code || !o_customer || !o_date) {
+    showToast('Vui lòng điền đầy đủ thông tin!', 'error');
+    return;
+  }
+
+  // Kiểm tra mã trùng
+  if (orders.some((o, idx) => o.code === o_code && idx !== editIndex)) {
+    showToast('Mã đơn hàng đã tồn tại!', 'error');
+    return;
+  }
+
+  const productsArray = Array.from(productsTableBody.rows)
+    .map(row => ({
+      name: row.querySelector('.product-name').value.trim(),
+      quantity: Number(row.querySelector('.product-quantity').value),
+      price: Number(row.querySelector('.product-price').value)
+    }))
+    .filter(p => p.name && p.quantity > 0 && p.price >= 0);
+
+  if (productsArray.length === 0) {
+    showToast('Vui lòng thêm ít nhất 1 sản phẩm hợp lệ!', 'error');
+    return;
+  }
+
+  const total = productsArray.reduce((sum, p) => sum + p.quantity * p.price, 0);
+  const orderData = { code: o_code, customer: o_customer, date: o_date, address: o_address, products: productsArray, total, status: o_status };
+
+  if (editIndex === null) {
+    orders.push(orderData);
+    showToast('Thêm đơn hàng thành công!');
+  } else {
+    orders[editIndex] = orderData;
+    showToast('Cập nhật đơn hàng thành công!');
+  }
+  orderModal.hide();
+});
+
+// -------------------- SỬA / XÓA / XUẤT HÓA ĐƠN --------------------
+tbody.addEventListener('click', e => {
+  const btnEdit = e.target.closest('.edit-btn');
+  const btnDelete = e.target.closest('.delete-btn');
+  const btnInvoice = e.target.closest('.invoice-btn');
+
+  if (btnEdit) {
+    editIndex = Number(btnEdit.dataset.index);
+    const o = orders[editIndex];
+    document.getElementById('orderModalTitle').textContent = 'Sửa đơn hàng';
+    document.getElementById('o_code').value = o.code;
+    document.getElementById('o_customer').value = o.customer;
+    document.getElementById('o_date').value = o.date;
+    document.getElementById('o_address').value = o.address;
+    document.getElementById('o_status').value = o.status;
+    productsTableBody.innerHTML = '';
+    o.products.forEach(p => addProductRow(p))
+    orderModal.show();
+  }
+
+  if (btnDelete) {
+    const index = Number(btnDelete.dataset.index);
+    if (confirm(`Bạn có chắc muốn xóa đơn "${orders[index].code}"?`)) {
+      orders.splice(index, 1);
+      showToast('Xóa đơn hàng thành công!');
+    }
+  }
+
+  if (btnInvoice) {
+    const index = Number(btnInvoice.dataset.index);
+    const order = orders[index];
+    const invoiceContent = document.getElementById('invoiceContent');
+    invoiceContent.innerHTML = generateInvoiceHTML(order);
+    invoiceModal.show();
+  }
+});
+
+// -------------------- GENERATE INVOICE --------------------
+function generateInvoiceHTML(order) {
+  const statusClass = order.status === 'Hoàn thành' ? 'bg-success' :
+                      order.status === 'Đang giao' ? 'bg-info' :
+                      order.status === 'Chờ xử lý' ? 'bg-warning text-dark' : 'bg-danger';
+
+  return `
+    <div class="p-3" style="font-family: 'Poppins', sans-serif;">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold text-success">Hóa đơn: ${order.code}</h5>
+        <small>Ngày: ${order.date}</small>
+      </div>
+      <div class="mb-3">
+        <p><strong>Khách hàng:</strong> ${order.customer}</p>
+        <p><strong>Địa chỉ:</strong> ${order.address}</p>
+        <p><strong>Trạng thái:</strong> <span class="badge ${statusClass}">${order.status}</span></p>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Đơn giá (VNĐ)</th>
+            <th>Thành tiền (VNĐ)</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${order.products.map((p, i) => `
+            <tr>
+              <td>${i + 1}</td>
+              <td>${p.name}</td>
+              <td>${p.quantity}</td>
+              <td>${p.price.toLocaleString()}</td>
+              <td>${(p.quantity * p.price).toLocaleString()}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="4">Tổng cộng</th>
+            <th>${order.total.toLocaleString()}</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  `;
+}
+
+// -------------------- SEARCH & FILTER --------------------
+function normalize(str) {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+document.getElementById('searchOrder').addEventListener('input', applyFilters);
+document.getElementById('filterStatus').addEventListener('change', applyFilters);
+
+function applyFilters() {
+  const keyword = normalize(document.getElementById('searchOrder').value);
+  const statusFilter = document.getElementById('filterStatus').value;
+
+  const filtered = orders.filter(o => {
+    const matchKeyword = normalize(o.code).includes(keyword) ||
+                         normalize(o.customer).includes(keyword) ||
+                         o.products.some(p => normalize(p.name).includes(keyword));
+    const matchStatus = statusFilter === '' || o.status === statusFilter;
+    return matchKeyword && matchStatus;
+  });
+
+  renderTable(filtered);
+}
+
+// -------------------- IN HÓA ĐƠN --------------------
+document.getElementById('printInvoiceBtn').addEventListener('click', () => {
+  showToast('In hóa đơn thành công!', 'success');
+});
+const pagination = document.getElementById('pagination');
+    pagination.addEventListener('click', e => {
+      if (e.target.classList.contains('pagination-item__link')) {
+        e.preventDefault();
+        const currentActive = pagination.querySelector('.pagination-item__link.active');
+        if (currentActive) currentActive.classList.remove('active');
+        e.target.classList.add('active');
+      }
+    });
+  </script>
+</body>
+
+</html>
