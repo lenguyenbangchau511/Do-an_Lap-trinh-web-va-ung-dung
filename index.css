@@ -165,6 +165,7 @@ body{
   text-align: center;
   overflow: hidden;
   padding: 0 20px;
+  
 }
 
 /* Background pattern tinh tế thay vì hoa lớn */
@@ -282,23 +283,27 @@ body{
   border: 1px solid rgba(255, 255, 255, 0.9);
 }
 
+/* ==== PHẦN CSS BỊ THIẾU CHO CATEGORIES - THÊM VÀO index.css ==== */
 .categories li {
-  padding: 10px 24px;
+  padding: 12px 28px;
   border-radius: 25px;
   transition: all 0.3s ease;
   cursor: pointer;
   font-weight: 500;
+  position: relative;
+  overflow: hidden;
 }
 
 .categories li.active {
   background: linear-gradient(135deg, #2e7d68 0%, #3a9c7f 100%);
   color: #fff;
-  box-shadow: 0 4px 12px rgba(46, 125, 104, 0.3);
+  box-shadow: 0 6px 20px rgba(46, 125, 104, 0.3);
 }
 
 .categories li:not(.active):hover {
   background: rgba(46, 125, 104, 0.1);
   color: #2e7d68;
+  transform: translateY(-2px);
 }
 
 .categories a {
@@ -1350,3 +1355,45 @@ body{
 .product img {
   cursor: pointer;
 }
+
+/* ==== NAV LINK VỚI ICON ==== */
+.bloom-nav .login-link {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Thêm khoảng cách giữa icon và chữ */
+  padding: 8px 16px;
+  border: 2px solid var(--green-main);
+  border-radius: 25px;
+  background: rgba(46, 125, 104, 0.1);
+  transition: all 0.3s ease;
+}
+
+.bloom-nav .login-link:hover {
+  background: var(--green-main);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.bloom-nav .login-link i {
+  font-size: 16px;
+  width: 16px;
+  text-align: center;
+}
+
+.bloom-nav .login-link span {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+  .bloom-nav .login-link {
+    padding: 6px 12px;
+    gap: 6px;
+  }
+  
+  .bloom-nav .login-link span {
+    font-size: 0.9rem;
+  }
+}
+
