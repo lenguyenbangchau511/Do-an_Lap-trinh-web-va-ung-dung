@@ -191,6 +191,7 @@ body {
   padding: 8px 5px;
   border-radius: 7px;
   border: 2px solid var(--mint-2);
+  z-index: 999;
 }
 
 .suggestions-list {
@@ -208,7 +209,6 @@ body {
 
 .suggestions-list li {
   padding: 8px;
-  cursor: pointer;
 }
 
 .suggestions-list li:hover {

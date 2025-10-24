@@ -33,7 +33,7 @@
       </div>
       <a href="users.html" class="active"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
       <a href="products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
-      <a href="category.html"><i class="fa-solid fa-chart-line me-2"></i>Quản lý danh mục</a>
+      <a href="category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
     </div>
   </div>
 
@@ -134,24 +134,24 @@
           <!-- Họ tên + Email chung 1 hàng -->
           <div class="row">
             <div class="col-md-6 mb-3">
-              <label class="form-label">Họ tên</label>
+              <label class="form-label" placeholder="VD: Lê Văn A" required>Họ tên</label>
               <input id="userName" class="form-control" required>
             </div>
 
             <div class="col-md-6 mb-3">
               <label class="form-label">Email</label>
-              <input id="userEmail" type="email" class="form-control" required>
+              <input id="userEmail" type="email" class="form-control" placeholder="VD: a@gmail.com" required>
             </div>
           </div>
 
           <div class="mb-3">
             <label class="form-label">Tên tài khoản</label>
-            <input id="userUsername" class="form-control" required>
+            <input id="userUsername" class="form-control" placeholder="VD: abc123" required>
           </div>
 
           <div class="mb-3 position-relative">
             <label class="form-label">Mật khẩu</label>
-            <input id="userPassword" type="password" class="form-control" required>
+            <input id="userPassword" type="password" class="form-control" placeholder="VD: 123456789" required>
             <button type="button" class="btn btn-sm btn-outline-secondary position-absolute" id="togglePassword">
               <i class="fa-solid fa-eye"></i>
             </button>
@@ -159,37 +159,33 @@
 
           <div class="mb-3">
             <label class="form-label">Số điện thoại</label>
-            <input id="userPhone" class="form-control" required>
+            <input id="userPhone" type="number" class="form-control" placeholder="0987654321" required>
           </div>
 
           <div class="mb-3">
             <label class="form-label">Địa chỉ</label>
-            <input id="userAddress" class="form-control">
+            <input id="userAddress" class="form-control" placeholder="VD: 13 An Dương Vương Q8 HCM">
           </div>
 
           <div class="mb-3">
             <label class="form-label">Ngày tạo</label>
-            <input type="date" id="userCreatedAt" class="form-control">
+            <input type="date" id="userCreatedAt" class="form-control" placeholder="VD: 10/10/2025">
           </div>
 
           <!-- Số đơn hàng + Trạng thái + Khóa tài khoản chung 1 hàng -->
           <div class="row align-items-center" id="asdf">
-            <div class="col-md-4 mb-3">
+            <div class="col-md-3 mb-3">
               <label class="form-label">Số đơn hàng</label>
-              <input type="number" id="userOrders" class="form-control">
+              <input type="number" id="userOrders" class="form-control" placeholder="VD: 6">
+            </div>
+            <div class="col-md-3 mb-3">
+
             </div>
 
-            <div class="col-md-3 mb-3">
-              <label class="form-label">Trạng thái</label>
-              <select id="userStatus" class="form-select">
-                <option value="active">Hoạt động</option>
-                <option value="inactive">Không hoạt động</option>
-              </select>
-            </div>
 
             <div class="col-md-3 mb-3 d-flex align-items-center">
               <div class="form-check mt-4">
-                <input class="form-check-input" type="checkbox" id="userLocked">
+                <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" id="userLocked">
                 <label class="form-check-label" for="userLocked">Khóa tài khoản</label>
               </div>
             </div>
@@ -216,19 +212,19 @@
     AOS.init();
 
     const defaultUsers = [
-      { id: 'K001', name: 'Nguyễn Văn A', username: 'nguyena', password: '123456', email: 'a@email.com', phone: '0123456789', address: '12 Ngũ lão Hà Nội', createdAt: '2025-10-24', orders: 5, status: 'active', locked: false },
-      { id: 'K002', name: 'Trần Thị B', username: 'tranb', password: '123456', email: 'b@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
-      { id: 'K003', name: 'Hoàng Văn C', username: 'hoangc', password: '123456', email: 'c@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'inactive', locked: true },
-      { id: 'K004', name: 'THân Thị D', username: 'thanc1', password: '123456', email: 'd@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
-      { id: 'K005', name: 'Trần Thị F', username: 'afety2', password: '123456', email: 'e@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
-      { id: 'K006', name: 'Cao văn G', username: 'gertrn1', password: '123456', email: 'f@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
-      { id: 'K007', name: 'Huỳnh Tấn H', username: 'huynh1', password: '123456', email: 'g@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
-      { id: 'K008', name: 'Doàn Hữu K', username: 'doantr', password: '123456', email: 'h@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
-      { id: 'K009', name: 'Nguyễn Văn X', username: '90thuy', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
-      { id: 'K010', name: 'Trần Thị P', username: 'yhu89', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
-      { id: 'K011', name: 'Hoàng Ngọc  R', username: 'tranb223', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'inactive', locked: false },
-      { id: 'K012', name: 'Trần Hoàng C', username: 'tran43b', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'active', locked: false },
-      { id: 'K013', name: 'Trần Thị N', username: 'tra54nb', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-10-23', orders: 2, status: 'inactive', locked: false },
+      { id: 'K001', name: 'Nguyễn Văn A', username: 'nguyena', password: '123456', email: 'a@email.com', phone: '0123456789', address: '12 Ngũ lão Hà Nội', createdAt: '2025/10/24', orders: 5, status: 'active', locked: false },
+      { id: 'K002', name: 'Trần Thị B', username: 'tranb', password: '123456', email: 'b@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025/09/23', orders: 2, status: 'active', locked: false },
+      { id: 'K003', name: 'Hoàng Văn C', username: 'hoangc', password: '123456', email: 'c@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025/12/23', orders: 2, status: 'inactive', locked: true },
+      { id: 'K004', name: 'THân Thị D', username: 'thanc1', password: '123456', email: 'd@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025/07/03', orders: 2, status: 'active', locked: false },
+      { id: 'K005', name: 'Trần Thị F', username: 'afety2', password: '123456', email: 'e@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'active', locked: false },
+      { id: 'K006', name: 'Cao văn G', username: 'gertrn1', password: '123456', email: 'f@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'active', locked: false },
+      { id: 'K007', name: 'Huỳnh Tấn H', username: 'huynh1', password: '123456', email: 'g@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'active', locked: false },
+      { id: 'K008', name: 'Doàn Hữu K', username: 'doantr', password: '123456', email: 'h@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '22024/12/25', orders: 2, status: 'active', locked: false },
+      { id: 'K009', name: 'Nguyễn Văn X', username: '90thuy', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'active', locked: false },
+      { id: 'K010', name: 'Trần Thị P', username: 'yhu89', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'active', locked: false },
+      { id: 'K011', name: 'Hoàng Ngọc  R', username: 'tranb223', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'inactive', locked: false },
+      { id: 'K012', name: 'Trần Hoàng C', username: 'tran43b', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'active', locked: false },
+      { id: 'K013', name: 'Trần Thị N', username: 'tra54nb', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'inactive', locked: false },
     ];
 
     let users = defaultUsers;
@@ -309,7 +305,6 @@
         address: document.getElementById('userAddress').value,
         createdAt: document.getElementById('userCreatedAt').value || new Date().toISOString().split('T')[0],
         orders: parseInt(document.getElementById('userOrders').value) || 0,
-        status: document.getElementById('userStatus').value,
         locked: document.getElementById('userLocked').checked
       };
 
@@ -335,7 +330,6 @@
       document.getElementById('userAddress').value = u.address;
       document.getElementById('userCreatedAt').value = u.createdAt;
       document.getElementById('userOrders').value = u.orders;
-      document.getElementById('userStatus').value = u.status;
       document.getElementById('userLocked').checked = u.locked;
       document.querySelector('#userModal .modal-title').innerText = 'Sửa khách hàng';
       userModal.show();
