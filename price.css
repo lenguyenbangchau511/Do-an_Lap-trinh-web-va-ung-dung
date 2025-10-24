@@ -159,5 +159,67 @@ td {
   z-index: 9999;
 }
 .custom-alert.error {
-  background-color: #dc3545;
+  background-color: #e11227;
+}
+
+/* 🔹 Lịch sử chỉnh sửa */
+#historyList {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f9f9f9;
+  padding: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 85%;
+  margin: 20px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Tiêu đề phần lịch sử */
+main h3 {
+  color: green;
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Mỗi dòng trong lịch sử chỉnh sửa */
+#historyList .history-item {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  transition: background 0.2s ease;
+}
+
+#historyList .history-item:hover {
+  background: #f0fff0;
+}
+
+/* Thời gian chỉnh sửa */
+#historyList .timestamp {
+  font-size: 13px;
+  color: #666;
+  display: block;
+  margin-top: 4px;
+}
+
+/* Thanh cuộn tùy chỉnh */
+#historyList::-webkit-scrollbar {
+  width: 8px;
+}
+
+#historyList::-webkit-scrollbar-thumb {
+  background: #b0b0b0;
+  border-radius: 4px;
+}
+
+#historyList::-webkit-scrollbar-thumb:hover {
+  background: #888;
 }
