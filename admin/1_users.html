@@ -38,7 +38,7 @@
       <a href="4_price.html"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
       <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
       <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
-      <a href="7_inventory.html"><i class="fa-sharp fa-solid fa-truck"></i> Quản lý tồn kho</a>
+      <a href="7_inventory.html"><i class="fa-solid fa-boxes-stacked me-2"></i></i> Quản lý tồn kho</a>
       <div class="logout_admin"><a href="../index.html" id="logout-link">Đăng xuất</a></div>
       <script>
         document.getElementById("logout-link").addEventListener("click", function (event) {
@@ -59,7 +59,41 @@
       <div class="header__title"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</div>
       <div class="header__info">
         <span class="text-muted small">Xin chào, Admin</span>
-        <a href=""><i class="fa-solid fa-user-tie ms-2"></i></a>
+        <a href="javascript:void(0)" id="userMenuToggle">
+          <i class="fa-solid fa-user-tie ms-2"></i>
+        </a>
+
+        <!-- Dropdown Menu -->
+        <div class="user-dropdown" id="userDropdown">
+          <div class="dropdown-header">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Quản trị viên</div>
+          </div>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" class="dropdown-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Hồ sơ cá nhân</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="dropdown-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Cài đặt</span>
+              </a>
+            </li>
+            <li class="dropdown-divider"></li>
+            <li>
+              <button class="dropdown-item logout" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Đăng xuất</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Overlay -->
+        <div class="dropdown-overlay" id="dropdownOverlay"></div>
       </div>
     </div>
 
@@ -83,7 +117,8 @@
             <option value="active">Hoạt động</option>
             <option value="locked">Đã khóa</option>
           </select>
-          <button id="reloadBtn" class="btn btn-secondary" style="margin-left: 20px;"><i class="fa-solid fa-arrows-rotate"></i> Tải lại</button>
+          <button id="reloadBtn" class="btn btn-secondary" style="margin-left: 20px;"><i
+              class="fa-solid fa-arrows-rotate"></i> Tải lại</button>
           <script>
             document.getElementById('reloadBtn').addEventListener('click', function () {
               // Tải lại trang hiện tại
@@ -425,6 +460,57 @@
         if (currentActive) currentActive.classList.remove('active');
         e.target.classList.add('active');
       }
+    });
+    // User dropdown functionality
+    document.addEventListener('DOMContentLoaded', function () {
+      const userMenuToggle = document.getElementById('userMenuToggle');
+      const userDropdown = document.getElementById('userDropdown');
+      const dropdownOverlay = document.getElementById('dropdownOverlay');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      // Toggle dropdown
+      userMenuToggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        userDropdown.classList.toggle('show');
+        dropdownOverlay.classList.toggle('show');
+      });
+
+      // Close dropdown when clicking overlay
+      dropdownOverlay.addEventListener('click', function () {
+        userDropdown.classList.remove('show');
+        dropdownOverlay.classList.remove('show');
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function (e) {
+        if (!userDropdown.contains(e.target) && !userMenuToggle.contains(e.target)) {
+          userDropdown.classList.remove('show');
+          dropdownOverlay.classList.remove('show');
+        }
+      });
+
+      // Logout functionality
+      logoutBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const confirmLogout = confirm('Bạn có chắc chắn muốn đăng xuất không?');
+
+        if (confirmLogout) {
+          // Thực hiện đăng xuất
+          window.location.href = '../index.html';
+        }
+
+        // Đóng dropdown
+        userDropdown.classList.remove('show');
+        dropdownOverlay.classList.remove('show');
+      });
+
+      // Close dropdown on escape key
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          userDropdown.classList.remove('show');
+          dropdownOverlay.classList.remove('show');
+        }
+      });
     });
   </script>
 </body>
