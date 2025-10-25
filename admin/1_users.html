@@ -66,7 +66,8 @@
     <div class="container-fluid function" data-aos="fade-up">
       <div class="d-flex justify-content-between mb-3">
         <div>
-          <button class="btn btn-success" style="padding: 10px;" id="addUserBtn"><i class="fa-solid fa-user-plus"></i> Thêm khách
+          <button class="btn btn-success" style="padding: 10px;" id="addUserBtn"><i class="fa-solid fa-user-plus"></i>
+            Thêm khách
             hàng</button>
         </div>
 
@@ -82,6 +83,13 @@
             <option value="active">Hoạt động</option>
             <option value="locked">Đã khóa</option>
           </select>
+          <button id="reloadBtn" class="btn btn-secondary" style="margin-left: 20px;"><i class="fa-solid fa-arrows-rotate"></i> Tải lại</button>
+          <script>
+            document.getElementById('reloadBtn').addEventListener('click', function () {
+              // Tải lại trang hiện tại
+              location.reload();
+            });
+          </script>
         </div>
       </div>
 
@@ -135,90 +143,90 @@
   </div>
 
   <!-- Modal -->
-<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content border-0 shadow-lg rounded-4">
-      <div class="modal-header bg-success text-white py-3 px-4">
-        <h5 class="modal-title fw-semibold" id="userModalLabel">
-          <i class="fa-solid fa-user-plus me-2"></i> Thêm khách hàng
-        </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
+  <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        <div class="modal-header bg-success text-white py-3 px-4">
+          <h5 class="modal-title fw-semibold" id="userModalLabel">
+            <i class="fa-solid fa-user-plus me-2"></i> Thêm khách hàng
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
 
-      <div class="modal-body px-4 py-3 bg-light">
-        <form id="userForm" class="needs-validation" novalidate>
-          <input type="hidden" id="userId">
+        <div class="modal-body px-4 py-3 bg-light">
+          <form id="userForm" class="needs-validation" novalidate>
+            <input type="hidden" id="userId">
 
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Họ tên</label>
-              <input id="userName" class="form-control" placeholder="VD: Lê Văn A" required>
-              <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Email</label>
-              <input id="userEmail" type="email" class="form-control" placeholder="VD: a@gmail.com" required>
-              <div class="invalid-feedback">Email không hợp lệ.</div>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Tên tài khoản</label>
-              <input id="userUsername" class="form-control" placeholder="VD: abc123" required>
-              <div class="invalid-feedback">Vui lòng nhập tên tài khoản.</div>
-            </div>
-
-            <div class="col-md-6 position-relative">
-              <label class="form-label fw-semibold">Mật khẩu</label>
-              <div class="input-group">
-                <input id="userPassword" type="password" class="form-control" placeholder="VD: 123456789" required>
-                <button type="button" class="btn btn-outline-secondary" id="togglePassword">
-                  <i class="fa-solid fa-eye"></i>
-                </button>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Họ tên</label>
+                <input id="userName" class="form-control" placeholder="VD: Lê Văn A" required>
+                <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
               </div>
-              <div class="invalid-feedback">Vui lòng nhập mật khẩu.</div>
-            </div>
 
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Số điện thoại</label>
-              <input id="userPhone" type="number" class="form-control" placeholder="0987654321" required>
-              <div class="invalid-feedback">Vui lòng nhập số điện thoại hợp lệ.</div>
-            </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Email</label>
+                <input id="userEmail" type="email" class="form-control" placeholder="VD: a@gmail.com" required>
+                <div class="invalid-feedback">Email không hợp lệ.</div>
+              </div>
 
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Địa chỉ</label>
-              <input id="userAddress" class="form-control" placeholder="VD: 13 An Dương Vương, Q8, HCM">
-            </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Tên tài khoản</label>
+                <input id="userUsername" class="form-control" placeholder="VD: abc123" required>
+                <div class="invalid-feedback">Vui lòng nhập tên tài khoản.</div>
+              </div>
 
-            <div class="col-md-6">
-              <label class="form-label fw-semibold">Ngày tạo</label>
-              <input type="date" id="userCreatedAt" class="form-control">
-            </div>
+              <div class="col-md-6 position-relative">
+                <label class="form-label fw-semibold">Mật khẩu</label>
+                <div class="input-group">
+                  <input id="userPassword" type="password" class="form-control" placeholder="VD: 123456789" required>
+                  <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+                <div class="invalid-feedback">Vui lòng nhập mật khẩu.</div>
+              </div>
 
-            <div class="col-md-3">
-              <label class="form-label fw-semibold">Số đơn hàng</label>
-              <input type="number" id="userOrders" class="form-control" placeholder="VD: 6">
-            </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Số điện thoại</label>
+                <input id="userPhone" type="number" class="form-control" placeholder="0987654321" required>
+                <div class="invalid-feedback">Vui lòng nhập số điện thoại hợp lệ.</div>
+              </div>
 
-            <div class="col-md-3 d-flex align-items-end">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="userLocked">
-                <label class="form-check-label fw-semibold" for="userLocked">Khóa tài khoản</label>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Địa chỉ</label>
+                <input id="userAddress" class="form-control" placeholder="VD: 13 An Dương Vương, Q8, HCM">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Ngày tạo</label>
+                <input type="date" id="userCreatedAt" class="form-control">
+              </div>
+
+              <div class="col-md-3">
+                <label class="form-label fw-semibold">Số đơn hàng</label>
+                <input type="number" id="userOrders" class="form-control" placeholder="VD: 6">
+              </div>
+
+              <div class="col-md-3 d-flex align-items-end">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="userLocked">
+                  <label class="form-check-label fw-semibold" for="userLocked">Khóa tài khoản</label>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
 
-      <div class="modal-footer bg-light border-top-0 py-3 px-4">
-        <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Hủy</button>
-        <button type="button" class="btn btn-success px-4" id="saveUser">
-          <i class="fa-solid fa-floppy-disk me-1"></i> Lưu
-        </button>
+        <div class="modal-footer bg-light border-top-0 py-3 px-4">
+          <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Hủy</button>
+          <button type="button" class="btn btn-success px-4" id="saveUser">
+            <i class="fa-solid fa-floppy-disk me-1"></i> Lưu
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
 
@@ -261,10 +269,10 @@
       toastEl.setAttribute('aria-live', 'assertive');
       toastEl.setAttribute('aria-atomic', 'true');
       toastEl.innerHTML = `
-        <div class="d-flex">
-          <div class="toast-body">${msg}</div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-        </div>`;
+                                                                                                 <div class="d-flex">
+                                                                                                   <div class="toast-body">${msg}</div>
+                                                                                                   <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                                                                                                 </div>`;
       document.getElementById('toastContainer').appendChild(toastEl);
       setTimeout(() => bootstrap.Toast.getOrCreateInstance(toastEl).hide(), 3000);
     }
@@ -309,14 +317,19 @@
           <td>${u.orders}</td>
           <td><span class="badge ${u.locked ? 'bg-secondary' : 'bg-success'}">${u.locked ? 'Đã khóa' : 'Hoạt động'}</span></td>
           <td>
-            <button class="btn btn-sm btn-outline-primary me-1 edit-btn" data-id="${u.id}"><i class="fa-solid fa-pen"></i></button>
-            <button class="btn btn-sm btn-outline-danger del-btn" data-id="${u.id}"><i class="fa-solid fa-trash"></i></button>
-          </td>
+  <button class="btn btn-sm btn-outline-primary me-1 edit-btn" data-id="${u.id}">
+    <i class="fa-solid fa-pen"></i>
+  </button>
+  <button class="btn btn-sm ${u.locked ? 'btn-success' : 'btn-warning'} lock-btn" data-id="${u.id}">
+    <i class="fa-solid ${u.locked ? 'fa-lock-open' : 'fa-lock'}"></i>
+  </button>
+</td>
+
         </tr>`;
       });
 
       document.querySelectorAll('.edit-btn').forEach(btn => btn.onclick = () => editUser(btn.dataset.id));
-      document.querySelectorAll('.del-btn').forEach(btn => btn.onclick = () => deleteUser(btn.dataset.id));
+      document.querySelectorAll('.lock-btn').forEach(btn => btn.onclick = () => toggleLock(btn.dataset.id));
     }
 
     function resetForm() {
@@ -367,16 +380,25 @@
       document.getElementById('userCreatedAt').value = u.createdAt;
       document.getElementById('userOrders').value = u.orders;
       document.getElementById('userLocked').checked = u.locked;
-      document.querySelector('#userModal .modal-title').innerText = 'Sửa khách hàng';
+      document.querySelector('#userModal .modal-title').innerText = 'Xem thông tin khách hàng';
       userModal.show();
     }
 
-    function deleteUser(id) {
-      if (confirm('Bạn có chắc muốn xóa khách hàng này?')) {
-        users = users.filter(u => u.id !== id);
-        showToast('Xóa khách hàng thành công', 'warning');
-      }
+    function toggleLock(id) {
+      const user = users.find(u => u.id === id);
+      if (!user) return;
+
+      user.locked = !user.locked; // Đổi trạng thái khóa / mở
+      showToast(
+        user.locked
+          ? `🔒 Tài khoản ${user.name} đã bị khóa!`
+          : `🔓 Tài khoản ${user.name} đã được mở khóa!`,
+        user.locked ? 'warning' : 'success'
+      );
+
+      renderUsers(filterUsers()); // Cập nhật lại bảng
     }
+
 
     document.getElementById('searchUser').oninput = () => renderUsers(filterUsers());
     document.getElementById('filterStatus').onchange = () => renderUsers(filterUsers());

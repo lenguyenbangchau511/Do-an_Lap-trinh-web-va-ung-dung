@@ -154,13 +154,13 @@ body {
 
 .header__info {
   position: absolute;
-  font-size: 23px;
+  font-size: 20px;
   right: 100px;
   font-weight: 500;
 }
 
 .header__info a {
-  margin-left: 10px;
+  margin-left: 5px;
   font-size: 25px;
   color: #425e4e;
 }
@@ -175,10 +175,6 @@ body {
 }
 
 /* Tìm kiếm */
-.function {
-  padding-bottom: 50px;
-}
-
 /* Users  */
 #searchUser {
   width: 400px;
@@ -264,33 +260,6 @@ body {
   background-color: #bad3c5;
 }
 
-/* Product */
-#searchProduct {
-  width: 400px;
-  padding: 8px 5px;
-  border-radius: 7px;
-  border: none;
-}
-
-.searchProduct {
-  display: flex;
-  align-items: center;
-  border: 2px solid var(--mint-2);
-  border-radius: 7px;
-}
-
-.searchProduct .search__btn {
-  border: 1px solid var(--mint-2);
-  padding: 8px 15px;
-  border-radius: 7px;
-  font-size: 17px;
-}
-
-.searchProduct .search__btn:hover {
-  background-color: #bad3c5;
-}
-
-/* Hết tìm kiếm  */
 
 
 .navbar {
@@ -433,7 +402,7 @@ body.dark .theme-toggle {
   position: absolute;
   border: none;
   font-size: 18px;
-  top: 35px;
+  top: 0px;
   right: 0;
 }
 
@@ -441,3 +410,53 @@ body.dark .theme-toggle {
   background: none;
   color: #000;
 }
+/* tìm kieenms Product */
+.searchProduct-main {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchProduct input {
+  width: 120px;
+  height: 40px;
+  margin-right: 5px;
+}
+
+.searchProduct .filter {
+  width: 150px;
+  margin-right: 20px;
+}
+.searchProduct-main .search__btn {
+  border: 1px solid var(--mint-2);
+  padding: 5px 15px;
+  border-radius: 7px;
+  font-size: 15px;
+  display: block;
+  margin-right: 50px;
+}
+
+.searchProduct-main .search__btn:hover {
+  background-color: #bad3c5;
+}
+.searchProduct .search {
+  margin-right: 20px;
+  margin-left: 0px;
+}
+#searchProduct {
+  display: block;
+  width: 350px;
+  border-radius: 8px;
+  border: 1px solid var(--green-main);
+  
+}
+
+#reloadBtn:hover {
+  background-color: #cce1d5;
+  border: 1px solid black;
+  color: #2b2b3a;
+}
+
+/* Hết tìm kiếm  */
