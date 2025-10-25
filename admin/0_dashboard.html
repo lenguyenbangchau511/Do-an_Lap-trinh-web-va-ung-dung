@@ -1,22 +1,219 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tổng quan - admin</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-    rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Tổng quan - Bloom Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+    <style>
+        .dashboard-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
 
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-card {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .stat-card .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .stat-card.revenue { background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%); }
+        .stat-card.orders { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
+        .stat-card.customers { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+        .stat-card.products { background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%); }
+
+        .chart-container {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 24px;
+        }
+
+        .recent-orders {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            justify-content: between;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-pending { background: #fff3e0; color: #f57c00; }
+        .status-processing { background: #e3f2fd; color: #1976d2; }
+        .status-completed { background: #e8f5e8; color: #2e7d32; }
+        .status-cancelled { background: #ffebee; color: #c62828; }
+
+        .top-products {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-rank {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .product-rank:last-child {
+            border-bottom: none;
+        }
+
+        .rank-number {
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .rank-1 { background: #ffd700; }
+        .rank-2 { background: #c0c0c0; }
+        .rank-3 { background: #cd7f32; }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .welcome-banner h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .welcome-banner p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .quick-action-btn {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-btn:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .quick-action-btn i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+    </style>
 </head>
 
-<body class="admin-page">
-  <div class="sidebar">
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
     <div class="sidebar">
       <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
         <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
@@ -31,7 +228,7 @@
         <span>Bloom</span>
       </div>
       <a href="0_dashboard.html" class="active"><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
-      <a href="1_users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
+      <a href="1_users.html" ><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
       <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
       <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
       <a href="4_price.html"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
@@ -51,35 +248,311 @@
       </script>
     </div>
   </div>
-  <main class="main">
-    <section class="overview">
-      <div class="stat">
-        <h3 id="ordersCount">0</h3>
-        <p>Đơn hàng</p>
-      </div>
-      <div class="stat">
-        <h3 id="stockCount">0</h3>
-        <p>Sản phẩm sắp hết</p>
-      </div>
-      <div class="stat">
-        <h3 id="revenue">0₫</h3>
-        <p>Doanh thu (30 ngày)</p>
-      </div>
-    </section>
-    <section class="charts" style="position: absolute; right: 200px;">
-      <div class="card">
-        <h4>Doanh thu theo tháng</h4><canvas id="revChart" width="600" height="240"></canvas>
-      </div>
-      <div class="card">
-        <h4>Trạng thái đơn</h4><canvas id="stChart" width="400" height="240"></canvas>
-      </div>
-    </section>
-    <section class="tables">
-      <div class="card" id="lowStock"></div>
-      <div class="card" id="recentOrders"></div>
-    </section>
-  </main>
-  <script src="admin.js"></script>
-</body>
 
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <div class="header__title"><i class="fa-sharp fa-solid fa-house me-2"></i>Tổng quan</div>
+            <div class="header__info">
+                <span class="text-muted small">Xin chào, Admin</span>
+                <a href="javascript:void(0)" id="userMenuToggle">
+                    <i class="fa-solid fa-user-tie ms-2"></i>
+                </a>
+
+                <!-- Dropdown Menu -->
+                <div class="user-dropdown" id="userDropdown">
+                    <div class="dropdown-header">
+                        <div class="user-name">Admin User</div>
+                        <div class="user-role">Quản trị viên</div>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-solid fa-user"></i>
+                                <span>Hồ sơ cá nhân</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-solid fa-gear"></i>
+                                <span>Cài đặt</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-divider"></li>
+                        <li>
+                            <button class="dropdown-item logout" id="logoutBtn">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <span>Đăng xuất</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Overlay -->
+                <div class="dropdown-overlay" id="dropdownOverlay"></div>
+            </div>
+        </div>
+
+        <div class="container-fluid" data-aos="fade-up">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1>Chào mừng trở lại, Admin! 🌸</h1>
+                        <p>Hôm nay là một ngày tuyệt vời để bán hoa tươi</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <i class="fa-solid fa-flower" style="font-size: 4rem; opacity: 0.3;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <a href="5_orders.html" class="quick-action-btn">
+                    <i class="fa-solid fa-cart-plus"></i>
+                    <div>Đơn hàng mới</div>
+                </a>
+                <a href="2_products.html" class="quick-action-btn">
+                    <i class="fa-solid fa-plus"></i>
+                    <div>Thêm sản phẩm</div>
+                </a>
+                <a href="7_inventory.html" class="quick-action-btn">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    <div>Kiểm kho</div>
+                </a>
+                <a href="1_users.html" class="quick-action-btn">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <div>Khách hàng mới</div>
+                </a>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card revenue">
+                        <div class="icon">
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                        </div>
+                        <div class="number">25.8M</div>
+                        <div class="label">Doanh thu tháng</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card orders">
+                        <div class="icon">
+                            <i class="fa-solid fa-shopping-cart"></i>
+                        </div>
+                        <div class="number">128</div>
+                        <div class="label">Đơn hàng</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card customers">
+                        <div class="icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="number">89</div>
+                        <div class="label">Khách hàng mới</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card products">
+                        <div class="icon">
+                            <i class="fa-solid fa-flower"></i>
+                        </div>
+                        <div class="number">45</div>
+                        <div class="label">Sản phẩm</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts and Recent Data -->
+            <div class="row g-4">
+                <!-- Left Column -->
+                <div class="col-lg-8">
+                    <!-- Revenue Chart -->
+                    <div class="chart-container">
+                        <h5 class="mb-4"><i class="fa-solid fa-chart-line me-2"></i>Doanh thu 7 ngày qua</h5>
+                        <div style="height: 300px; background: #f8f9fa; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #6c757d;">
+                            <div class="text-center">
+                                <i class="fa-solid fa-chart-bar mb-2" style="font-size: 2rem;"></i>
+                                <div>Biểu đồ doanh thu</div>
+                                <small>(Dữ liệu mẫu - có thể tích hợp chart library)</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Orders -->
+                    <div class="recent-orders">
+                        <h5 class="mb-4"><i class="fa-solid fa-clock-rotate-left me-2"></i>Đơn hàng gần đây</h5>
+                        <div class="order-item">
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">DH008 - Nguyễn Thị Mai</div>
+                                <small class="text-muted">Hoa hồng đỏ, Hoa cúc trắng</small>
+                            </div>
+                            <div class="text-end">
+                                <div class="fw-bold">1.250.000 ₫</div>
+                                <span class="order-status status-processing">Đang giao</span>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">DH007 - Trần Văn Nam</div>
+                                <small class="text-muted">Lẵng hoa sinh nhật</small>
+                            </div>
+                            <div class="text-end">
+                                <div class="fw-bold">850.000 ₫</div>
+                                <span class="order-status status-completed">Hoàn thành</span>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">DH006 - Lê Thị Hương</div>
+                                <small class="text-muted">Hoa lan, Hoa ly</small>
+                            </div>
+                            <div class="text-end">
+                                <div class="fw-bold">2.150.000 ₫</div>
+                                <span class="order-status status-pending">Chờ xử lý</span>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">DH005 - Phạm Văn Tùng</div>
+                                <small class="text-muted">Bó hoa cưới</small>
+                            </div>
+                            <div class="text-end">
+                                <div class="fw-bold">3.500.000 ₫</div>
+                                <span class="order-status status-completed">Hoàn thành</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-lg-4">
+                    <!-- Top Products -->
+                    <div class="top-products mb-4">
+                        <h5 class="mb-4"><i class="fa-solid fa-trophy me-2"></i>Sản phẩm bán chạy</h5>
+                        <div class="product-rank">
+                            <div class="rank-number rank-1">1</div>
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">Hoa Hồng Đỏ</div>
+                                <small class="text-muted">Đã bán: 45 bó</small>
+                            </div>
+                            <div class="fw-bold text-success">12.5M ₫</div>
+                        </div>
+                        <div class="product-rank">
+                            <div class="rank-number rank-2">2</div>
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">Lẵng hoa sinh nhật</div>
+                                <small class="text-muted">Đã bán: 28 lẵng</small>
+                            </div>
+                            <div class="fw-bold text-success">8.2M ₫</div>
+                        </div>
+                        <div class="product-rank">
+                            <div class="rank-number rank-3">3</div>
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">Hoa Lan Trắng</div>
+                                <small class="text-muted">Đã bán: 22 chậu</small>
+                            </div>
+                            <div class="fw-bold text-success">6.8M ₫</div>
+                        </div>
+                        <div class="product-rank">
+                            <div class="rank-number">4</div>
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">Hoa Cúc Vàng</div>
+                                <small class="text-muted">Đã bán: 35 bó</small>
+                            </div>
+                            <div class="fw-bold text-success">5.4M ₫</div>
+                        </div>
+                        <div class="product-rank">
+                            <div class="rank-number">5</div>
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">Bó hoa cưới</div>
+                                <small class="text-muted">Đã bán: 12 bó</small>
+                            </div>
+                            <div class="fw-bold text-success">4.2M ₫</div>
+                        </div>
+                    </div>
+
+                    <!-- Inventory Alert -->
+                    <div class="dashboard-card">
+                        <h5 class="mb-4"><i class="fa-solid fa-bell me-2"></i>Cảnh báo tồn kho</h5>
+                        <div class="alert alert-warning">
+                            <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                            <strong>3 sản phẩm</strong> sắp hết hàng
+                        </div>
+                        <div class="alert alert-danger">
+                            <i class="fa-solid fa-circle-exclamation me-2"></i>
+                            <strong>2 sản phẩm</strong> đã hết hàng
+                        </div>
+                        <a href="7_inventory.html" class="btn btn-outline-primary w-100">
+                            <i class="fa-solid fa-boxes-stacked me-2"></i>Kiểm tra ngay
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="mt-4">
+                <p class="text-center text-muted">&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080" id="toastContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // User dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const userMenuToggle = document.getElementById('userMenuToggle');
+            const userDropdown = document.getElementById('userDropdown');
+            const dropdownOverlay = document.getElementById('dropdownOverlay');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            // Toggle dropdown
+            userMenuToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                userDropdown.classList.toggle('show');
+                dropdownOverlay.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking overlay
+            dropdownOverlay.addEventListener('click', function() {
+                userDropdown.classList.remove('show');
+                dropdownOverlay.classList.remove('show');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!userDropdown.contains(e.target) && !userMenuToggle.contains(e.target)) {
+                    userDropdown.classList.remove('show');
+                    dropdownOverlay.classList.remove('show');
+                }
+            });
+
+            // Logout functionality
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const confirmLogout = confirm('Bạn có chắc chắn muốn đăng xuất không?');
+                if (confirmLogout) {
+                    window.location.href = '../index.html';
+                }
+                userDropdown.classList.remove('show');
+                dropdownOverlay.classList.remove('show');
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    userDropdown.classList.remove('show');
+                    dropdownOverlay.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
 </html>
