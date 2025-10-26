@@ -39,10 +39,10 @@
       <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
       <a href="3_category.html" class="active"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
       <a href="4_price.html"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
-      <a href=""><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
+      <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
       <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
-      <a href="#"><i class="fa-sharp fa-solid fa-truck"></i> Quản lý tồn kho</a>
-      <div class="logout_admin"><a href="../index.html" id="logout-link">Đăng xuất</a></div>
+      <a href="7_inventory.html"><i class="fa-solid fa-boxes-stacked me-2"></i> Quản lý tồn kho</a>
+      <div class="logout_admin"><a href="index.html" id="logout-link">Đăng xuất</a></div>
       <script>
         document.getElementById("logout-link").addEventListener("click", function (event) {
           event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
@@ -58,10 +58,44 @@
   <!-- MAIN -->
   <div class="main-content">
     <div class="header">
-      <div class="header__title"><i class="fa-solid fa-folder-tree me-2"></i> Quản lý danh mục</div>
+      <div class="header__title"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</div>
       <div class="header__info">
-        <span class="text-muted small me-2">Xin chào, Admin</span>
-        <i class="fa-solid fa-user-tie"></i>
+        <span class="text-muted small">Xin chào, Admin</span>
+        <a href="javascript:void(0)" id="userMenuToggle">
+          <i class="fa-solid fa-user-tie ms-2"></i>
+        </a>
+
+        <!-- Dropdown Menu -->
+        <div class="user-dropdown" id="userDropdown">
+          <div class="dropdown-header">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Quản trị viên</div>
+          </div>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" class="dropdown-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Hồ sơ cá nhân</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="dropdown-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Cài đặt</span>
+              </a>
+            </li>
+            <li class="dropdown-divider"></li>
+            <li>
+              <button class="dropdown-item logout" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Đăng xuất</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Overlay -->
+        <div class="dropdown-overlay" id="dropdownOverlay"></div>
       </div>
     </div>
 
@@ -77,6 +111,13 @@
             <input id="searchCategory" class="control__search" placeholder="Tìm kiếm...">
             <button class="search__btn"><i class="search__btn__icon fa-solid fa-magnifying-glass"></i></button>
           </div>
+          <button id="reloadBtn" class="btn btn-secondary" style="margin-left: 20px;"><i class="fa-solid fa-arrows-rotate"></i> Tải lại</button>
+          <script>
+            document.getElementById('reloadBtn').addEventListener('click', function () {
+              // Tải lại trang hiện tại
+              location.reload();
+            });
+          </script>
         </div>
       </div>
 
@@ -92,6 +133,7 @@
                   <th class="desc_sp">Mô tả</th>
                   <th>Số loại</th>
                   <th>Tồn</th>
+                  <th>Trạng thái</th>
                   <th>Thao tác</th>
                 </tr>
               </thead>
@@ -119,37 +161,91 @@
         </div>
       </div>
     </div>
+    <footer class="mt-4">
+      <p class="text-center text-muted">&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+    </footer>
   </div>
+  
 
-  <!-- MODAL THÊM / SỬA DANH MỤC -->
-  <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title fw-bold" id="categoryModalLabel">Thêm danh mục</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-        </div>
+  <!-- MODAL THÊM / SỬA DANH MỤC (SỬA MỚI) -->
+<!-- MODAL THÊM / SỬA DANH MỤC -->
+<div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content shadow-lg border-0 rounded-4">
+      
+      <!-- Header -->
+      <div class="modal-header bg-success text-white rounded-top-4">
+        <h5 class="modal-title fw-bold" id="categoryModalLabel">Thêm danh mục</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Đóng"></button>
+      </div>
+
+      <!-- Form -->
+      <form id="categoryForm" class="needs-validation" novalidate>
         <div class="modal-body">
-          <form id="categoryForm">
-            <input type="hidden" id="categoryId">
-            <div class="mb-3">
-              <label for="categoryName" class="form-label">Tên danh mục</label>
-              <input type="text" id="categoryName" class="form-control" placeholder="Nhập tên danh mục..." required>
-            </div>
-            <div class="mb-3">
-              <label for="categoryDesc" class="form-label">Mô tả</label>
-              <textarea id="categoryDesc" class="form-control" rows="3" placeholder="Nhập mô tả danh mục..."
-                required></textarea>
-            </div>
-          </form>
+          <!-- Hidden ID for editing -->
+          <input type="hidden" id="categoryId">
+
+          <!-- Tên danh mục -->
+          <div class="mb-3">
+            <label for="categoryName" class="form-label fw-semibold">Tên danh mục</label>
+            <input type="text" id="categoryName" class="form-control form-control-lg" placeholder="Nhập tên danh mục..." required>
+            <div class="invalid-feedback">Vui lòng nhập tên danh mục.</div>
+          </div>
+
+          <!-- Mô tả -->
+          <div class="mb-3">
+            <label for="categoryDesc" class="form-label fw-semibold">Mô tả</label>
+            <textarea id="categoryDesc" class="form-control" rows="3" placeholder="Nhập mô tả danh mục..." required></textarea>
+            <div class="invalid-feedback">Vui lòng nhập mô tả danh mục.</div>
+          </div>
+
+          <!-- Trạng thái -->
+          <div class="mb-3">
+            <label for="categoryStatus" class="form-label fw-semibold">Trạng thái</label>
+            <select id="categoryStatus" class="form-select">
+              <option value="active">Hoạt động</option>
+              <option value="hidden">Ẩn</option>
+            </select>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-          <button type="submit" form="categoryForm" class="btn btn-primary">Lưu</button>
+
+        <!-- Footer -->
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">
+            <i class="fa-solid fa-xmark me-1"></i> Hủy
+          </button>
+          <button type="submit" class="btn btn-success px-4" id="saveCategoryBtn">
+            <i class="fa-solid fa-floppy-disk me-1"></i> Lưu
+          </button>
         </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Xem Sản Phẩm -->
+<div class="modal fade" id="productListModal" tabindex="-1" aria-labelledby="productListModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productListModalLabel">Danh sách sản phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="noProductsMsg" class="text-center text-muted my-3 d-none">
+          <i class="fa-solid fa-box-open fa-2x mb-2"></i>
+          <div>Chưa có sản phẩm trong danh mục này</div>
+        </div>
+        <div id="productList" class="list-group"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
       </div>
     </div>
   </div>
+</div>
+
+
 
   <!-- TOAST -->
   <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080" id="toastContainer"></div>
@@ -158,136 +254,195 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init();
+   AOS.init();
 
-    // ==== DỮ LIỆU MẶC ĐỊNH ====
-    const defaultCategories = [
-      { stt: '01', name: 'Bó hoa', desc: 'Dùng để tặng trong các dịp như sinh nhật, chúc mừng, hoặc hẹn hò.', qty1: '4', qty: '56' },
-      { stt: '02', name: 'Lẵng hoa', desc: 'Sang trọng, trang nhã.', qty1: '3', qty: '13' },
-      { stt: '03', name: 'Kệ hoa', desc: 'Phù hợp để trang trí sân khấu, hội nghị, hoặc làm quà tặng khai trương.', qty1: '3', qty: '21' },
-    ];
+    // ==== DỮ LIỆU DANH MỤC MẶC ĐỊNH ====
+let categories = [
+  {
+    stt: '01',
+    name: 'Bó hoa',
+    desc: 'Hoa tặng dịp đặc biệt, được gói cẩn thận,  mang đến cảm xúc ngọt ngào và ý nghĩa chân thành.',
+    qty1: '4',
+    qty: '56',
+    status: 'active',
+    products: [
+      { name: 'Nhiệt Ái', image: '../images/hoa1.jpg' },
+      { name: 'BlueBerry', image: '../images/hoa2.jpg' },
+      { name: 'BluSky', image: '../images/hoa3.jpg' }
+    ]
+  },
+  {
+    stt: '02',
+    name: 'Lẵng hoa',
+    desc: 'Sang trọng, trang nhã, kết hợp hài hòa giữa màu sắc và hương thơm,',
+    qty1: '3',
+    qty: '13',
+    status: 'active',
+   products: [
+      { name: 'Nhiệt Ái', image: '../images/hoa4.jpg' },
+      { name: 'BlueBerry', image: '../images/hoa5.jpg' },
+      { name: 'Hồng Phát', image: '../images/kehoa1.jpg' },
+      { name: 'Tương Lai', image: '../images/kehoa2.jpg' }
+  ]
+  },
+  {
+    stt: '03',
+    name: 'Kệ hoa',
+    desc: 'Trang trí, khai trương, mang đến cảm xúc ngọt ngào và ý nghĩa chân thành.',
+    qty1: '3',
+    qty: '21',
+    status: 'active',
+    products: [
+      { name: 'Sắc Màu', image: '../images/langhoa2.jpg' },
+      { name: 'Sen Xanh', image: '../images/langhoa3.png' }
+    ]
+  },
+    {
+    stt: '04',
+    name: 'Bông hoa',
+    desc: 'Trang nhã, kết hợp hài hòa giữa màu sắc và hương thơm,',
+    qty1: '5',
+    qty: '12',
+    status: 'hidden',
+    products: [
+      { name: 'Hồng phát', image: '../images/hoa2.jpg' },
+      { name: 'Hoa Hồng', image: '../images/hoa3.jpg' }
+    ]
+  }
+];
 
-    // ==== KHỞI TẠO DỮ LIỆU TỪ LOCALSTORAGE ====
-    let categories =  defaultCategories;
-
-    // ==== LƯU DỮ LIỆU ====
-    const saveCategories = () => localStorage.setItem('categories', JSON.stringify(categories));
-
-    // ==== TOAST THÔNG BÁO ====
-    function showToast(message, type = 'success') {
-      const container = document.getElementById('toastContainer');
-      const color = type === 'success' ? 'bg-success' : 'bg-danger';
-      const toast = document.createElement('div');
-      toast.className = `toast align-items-center text-white ${color} border-0 show mb-2`;
-      toast.innerHTML = `
+// ==== HIỂN THỊ TOAST ====
+function showToast(message, type = 'success') {
+  const container = document.getElementById('toastContainer');
+  const color = type === 'success' ? 'bg-success' : 'bg-danger';
+  const toast = document.createElement('div');
+  toast.className = `toast align-items-center text-white ${color} border-0 show mb-2`;
+  toast.innerHTML = `
     <div class="d-flex">
       <div class="toast-body">${message}</div>
       <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
     </div>`;
-      container.appendChild(toast);
-      setTimeout(() => toast.remove(), 3000);
-    }
+  container.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
 
-    // ==== RENDER BẢNG ====
-    const tbody = document.getElementById('categoryTableBody');
-    function renderCategories(list = categories) {
-      tbody.innerHTML = list.map(c => `
+// ==== RENDER DANH MỤC ====
+const tbody = document.getElementById('categoryTableBody');
+function renderCategories(list = categories) {
+  tbody.innerHTML = list.map(c => `
     <tr>
       <td>${c.stt}</td>
-      <td>${c.name}</td>
+      <td><b>${c.name}</b></td>
       <td class="text-start">${c.desc}</td>
       <td>${c.qty1}</td>
       <td>${c.qty}</td>
       <td>
+        <span class="badge ${c.status === 'active' ? 'bg-success' : 'bg-secondary'}">
+          ${c.status === 'active' ? 'Hoạt động' : 'Ẩn'}
+        </span>
+      </td>
+      <td>
+        <button class="btn btn-sm btn-outline-info me-1 view-products" data-id="${c.stt}">
+          <i class="fa-solid fa-eye"></i>
+        </button>
         <button class="btn btn-sm btn-outline-primary me-1 edit-btn" data-id="${c.stt}">
           <i class="fa-solid fa-pen"></i> Sửa
         </button>
-        <button class="btn btn-sm btn-outline-danger delete-btn" data-id="${c.stt}">
-          <i class="fa-solid fa-trash"></i> Xóa
-        </button>
       </td>
-    </tr>
-  `).join('');
+    </tr>`).join('');
+}
+
+// ==== MỞ MODAL THÊM / SỬA ====
+document.getElementById('addCategoryBtn').addEventListener('click', () => {
+  document.getElementById('categoryForm').reset();
+  document.getElementById('categoryId').value = '';
+  document.getElementById('categoryModalLabel').innerText = 'Thêm danh mục';
+  new bootstrap.Modal('#categoryModal').show();
+});
+
+// ==== LƯU DANH MỤC ====
+document.getElementById('categoryForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const id = document.getElementById('categoryId').value;
+  const name = document.getElementById('categoryName').value.trim();
+  const desc = document.getElementById('categoryDesc').value.trim();
+  const status = document.getElementById('categoryStatus').value;
+
+  if (!name || !desc) {
+    showToast('Vui lòng nhập đầy đủ thông tin', 'error');
+    return;
+  }
+
+  if (id) {
+    const idx = categories.findIndex(c => c.stt === id);
+    if (idx !== -1) {
+      categories[idx].name = name;
+      categories[idx].desc = desc;
+      categories[idx].status = status;
+      showToast('Cập nhật danh mục thành công');
     }
+  } else {
+    const newStt = (categories.length + 1).toString().padStart(2, '0');
+    categories.push({ stt: newStt, name, desc, qty1: '0', qty: '0', status, products: [] });
+    showToast('Thêm danh mục thành công');
+  }
+  bootstrap.Modal.getInstance(document.getElementById('categoryModal')).hide();
+  renderCategories();
+});
 
-    // ==== TÌM KIẾM ====
-    document.getElementById('searchCategory').addEventListener('input', e => {
-      const keyword = e.target.value.toLowerCase();
-      const filtered = categories.filter(c =>
-        c.name.toLowerCase().includes(keyword) ||
-        c.desc.toLowerCase().includes(keyword)
-      );
-      renderCategories(filtered);
-    });
+// ==== NÚT HÀNH ĐỘNG (SỬA / XÓA / XEM SP) ====
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-id]');
+  if (!btn) return;
+  const id = btn.dataset.id;
+  const idx = categories.findIndex(c => c.stt === id);
+  if (idx === -1) return;
 
-    // ==== MỞ MODAL THÊM DANH MỤC ====
-    document.getElementById('addCategoryBtn').addEventListener('click', () => {
-      document.getElementById('categoryForm').reset();
-      document.getElementById('categoryId').value = '';
-      document.getElementById('categoryModalLabel').innerText = 'Thêm danh mục';
-      new bootstrap.Modal('#categoryModal').show();
-    });
+  // Sửa
+  if (btn.classList.contains('edit-btn')) {
+    const c = categories[idx];
+    document.getElementById('categoryId').value = c.stt;
+    document.getElementById('categoryName').value = c.name;
+    document.getElementById('categoryDesc').value = c.desc;
+    document.getElementById('categoryStatus').value = c.status;
+    document.getElementById('categoryModalLabel').innerText = 'Sửa danh mục';
+    new bootstrap.Modal('#categoryModal').show();
+  }
+});
+// Khi nhấn nút Xem SP
+// Khi nhấn nút Xem SP
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.view-products');
+  if (!btn) return;
 
-    // ==== LƯU FORM ====
-    document.getElementById('categoryForm').addEventListener('submit', e => {
-      e.preventDefault();
-      const id = document.getElementById('categoryId').value;
-      const name = document.getElementById('categoryName').value.trim();
-      const desc = document.getElementById('categoryDesc').value.trim();
+  const id = btn.dataset.id;
+  const category = categories.find(c => c.stt === id);
+  if (!category) return;
 
-      if (!name || !desc) {
-        showToast('Vui lòng nhập đầy đủ thông tin', 'error');
-        return;
-      }
+  const list = document.getElementById('productList');
+  const noMsg = document.getElementById('noProductsMsg');
 
-      if (id) {
-        // Cập nhật danh mục
-        const idx = categories.findIndex(c => c.stt === id);
-        if (idx !== -1) {
-          categories[idx].name = name;
-          categories[idx].desc = desc;
-          showToast('Cập nhật danh mục thành công');
-        }
-      } else {
-        // Thêm danh mục mới
-        const newStt = (categories.length + 1).toString().padStart(2, '0');
-        categories.push({ stt: newStt, name, desc, qty1: '0', qty: '0' });
-        showToast('Thêm danh mục thành công');
-      }
-      renderCategories(categories);
-      bootstrap.Modal.getInstance(document.getElementById('categoryModal')).hide();
-      e.target.reset();
-    });
+  if (category.products && category.products.length > 0) {
+    noMsg.classList.add('d-none');
+    list.innerHTML = category.products.map(p => `
+      <div class="list-group-item d-flex align-items-center py-1" style="justify-content: space-everly">
+        <img src="${p.image}" alt="${p.name}" class="me-3" style="width:80px; height:80px; object-fit:cover; border-radius:6px;"">
+        <span style="font-size: 18px; font-weight: 500; margin-left: 30px">${p.name}</span>
+      </div>
+    `).join('');
+  } else {
+    list.innerHTML = '';
+    noMsg.classList.remove('d-none');
+  }
 
-    // ==== SỬA / XÓA DANH MỤC ====
-    document.addEventListener('click', e => {
-      const btn = e.target.closest('[data-id]');
-      if (!btn) return;
-      const id = btn.dataset.id;
-      const idx = categories.findIndex(c => c.stt === id);
-      if (idx === -1) return;
+  new bootstrap.Modal('#productListModal').show();
+});
 
-      if (btn.classList.contains('edit-btn')) {
-        document.getElementById('categoryId').value = categories[idx].stt;
-        document.getElementById('categoryName').value = categories[idx].name;
-        document.getElementById('categoryDesc').value = categories[idx].desc;
-        document.getElementById('categoryModalLabel').innerText = 'Sửa danh mục';
-        new bootstrap.Modal('#categoryModal').show();
-      }
 
-      if (btn.classList.contains('delete-btn')) {
-        if (confirm(`Bạn có chắc muốn xóa danh mục "${categories[idx].name}" không?`)) {
-          categories.splice(idx, 1);
-          // Cập nhật lại STT
-          categories.forEach((c, i) => c.stt = (i + 1).toString().padStart(2, '0'));
-          renderCategories(categories);
-          showToast('Xóa danh mục thành công','denger');
-        }
-      }
-    });
 
-    // ==== KHỞI TẠO ====
-    renderCategories(categories);
+renderCategories();
+
+
 
     
     const pagination = document.getElementById('pagination');
@@ -299,7 +454,60 @@
         e.target.classList.add('active');
       }
     });
+    // User dropdown functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const userMenuToggle = document.getElementById('userMenuToggle');
+    const userDropdown = document.getElementById('userDropdown');
+    const dropdownOverlay = document.getElementById('dropdownOverlay');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Toggle dropdown
+    userMenuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        userDropdown.classList.toggle('show');
+        dropdownOverlay.classList.toggle('show');
+    });
+
+    // Close dropdown when clicking overlay
+    dropdownOverlay.addEventListener('click', function() {
+        userDropdown.classList.remove('show');
+        dropdownOverlay.classList.remove('show');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!userDropdown.contains(e.target) && !userMenuToggle.contains(e.target)) {
+            userDropdown.classList.remove('show');
+            dropdownOverlay.classList.remove('show');
+        }
+    });
+
+    // Logout functionality
+    logoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const confirmLogout = confirm('Bạn có chắc chắn muốn đăng xuất không?');
+        
+        if (confirmLogout) {
+            // Thực hiện đăng xuất
+            window.location.href = '../index.html';
+        }
+        
+        // Đóng dropdown
+        userDropdown.classList.remove('show');
+        dropdownOverlay.classList.remove('show');
+    });
+
+    // Close dropdown on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            userDropdown.classList.remove('show');
+            dropdownOverlay.classList.remove('show');
+        }
+    });
+});
+    
   </script>
+
 </body>
 
 </html>

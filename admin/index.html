@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập Admin - Bloom</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+        }
+
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: var(--secondary-color);
+        }
+
+        :root {
+            --primary-color: #2e7d68;
+            --primary-dark: #1b5e4f;
+            --secondary-color: #9370db;
+            --accent-color: #e91e63;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --border-color: #e9ecef;
+            --error-color: #dc3545;
+            --success-color: #28a745;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-card {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-section {
+            display: flex;
+            text-align: center;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+
+        .bloom-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            margin-right: 60px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-left: 10px;
+        }
+
+        .admin-badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .welcome-text h1 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .welcome-text p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(46, 125, 104, 0.1);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: var(--error-color);
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: var(--success-color);
+            border: 1px solid #c3e6cb;
+        }
+
+        .security-note {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: var(--light-bg);
+            border-radius: 5px;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <!-- Logo Section -->
+            <div class="logo-section">
+                <div class="bloom-logo">
+                    <svg class="logo-icon" viewBox="0 0 100 100" fill="none">
+                        <circle cx="50" cy="50" r="45" fill="#2e7d68" />
+                        <path
+                            d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
+                            fill="#eaf8f0" />
+                        <circle cx="40" cy="35" r="8" fill="#b19cd9" />
+                        <circle cx="60" cy="35" r="8" fill="#b19cd9" />
+                        <circle cx="50" cy="50" r="12" fill="#9370db" />
+                        <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
+                    </svg>
+                    <span class="logo-text">Bloom</span>
+                </div>
+                <div class="admin-badge">
+                    <i class="fa-solid fa-shield-halved me-1"></i>QUẢN TRỊ VIÊN
+                </div>
+            </div>
+
+            <!-- Welcome Text -->
+            <div class="welcome-text">
+                <h1>Đăng Nhập Admin</h1>
+                <p>Vui lòng đăng nhập để truy cập hệ thống</p>
+            </div>
+
+
+            <!-- Error Alert -->
+            <div class="alert alert-danger" id="errorAlert">
+                <i class="fa-solid fa-circle-exclamation me-2"></i>
+                <span id="errorMessage">Tên đăng nhập hoặc mật khẩu không đúng</span>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username" class="form-label">
+                        <i class="fa-solid fa-user me-1"></i>Tên đăng nhập
+                    </label>
+                    <input type="text" class="form-control" id="username" placeholder="Nhập tên đăng nhập" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">
+                        <i class="fa-solid fa-lock me-1"></i>Mật khẩu
+                    </label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu" required>
+                        <button type="button" class="password-toggle" id="passwordToggle">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Ghi nhớ đăng nhập</label>
+                    </div>
+                    <a href="#" class="forgot-password" id="forgotPassword">Quên mật khẩu?</a>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginButton">
+                    <i class="fa-solid fa-right-to-bracket me-2"></i>Đăng Nhập
+                </button>
+            </form>
+
+            <!-- Security Note -->
+            <div class="security-note">
+                <i class="fa-solid fa-info-circle me-1"></i>
+                Đây là khu vực dành riêng cho quản trị viên
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const loginForm = document.getElementById('loginForm');
+            const errorAlert = document.getElementById('errorAlert');
+            const passwordToggle = document.getElementById('passwordToggle');
+            const passwordInput = document.getElementById('password');
+            const loginButton = document.getElementById('loginButton');
+            const forgotPasswordLink = document.getElementById('forgotPassword');
+
+            // Toggle hiển thị mật khẩu
+            passwordToggle.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-eye-slash"></i>';
+            });
+
+            // Xử lý đăng nhập - không kiểm tra, luôn thành công
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Ẩn cảnh báo cũ nếu có
+                errorAlert.style.display = 'none';
+
+                // Luôn đăng nhập thành công
+                loginSuccess();
+            });
+
+            // Xử lý quên mật khẩu
+            forgotPasswordLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                showForgotPasswordModal();
+            });
+
+            function loginSuccess() {
+                // Hiệu ứng loading
+                loginButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i>Đang đăng nhập...';
+                loginButton.disabled = true;
+
+                // Giả lập thời gian xử lý
+                setTimeout(function () {
+                    // Chuyển hướng đến trang dashboard admin
+                    window.location.href = '0_dashboard.html';
+                }, 1000);
+            }
+
+            function showForgotPasswordModal() {
+                // Tạo modal quên mật khẩu
+                const modalHTML = `
+                <div class="modal fade" id="forgotPasswordModal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    <i class="fa-solid fa-key me-2"></i>Quên Mật Khẩu Admin
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-info">
+                                    <i class="fa-solid fa-info-circle me-2"></i>
+                                    Vui lòng liên hệ Super Admin để được cấp lại mật khẩu.
+                                </div>
+                                <div class="contact-info">
+                                    <h6>Thông tin liên hệ:</h6>
+                                    <ul class="list-unstyled mt-3">
+                                        <li class="mb-2">
+                                            <i class="fa-solid fa-user-shield me-2 text-primary"></i>
+                                            <strong>Super Admin:</strong> Nguyễn Văn A
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fa-solid fa-phone me-2 text-success"></i>
+                                            <strong>SĐT:</strong> 0900 123 456
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fa-solid fa-envelope me-2 text-warning"></i>
+                                            <strong>Email:</strong> superadmin@bloom.com
+                                        </li>
+                                        <li>
+                                            <i class="fa-solid fa-clock me-2 text-info"></i>
+                                            <strong>Thời gian làm việc:</strong> 8:00 - 17:00 (Thứ 2 - Thứ 6)
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                <button type="button" class="btn btn-primary" id="copyContactInfo">
+                                    <i class="fa-solid fa-copy me-2"></i>Sao chép thông tin
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+                // Thêm modal vào body nếu chưa có
+                if (!document.getElementById('forgotPasswordModal')) {
+                    document.body.insertAdjacentHTML('beforeend', modalHTML);
+                }
+
+                // Hiển thị modal
+                const modal = new bootstrap.Modal(document.getElementById('forgotPasswordModal'));
+                modal.show();
+
+                // Xử lý sao chép thông tin liên hệ
+                document.getElementById('copyContactInfo').addEventListener('click', function () {
+                    const contactInfo = `
+Super Admin: Nguyễn Văn A
+SĐT: 0900 123 456
+Email: superadmin@bloom.com
+Thời gian làm việc: 8:00 - 17:00 (Thứ 2 - Thứ 6)
+                `.trim();
+
+                    navigator.clipboard.writeText(contactInfo).then(function () {
+                        const copyBtn = document.getElementById('copyContactInfo');
+                        const originalText = copyBtn.innerHTML;
+                        copyBtn.innerHTML = '<i class="fa-solid fa-check me-2"></i>Đã sao chép!';
+                        copyBtn.classList.remove('btn-primary');
+                        copyBtn.classList.add('btn-success');
+
+                        setTimeout(function () {
+                            copyBtn.innerHTML = originalText;
+                            copyBtn.classList.remove('btn-success');
+                            copyBtn.classList.add('btn-primary');
+                        }, 2000);
+                    });
+                });
+            }
+
+            // Focus vào ô username khi trang load
+            document.getElementById('username').focus();
+        });
+    </script>
+</body>
+
+</html>

@@ -11,8 +11,9 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
     rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css">
+
   <link rel="stylesheet" href="inputproduct.css" />
+    <link rel="stylesheet" href="admin.css">
 </head>
 
 <body>
@@ -36,10 +37,10 @@
       <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
       <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
       <a href="4_price.html" ><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
-      <a href=""><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
+      <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
       <a href="6_inputproduct.html" class="active"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
-      <a href="#"><i class="fa-sharp fa-solid fa-truck"></i> Quản lý tồn kho</a>
-      <div class="logout_admin"><a href="../index.html" id="logout-link">Đăng xuất</a></div>
+      <a href="7_inventory.html"><i class="fa-solid fa-boxes-stacked me-2"></i> Quản lý tồn kho</a>
+      <div class="logout_admin"><a href="index.html" id="logout-link">Đăng xuất</a></div>
       <script>
         document.getElementById("logout-link").addEventListener("click", function (event) {
           event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
@@ -52,9 +53,15 @@
       </script>
     </div>
   </div>
-  <div class="container">
-    <h2>📦 Quản lý Phiếu Nhập</h2>
-    <button id="addNewBtn">+ Thêm phiếu nhập mới</button>
+  <div class="main-content">
+    <div class="header">
+      <div class="header__title"><i class="fa-solid fa-users me-2"></i>Quản lý nhập hàng</div>
+      <div class="header__info">
+        <span class="text-muted small">Xin chào, Admin</span>
+        <a href=""><i class="fa-solid fa-user-tie ms-2"></i></a>
+      </div>
+    </div>
+    <button id="addNewBtn"> + Thêm phiếu nhập mới</button>
 
     <!-- Form thêm phiếu nhập -->
     <div id="inputForm" class="hidden">
@@ -105,7 +112,7 @@
 
     <!-- Danh sách phiếu nhập -->
     <div class="list-section">
-      <h3>📋 Danh sách Phiếu Nhập</h3>
+      <h3 style="text-align: center;">📋 Danh sách Phiếu Nhập</h3>
       <table id="dataTable">
         <thead>
           <tr>
@@ -125,6 +132,57 @@
   </div>
 
   <script src="inputproduct.js"></script>
+  <script>// User dropdown functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const userMenuToggle = document.getElementById('userMenuToggle');
+    const userDropdown = document.getElementById('userDropdown');
+    const dropdownOverlay = document.getElementById('dropdownOverlay');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Toggle dropdown
+    userMenuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        userDropdown.classList.toggle('show');
+        dropdownOverlay.classList.toggle('show');
+    });
+
+    // Close dropdown when clicking overlay
+    dropdownOverlay.addEventListener('click', function() {
+        userDropdown.classList.remove('show');
+        dropdownOverlay.classList.remove('show');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!userDropdown.contains(e.target) && !userMenuToggle.contains(e.target)) {
+            userDropdown.classList.remove('show');
+            dropdownOverlay.classList.remove('show');
+        }
+    });
+
+    // Logout functionality
+    logoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const confirmLogout = confirm('Bạn có chắc chắn muốn đăng xuất không?');
+        
+        if (confirmLogout) {
+            // Thực hiện đăng xuất
+            window.location.href = '../index.html';
+        }
+        
+        // Đóng dropdown
+        userDropdown.classList.remove('show');
+        dropdownOverlay.classList.remove('show');
+    });
+
+    // Close dropdown on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            userDropdown.classList.remove('show');
+            dropdownOverlay.classList.remove('show');
+        }
+    });
+});</script>
 </body>
 
 </html>

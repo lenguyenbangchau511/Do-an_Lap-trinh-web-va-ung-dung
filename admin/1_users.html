@@ -36,10 +36,10 @@
       <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
       <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
       <a href="4_price.html"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
-      <a href=""><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
+      <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
       <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
-      <a href="#"><i class="fa-sharp fa-solid fa-truck"></i> Quản lý tồn kho</a>
-      <div class="logout_admin"><a href="../index.html" id="logout-link">Đăng xuất</a></div>
+      <a href="7_inventory.html"><i class="fa-solid fa-boxes-stacked me-2"></i></i> Quản lý tồn kho</a>
+      <div class="logout_admin"><a href="index.html" id="logout-link">Đăng xuất</a></div>
       <script>
         document.getElementById("logout-link").addEventListener("click", function (event) {
           event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
@@ -59,14 +59,49 @@
       <div class="header__title"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</div>
       <div class="header__info">
         <span class="text-muted small">Xin chào, Admin</span>
-        <a href=""><i class="fa-solid fa-user-tie ms-2"></i></a>
+        <a href="javascript:void(0)" id="userMenuToggle">
+          <i class="fa-solid fa-user-tie ms-2"></i>
+        </a>
+
+        <!-- Dropdown Menu -->
+        <div class="user-dropdown" id="userDropdown">
+          <div class="dropdown-header">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Quản trị viên</div>
+          </div>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" class="dropdown-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Hồ sơ cá nhân</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="dropdown-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Cài đặt</span>
+              </a>
+            </li>
+            <li class="dropdown-divider"></li>
+            <li>
+              <button class="dropdown-item logout" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Đăng xuất</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Overlay -->
+        <div class="dropdown-overlay" id="dropdownOverlay"></div>
       </div>
     </div>
 
     <div class="container-fluid function" data-aos="fade-up">
       <div class="d-flex justify-content-between mb-3">
         <div>
-          <button class="btn btn-success" style="padding: 10px;" id="addUserBtn"><i class="fa-solid fa-user-plus"></i> Thêm khách
+          <button class="btn btn-success" style="padding: 10px;" id="addUserBtn"><i class="fa-solid fa-user-plus"></i>
+            Thêm khách
             hàng</button>
         </div>
 
@@ -82,6 +117,14 @@
             <option value="active">Hoạt động</option>
             <option value="locked">Đã khóa</option>
           </select>
+          <button id="reloadBtn" class="btn btn-secondary" style="margin-left: 20px;"><i
+              class="fa-solid fa-arrows-rotate"></i> Tải lại</button>
+          <script>
+            document.getElementById('reloadBtn').addEventListener('click', function () {
+              // Tải lại trang hiện tại
+              location.reload();
+            });
+          </script>
         </div>
       </div>
 
@@ -135,88 +178,91 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="userModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title fw-bold">Thêm khách hàng</h5>
-          <button class="btn-close" data-bs-dismiss="modal"></button>
+  <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        <div class="modal-header bg-success text-white py-3 px-4">
+          <h5 class="modal-title fw-semibold" id="userModalLabel">
+            <i class="fa-solid fa-user-plus me-2"></i> Thêm khách hàng
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
 
-        <div class="modal-body">
-          <form id="userForm">
+        <div class="modal-body px-4 py-3 bg-light">
+          <form id="userForm" class="needs-validation" novalidate>
             <input type="hidden" id="userId">
 
-            <!-- Họ tên + Email chung 1 hàng -->
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label class="form-label" placeholder="VD: Lê Văn A" required>Họ tên</label>
-                <input id="userName" class="form-control" required>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Họ tên</label>
+                <input id="userName" class="form-control" placeholder="VD: Lê Văn A" required>
+                <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
               </div>
 
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Email</label>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Email</label>
                 <input id="userEmail" type="email" class="form-control" placeholder="VD: a@gmail.com" required>
+                <div class="invalid-feedback">Email không hợp lệ.</div>
               </div>
-            </div>
 
-            <div class="mb-3">
-              <label class="form-label">Tên tài khoản</label>
-              <input id="userUsername" class="form-control" placeholder="VD: abc123" required>
-            </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Tên tài khoản</label>
+                <input id="userUsername" class="form-control" placeholder="VD: abc123" required>
+                <div class="invalid-feedback">Vui lòng nhập tên tài khoản.</div>
+              </div>
 
-            <div class="mb-3 position-relative">
-              <label class="form-label">Mật khẩu</label>
-              <input id="userPassword" type="password" class="form-control" placeholder="VD: 123456789" required>
-              <button type="button" class="btn btn-sm btn-outline-secondary position-absolute" id="togglePassword">
-                <i class="fa-solid fa-eye"></i>
-              </button>
-            </div>
+              <div class="col-md-6 position-relative">
+                <label class="form-label fw-semibold">Mật khẩu</label>
+                <div class="input-group">
+                  <input id="userPassword" type="password" class="form-control" placeholder="VD: 123456789" required>
+                  <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+                <div class="invalid-feedback">Vui lòng nhập mật khẩu.</div>
+              </div>
 
-            <div class="mb-3">
-              <label class="form-label">Số điện thoại</label>
-              <input id="userPhone" type="number" class="form-control" placeholder="0987654321" required>
-            </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Số điện thoại</label>
+                <input id="userPhone" type="number" class="form-control" placeholder="0987654321" required>
+                <div class="invalid-feedback">Vui lòng nhập số điện thoại hợp lệ.</div>
+              </div>
 
-            <div class="mb-3">
-              <label class="form-label">Địa chỉ</label>
-              <input id="userAddress" class="form-control" placeholder="VD: 13 An Dương Vương Q8 HCM">
-            </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Địa chỉ</label>
+                <input id="userAddress" class="form-control" placeholder="VD: 13 An Dương Vương, Q8, HCM">
+              </div>
 
-            <div class="mb-3">
-              <label class="form-label">Ngày tạo</label>
-              <input type="date" id="userCreatedAt" class="form-control" placeholder="VD: 10/10/2025">
-            </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Ngày tạo</label>
+                <input type="date" id="userCreatedAt" class="form-control">
+              </div>
 
-            <!-- Số đơn hàng + Trạng thái + Khóa tài khoản chung 1 hàng -->
-            <div class="row align-items-center" id="asdf">
-              <div class="col-md-3 mb-3">
-                <label class="form-label">Số đơn hàng</label>
+              <div class="col-md-3">
+                <label class="form-label fw-semibold">Số đơn hàng</label>
                 <input type="number" id="userOrders" class="form-control" placeholder="VD: 6">
               </div>
-              <div class="col-md-3 mb-3">
 
-              </div>
-
-
-              <div class="col-md-3 mb-3 d-flex align-items-center">
-                <div class="form-check mt-4">
-                  <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;" id="userLocked">
-                  <label class="form-check-label" for="userLocked">Khóa tài khoản</label>
+              <div class="col-md-3 d-flex align-items-end">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="userLocked">
+                  <label class="form-check-label fw-semibold" for="userLocked">Khóa tài khoản</label>
                 </div>
               </div>
             </div>
-
           </form>
         </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-          <button type="button" class="btn btn-primary" id="saveUser">Lưu</button>
+        <div class="modal-footer bg-light border-top-0 py-3 px-4">
+          <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Hủy</button>
+          <button type="button" class="btn btn-success px-4" id="saveUser">
+            <i class="fa-solid fa-floppy-disk me-1"></i> Lưu
+          </button>
         </div>
       </div>
     </div>
   </div>
+
 
 
   <!-- Toast container -->
@@ -228,19 +274,19 @@
     AOS.init(); // thư viện
 
     const defaultUsers = [
-      { id: 'K001', name: 'Nguyễn Văn A', username: 'nguyena', password: '123456', email: 'a@email.com', phone: '0123456789', address: '12 Ngũ lão Hà Nội', createdAt: '2025/10/24', orders: 5, status: 'active', locked: false },
-      { id: 'K002', name: 'Trần Thị B', username: 'tranb', password: '123456', email: 'b@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025/09/23', orders: 2, status: 'active', locked: false },
-      { id: 'K003', name: 'Hoàng Văn C', username: 'hoangc', password: '123456', email: 'c@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025/12/23', orders: 2, status: 'inactive', locked: true },
-      { id: 'K004', name: 'THân Thị D', username: 'thanc1', password: '123456', email: 'd@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025/07/03', orders: 2, status: 'active', locked: false },
-      { id: 'K005', name: 'Trần Thị F', username: 'afety2', password: '123456', email: 'e@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'active', locked: false },
-      { id: 'K006', name: 'Cao văn G', username: 'gertrn1', password: '123456', email: 'f@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'active', locked: false },
-      { id: 'K007', name: 'Huỳnh Tấn H', username: 'huynh1', password: '123456', email: 'g@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'active', locked: false },
-      { id: 'K008', name: 'Doàn Hữu K', username: 'doantr', password: '123456', email: 'h@email.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '22024/12/25', orders: 2, status: 'active', locked: false },
-      { id: 'K009', name: 'Nguyễn Văn X', username: '90thuy', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'active', locked: false },
-      { id: 'K010', name: 'Trần Thị P', username: 'yhu89', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'active', locked: false },
-      { id: 'K011', name: 'Hoàng Ngọc  R', username: 'tranb223', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'inactive', locked: false },
-      { id: 'K012', name: 'Trần Hoàng C', username: 'tran43b', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'active', locked: false },
-      { id: 'K013', name: 'Trần Thị N', username: 'tra54nb', password: '123456', email: 'b@example.com', phone: '0912345678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024/12/25', orders: 2, status: 'inactive', locked: false },
+      { id: 'K001', name: 'Nguyễn Văn A', username: 'nguyena', password: '123456', email: 'a@email.com', phone: '0123456789', address: '12 Ngũ lão Hà Nội', createdAt: '2025-10-24', orders: 5, status: 'active', locked: false },
+      { id: 'K002', name: 'Trần Thị B', username: 'tranb', password: '123456', email: 'b@email.com', phone: '0912456678', address: '11 hòa Hảo Q10 HCM', createdAt: '2025-09-23', orders: 2, status: 'active', locked: false },
+      { id: 'K003', name: 'Hoàng Văn C', username: 'hoangc', password: '123456', email: 'c@email.com', phone: '0912785678', address: '8 Pasteur, TP.HCM', createdAt: '2025-12-23', orders: 2, status: 'inactive', locked: true },
+      { id: 'K004', name: 'THân Thị D', username: 'thanc1', password: '123456', email: 'd@email.com', phone: '0912345678', address: '31 Lê Thánh Tôn, Nha Trang', createdAt: '2025-07-03', orders: 2, status: 'active', locked: false },
+      { id: 'K005', name: 'Trần Thị F', username: 'afety2', password: '123456', email: 'e@email.com', phone: '0918005678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024-12-25', orders: 1, status: 'active', locked: true },
+      { id: 'K006', name: 'Cao văn G', username: 'gertrn1', password: '123456', email: 'f@email.com', phone: '0912009678', address: '29 Hòa Bình, Biên Hòa', createdAt: '2024-12-25', orders: 0, status: 'active', locked: false },
+      { id: 'K007', name: 'Huỳnh Tấn H', username: 'huynh1', password: '123456', email: 'g@email.com', phone: '0912323478', address: '17 Lạc Long Quân, TP.HCM', createdAt: '2025-12-24', orders: 7, status: 'active', locked: false },
+      { id: 'K008', name: 'Doàn Hữu K', username: 'doantr', password: '123456', email: 'h@email.com', phone: '0912309878', address: '11 hòa Hảo Q10 HCM', createdAt: '2024-02-21', orders: 2, status: 'active', locked: false },
+      { id: 'K009', name: 'Nguyễn Văn X', username: '90thuy', password: '123456', email: 'u@example.com', phone: '0912378678', address: '11 hòa Hảo Q10 HCM', createdAt: '2024-12-25', orders: 1, status: 'active', locked: true },
+      { id: 'K010', name: 'Trần Thị P', username: 'yhu89', password: '123456', email: 'be@example.com', phone: '0912564678', address: '85 Trường Chinh, TP.HCM', createdAt: '2024-12-22', orders: 1, status: 'active', locked: false },
+      { id: 'K011', name: 'Hoàng Ngọc  R', username: 'tranb223', password: '123456', email: 'po@example.com', phone: '0912340678', address: '1 hòa Hảo Q10 HCM', createdAt: '2024-12-21', orders: 2, status: 'inactive', locked: false },
+      { id: 'K012', name: 'Trần Hoàng C', username: 'tran43b', password: '123456', email: 'hn@example.com', phone: '0912445678', address: '17 Lạc Long Quân, TP.HCM', createdAt: '2025-12-20', orders: 5, status: 'active', locked: false },
+      { id: 'K013', name: 'Trần Thị N', username: 'tra54nb', password: '123456', email: 'bm,@example.com', phone: '0912346078', address: '5 Trần Quang Khải, Hà Nội', createdAt: '2023-12-19', orders: 0, status: 'inactive', locked: false },
     ]; //dữ liệu mẫu
 
     let users = defaultUsers;
@@ -258,10 +304,10 @@
       toastEl.setAttribute('aria-live', 'assertive');
       toastEl.setAttribute('aria-atomic', 'true');
       toastEl.innerHTML = `
-        <div class="d-flex">
-          <div class="toast-body">${msg}</div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-        </div>`;
+                                                                                                 <div class="d-flex">
+                                                                                                   <div class="toast-body">${msg}</div>
+                                                                                                   <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                                                                                                 </div>`;
       document.getElementById('toastContainer').appendChild(toastEl);
       setTimeout(() => bootstrap.Toast.getOrCreateInstance(toastEl).hide(), 3000);
     }
@@ -306,14 +352,19 @@
           <td>${u.orders}</td>
           <td><span class="badge ${u.locked ? 'bg-secondary' : 'bg-success'}">${u.locked ? 'Đã khóa' : 'Hoạt động'}</span></td>
           <td>
-            <button class="btn btn-sm btn-outline-primary me-1 edit-btn" data-id="${u.id}"><i class="fa-solid fa-pen"></i></button>
-            <button class="btn btn-sm btn-outline-danger del-btn" data-id="${u.id}"><i class="fa-solid fa-trash"></i></button>
-          </td>
+  <button class="btn btn-sm btn-outline-primary me-1 edit-btn" data-id="${u.id}">
+    <i class="fa-solid fa-pen"></i>
+  </button>
+  <button class="btn btn-sm ${u.locked ? 'btn-success' : 'btn-warning'} lock-btn" data-id="${u.id}">
+    <i class="fa-solid ${u.locked ? 'fa-lock-open' : 'fa-lock'}"></i>
+  </button>
+</td>
+
         </tr>`;
       });
 
       document.querySelectorAll('.edit-btn').forEach(btn => btn.onclick = () => editUser(btn.dataset.id));
-      document.querySelectorAll('.del-btn').forEach(btn => btn.onclick = () => deleteUser(btn.dataset.id));
+      document.querySelectorAll('.lock-btn').forEach(btn => btn.onclick = () => toggleLock(btn.dataset.id));
     }
 
     function resetForm() {
@@ -349,7 +400,6 @@
         users.push(u);
         showToast('Thêm khách hàng thành công');
       }
-      renderUsers(filterUsers());
       userModal.hide();
     }
 
@@ -365,17 +415,25 @@
       document.getElementById('userCreatedAt').value = u.createdAt;
       document.getElementById('userOrders').value = u.orders;
       document.getElementById('userLocked').checked = u.locked;
-      document.querySelector('#userModal .modal-title').innerText = 'Sửa khách hàng';
+      document.querySelector('#userModal .modal-title').innerText = 'Xem thông tin khách hàng';
       userModal.show();
     }
 
-    function deleteUser(id) {
-      if (confirm('Bạn có chắc muốn xóa khách hàng này?')) {
-        users = users.filter(u => u.id !== id);
-        renderUsers(filterUsers());
-        showToast('Xóa khách hàng thành công', 'warning');
-      }
+    function toggleLock(id) {
+      const user = users.find(u => u.id === id);
+      if (!user) return;
+
+      user.locked = !user.locked; // Đổi trạng thái khóa / mở
+      showToast(
+        user.locked
+          ? `🔒 Tài khoản ${user.name} đã bị khóa!`
+          : `🔓 Tài khoản ${user.name} đã được mở khóa!`,
+        user.locked ? 'warning' : 'success'
+      );
+
+      renderUsers(filterUsers()); // Cập nhật lại bảng
     }
+
 
     document.getElementById('searchUser').oninput = () => renderUsers(filterUsers());
     document.getElementById('filterStatus').onchange = () => renderUsers(filterUsers());
@@ -402,6 +460,57 @@
         if (currentActive) currentActive.classList.remove('active');
         e.target.classList.add('active');
       }
+    });
+    // User dropdown functionality
+    document.addEventListener('DOMContentLoaded', function () {
+      const userMenuToggle = document.getElementById('userMenuToggle');
+      const userDropdown = document.getElementById('userDropdown');
+      const dropdownOverlay = document.getElementById('dropdownOverlay');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      // Toggle dropdown
+      userMenuToggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        userDropdown.classList.toggle('show');
+        dropdownOverlay.classList.toggle('show');
+      });
+
+      // Close dropdown when clicking overlay
+      dropdownOverlay.addEventListener('click', function () {
+        userDropdown.classList.remove('show');
+        dropdownOverlay.classList.remove('show');
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function (e) {
+        if (!userDropdown.contains(e.target) && !userMenuToggle.contains(e.target)) {
+          userDropdown.classList.remove('show');
+          dropdownOverlay.classList.remove('show');
+        }
+      });
+
+      // Logout functionality
+      logoutBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const confirmLogout = confirm('Bạn có chắc chắn muốn đăng xuất không?');
+
+        if (confirmLogout) {
+          // Thực hiện đăng xuất
+          window.location.href = '../index.html';
+        }
+
+        // Đóng dropdown
+        userDropdown.classList.remove('show');
+        dropdownOverlay.classList.remove('show');
+      });
+
+      // Close dropdown on escape key
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          userDropdown.classList.remove('show');
+          dropdownOverlay.classList.remove('show');
+        }
+      });
     });
   </script>
 </body>

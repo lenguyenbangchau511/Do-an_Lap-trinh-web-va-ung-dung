@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Tổng quan - admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="detail.css">
+
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar">
+            <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
+                <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                    <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9" />
+                    <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
+                        fill="#eaf8f0" />
+                    <circle cx="40" cy="35" r="8" fill="#b19cd9" />
+                    <circle cx="60" cy="35" r="8" fill="#b19cd9" />
+                    <circle cx="50" cy="50" r="12" fill="#9370db" />
+                    <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
+                </svg>
+                <span>Bloom</span>
+            </div>
+            <a href="0_dashboard.html"><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
+            <a href="1_users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
+            <a href="2_products.html" class="active"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
+            <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
+            <a href="4_price.html"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
+            <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
+            <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
+            <a href="7_inventory.html"><i class="fa-sharp fa-solid fa-truck"></i> Quản lý tồn kho</a>
+            <div class="logout_admin"><a href="../index.html" id="logout-link">Đăng xuất</a></div>
+            <script>
+                document.getElementById("logout-link").addEventListener("click", function (event) {
+                    event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
+                    const confirmLogout = confirm("Bạn có chắc chắn muốn đăng xuất không?");
+
+                    if (confirmLogout) {
+                        window.location.href = this.href; // Chuyển đến trang đăng xuất nếu xác nhận
+                    }
+                });
+            </script>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="main-content">
+            <div class="header">
+                <div class="header__title"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</div>
+                <div class="header__info">
+                    <span class="text-muted small">Xin chào, Admin</span>
+                    <a href=""><i class="fa-solid fa-user-tie ms-2"></i></a>
+                </div>
+            </div>
+            <!-- nội dung chính  -->
+            <main class="content" role="main" style="overflow-y: auto;">
+                <div class="thanh-bo-loc">
+                    <div class="thanh-bo-loc-1">
+                        <h1 class="title-page">Chi tiết sản phẩm</h1>
+                    </div>
+                </div>
+                <div class="product-detail-container">
+
+                    <div class="image-section">
+                        <img id="mainImage" class="main-image" src="../images/hoa2.jpg" alt="Ảnh sản phẩm">
+                    </div>
+
+                    <!-- Phần thông tin -->
+                    <div class="info-section">
+                        <div style="display: flex; align-items: center; justify-content: space-evenly;">
+                            <label for="">Tên sản phẩm : </label>
+                            <p class="thongtin" style="font-size: 20px; margin-bottom: 23px;"> Nhiệt ái</p>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <label for="">Danh mục :</label>
+                            <p class="thongtin">Bó hoa</p>
+                        </div>
+
+                        <div style="display: flex; align-items: center;"> <label for="">Giá bán :</label>
+                            <p id="productPrice" class="product-price">700.000 VND</p>
+                        </div>
+                        <div style="display: flex; align-items: center;"> <label for="">Giá nhập :</label>
+                            <p id="productPrice" class="product-price-import"> 600.000 VND</p>
+                        </div>
+                        <div style="display: flex; align-items: center;"><label for="">Tỉ lệ lợi nhuận :</label>
+                            <p id="productPrice" class="product-price-profit"> 23.3%</p>
+                        </div>
+        
+                        <div style="display: flex; align-items: center;">
+                            <label for="">Đã bán :</label>
+                            <p class="thongtin">67 sản phẩm </p>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <label for="">Tồn kho :</label>
+                            <p class="thongtin">98 sản phẩm</p>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <label for="">Mô tả :</label>
+                            <p class="thongtin">Bó hoa thể hiện trọn vẹn sự mãnh liệt và lãng mạn.</p>
+                        </div>
+                    </div>
+            </main>
+        </div>
+    </div>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../assets/js/account-admin.js"></script>
+    <script src="../assets/js/Notification.js"></script>
+</body>
+
+</html>

@@ -1,85 +1,486 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tổng quan - admin</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-    rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css">
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Tổng quan - Bloom Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="admin-page">
-  <div class="sidebar">
+<body>
+    <!-- Sidebar -->
     <div class="sidebar">
-      <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
-        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9" />
-          <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
-            fill="#eaf8f0" />
-          <circle cx="40" cy="35" r="8" fill="#b19cd9" />
-          <circle cx="60" cy="35" r="8" fill="#b19cd9" />
-          <circle cx="50" cy="50" r="12" fill="#9370db" />
-          <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
-        </svg>
-        <span>Bloom</span>
-      </div>
-      <a href="0_dashboard.html" class="active"><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
-      <a href="1_users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
-      <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
-      <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
-      <a href="4_price.html"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
-      <a href=""><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
-      <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
-      <a href="#"><i class="fa-sharp fa-solid fa-truck"></i> Quản lý tồn kho</a>
-      <div class="logout_admin"><a href="../index.html" id="logout-link">Đăng xuất</a></div>
-      <script>
-        document.getElementById("logout-link").addEventListener("click", function (event) {
-          event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
-          const confirmLogout = confirm("Bạn có chắc chắn muốn đăng xuất không?");
+        <div class="sidebar">
+            <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
+                <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                    <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9" />
+                    <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
+                        fill="#eaf8f0" />
+                    <circle cx="40" cy="35" r="8" fill="#b19cd9" />
+                    <circle cx="60" cy="35" r="8" fill="#b19cd9" />
+                    <circle cx="50" cy="50" r="12" fill="#9370db" />
+                    <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
+                </svg>
+                <span>Bloom</span>
+            </div>
+            <a href="0_dashboard.html" class="active"><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
+            <a href="1_users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
+            <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
+            <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
+            <a href="4_price.html"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
+            <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
+            <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
+            <a href="7_inventory.html"><i class="fa-solid fa-boxes-stacked me-2"></i></i> Quản lý tồn kho</a>
+            <div class="logout_admin"><a href="index.html" id="logout-link">Đăng xuất</a></div>
+            <script>
+                document.getElementById("logout-link").addEventListener("click", function (event) {
+                    event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
+                    const confirmLogout = confirm("Bạn có chắc chắn muốn đăng xuất không?");
 
-          if (confirmLogout) {
-            window.location.href = this.href; // Chuyển đến trang đăng xuất nếu xác nhận
-          }
-        });
-      </script>
+                    if (confirmLogout) {
+                        window.location.href = this.href; // Chuyển đến trang đăng xuất nếu xác nhận
+                    }
+                });
+            </script>
+        </div>
     </div>
-  </div>
-  <main class="main">
-    <section class="overview">
-      <div class="stat">
-        <h3 id="ordersCount">0</h3>
-        <p>Đơn hàng</p>
-      </div>
-      <div class="stat">
-        <h3 id="stockCount">0</h3>
-        <p>Sản phẩm sắp hết</p>
-      </div>
-      <div class="stat">
-        <h3 id="revenue">0₫</h3>
-        <p>Doanh thu (30 ngày)</p>
-      </div>
-    </section>
-    <section class="charts" style="position: absolute; right: 200px;">
-      <div class="card">
-        <h4>Doanh thu theo tháng</h4><canvas id="revChart" width="600" height="240"></canvas>
-      </div>
-      <div class="card">
-        <h4>Trạng thái đơn</h4><canvas id="stChart" width="400" height="240"></canvas>
-      </div>
-    </section>
-    <section class="tables">
-      <div class="card" id="lowStock"></div>
-      <div class="card" id="recentOrders"></div>
-    </section>
-  </main>
-  <script src="admin.js"></script>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- header  -->
+        <div class="header">
+            <div class="header__title"><i class="fa-sharp fa-solid fa-house me-2"></i>Tổng quan</div>
+            <div class="header__info">
+                <span class="text-muted small">Xin chào, Admin</span>
+                <a href="javascript:void(0)" id="userMenuToggle">
+                    <i class="fa-solid fa-user-tie ms-2"></i>
+                </a>
+
+                <!-- Dropdown Menu -->
+                <div class="user-dropdown" id="userDropdown">
+                    <div class="dropdown-header">
+                        <div class="user-name">Admin User</div>
+                        <div class="user-role">Quản trị viên</div>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-solid fa-user"></i>
+                                <span>Hồ sơ cá nhân</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-solid fa-gear"></i>
+                                <span>Cài đặt</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-divider"></li>
+                        <li>
+                            <button class="dropdown-item logout" id="logoutBtn">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <span>Đăng xuất</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Overlay -->
+                <div class="dropdown-overlay" id="dropdownOverlay"></div>
+            </div>
+        </div>
+
+        <div class="container-fluid" data-aos="fade-up">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1>Chào mừng trở lại, Admin! 🌸</h1>
+                        <p>Hôm nay là một ngày tuyệt vời để bán hoa tươi</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <i class="fa-solid fa-flower" style="font-size: 4rem; opacity: 0.3;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <a href="5_orders.html" class="quick-action-btn">
+                    <i class="fa-solid fa-cart-plus"></i>
+                    <div>Xem đơn hàng</div>
+                </a>
+                <a href="2_products.html" class="quick-action-btn">
+                    <i class="fa-solid fa-plus"></i>
+                    <div>Thêm sản phẩm</div>
+                </a>
+                <a href="7_inventory.html" class="quick-action-btn">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    <div>Kiểm kho</div>
+                </a>
+                <a href="1_users.html" class="quick-action-btn">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <div>Khách hàng mới</div>
+                </a>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card revenue">
+                        <div class="icon">
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                        </div>
+                        <div class="number">154.8M</div>
+                        <div class="label">Doanh thu tháng</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card orders">
+                        <div class="icon">
+                            <i class="fa-solid fa-shopping-cart"></i>
+                        </div>
+                        <div class="number">128</div>
+                        <div class="label">Đơn hàng</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card customers">
+                        <div class="icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="number">89</div>
+                        <div class="label">Khách hàng mới</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card products">
+                        <div class="icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="number">121</div>
+                        <div class="label">Sản phẩm</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts and Recent Data -->
+            <div class="row g-4">
+                <!-- Left Column -->
+                <div class="col-lg-8">
+                    <!-- Revenue Chart -->
+                    <div class="container">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h5><i class="fa-solid fa-chart-line me-2"></i>Doanh thu 7 ngày qua</h5>
+                                <div class="chart-actions">
+                                    <button class="btn" id="weekBtn">Tuần này</button>
+                                    <button class="btn" id="monthBtn">Tháng này</button>
+                                    <button class="btn btn-primary" id="exportBtn">Xuất báo cáo</button>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="revenueChart"></canvas>
+                            </div>
+
+                            <div class="stats-container">
+                                <div class="stat-card">
+                                    <i class="fa-solid fa-sack-dollar revenue-up"></i>
+                                    <div class="stat-value">42.5M</div>
+                                    <div class="stat-label">Tổng doanh thu</div>
+                                </div>
+                                <div class="stat-card">
+                                    <i class="fa-solid fa-arrow-trend-up revenue-up"></i>
+                                    <div class="stat-value">+12.4%</div>
+                                    <div class="stat-label">Tăng trưởng</div>
+                                </div>
+                                <div class="stat-card">
+                                    <i class="fa-solid fa-calendar-day revenue-neutral"></i>
+                                    <div class="stat-value">6.07M</div>
+                                    <div class="stat-label">Trung bình ngày</div>
+                                </div>
+                                <div class="stat-card">
+                                    <i class="fa-solid fa-chart-pie revenue-down"></i>
+                                    <div class="stat-value">8.2M</div>
+                                    <div class="stat-label">Cao nhất</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        // Dữ liệu mẫu cho 7 ngày qua
+                        const days = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
+                        const revenueData = [5200000, 6100000, 4800000, 8200000, 7500000, 6900000, 4500000];
+
+                        // Định dạng số tiền
+                        function formatCurrency(value) {
+                            if (value >= 1000000) {
+                                return (value / 1000000).toFixed(1) + 'M';
+                            } else if (value >= 1000) {
+                                return (value / 1000).toFixed(1) + 'K';
+                            }
+                            return value.toString();
+                        }
+
+                        // Tạo biểu đồ
+                        const ctx = document.getElementById('revenueChart').getContext('2d');
+                        const revenueChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: days,
+                                datasets: [{
+                                    label: 'Doanh thu (VNĐ)',
+                                    data: revenueData,
+                                    backgroundColor: [
+                                        'rgba(52, 152, 219, 0.7)',
+                                        'rgba(46, 204, 113, 0.7)',
+                                        'rgba(155, 89, 182, 0.7)',
+                                        'rgba(241, 196, 15, 0.7)',
+                                        'rgba(230, 126, 34, 0.7)',
+                                        'rgba(231, 76, 60, 0.7)',
+                                        'rgba(52, 73, 94, 0.7)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(52, 152, 219, 1)',
+                                        'rgba(46, 204, 113, 1)',
+                                        'rgba(155, 89, 182, 1)',
+                                        'rgba(241, 196, 15, 1)',
+                                        'rgba(230, 126, 34, 1)',
+                                        'rgba(231, 76, 60, 1)',
+                                        'rgba(52, 73, 94, 1)'
+                                    ],
+                                    borderWidth: 1,
+                                    borderRadius: 6,
+                                    borderSkipped: false,
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function (context) {
+                                                return `Doanh thu: ${formatCurrency(context.parsed.y)} VNĐ`;
+                                            }
+                                        }
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        grid: {
+                                            color: 'rgba(0, 0, 0, 0.05)'
+                                        },
+                                        ticks: {
+                                            callback: function (value) {
+                                                return formatCurrency(value);
+                                            }
+                                        }
+                                    },
+                                    x: {
+                                        grid: {
+                                            display: false
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                        // Xử lý sự kiện cho các nút
+                        document.getElementById('weekBtn').addEventListener('click', function () {
+                            alert('Đang hiển thị dữ liệu tuần này');
+                        });
+
+                        document.getElementById('monthBtn').addEventListener('click', function () {
+                            alert('Đang hiển thị dữ liệu tháng này');
+                        });
+
+                        document.getElementById('exportBtn').addEventListener('click', function () {
+                            alert('Đang xuất báo cáo doanh thu...');
+                        });
+                    </script>
+
+                    <!-- Recent Orders -->
+                    <div class="recent-orders">
+                        <h5 class="mb-4"><i class="fa-solid fa-clock-rotate-left me-2"></i>Đơn hàng gần đây</h5>
+                        <div class="order-item">
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">DH008 - Nguyễn Thị Mai</div>
+                                <small class="text-muted">Hoa hồng đỏ, Hoa cúc trắng</small>
+                            </div>
+                            <div class="text-end">
+                                <div class="fw-bold">1.250.000 ₫</div>
+                                <span class="order-status status-processing">Đang giao</span>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">DH007 - Trần Văn Nam</div>
+                                <small class="text-muted">Lẵng hoa sinh nhật</small>
+                            </div>
+                            <div class="text-end">
+                                <div class="fw-bold">850.000 ₫</div>
+                                <span class="order-status status-completed">Hoàn thành</span>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">DH006 - Lê Thị Hương</div>
+                                <small class="text-muted">Hoa lan, Hoa ly</small>
+                            </div>
+                            <div class="text-end">
+                                <div class="fw-bold">2.150.000 ₫</div>
+                                <span class="order-status status-pending">Chờ xử lý</span>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">DH005 - Phạm Văn Tùng</div>
+                                <small class="text-muted">Bó hoa cưới</small>
+                            </div>
+                            <div class="text-end">
+                                <div class="fw-bold">3.500.000 ₫</div>
+                                <span class="order-status status-completed">Hoàn thành</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-lg-4">
+                    <!-- Top Products -->
+                    <div class="top-products mb-4">
+                        <h5 class="mb-4"><i class="fa-solid fa-trophy me-2"></i>Sản phẩm bán chạy</h5>
+                        <div class="product-rank">
+                            <div class="rank-number rank-1">1</div>
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">Nhiệt Ái</div>
+                                <small class="text-muted">Đã bán: 45 bó</small>
+                            </div>
+                            <div class="fw-bold text-success">12.5M ₫</div>
+                        </div>
+                        <div class="product-rank">
+                            <div class="rank-number rank-2">2</div>
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">Peach</div>
+                                <small class="text-muted">Đã bán: 28 lẵng</small>
+                            </div>
+                            <div class="fw-bold text-success">8.2M ₫</div>
+                        </div>
+                        <div class="product-rank">
+                            <div class="rank-number rank-3">3</div>
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">Hồng Phát</div>
+                                <small class="text-muted">Đã bán: 22 kệ</small>
+                            </div>
+                            <div class="fw-bold text-success">6.8M ₫</div>
+                        </div>
+                        <div class="product-rank">
+                            <div class="rank-number">4</div>
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">BlueBerry</div>
+                                <small class="text-muted">Đã bán: 35 bó</small>
+                            </div>
+                            <div class="fw-bold text-success">5.4M ₫</div>
+                        </div>
+                        <div class="product-rank">
+                            <div class="rank-number">5</div>
+                            <div class="flex-grow-1">
+                                <div class="fw-bold">BlueSky</div>
+                                <small class="text-muted">Đã bán: 12 bó</small>
+                            </div>
+                            <div class="fw-bold text-success">4.2M ₫</div>
+                        </div>
+                    </div>
+
+                    <!-- Inventory Alert -->
+                    <div class="dashboard-card">
+                        <h5 class="mb-4"><i class="fa-solid fa-bell me-2"></i>Cảnh báo tồn kho</h5>
+                        <div class="alert alert-warning">
+                            <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                            <strong>3 sản phẩm</strong> sắp hết hàng
+                        </div>
+                        <a href="7_inventory.html" class="btn btn-outline-primary w-100">
+                            <i class="fa-solid fa-boxes-stacked me-2"></i>Kiểm tra ngay
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="mt-4">
+                <p class="text-center text-muted">&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080" id="toastContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // User dropdown functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const userMenuToggle = document.getElementById('userMenuToggle');
+            const userDropdown = document.getElementById('userDropdown');
+            const dropdownOverlay = document.getElementById('dropdownOverlay');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            // Toggle dropdown
+            userMenuToggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                userDropdown.classList.toggle('show');
+                dropdownOverlay.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking overlay
+            dropdownOverlay.addEventListener('click', function () {
+                userDropdown.classList.remove('show');
+                dropdownOverlay.classList.remove('show');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!userDropdown.contains(e.target) && !userMenuToggle.contains(e.target)) {
+                    userDropdown.classList.remove('show');
+                    dropdownOverlay.classList.remove('show');
+                }
+            });
+
+            // Logout functionality
+            logoutBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const confirmLogout = confirm('Bạn có chắc chắn muốn đăng xuất không?');
+                if (confirmLogout) {
+                    window.location.href = '../index.html';
+                }
+                userDropdown.classList.remove('show');
+                dropdownOverlay.classList.remove('show');
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    userDropdown.classList.remove('show');
+                    dropdownOverlay.classList.remove('show');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

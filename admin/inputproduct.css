@@ -2,7 +2,7 @@ body {
   font-family: "Segoe UI", sans-serif;
   background-color: #f4f6f8;
   margin: 0;
-  padding: 30px;
+  padding: 0px;
 }
 
 .container {
@@ -20,11 +20,12 @@ h2 {
 }
 
 button {
-  background-color: #047857;
+  background-color: #0f9670;
   color: white;
   border: none;
   padding: 10px 15px;
   margin-top: 10px;
+  margin-bottom: 20px;
   border-radius: 5px;
   cursor: pointer;
 }

@@ -135,7 +135,7 @@ function updateProfit() {
   document.getElementById("profitPercent").value = profit + " %";
 }
 
-// ================== HÀM THÔNG BÁO TÙY CHỈNH ==================
+// ================== THÔNG BÁO TÙY CHỈNH ==================
 function showAlert(message, type = "success") {
   let alertBox = document.getElementById("customAlert");
   if (!alertBox) {
@@ -147,18 +147,31 @@ function showAlert(message, type = "success") {
   alertBox.textContent = message;
   alertBox.className =
     "custom-alert " + (type === "error" ? "error" : "success");
-
   alertBox.style.display = "block";
-  setTimeout(() => {
-    alertBox.style.opacity = "1";
-  }, 50);
 
+  setTimeout(() => (alertBox.style.opacity = "1"), 50);
   setTimeout(() => {
     alertBox.style.opacity = "0";
-    setTimeout(() => {
-      alertBox.style.display = "none";
-    }, 400);
+    setTimeout(() => (alertBox.style.display = "none"), 400);
   }, 2500);
+}
+
+// ================== LỊCH SỬ CHỈNH SỬA ==================
+function loadHistory() {
+  const savedHistory = JSON.parse(localStorage.getItem("editHistory")) || [];
+  historyList.innerHTML = "";
+  savedHistory.forEach((item) => {
+    const li = document.createElement("div");
+    li.className = "history-item";
+    li.innerHTML = `
+      <strong>${item.time}</strong> — ${item.id} | ${item.name} 
+      <div class="timestamp">
+        Giá vốn: ${item.oldCost.toLocaleString()} → ${item.newCost.toLocaleString()} |
+        Giá bán: ${item.oldSell.toLocaleString()} → ${item.newSell.toLocaleString()}
+      </div>
+    `;
+    historyList.appendChild(li);
+  });
 }
 
 // ================== LƯU CHỈNH SỬA ==================
@@ -170,7 +183,6 @@ function saveEdit() {
   const cost = document.getElementById("costPrice").value.trim();
   const sell = document.getElementById("sellPrice").value.trim();
 
-  // 🔸 Kiểm tra nhập đủ
   if (!code || !cost || !sell) {
     showAlert("Vui lòng nhập đầy đủ thông tin sản phẩm!", "error");
     return;
@@ -188,17 +200,37 @@ function saveEdit() {
   product.cost = parseInt(cost);
   product.sell = parseInt(sell);
 
-  const time =
-    new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString();
-  historyList.innerHTML += `<li>${time} — ${product.id} | ${
-    product.name
-  } | Giá vốn: ${oldCost.toLocaleString()} VND → ${product.cost.toLocaleString()} VND | Giá bán: ${oldSell.toLocaleString()} VND → ${product.sell.toLocaleString()} VND</li>`;
+  const time = new Date().toLocaleString("vi-VN");
+  const newHistory = {
+    time,
+    id: product.id,
+    name: product.name,
+    oldCost,
+    newCost: product.cost,
+    oldSell,
+    newSell: product.sell,
+  };
+
+  // 🔹 Lưu vào localStorage
+  const savedHistory = JSON.parse(localStorage.getItem("editHistory")) || [];
+  savedHistory.unshift(newHistory); // thêm lên đầu danh sách
+  localStorage.setItem("editHistory", JSON.stringify(savedHistory));
+
+  // 🔹 Cập nhật hiển thị
+  loadHistory();
+
+  // 🔹 Hiệu ứng sáng khi thêm mới
+  const firstItem = historyList.firstElementChild;
+  if (firstItem) {
+    firstItem.style.backgroundColor = "#dfffe0";
+    setTimeout(() => (firstItem.style.backgroundColor = "#fff"), 800);
+  }
 
   closePopup();
   filterCategory();
-
-  // 🔸 Hiển thị thông báo thành công
   showAlert("Cập nhật thành công!", "success");
 }
 
+// ================== KHỞI TẠO ==================
 renderTable(data);
+loadHistory();
