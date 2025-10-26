@@ -12,245 +12,51 @@
         rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="admin.css">
-    <style>
-        .dashboard-card {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid #f0f0f0;
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        }
-
-        .stat-card {
-            text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 16px;
-            padding: 30px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-
-        .stat-card .icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            opacity: 0.9;
-        }
-
-        .stat-card .number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .stat-card .label {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .stat-card.revenue { background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%); }
-        .stat-card.orders { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
-        .stat-card.customers { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
-        .stat-card.products { background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%); }
-
-        .chart-container {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            margin-bottom: 24px;
-        }
-
-        .recent-orders {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .order-item {
-            display: flex;
-            align-items: center;
-            justify-content: between;
-            padding: 15px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .order-item:last-child {
-            border-bottom: none;
-        }
-
-        .order-status {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .status-pending { background: #fff3e0; color: #f57c00; }
-        .status-processing { background: #e3f2fd; color: #1976d2; }
-        .status-completed { background: #e8f5e8; color: #2e7d32; }
-        .status-cancelled { background: #ffebee; color: #c62828; }
-
-        .top-products {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .product-rank {
-            display: flex;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .product-rank:last-child {
-            border-bottom: none;
-        }
-
-        .rank-number {
-            width: 30px;
-            height: 30px;
-            background: #667eea;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-
-        .rank-1 { background: #ffd700; }
-        .rank-2 { background: #c0c0c0; }
-        .rank-3 { background: #cd7f32; }
-
-        .welcome-banner {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .welcome-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-
-        .welcome-banner h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .welcome-banner p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 0;
-        }
-
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .quick-action-btn {
-            background: white;
-            border: 2px solid #f0f0f0;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            text-decoration: none;
-            color: #333;
-            transition: all 0.3s ease;
-        }
-
-        .quick-action-btn:hover {
-            border-color: #667eea;
-            transform: translateY(-3px);
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        .quick-action-btn i {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-    <div class="sidebar">
-      <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
-        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9" />
-          <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
-            fill="#eaf8f0" />
-          <circle cx="40" cy="35" r="8" fill="#b19cd9" />
-          <circle cx="60" cy="35" r="8" fill="#b19cd9" />
-          <circle cx="50" cy="50" r="12" fill="#9370db" />
-          <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
-        </svg>
-        <span>Bloom</span>
-      </div>
-      <a href="0_dashboard.html" class="active"><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
-      <a href="1_users.html" ><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
-      <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
-      <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
-      <a href="4_price.html"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
-      <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
-      <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
-      <a href="7_inventory.html"><i class="fa-solid fa-boxes-stacked me-2"></i></i> Quản lý tồn kho</a>
-      <div class="logout_admin"><a href="../index.html" id="logout-link">Đăng xuất</a></div>
-      <script>
-        document.getElementById("logout-link").addEventListener("click", function (event) {
-          event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
-          const confirmLogout = confirm("Bạn có chắc chắn muốn đăng xuất không?");
+        <div class="sidebar">
+            <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
+                <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                    <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9" />
+                    <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
+                        fill="#eaf8f0" />
+                    <circle cx="40" cy="35" r="8" fill="#b19cd9" />
+                    <circle cx="60" cy="35" r="8" fill="#b19cd9" />
+                    <circle cx="50" cy="50" r="12" fill="#9370db" />
+                    <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
+                </svg>
+                <span>Bloom</span>
+            </div>
+            <a href="0_dashboard.html" class="active"><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
+            <a href="1_users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
+            <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
+            <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
+            <a href="4_price.html"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
+            <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
+            <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
+            <a href="7_inventory.html"><i class="fa-solid fa-boxes-stacked me-2"></i></i> Quản lý tồn kho</a>
+            <div class="logout_admin"><a href="../index.html" id="logout-link">Đăng xuất</a></div>
+            <script>
+                document.getElementById("logout-link").addEventListener("click", function (event) {
+                    event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
+                    const confirmLogout = confirm("Bạn có chắc chắn muốn đăng xuất không?");
 
-          if (confirmLogout) {
-            window.location.href = this.href; // Chuyển đến trang đăng xuất nếu xác nhận
-          }
-        });
-      </script>
+                    if (confirmLogout) {
+                        window.location.href = this.href; // Chuyển đến trang đăng xuất nếu xác nhận
+                    }
+                });
+            </script>
+        </div>
     </div>
-  </div>
 
     <!-- Main Content -->
     <div class="main-content">
+        <!-- header  -->
         <div class="header">
             <div class="header__title"><i class="fa-sharp fa-solid fa-house me-2"></i>Tổng quan</div>
             <div class="header__info">
@@ -311,7 +117,7 @@
             <div class="quick-actions">
                 <a href="5_orders.html" class="quick-action-btn">
                     <i class="fa-solid fa-cart-plus"></i>
-                    <div>Đơn hàng mới</div>
+                    <div>Xem đơn hàng</div>
                 </a>
                 <a href="2_products.html" class="quick-action-btn">
                     <i class="fa-solid fa-plus"></i>
@@ -334,7 +140,7 @@
                         <div class="icon">
                             <i class="fa-solid fa-money-bill-wave"></i>
                         </div>
-                        <div class="number">25.8M</div>
+                        <div class="number">154.8M</div>
                         <div class="label">Doanh thu tháng</div>
                     </div>
                 </div>
@@ -359,9 +165,9 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="stat-card products">
                         <div class="icon">
-                            <i class="fa-solid fa-flower"></i>
+                            <i class="fa-solid fa-users"></i>
                         </div>
-                        <div class="number">45</div>
+                        <div class="number">121</div>
                         <div class="label">Sản phẩm</div>
                     </div>
                 </div>
@@ -372,16 +178,141 @@
                 <!-- Left Column -->
                 <div class="col-lg-8">
                     <!-- Revenue Chart -->
-                    <div class="chart-container">
-                        <h5 class="mb-4"><i class="fa-solid fa-chart-line me-2"></i>Doanh thu 7 ngày qua</h5>
-                        <div style="height: 300px; background: #f8f9fa; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #6c757d;">
-                            <div class="text-center">
-                                <i class="fa-solid fa-chart-bar mb-2" style="font-size: 2rem;"></i>
-                                <div>Biểu đồ doanh thu</div>
-                                <small>(Dữ liệu mẫu - có thể tích hợp chart library)</small>
+                    <div class="container">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h5><i class="fa-solid fa-chart-line me-2"></i>Doanh thu 7 ngày qua</h5>
+                                <div class="chart-actions">
+                                    <button class="btn" id="weekBtn">Tuần này</button>
+                                    <button class="btn" id="monthBtn">Tháng này</button>
+                                    <button class="btn btn-primary" id="exportBtn">Xuất báo cáo</button>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="revenueChart"></canvas>
+                            </div>
+
+                            <div class="stats-container">
+                                <div class="stat-card">
+                                    <i class="fa-solid fa-sack-dollar revenue-up"></i>
+                                    <div class="stat-value">42.5M</div>
+                                    <div class="stat-label">Tổng doanh thu</div>
+                                </div>
+                                <div class="stat-card">
+                                    <i class="fa-solid fa-arrow-trend-up revenue-up"></i>
+                                    <div class="stat-value">+12.4%</div>
+                                    <div class="stat-label">Tăng trưởng</div>
+                                </div>
+                                <div class="stat-card">
+                                    <i class="fa-solid fa-calendar-day revenue-neutral"></i>
+                                    <div class="stat-value">6.07M</div>
+                                    <div class="stat-label">Trung bình ngày</div>
+                                </div>
+                                <div class="stat-card">
+                                    <i class="fa-solid fa-chart-pie revenue-down"></i>
+                                    <div class="stat-value">8.2M</div>
+                                    <div class="stat-label">Cao nhất</div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                        // Dữ liệu mẫu cho 7 ngày qua
+                        const days = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
+                        const revenueData = [5200000, 6100000, 4800000, 8200000, 7500000, 6900000, 4500000];
+
+                        // Định dạng số tiền
+                        function formatCurrency(value) {
+                            if (value >= 1000000) {
+                                return (value / 1000000).toFixed(1) + 'M';
+                            } else if (value >= 1000) {
+                                return (value / 1000).toFixed(1) + 'K';
+                            }
+                            return value.toString();
+                        }
+
+                        // Tạo biểu đồ
+                        const ctx = document.getElementById('revenueChart').getContext('2d');
+                        const revenueChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: days,
+                                datasets: [{
+                                    label: 'Doanh thu (VNĐ)',
+                                    data: revenueData,
+                                    backgroundColor: [
+                                        'rgba(52, 152, 219, 0.7)',
+                                        'rgba(46, 204, 113, 0.7)',
+                                        'rgba(155, 89, 182, 0.7)',
+                                        'rgba(241, 196, 15, 0.7)',
+                                        'rgba(230, 126, 34, 0.7)',
+                                        'rgba(231, 76, 60, 0.7)',
+                                        'rgba(52, 73, 94, 0.7)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(52, 152, 219, 1)',
+                                        'rgba(46, 204, 113, 1)',
+                                        'rgba(155, 89, 182, 1)',
+                                        'rgba(241, 196, 15, 1)',
+                                        'rgba(230, 126, 34, 1)',
+                                        'rgba(231, 76, 60, 1)',
+                                        'rgba(52, 73, 94, 1)'
+                                    ],
+                                    borderWidth: 1,
+                                    borderRadius: 6,
+                                    borderSkipped: false,
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function (context) {
+                                                return `Doanh thu: ${formatCurrency(context.parsed.y)} VNĐ`;
+                                            }
+                                        }
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        grid: {
+                                            color: 'rgba(0, 0, 0, 0.05)'
+                                        },
+                                        ticks: {
+                                            callback: function (value) {
+                                                return formatCurrency(value);
+                                            }
+                                        }
+                                    },
+                                    x: {
+                                        grid: {
+                                            display: false
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                        // Xử lý sự kiện cho các nút
+                        document.getElementById('weekBtn').addEventListener('click', function () {
+                            alert('Đang hiển thị dữ liệu tuần này');
+                        });
+
+                        document.getElementById('monthBtn').addEventListener('click', function () {
+                            alert('Đang hiển thị dữ liệu tháng này');
+                        });
+
+                        document.getElementById('exportBtn').addEventListener('click', function () {
+                            alert('Đang xuất báo cáo doanh thu...');
+                        });
+                    </script>
 
                     <!-- Recent Orders -->
                     <div class="recent-orders">
@@ -508,27 +439,27 @@
         AOS.init();
 
         // User dropdown functionality
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const userMenuToggle = document.getElementById('userMenuToggle');
             const userDropdown = document.getElementById('userDropdown');
             const dropdownOverlay = document.getElementById('dropdownOverlay');
             const logoutBtn = document.getElementById('logoutBtn');
 
             // Toggle dropdown
-            userMenuToggle.addEventListener('click', function(e) {
+            userMenuToggle.addEventListener('click', function (e) {
                 e.stopPropagation();
                 userDropdown.classList.toggle('show');
                 dropdownOverlay.classList.toggle('show');
             });
 
             // Close dropdown when clicking overlay
-            dropdownOverlay.addEventListener('click', function() {
+            dropdownOverlay.addEventListener('click', function () {
                 userDropdown.classList.remove('show');
                 dropdownOverlay.classList.remove('show');
             });
 
             // Close dropdown when clicking outside
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (!userDropdown.contains(e.target) && !userMenuToggle.contains(e.target)) {
                     userDropdown.classList.remove('show');
                     dropdownOverlay.classList.remove('show');
@@ -536,7 +467,7 @@
             });
 
             // Logout functionality
-            logoutBtn.addEventListener('click', function(e) {
+            logoutBtn.addEventListener('click', function (e) {
                 e.preventDefault();
                 const confirmLogout = confirm('Bạn có chắc chắn muốn đăng xuất không?');
                 if (confirmLogout) {
@@ -545,8 +476,8 @@
                 userDropdown.classList.remove('show');
                 dropdownOverlay.classList.remove('show');
             });
-            
-            document.addEventListener('keydown', function(e) {
+
+            document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') {
                     userDropdown.classList.remove('show');
                     dropdownOverlay.classList.remove('show');
@@ -555,4 +486,5 @@
         });
     </script>
 </body>
+
 </html>
