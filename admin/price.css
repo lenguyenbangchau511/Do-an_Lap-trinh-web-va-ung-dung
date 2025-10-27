@@ -1,10 +1,4 @@
-body {
-  font-family: "Segoe UI", sans-serif;
-  margin: 0;
-  background-color: #f8fff6;
-  color: #222;
-  position: relative;
-}
+
 
 
 .filter-section {
@@ -30,45 +24,13 @@ body {
 #editBtn:hover {
   background-color: #00b35c;
 }
-/* header  */
-.header {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--muted);
-  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-  margin-bottom: 30px;
-  align-items: center;
-  border-radius: 8px;
-  margin-top: 10px;
-  margin-left: 20px;
-  margin-right: 0px;
-}
 
-.header__title {
-  position: relative;
-  font-size: 30px;
-  font-weight: 600;
-  color: var(--accent);
-  left: 50px;
-}
 
-.header__info {
-  position: absolute;
-  font-size: 23px;
-  right: 100px;
-  font-weight: 500;
-}
 
-.header__info a {
-  margin-left: 10px;
-  font-size: 25px;
-  color: #425e4e;
-}
 
 main {
-  margin-left: 250px;
+  margin-left: 280px;
+  margin-top: 10px;
   margin-right: 30px;
 }
 

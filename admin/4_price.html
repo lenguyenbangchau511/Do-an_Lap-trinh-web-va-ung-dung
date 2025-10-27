@@ -33,7 +33,7 @@
         <span>Bloom</span>
       </div>
       <a href="0_dashboard.html"><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
-      <a href="1_users.html" ><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
+      <a href="1_users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
       <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
       <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
       <a href="4_price.html" class="active"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
@@ -55,19 +55,22 @@
   </div>
 
   <main>
+    <!-- header  -->
     <div class="header">
-      <div class="header__title"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</div>
+      <div class="header__title"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</div>
       <div class="header__info">
-        <span class="text-muted small">Xin chào, Admin</span>
-        <a href="javascript:void(0)" id="userMenuToggle">
-          <i class="fa-solid fa-user-tie ms-2"></i>
-        </a>
-
+        <div>
+          <span class="text-muted small">Xin chào, Admin</span>
+          <a href="javascript:void(0)" id="userMenuToggle">
+            <i class="fa-solid fa-user-tie ms-2"></i>
+          </a>
+        </div>
         <!-- Dropdown Menu -->
         <div class="user-dropdown" id="userDropdown">
           <div class="dropdown-header">
             <div class="user-name">Admin User</div>
             <div class="user-role">Quản trị viên</div>
+            <span>_________________________________________________</span>
           </div>
           <ul class="dropdown-menu">
             <li>
@@ -91,7 +94,6 @@
             </li>
           </ul>
         </div>
-
         <!-- Overlay -->
         <div class="dropdown-overlay" id="dropdownOverlay"></div>
       </div>
@@ -109,7 +111,7 @@
       </button>
     </div>
 
-    <table id="priceTable" >
+    <table id="priceTable">
       <thead>
         <tr>
           <th>STT</th>
@@ -161,59 +163,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="price.js"></script>
-  <script>
-    // User dropdown functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const userMenuToggle = document.getElementById('userMenuToggle');
-    const userDropdown = document.getElementById('userDropdown');
-    const dropdownOverlay = document.getElementById('dropdownOverlay');
-    const logoutBtn = document.getElementById('logoutBtn');
-
-    // Toggle dropdown
-    userMenuToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        userDropdown.classList.toggle('show');
-        dropdownOverlay.classList.toggle('show');
-    });
-
-    // Close dropdown when clicking overlay
-    dropdownOverlay.addEventListener('click', function() {
-        userDropdown.classList.remove('show');
-        dropdownOverlay.classList.remove('show');
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!userDropdown.contains(e.target) && !userMenuToggle.contains(e.target)) {
-            userDropdown.classList.remove('show');
-            dropdownOverlay.classList.remove('show');
-        }
-    });
-
-    // Logout functionality
-    logoutBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const confirmLogout = confirm('Bạn có chắc chắn muốn đăng xuất không?');
-        
-        if (confirmLogout) {
-            // Thực hiện đăng xuất
-            window.location.href = '../index.html';
-        }
-        
-        // Đóng dropdown
-        userDropdown.classList.remove('show');
-        dropdownOverlay.classList.remove('show');
-    });
-
-    // Close dropdown on escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            userDropdown.classList.remove('show');
-            dropdownOverlay.classList.remove('show');
-        }
-    });
-});
-  </script>
+  <script src="info_admin.js"></script>
 </body>
 
 </html>

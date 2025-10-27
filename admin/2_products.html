@@ -55,19 +55,22 @@
   <!-- Main Content -->
   <div class="main-content">
     <!-- Header  -->
+    <!-- header  -->
     <div class="header">
-      <div class="header__title"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</div>
+      <div class="header__title"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</div>
       <div class="header__info">
-        <span class="text-muted small">Xin chào, Admin</span>
-        <a href="javascript:void(0)" id="userMenuToggle">
-          <i class="fa-solid fa-user-tie ms-2"></i>
-        </a>
-
+        <div>
+          <span class="text-muted small">Xin chào, Admin</span>
+          <a href="javascript:void(0)" id="userMenuToggle">
+            <i class="fa-solid fa-user-tie ms-2"></i>
+          </a>
+        </div>
         <!-- Dropdown Menu -->
         <div class="user-dropdown" id="userDropdown">
           <div class="dropdown-header">
             <div class="user-name">Admin User</div>
             <div class="user-role">Quản trị viên</div>
+            <span>_________________________________________________</span>
           </div>
           <ul class="dropdown-menu">
             <li>
@@ -91,7 +94,6 @@
             </li>
           </ul>
         </div>
-
         <!-- Overlay -->
         <div class="dropdown-overlay" id="dropdownOverlay"></div>
       </div>
@@ -333,10 +335,12 @@
   <td>${p.costPrice.toLocaleString()}</td>        <!-- giá nhập -->
   <td>${p.salePrice.toLocaleString()}</td>       <!-- giá bán -->
   <td>${p.qty}</td>
-  <td style="color: ${p.status === 'Hoạt động' ? 'green' : 'red'}; font-weight: bold;">
-  ${p.status}
-</td>
-                       <!-- trạng thái -->
+  
+<td>
+        <span class="badge ${p.status === 'Hoạt động' ? 'bg-success' : 'bg-secondary'}">
+          ${p.status}
+        </span>
+      </td>
   <td>
     <button class="btn btn-sm btn-outline-info me-1 view-products" data-index="${i}"><i class="fa-solid fa-eye"></i> Xem </button>
     <button class="btn btn-sm btn-outline-primary me-1 edit-btn" data-index="${i}"><i class="fa-solid fa-pen"></i> Sửa</button>
@@ -458,31 +462,31 @@
 
     /* ==================== TÌM KIẾM & LỌC ==================== */
     const searchInput = document.getElementById('searchProduct');
-const categorySelect = document.getElementById('filterCategory2');
-const statusSelect = document.getElementById('filterStatus2'); // thêm select trạng thái
+    const categorySelect = document.getElementById('filterCategory2');
+    const statusSelect = document.getElementById('filterStatus2'); // thêm select trạng thái
 
-function filterProducts() {
-  const keyword = searchInput.value.trim().toLowerCase();
-  const category = categorySelect.value;
-  const status = statusSelect.value;
+    function filterProducts() {
+      const keyword = searchInput.value.trim().toLowerCase();
+      const category = categorySelect.value;
+      const status = statusSelect.value;
 
-  const filtered = products.filter(p => {
-    const matchesKeyword =
-      p.name.toLowerCase().includes(keyword) ||
-      p.code.toLowerCase().includes(keyword);
-    const matchesCategory = !category || p.category.toLowerCase() === category.toLowerCase();
-    const matchesStatus = !status || p.status.toLowerCase() === status.toLowerCase(); // kiểm tra trạng thái
+      const filtered = products.filter(p => {
+        const matchesKeyword =
+          p.name.toLowerCase().includes(keyword) ||
+          p.code.toLowerCase().includes(keyword);
+        const matchesCategory = !category || p.category.toLowerCase() === category.toLowerCase();
+        const matchesStatus = !status || p.status.toLowerCase() === status.toLowerCase(); // kiểm tra trạng thái
 
-    return matchesKeyword && matchesCategory && matchesStatus;
-  });
+        return matchesKeyword && matchesCategory && matchesStatus;
+      });
 
-  renderTable(filtered);
-}
+      renderTable(filtered);
+    }
 
-// Gán sự kiện
-searchInput.addEventListener('input', filterProducts);
-categorySelect.addEventListener('change', filterProducts);
-statusSelect.addEventListener('change', filterProducts); // thêm sự kiện
+    // Gán sự kiện
+    searchInput.addEventListener('input', filterProducts);
+    categorySelect.addEventListener('change', filterProducts);
+    statusSelect.addEventListener('change', filterProducts); // thêm sự kiện
 
 
     /* ==================== PHÂN TRANG (GIẢ LẬP) ==================== */
@@ -506,59 +510,6 @@ statusSelect.addEventListener('change', filterProducts); // thêm sự kiện
       // Chuyển hướng sang detail.html kèm query string
       window.location.href = `detail.html?index=${index}`;
     });
-    // User dropdown functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const userMenuToggle = document.getElementById('userMenuToggle');
-    const userDropdown = document.getElementById('userDropdown');
-    const dropdownOverlay = document.getElementById('dropdownOverlay');
-    const logoutBtn = document.getElementById('logoutBtn');
-
-    // Toggle dropdown
-    userMenuToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        userDropdown.classList.toggle('show');
-        dropdownOverlay.classList.toggle('show');
-    });
-
-    // Close dropdown when clicking overlay
-    dropdownOverlay.addEventListener('click', function() {
-        userDropdown.classList.remove('show');
-        dropdownOverlay.classList.remove('show');
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!userDropdown.contains(e.target) && !userMenuToggle.contains(e.target)) {
-            userDropdown.classList.remove('show');
-            dropdownOverlay.classList.remove('show');
-        }
-    });
-
-    // Logout functionality
-    logoutBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const confirmLogout = confirm('Bạn có chắc chắn muốn đăng xuất không?');
-        
-        if (confirmLogout) {
-            // Thực hiện đăng xuất
-            window.location.href = '../index.html';
-        }
-        
-        // Đóng dropdown
-        userDropdown.classList.remove('show');
-        dropdownOverlay.classList.remove('show');
-    });
-
-    // Close dropdown on escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            userDropdown.classList.remove('show');
-            dropdownOverlay.classList.remove('show');
-        }
-    });
-});
-
-
-
   </script>
+  <script src="info_admin.js"></script>
 </body>

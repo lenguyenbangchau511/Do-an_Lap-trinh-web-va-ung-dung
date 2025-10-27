@@ -120,47 +120,49 @@
 
   <!-- Main Content -->
   <div class="main-content">
-    <div class="header">
-      <div class="header__title"><i class="fa-solid fa-boxes-stacked me-2"></i>Quản lý tồn kho</div>
-      <div class="header__info">
-        <span class="text-muted small">Xin chào, Admin</span>
-        <a href="javascript:void(0)" id="userMenuToggle">
-          <i class="fa-solid fa-user-tie ms-2"></i>
-        </a>
-
-        <!-- Dropdown Menu -->
-        <div class="user-dropdown" id="userDropdown">
-          <div class="dropdown-header">
-            <div class="user-name">Admin User</div>
-            <div class="user-role">Quản trị viên</div>
-          </div>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="#" class="dropdown-item">
-                <i class="fa-solid fa-user"></i>
-                <span>Hồ sơ cá nhân</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="dropdown-item">
-                <i class="fa-solid fa-gear"></i>
-                <span>Cài đặt</span>
-              </a>
-            </li>
-            <li class="dropdown-divider"></li>
-            <li>
-              <button class="dropdown-item logout" id="logoutBtn">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <span>Đăng xuất</span>
-              </button>
-            </li>
-          </ul>
+    <!-- header  -->
+        <div class="header">
+            <div class="header__title"> <i class="fa-solid fa-boxes-stacked me-2"></i></i> Quản lý tồn kho</div>
+            <div class="header__info">
+                <div>
+                    <span class="text-muted small">Xin chào, Admin</span>
+                    <a href="javascript:void(0)" id="userMenuToggle">
+                        <i class="fa-solid fa-user-tie ms-2"></i>
+                    </a>
+                </div>
+                <!-- Dropdown Menu -->
+                <div class="user-dropdown" id="userDropdown">
+                    <div class="dropdown-header">
+                        <div class="user-name">Admin User</div>
+                        <div class="user-role">Quản trị viên</div>
+                        <span>_________________________________________________</span>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-solid fa-user"></i>
+                                <span>Hồ sơ cá nhân</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-solid fa-gear"></i>
+                                <span>Cài đặt</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-divider"></li>
+                        <li>
+                            <button class="dropdown-item logout" id="logoutBtn">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <span>Đăng xuất</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Overlay -->
+                <div class="dropdown-overlay" id="dropdownOverlay"></div>
+            </div>
         </div>
-
-        <!-- Overlay -->
-        <div class="dropdown-overlay" id="dropdownOverlay"></div>
-      </div>
-    </div>
 
     <div class="container-fluid" data-aos="fade-up">
       <!-- Thống kê tồn kho -->
@@ -345,54 +347,8 @@
         e.target.classList.add('active');
       }
     });
-
-    // User dropdown functionality
-    document.addEventListener('DOMContentLoaded', function () {
-      const userMenuToggle = document.getElementById('userMenuToggle');
-      const userDropdown = document.getElementById('userDropdown');
-      const dropdownOverlay = document.getElementById('dropdownOverlay');
-      const logoutBtn = document.getElementById('logoutBtn');
-
-      // Toggle dropdown
-      userMenuToggle.addEventListener('click', function (e) {
-        e.stopPropagation();
-        userDropdown.classList.toggle('show');
-        dropdownOverlay.classList.toggle('show');
-      });
-
-      // Close dropdown when clicking overlay
-      dropdownOverlay.addEventListener('click', function () {
-        userDropdown.classList.remove('show');
-        dropdownOverlay.classList.remove('show');
-      });
-
-      // Close dropdown when clicking outside
-      document.addEventListener('click', function (e) {
-        if (!userDropdown.contains(e.target) && !userMenuToggle.contains(e.target)) {
-          userDropdown.classList.remove('show');
-          dropdownOverlay.classList.remove('show');
-        }
-      });
-
-      // Logout functionality
-      logoutBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        const confirmLogout = confirm('Bạn có chắc chắn muốn đăng xuất không?');
-        if (confirmLogout) {
-          window.location.href = '../index.html';
-        }
-        userDropdown.classList.remove('show');
-        dropdownOverlay.classList.remove('show');
-      });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-          userDropdown.classList.remove('show');
-          dropdownOverlay.classList.remove('show');
-        }
-      });
-    });
   </script>
+  <script src="info_admin.js"></script>
 </body>
 
 </html>
