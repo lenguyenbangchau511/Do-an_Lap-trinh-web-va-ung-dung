@@ -222,6 +222,10 @@
                   <button type="button" class="btn btn-outline-secondary" id="togglePassword">
                     <i class="fa-solid fa-eye"></i>
                   </button>
+                  <button type="button" class="btn btn-outline-secondary" id="resetPassword">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                  </button>
+                  
                 </div>
                 <div class="invalid-feedback">Vui lòng nhập mật khẩu.</div>
               </div>
@@ -465,6 +469,20 @@
         e.target.classList.add('active');
       }
     });
+    const passwordButton = document.getElementById('resetPassword');
+        
+        // Thêm sự kiện click
+        passwordButton.addEventListener('click', function() {
+            // Hiển thị hộp thoại xác nhận
+            const isConfirmed = confirm('Bạn có chắc muốn đổi về id mặc định không?');
+            
+            // Kiểm tra kết quả
+            if (isConfirmed) {
+                // Thực hiện hành động khi người dùng đồng ý
+                alert('Đổi thành công!');
+                console.log('Đã đổi về id mặc định thành công');
+            }
+        });
   </script>
   <script src="info_admin.js"></script>
 </body>

@@ -366,13 +366,14 @@ body.dark .theme-toggle {
   border: none;
   font-size: 18px;
   top: 0px;
-  right: 0;
+  right: 40px;
 }
 
 #togglePassword:hover {
   background: none;
   color: #000;
 }
+
 /* tìm kieenms Product */
 .searchProduct-main {
   display: flex;
@@ -788,4 +789,11 @@ body.dark .theme-toggle {
 
 footer p{
   font-size: 16px !important;
+}
+#resetPassword{
+  border: none;
+}
+#resetPassword:hover{
+  background: none;
+  color: #2b2b3a;
 }
