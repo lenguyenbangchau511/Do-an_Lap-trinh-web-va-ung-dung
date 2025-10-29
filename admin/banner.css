@@ -1,0 +1,268 @@
+ /* Banner  */
+        .welcome-banner {
+            background: linear-gradient(135deg,
+                    #ff9a9e 0%,
+                    #e4db80 25%,
+                    #fad0c4 50%,
+                    #67cba2 75%,
+                    #c2e9fb 100%);
+            background-size: 400% 400%;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+            animation: gradientShift 8s ease infinite;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+            animation: sparkle 4s ease-in-out infinite alternate;
+        }
+
+        .welcome-banner::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.1) 50%,
+                    transparent 100%);
+            transform: rotate(45deg);
+            animation: shimmer 6s ease-in-out infinite;
+        }
+
+        .welcome-banner h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        .welcome-banner p {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 2;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        .welcome-banner .fa-flower {
+            color: #ec4899;
+            filter: drop-shadow(0 4px 8px rgba(236, 72, 153, 0.3));
+            position: relative;
+            z-index: 2;
+            animation:
+                float 3s ease-in-out infinite,
+                rotate 8s linear infinite,
+                pulse 2s ease-in-out infinite alternate;
+        }
+
+        /* Hiệu ứng floating particles */
+        .welcome-banner .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .welcome-banner .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: floatParticle 6s ease-in-out infinite;
+        }
+
+        .welcome-banner .particle:nth-child(1) {
+            width: 8px;
+            height: 8px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .welcome-banner .particle:nth-child(2) {
+            width: 6px;
+            height: 6px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 1s;
+        }
+
+        .welcome-banner .particle:nth-child(3) {
+            width: 4px;
+            height: 4px;
+            top: 40%;
+            left: 60%;
+            animation-delay: 2s;
+        }
+
+        .welcome-banner .particle:nth-child(4) {
+            width: 10px;
+            height: 10px;
+            top: 80%;
+            left: 30%;
+            animation-delay: 3s;
+        }
+
+        /* Animations */
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+            from {
+                opacity: 0.2;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 0.4;
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes textGlow {
+            from {
+                filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.3));
+            }
+
+            to {
+                filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.6));
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: rotate(45deg) translateX(-100%);
+            }
+
+            100% {
+                transform: rotate(45deg) translateX(100%);
+            }
+        }
+
+        @keyframes sparkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes floatParticle {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px);
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: translateY(-20px) translateX(10px);
+                opacity: 0.4;
+            }
+
+            75% {
+                opacity: 0.8;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .welcome-banner {
+                padding: 2rem 1.5rem;
+            }
+
+            .welcome-banner h1 {
+                font-size: 2rem;
+            }
+
+            .welcome-banner p {
+                font-size: 1.1rem;
+            }
+
+            .welcome-banner .fa-flower {
+                font-size: 3rem !important;
+            }
+        }
+
+        /* Hiệu ứng hover */
+        .welcome-banner:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .welcome-banner:hover .fa-flower {
+            animation-duration: 2s, 6s, 1s;
+        }
