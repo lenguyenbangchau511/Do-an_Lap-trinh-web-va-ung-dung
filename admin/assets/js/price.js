@@ -218,21 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
       style.textContent = `
         .toast-message {
           position: fixed;
-          top: 20px;
-          right: 20px;
-          background: #dc3545;
-          color: white;
-          padding: 15px 20px;
-          border-radius: 8px;
-          z-index: 10000;
-          transform: translateX(400px);
-          transition: transform 0.3s ease;
-          max-width: 300px;
-          word-wrap: break-word;
-        }
-        .toast-message.show {
-          transform: translateX(0);
-        }
+         
       `;
       document.head.appendChild(style);
     }
