@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý Phiếu Nhập Hàng</title>
+    <!-- Sử dụng cùng link font-awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Liên kết với file CSS mới -->
+    <link rel="stylesheet" href="css/inputproduct.css" />
+
+    <!-- ⭐ Thêm phần CSS để thu nhỏ hình ảnh hoa ⭐ -->
+    <style>
+      /* Thu nhỏ hình ảnh sản phẩm trong danh sách phiếu nhập */
+      .data-table img,
+      .detail-table img,
+      .product-list img {
+        width: 100px !important; /* Giới hạn chiều rộng */
+        height: auto !important; /* Giữ nguyên tỉ lệ ảnh */
+        object-fit: cover; /* Cắt ảnh vừa khung, không méo */
+        border-radius: 8px; /* Bo tròn nhẹ góc */
+        display: block;
+        margin: 0 auto; /* Căn giữa hình trong ô */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar (Giống như file HTML cũ của bạn) -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h3>TRUNG TÂM ĐIỀU KHIỂN</h3>
+        </div>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="#"><i class="fas fa-tachometer-alt"></i> Tổng quan</a>
+          </li>
+          <li>
+            <a href="#"><i class="fas fa-users"></i> Quản lý khách hàng</a>
+          </li>
+          <li>
+            <a href="#"><i class="fas fa-file-invoice"></i> Quản lý đơn hàng</a>
+          </li>
+          <li>
+            <a href="#"><i class="fas fa-box"></i> Quản lý sản phẩm</a>
+          </li>
+          <li>
+            <a href="#"><i class="fas fa-list-alt"></i> Quản lý danh mục</a>
+          </li>
+          <li class="active">
+            <a href="#"><i class="fas fa-truck"></i> Quản lý nhập hàng</a>
+          </li>
+          <li>
+            <a href="#"><i class="fas fa-dollar-sign"></i> Quản lý giá bán</a>
+          </li>
+          <li>
+            <a href="#"><i class="fas fa-warehouse"></i> Quản lý tồn kho</a>
+          </li>
+        </ul>
+        <div class="sidebar-footer">
+          <button class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Đăng xuất
+          </button>
+        </div>
+      </div>
+
+      <!-- Khu vực Nội dung Chính -->
+      <div class="main-content">
+        <div class="header">
+          <h2>Quản lý phiếu nhập hàng</h2>
+        </div>
+
+        <!-- Màn hình DANH SÁCH PHIẾU NHẬP (Mặc định) -->
+        <div id="list-view" class="content-view active">
+          <div class="content-header">
+            <button class="action-btn add-btn" onclick="showView('add-view')">
+              <i class="fas fa-plus"></i> Thêm phiếu nhập
+            </button>
+          </div>
+
+          <!-- Thanh tìm kiếm/Lọc -->
+          <div class="filter-box">
+            <h4>Tra cứu phiếu nhập</h4>
+            <div class="filter-inputs">
+              <div class="filter-group date-group">
+                <label for="date-from">Từ ngày</label>
+                <input type="date" id="date-from" />
+              </div>
+              <div class="filter-group date-group">
+                <label for="date-to">Đến ngày</label>
+                <input type="date" id="date-to" />
+              </div>
+              <div class="filter-actions">
+                <button class="search-btn">
+                  <i class="fas fa-search"></i> Tìm kiếm
+                </button>
+                <button class="reset-btn">
+                  <i class="fas fa-redo"></i> Đặt lại
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bảng Danh sách Phiếu Nhập -->
+          <table class="data-table import-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>MÃ PHIẾU</th>
+                <th>NGÀY NHẬP</th>
+                <th>SỐ LƯỢNG SẢN PHẨM</th>
+                <th>TỔNG GIÁ TRỊ</th>
+                <th>THAO TÁC</th>
+              </tr>
+            </thead>
+            <tbody id="import-list-body">
+              <!-- Dữ liệu phiếu nhập sẽ được chèn ở đây -->
+            </tbody>
+          </table>
+
+          <!-- Phân trang -->
+          <div class="pagination" id="pagination-controls">
+            <!-- Các nút phân trang sẽ được chèn bởi JS -->
+          </div>
+        </div>
+
+        <!-- Màn hình CHI TIẾT PHIẾU NHẬP (Ẩn) -->
+        <div id="detail-view" class="content-view">
+          <div class="detail-card">
+            <h3 class="detail-title">Chi tiết phiếu nhập hàng</h3>
+            <div class="detail-content">
+              <div class="section-header pink-bg">
+                Thông tin phiếu nhập <span id="detail-code"></span>
+              </div>
+              <div class="info-grid">
+                <div>
+                  <label>Mã phiếu nhập</label>
+                  <span id="detail-ma-phieu"></span>
+                </div>
+                <div>
+                  <label>Ngày nhập</label>
+                  <span id="detail-ngay-nhap"></span>
+                </div>
+                <div>
+                  <label>Số lượng sản phẩm</label>
+                  <span id="detail-so-luong"></span>
+                </div>
+              </div>
+
+              <div class="section-header pink-bg">Danh sách sản phẩm nhập</div>
+              <table class="data-table detail-table">
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>SẢN PHẨM</th>
+                    <th>GIÁ NHẬP</th>
+                    <th>SỐ LƯỢNG</th>
+                    <th>THÀNH TIỀN</th>
+                  </tr>
+                </thead>
+                <tbody id="detail-products-body">
+                  <!-- Chi tiết sản phẩm sẽ được chèn ở đây -->
+                </tbody>
+              </table>
+
+              <div class="summary-box">
+                <p>Tổng số sản phẩm: <span id="summary-items"></span></p>
+                <p>Tổng số lượng nhập: <span id="summary-quantity"></span></p>
+                <p class="total-value">
+                  Tổng giá trị phiếu nhập: <span id="summary-total"></span> VND
+                </p>
+              </div>
+
+              <div class="detail-actions">
+                <button
+                  class="action-btn secondary-btn"
+                  onclick="showView('list-view')"
+                >
+                  <i class="fas fa-arrow-left"></i> Quay về
+                </button>
+                <button class="action-btn print-btn" onclick="printImport()">
+                  <i class="fas fa-print"></i> In phiếu nhập
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Màn hình THÊM PHIẾU NHẬP (Ẩn) -->
+        <div id="add-view" class="content-view">
+          <div class="detail-card">
+            <h3 class="detail-title">Thêm thông tin phiếu nhập</h3>
+            <div class="detail-content">
+              <div class="section-header pink-bg">Thông tin phiếu nhập</div>
+              <div class="info-grid add-info-grid">
+                <div class="input-group required">
+                  <label for="add-date">Ngày nhập</label>
+                  <input type="date" id="add-date" value="2025-10-31" />
+                </div>
+                <div class="input-group">
+                  <label for="add-code">Mã phiếu nhập</label>
+                  <input type="text" id="add-code" value="#MP006" disabled />
+                </div>
+              </div>
+
+              <div class="section-header pink-bg">Danh sách sản phẩm nhập</div>
+              <div id="add-product-list">
+                <!-- Các trường nhập sản phẩm sẽ được thêm vào đây -->
+              </div>
+
+              <button
+                class="action-btn add-product-row-btn"
+                onclick="addProductRow()"
+              >
+                <i class="fas fa-plus"></i> Thêm sản phẩm
+              </button>
+
+              <div class="summary-box add-summary-box">
+                <p>Tổng số sản phẩm: <span id="add-summary-items">0</span></p>
+                <p>
+                  Tổng số lượng nhập: <span id="add-summary-quantity">0</span>
+                </p>
+                <p class="total-value">
+                  Tổng giá trị: <span id="add-summary-total">0</span> VND
+                </p>
+              </div>
+
+              <div class="detail-actions">
+                <button
+                  class="action-btn secondary-btn"
+                  onclick="showView('list-view')"
+                >
+                  <i class="fas fa-times"></i> Hủy bỏ
+                </button>
+                <button class="action-btn save-btn" onclick="saveNewImport()">
+                  <i class="fas fa-save"></i> Lưu phiếu nhập
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Liên kết với file JS mới -->
+    <script src="js/inputproduct.js"></script>
+  </body>
+</html>

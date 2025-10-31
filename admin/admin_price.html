@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="vi">
+   
+  <head>
+       
+    <meta charset="UTF-8" />
+       
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       
+    <title>Quản lý Giá Bán Hoa</title>
+       
+    <link rel="stylesheet" href="css/price.css" />
+       
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+     
+  </head>
+   
+  <body>
+       
+    <div class="container">
+           
+      <div class="sidebar">
+               
+        <div class="sidebar-header">
+                   
+          <h3>TRUNG TÂM ĐIỀU KHIỂN</h3>
+                 
+        </div>
+               
+        <ul class="sidebar-menu">
+                   
+          <li>
+                       
+            <a href="#"><i class="fas fa-tachometer-alt"></i> Tổng quan</a>    
+                 
+          </li>
+                   
+          <li>
+                       
+            <a href="#"><i class="fas fa-users"></i> Quản lý khách hàng</a>    
+                 
+          </li>
+                   
+          <li>
+                       
+            <a href="#"><i class="fas fa-file-invoice"></i> Quản lý đơn hàng</a>
+                     
+          </li>
+                   
+          <li>
+                       
+            <a href="#"><i class="fas fa-box"></i> Quản lý sản phẩm</a>        
+             
+          </li>
+                   
+          <li>
+                       
+            <a href="#"><i class="fas fa-list-alt"></i> Quản lý danh mục</a>    
+                 
+          </li>
+                   
+          <li>
+                       
+            <a href="#"><i class="fas fa-truck"></i> Quản lý nhập hàng</a>      
+               
+          </li>
+                   
+          <li class="active">
+                       
+            <a href="#"><i class="fas fa-dollar-sign"></i> Quản lý giá bán</a>  
+                   
+          </li>
+                   
+          <li>
+                       
+            <a href="#"><i class="fas fa-warehouse"></i> Quản lý tồn kho</a>    
+                 
+          </li>
+                 
+        </ul>
+               
+        <div class="sidebar-footer">
+                   
+          <button class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất          
+          </button>
+                 
+        </div>
+             
+      </div>
+           
+      <div class="main-content">
+               
+        <div class="header">
+                   
+          <h2>Quản lý giá bán</h2>
+                 
+        </div>
+               
+        <div class="tabs">
+                   
+          <button
+            class="tab-button active"
+            onclick="showTab('category-profit')"
+          >
+                        Tỷ lệ lợi nhuận theo danh mục          
+          </button>
+                   
+          <button class="tab-button" onclick="showTab('product-profit')">
+                        Tỷ lệ lợi nhuận theo sản phẩm          
+          </button>
+                   
+          <button class="tab-button" onclick="showTab('price-lookup')">
+                        Tra cứu giá bán          
+          </button>
+                 
+        </div>
+
+               
+        <div id="category-profit" class="tab-content active">
+                   
+          <div class="filter-section">
+                       
+            <div class="filter-group">
+                           
+              <label for="search-category">Tìm kiếm danh mục</label>            
+               
+              <input
+                type="text"
+                id="search-category"
+                placeholder="Nhập tên danh mục..."
+              />
+                         
+            </div>
+                       
+            <div class="filter-group">
+                           
+              <label for="profit-range">Khoảng tỷ lệ lợi nhuận</label>          
+                 
+              <select id="profit-range">
+                               
+                <option value="">Tất cả</option>
+                               
+                <option value="0-15">0% - 15%</option>
+                               
+                <option value="15-25">15% - 25%</option>
+                               
+                <option value="25-35">25% - 35%</option>
+                               
+                <option value="35+">35%+</option>
+                             
+              </select>
+                         
+            </div>
+                       
+            <div class="filter-actions">
+                           
+              <button class="search-btn">
+                                <i class="fas fa-search"></i> Tìm kiếm          
+                   
+              </button>
+                           
+              <button class="reset-btn">
+                                <i class="fas fa-redo"></i> Đặt lại            
+                 
+              </button>
+                         
+            </div>
+                     
+          </div>
+                   
+          <table class="data-table">
+                       
+            <thead>
+                           
+              <tr>
+                               
+                <th>STT</th>
+                               
+                <th>TÊN DANH MỤC</th>
+                               
+                <th>TỶ LỆ LỢI NHUẬN (%)</th>
+                               
+                <th>THAO TÁC</th>
+                             
+              </tr>
+                         
+            </thead>
+                       
+            <tbody id="category-profit-body"></tbody>
+                     
+          </table>
+                 
+        </div>
+
+               
+        <div id="product-profit" class="tab-content">
+                   
+          <div class="filter-section">
+                       
+            <div class="filter-group">
+                           
+              <label for="search-product">Tìm kiếm sản phẩm</label>            
+               
+              <input
+                type="text"
+                id="search-product"
+                placeholder="Nhập tên sản phẩm..."
+              />
+                         
+            </div>
+                       
+            <div class="filter-group">
+                           
+              <label for="product-category-filter">Danh mục</label>            
+               
+              <select id="product-category-filter">
+                               
+                <option value="">Tất cả danh mục</option>
+                               
+                <option value="Bó hoa">Bó hoa</option>
+                               
+                <option value="Lẳng hoa">Lẳng hoa</option>
+                               
+                <option value="Kệ hoa">Kệ hoa</option>
+                             
+              </select>
+                         
+            </div>
+                       
+            <div class="filter-actions">
+                           
+              <button class="search-btn">
+                                <i class="fas fa-search"></i> Tìm kiếm          
+                   
+              </button>
+                           
+              <button class="reset-btn">
+                                <i class="fas fa-redo"></i> Đặt lại            
+                 
+              </button>
+                         
+            </div>
+                     
+          </div>
+                   
+          <table class="data-table">
+                       
+            <thead>
+                           
+              <tr>
+                               
+                <th>STT</th>
+                               
+                <th>SẢN PHẨM</th>
+                               
+                <th>DANH MỤC</th>
+                               
+                <th>TỶ LỆ LỢI NHUẬN (%)</th>
+                               
+                <th>THAO TÁC</th>
+                             
+              </tr>
+                         
+            </thead>
+                       
+            <tbody id="product-profit-body"></tbody>
+                     
+          </table>
+                 
+        </div>
+
+               
+        <div id="price-lookup" class="tab-content">
+                   
+          <div class="filter-section">
+                       
+            <div class="filter-group">
+                           
+              <label for="lookup-search-product">Tìm kiếm sản phẩm</label>      
+                     
+              <input
+                type="text"
+                id="lookup-search-product"
+                placeholder="Nhập tên sản phẩm..."
+              />
+                         
+            </div>
+                       
+            <div class="filter-group">
+                           
+              <label for="lookup-product-category-filter">Danh mục</label>      
+                     
+              <select id="lookup-product-category-filter">
+                               
+                <option value="">Tất cả danh mục</option>
+                               
+                <option value="Bó hoa">Bó hoa</option>
+                               
+                <option value="Lẳng hoa">Lẳng hoa</option>
+                               
+                <option value="Kệ hoa">Kệ hoa</option>
+                             
+              </select>
+                         
+            </div>
+                       
+            <div class="filter-group">
+                           
+              <label for="price-range-filter">Khoảng giá bán</label>            
+               
+              <select id="price-range-filter">
+                               
+                <option value="">Tất cả</option>
+                               
+                <option value="0-100000">Dưới 100,000 VND</option>
+                               
+                <option value="100000-300000">100,000 - 300,000 VND</option>
+                               
+                <option value="300000-500000">300,000 - 500,000 VND</option>
+                               
+                <option value="500000+">Trên 500,000 VND</option>
+                             
+              </select>
+                         
+            </div>
+                       
+            <div class="filter-actions">
+                           
+              <button class="search-btn">
+                                <i class="fas fa-search"></i> Tìm kiếm          
+                   
+              </button>
+                           
+              <button class="reset-btn">
+                                <i class="fas fa-redo"></i> Đặt lại            
+                 
+              </button>
+                         
+            </div>
+                     
+          </div>
+                   
+          <table class="data-table">
+                       
+            <thead>
+                           
+              <tr>
+                               
+                <th>STT</th>
+                               
+                <th>SẢN PHẨM</th>
+                               
+                <th>DANH MỤC</th>
+                               
+                <th>GIÁ VỐN</th>
+                               
+                <th>TỶ LỆ LỢI NHUẬN (%)</th>
+                               
+                <th>GIÁ BÁN</th>
+                               
+                <th>THAO TÁC</th>
+                             
+              </tr>
+                         
+            </thead>
+                       
+            <tbody id="price-lookup-body"></tbody>
+                     
+          </table>
+                 
+        </div>
+             
+      </div>
+         
+    </div>
+
+       
+    <div id="editPriceModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>Sửa Thông Tin Giá Sản Phẩm</h3>
+        <form id="editPriceForm">
+          <div class="form-group">
+            <label for="modal-product-name">Tên Sản Phẩm:</label>
+            <select id="modal-product-name" required></select>
+            <input type="hidden" id="modal-product-id" />
+          </div>
+          <div class="form-group">
+            <label for="modal-cost-price">Giá Vốn (VND):</label>
+            <input
+              type="number"
+              id="modal-cost-price"
+              name="costPrice"
+              required
+              min="0"
+              placeholder="Nhập giá vốn"
+            />
+          </div>
+          <div class="form-group">
+            <label for="modal-profit-rate">Tỷ Lệ Lợi Nhuận (%):</label>
+            <input
+              type="number"
+              id="modal-profit-rate"
+              name="profitRate"
+              required
+              min="0"
+              max="100"
+              step="0.1"
+              placeholder="Nhập tỷ lệ lợi nhuận"
+            />
+          </div>
+          <div class="form-group">
+            <label for="modal-selling-price">Giá Bán Ước Tính (VND):</label>
+            <input
+              type="text"
+              id="modal-selling-price"
+              disabled
+              value="0 VND"
+            />
+          </div>
+          <button type="submit" class="save-btn">Lưu</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="success-notification" class="notification success-notification">
+      Cập nhật giá sản phẩm thành công!
+    </div>
+
+       
+    <script src="js/price.js"></script>
+     
+  </body>
+</html>
