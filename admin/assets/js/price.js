@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (categoryIndex !== -1) {
           categories[categoryIndex].profit = newProfit;
           showToast(
-            `Đã lưu thành công tỷ lệ lợi nhuận cho danh mục ${categories[categoryIndex].name}!`
+            `Đã lưu tỷ lệ lợi nhuận tất cả sản phẩm trong danh mục ${categories[categoryIndex].name}!`
           );
           renderProductProfitTable();
           renderPriceLookupTable();
@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (productIndex !== -1) {
           products[productIndex].profit = newProfit;
           showToast(
-            `Đã lưu thành công tỷ lệ lợi nhuận cho sản phẩm ${products[productIndex].name}!`
+            `Đã lưu tỷ lệ lợi nhuận cho sản phẩm ${products[productIndex].name}!`
           );
           renderPriceLookupTable();
         }

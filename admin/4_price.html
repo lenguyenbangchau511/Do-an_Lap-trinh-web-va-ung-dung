@@ -14,138 +14,145 @@
   <link rel="stylesheet" href="assets/css/price.css">
   <style>
     /* Thêm vào assets/css/price.css */
-.toast-message {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #37a358;
-  color: white;
-  padding: 15px 20px;
-  border-radius: 8px;
-  z-index: 10000;
-  transform: translateX(400px);
-  transition: transform 0.3s ease;
-  max-width: 400px;
-  height: 70px;
-  word-wrap: break-word;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
+    .toast-message {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #37a358;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      z-index: 10000;
+      transform: translateX(400px);
+      transition: transform 0.3s ease;
+      max-width: 400px;
+      height: 70px;
+      word-wrap: break-word;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
 
-.toast-message.show {
-  transform: translateX(0);
-}
+    .toast-message.show {
+      transform: translateX(0);
+    }
 
-.action-btn {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.3s ease;
-}
+    .action-btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
 
-.action-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
 
-.profit-input {
-  width: 80px;
-  display: inline-block;
-  margin-right: 5px;
-}
+    .profit-input {
+      width: 80px;
+      display: inline-block;
+      margin-right: 5px;
+    }
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 2000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  animation: fadeIn 0.3s ease;
-}
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      animation: fadeIn 0.3s ease;
+    }
 
-.modal-content {
-  background-color: white;
-  margin: 5% auto;
-  padding: 30px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  position: relative;
-  animation: slideIn 0.3s ease;
-}
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      animation: slideIn 0.3s ease;
+    }
 
-@keyframes slideIn {
-  from { transform: translateY(-50px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
 
-.notification {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 15px 25px;
-  border-radius: 8px;
-  color: white;
-  font-weight: 500;
-  z-index: 3000;
-  transform: translateX(400px);
-  transition: transform 0.3s ease;
-  display: none;
-}
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
 
-.notification.show {
-  transform: translateX(0);
-  display: block;
-}
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 25px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 500;
+      z-index: 3000;
+      transform: translateX(400px);
+      transition: transform 0.3s ease;
+      display: none;
+    }
 
-.success-notification {
-  background: linear-gradient(135deg, #28a745, #20c997);
-}
+    .notification.show {
+      transform: translateX(0);
+      display: block;
+    }
+
+    .success-notification {
+      background: linear-gradient(135deg, #28a745, #20c997);
+    }
   </style>
 </head>
 
 <body>
   <!-- sidebar -->
   <div class="sidebar">
-        <div class="sidebar">
-            <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
-                <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-                    <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9" />
-                    <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
-                        fill="#eaf8f0" />
-                    <circle cx="40" cy="35" r="8" fill="#b19cd9" />
-                    <circle cx="60" cy="35" r="8" fill="#b19cd9" />
-                    <circle cx="50" cy="50" r="12" fill="#9370db" />
-                    <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
-                </svg>
-                <span>Bloom</span>
-            </div>
-            <a href="0_dashboard.html" ><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
-            <a href="1_users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
-            <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
-            <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
-            <a href="4_price.html" ><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
-            <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
-            <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
-            <a href="7_inventory.html"><i class="fa-solid fa-boxes-stacked me-2"></i></i> Quản lý tồn kho</a>
-            <div class="logout_admin"><a href="index.html" id="logout-link">Đăng xuất</a></div>
-            <script>
-                document.getElementById("logout-link").addEventListener("click", function (event) {
-                    event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
-                    const confirmLogout = confirm("Bạn có chắc chắn muốn đăng xuất không?");
+    <div class="sidebar">
+      <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
+        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9" />
+          <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
+            fill="#eaf8f0" />
+          <circle cx="40" cy="35" r="8" fill="#b19cd9" />
+          <circle cx="60" cy="35" r="8" fill="#b19cd9" />
+          <circle cx="50" cy="50" r="12" fill="#9370db" />
+          <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
+        </svg>
+        <span>Bloom</span>
+      </div>
+      <a href="0_dashboard.html"><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
+      <a href="1_users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
+      <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
+      <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
+      <a href="4_price.html" class="active"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
+      <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
+      <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
+      <a href="7_inventory.html"><i class="fa-solid fa-boxes-stacked me-2"></i></i> Quản lý tồn kho</a>
+      <div class="logout_admin"><a href="index.html" id="logout-link">Đăng xuất</a></div>
+      <script>
+        document.getElementById("logout-link").addEventListener("click", function (event) {
+          event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
+          const confirmLogout = confirm("Bạn có chắc chắn muốn đăng xuất không?");
 
-                    if (confirmLogout) {
-                        window.location.href = this.href; // Chuyển đến trang đăng xuất nếu xác nhận
-                    }
-                });
-            </script>
-        </div>
+          if (confirmLogout) {
+            window.location.href = this.href; // Chuyển đến trang đăng xuất nếu xác nhận
+          }
+        });
+      </script>
     </div>
+  </div>
 
   <main class="main-content">
     <!-- header  -->
@@ -344,24 +351,22 @@
           </div>
           <div class="form-group">
             <label for="modal-cost-price">Giá Vốn (VND):</label>
-            <input type="number" id="modal-cost-price" class="form-control" name="costPrice" required min="0" placeholder="Nhập giá vốn" />
+            <input type="number" id="modal-cost-price" class="form-control" name="costPrice" required min="0"
+              placeholder="Nhập giá vốn" />
           </div>
           <div class="form-group">
             <label for="modal-profit-rate">Tỷ Lệ Lợi Nhuận (%):</label>
-            <input type="number" id="modal-profit-rate" class="form-control" name="profitRate" required min="0" max="100" step="0.1"
-              placeholder="Nhập tỷ lệ lợi nhuận" />
+            <input type="number" id="modal-profit-rate" class="form-control" name="profitRate" required min="0"
+              max="100" step="0.1" placeholder="Nhập tỷ lệ lợi nhuận" />
           </div>
           <div class="form-group">
             <label for="modal-selling-price">Giá Bán Ước Tính (VND):</label>
             <input type="text" id="modal-selling-price" class="form-control" disabled value="0 VND" />
           </div>
-          <button type="submit" class="save-btn">Lưu</button>
+          <button type="submit" class="save-btn" onclick="showAlert()">Lưu</button>
+
         </form>
       </div>
-    </div>
-
-    <div id="success-notification" class="notification success-notification">
-      Cập nhật giá sản phẩm thành công!
     </div>
 
     <footer class="mt-4">

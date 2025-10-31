@@ -11,9 +11,7 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
     rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-  <link rel="stylesheet" href="assets/css/inputproduct.css" />
-    <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/inputproduct.css">
 </head>
 
 <body>
@@ -36,10 +34,10 @@
       <a href="1_users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
       <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
       <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
-      <a href="4_price.html" ><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
+      <a href="4_price.html"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
       <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
       <a href="6_inputproduct.html" class="active"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
-      <a href="7_inventory.html"><i class="fa-solid fa-boxes-stacked me-2"></i> Quản lý tồn kho</a>
+      <a href="7_inventory.html"><i class="fa-solid fa-boxes-stacked me-2"></i></i> Quản lý tồn kho</a>
       <div class="logout_admin"><a href="index.html" id="logout-link">Đăng xuất</a></div>
       <script>
         document.getElementById("logout-link").addEventListener("click", function (event) {
@@ -53,218 +51,337 @@
       </script>
     </div>
   </div>
+
   <div class="main-content">
     <!-- header  -->
-        <div class="header">
-            <div class="header__title"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</div>
-            <div class="header__info">
-                <div>
-                    <span class="text-muted small">Xin chào, Admin</span>
-                    <a href="javascript:void(0)" id="userMenuToggle">
-                        <i class="fa-solid fa-user-tie ms-2"></i>
-                    </a>
-                </div>
-                <!-- Dropdown Menu -->
-                <div class="user-dropdown" id="userDropdown">
-                    <div class="dropdown-header">
-                        <div class="user-name">Admin User</div>
-                        <div class="user-role">Quản trị viên</div>
-                        <span>_________________________________________________</span>
-                    </div>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#" class="dropdown-item">
-                                <i class="fa-solid fa-user"></i>
-                                <span>Hồ sơ cá nhân</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item">
-                                <i class="fa-solid fa-gear"></i>
-                                <span>Cài đặt</span>
-                            </a>
-                        </li>
-                        <li class="dropdown-divider"></li>
-                        <li>
-                            <button class="dropdown-item logout" id="logoutBtn">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                                <span>Đăng xuất</span>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Overlay -->
-                <div class="dropdown-overlay" id="dropdownOverlay"></div>
-            </div>
+    <div class="header">
+      <div class="header__title"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</div>
+      <div class="header__info">
+        <div>
+          <span class="text-muted small">Xin chào, Admin</span>
+          <a href="javascript:void(0)" id="userMenuToggle">
+            <i class="fa-solid fa-user-tie ms-2"></i>
+          </a>
         </div>
-    <button id="addNewBtn"> + Thêm phiếu nhập mới</button>
-<div id="list-view" class="content-view active">
-          <div class="content-header">
-            <button class="action-btn add-btn" onclick="showView('add-view')">
-              <i class="fas fa-plus"></i> Thêm phiếu nhập
-            </button>
+        <!-- Dropdown Menu -->
+        <div class="user-dropdown" id="userDropdown">
+          <div class="dropdown-header">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Quản trị viên</div>
+            <span>_________________________________________________</span>
           </div>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" class="dropdown-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Hồ sơ cá nhân</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="dropdown-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Cài đặt</span>
+              </a>
+            </li>
+            <li class="dropdown-divider"></li>
+            <li>
+              <button class="dropdown-item logout" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Đăng xuất</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+        <!-- Overlay -->
+        <div class="dropdown-overlay" id="dropdownOverlay"></div>
+      </div>
+    </div>
 
-          <!-- Thanh tìm kiếm/Lọc -->
-          <div class="filter-box">
-            <h4>Tra cứu phiếu nhập</h4>
-            <div class="filter-inputs">
-              <div class="filter-group date-group">
-                <label for="date-from">Từ ngày</label>
-                <input type="date" id="date-from" />
-              </div>
-              <div class="filter-group date-group">
-                <label for="date-to">Đến ngày</label>
-                <input type="date" id="date-to" />
-              </div>
-              <div class="filter-actions">
-                <button class="search-btn">
-                  <i class="fas fa-search"></i> Tìm kiếm
-                </button>
-                <button class="reset-btn">
-                  <i class="fas fa-redo"></i> Đặt lại
-                </button>
-              </div>
+    <div class="container-fluid" data-aos="fade-up">
+      <!-- List View -->
+      <div id="list-view" class="content-view active">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4 class="mb-0">Danh sách phiếu nhập</h4>
+          <button class="btn btn-success" onclick="showView('add-view')">
+            <i class="fas fa-plus me-2"></i>Thêm phiếu nhập
+          </button>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+          <h5 class="mb-3">Tra cứu phiếu nhập</h5>
+          <div class="row g-3 align-items-end">
+            <div class="col-md-2">
+              <label class="form-label">Từ ngày</label>
+              <input type="date" id="date-from" class="form-control">
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Đến ngày</label>
+              <input type="date" id="date-to" class="form-control">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Trạng thái</label>
+              <select id="status-filter" class="form-select">
+                <option value="">Tất cả</option>
+                <option value="pending">Chờ xử lý</option>
+                <option value="completed">Hoàn thành</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-success me-2" id="searchImportBtn">
+                <i class="fas fa-search me-2"></i>Tìm kiếm
+              </button>
+              <button class="btn btn-secondary" id="resetImportBtn">
+                <i class="fas fa-redo me-2"></i>Đặt lại
+              </button>
             </div>
           </div>
-
-          <!-- Bảng Danh sách Phiếu Nhập -->
-          <table class="data-table import-table">
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>MÃ PHIẾU</th>
-                <th>NGÀY NHẬP</th>
-                <th>SỐ LƯỢNG SẢN PHẨM</th>
-                <th>TỔNG GIÁ TRỊ</th>
-                <th>THAO TÁC</th>
-              </tr>
-            </thead>
-            <tbody id="import-list-body">
-              <!-- Dữ liệu phiếu nhập sẽ được chèn ở đây -->
-            </tbody>
-          </table>
-
-        
         </div>
-        <div id="detail-view" class="content-view">
-          <div class="detail-card">
-            <h3 class="detail-title">Chi tiết phiếu nhập hàng</h3>
-            <div class="detail-content">
-              <div class="section-header pink-bg">
-                Thông tin phiếu nhập <span id="detail-code"></span>
-              </div>
-              <div class="info-grid">
-                <div>
-                  <label>Mã phiếu nhập</label>
-                  <span id="detail-ma-phieu"></span>
-                </div>
-                <div>
-                  <label>Ngày nhập</label>
-                  <span id="detail-ngay-nhap"></span>
-                </div>
-                <div>
-                  <label>Số lượng sản phẩm</label>
-                  <span id="detail-so-luong"></span>
-                </div>
-              </div>
 
-              <div class="section-header pink-bg">Danh sách sản phẩm nhập</div>
-              <table class="data-table detail-table">
+        <!-- Import List Table -->
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
                 <thead>
                   <tr>
                     <th>STT</th>
-                    <th>SẢN PHẨM</th>
-                    <th>GIÁ NHẬP</th>
-                    <th>SỐ LƯỢNG</th>
-                    <th>THÀNH TIỀN</th>
+                    <th>MÃ PHIẾU</th>
+                    <th>NGÀY NHẬP</th>
+                    <th>SỐ LƯỢNG SẢN PHẨM</th>
+                    <th>TỔNG GIÁ TRỊ</th>
+                    <th>TRẠNG THÁI</th>
+                    <th>THAO TÁC</th>
                   </tr>
                 </thead>
-                <tbody id="detail-products-body">
-                  <!-- Chi tiết sản phẩm sẽ được chèn ở đây -->
+                <tbody id="import-list-body">
+                  <!-- Data will be populated by JavaScript -->
                 </tbody>
               </table>
-
-              <div class="summary-box">
-                <p>Tổng số sản phẩm: <span id="summary-items"></span></p>
-                <p>Tổng số lượng nhập: <span id="summary-quantity"></span></p>
-                <p class="total-value">
-                  Tổng giá trị phiếu nhập: <span id="summary-total"></span> VND
-                </p>
-              </div>
-
-              <div class="detail-actions">
-                <button
-                  class="action-btn secondary-btn"
-                  onclick="showView('list-view')"
-                >
-                  <i class="fas fa-arrow-left"></i> Quay về
-                </button>
-                <button class="action-btn print-btn" onclick="printImport()">
-                  <i class="fas fa-print"></i> In phiếu nhập
-                </button>
-              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Màn hình THÊM PHIẾU NHẬP (Ẩn) -->
-        <div id="add-view" class="content-view">
-          <div class="detail-card">
-            <h3 class="detail-title">Thêm thông tin phiếu nhập</h3>
-            <div class="detail-content">
-              <div class="section-header pink-bg">Thông tin phiếu nhập</div>
-              <div class="info-grid add-info-grid">
-                <div class="input-group required">
-                  <label for="add-date">Ngày nhập</label>
-                  <input type="date" id="add-date" value="2025-10-31" />
+      <!-- Detail View -->
+      <div id="detail-view" class="content-view">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0">Chi tiết phiếu nhập hàng</h4>
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <h5 class="text-primary">Thông tin phiếu nhập <span id="detail-code" class="badge bg-primary"></span></h5>
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <label class="form-label fw-bold">Mã phiếu nhập</label>
+                  <p class="form-control-plaintext" id="detail-ma-phieu"></p>
                 </div>
-                <div class="input-group">
-                  <label for="add-code">Mã phiếu nhập</label>
-                  <input type="text" id="add-code" value="#MP006" disabled />
+                <div class="col-md-3">
+                  <label class="form-label fw-bold">Ngày nhập</label>
+                  <p class="form-control-plaintext" id="detail-ngay-nhap"></p>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label fw-bold">Nhà cung cấp</label>
+                  <p class="form-control-plaintext" id="detail-supplier">Flower Garden</p>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label fw-bold">Trạng thái</label>
+                  <p class="form-control-plaintext" id="detail-status">Hoàn thành</p>
                 </div>
               </div>
+            </div>
 
-              <div class="section-header pink-bg">Danh sách sản phẩm nhập</div>
-              <div id="add-product-list">
-                <!-- Các trường nhập sản phẩm sẽ được thêm vào đây -->
+            <div class="mb-4">
+              <h5 class="text-primary">Danh sách sản phẩm nhập</h5>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>STT</th>
+                      <th>ẢNH SẢN PHẨM</th>
+                      <th>TÊN SẢN PHẨM</th>
+                      <th>MÃ SẢN PHẨM</th>
+                      <th>GIÁ NHẬP</th>
+                      <th>SỐ LƯỢNG</th>
+                      <th>THÀNH TIỀN</th>
+                    </tr>
+                  </thead>
+                  <tbody id="detail-products-body">
+                    <!-- Data will be populated by JavaScript -->
+                  </tbody>
+                </table>
               </div>
+            </div>
 
-              <button
-                class="action-btn add-product-row-btn"
-                onclick="addProductRow()"
-              >
-                <i class="fas fa-plus"></i> Thêm sản phẩm
+            <div class="summary-box">
+              <div class="row">
+                <div class="col-md-4">
+                  <p class="mb-2">Tổng số sản phẩm: <strong id="summary-items">0</strong></p>
+                </div>
+                <div class="col-md-4">
+                  <p class="mb-2">Tổng số lượng nhập: <strong id="summary-quantity">0</strong></p>
+                </div>
+                <div class="col-md-4">
+                  <p class="total-value mb-0">Tổng giá trị: <strong id="summary-total">0</strong> VND</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+              <button class="btn btn-secondary" onclick="showView('list-view')">
+                <i class="fas fa-arrow-left me-2"></i>Quay về
               </button>
+              <button class="btn btn-info" onclick="printImport()">
+                <i class="fas fa-print me-2"></i>In phiếu nhập
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-              <div class="summary-box add-summary-box">
-                <p>Tổng số sản phẩm: <span id="add-summary-items">0</span></p>
-                <p>
-                  Tổng số lượng nhập: <span id="add-summary-quantity">0</span>
-                </p>
-                <p class="total-value">
-                  Tổng giá trị: <span id="add-summary-total">0</span> VND
-                </p>
+      <!-- Add View -->
+      <div id="add-view" class="content-view">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0">Thêm thông tin phiếu nhập</h4>
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <h5 class="text-primary">Thông tin phiếu nhập</h5>
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="form-label fw-bold">Ngày nhập <span class="text-danger">*</span></label>
+                  <input type="date" id="add-date" class="form-control" value="2025-10-31">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-bold">Mã phiếu nhập</label>
+                  <input type="text" id="add-code" class="form-control" value="#MP006" disabled>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-bold">Nhà cung cấp</label>
+                  <input type="text" id="provided" class="form-control" value="Flower Garden" disabled>
+                </div>
+                <select  class="col-md-4" id="status">
+                  <option value="">Chờ xử lý</option>
+                  <option value="">Hoàn thành</option>
+                </select>
               </div>
+            </div>
 
-              <div class="detail-actions">
-                <button
-                  class="action-btn secondary-btn"
-                  onclick="showView('list-view')"
-                >
-                  <i class="fas fa-times"></i> Hủy bỏ
-                </button>
-                <button class="action-btn save-btn" onclick="saveNewImport()">
-                  <i class="fas fa-save"></i> Lưu phiếu nhập
+            <div class="mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="text-primary mb-0">Danh sách sản phẩm nhập</h5>
+                <button class="btn btn-primary btn-sm" onclick="addProductRow()">
+                  <i class="fas fa-plus me-1"></i>Thêm sản phẩm
                 </button>
               </div>
+              <div id="add-product-list">
+                <!-- Product rows will be added here -->
+              </div>
+            </div>
+
+            <div class="summary-box">
+              <div class="row">
+                <div class="col-md-4">
+                  <p class="mb-2">Tổng số sản phẩm: <strong id="add-summary-items">0</strong></p>
+                </div>
+                <div class="col-md-4">
+                  <p class="mb-2">Tổng số lượng nhập: <strong id="add-summary-quantity">0</strong></p>
+                </div>
+                <div class="col-md-4">
+                  <p class="total-value mb-0">Tổng giá trị: <strong id="add-summary-total">0</strong> VND</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+              <button class="btn btn-secondary" onclick="showView('list-view')">
+                <i class="fas fa-times me-2"></i>Hủy bỏ
+              </button>
+              <button class="btn btn-success" onclick="saveNewImport()">
+                <i class="fas fa-save me-2"></i>Lưu phiếu nhập
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit View -->
+      <div id="edit-view" class="content-view">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0">Sửa thông tin phiếu nhập</h4>
+          </div>
+          <div class="card-body">
+            <div class="mb-4">
+              <h5 class="text-primary">Thông tin phiếu nhập</h5>
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="form-label fw-bold">Ngày nhập <span class="text-danger">*</span></label>
+                  <input type="date" id="edit-date" class="form-control">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-bold">Mã phiếu nhập</label>
+                  <input type="text" id="edit-code" class="form-control" disabled>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-bold">Nhà cung cấp</label>
+                  <input type="text" id="edit-supplier" class="form-control" value="Flower Garden" disabled>
+                </div>
+                <select  class="col-md-4" id="status">
+                  <option value="">Chờ xử lý</option>
+                  <option value="">Hoàn thành</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="text-primary mb-0">Danh sách sản phẩm nhập</h5>
+                <button class="btn btn-primary btn-sm" onclick="addEditProductRow()">
+                  <i class="fas fa-plus me-1"></i>Thêm sản phẩm
+                </button>
+              </div>
+              <div id="edit-product-list">
+                <!-- Edit product rows will be added here -->
+              </div>
+            </div>
+
+            <div class="summary-box">
+              <div class="row">
+                <div class="col-md-4">
+                  <p class="mb-2">Tổng số sản phẩm: <strong id="edit-summary-items">0</strong></p>
+                </div>
+                <div class="col-md-4">
+                  <p class="mb-2">Tổng số lượng nhập: <strong id="edit-summary-quantity">0</strong></p>
+                </div>
+                <div class="col-md-4">
+                  <p class="total-value mb-0">Tổng giá trị: <strong id="edit-summary-total">0</strong> VND</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+              <button class="btn btn-secondary" onclick="showView('list-view')">
+                <i class="fas fa-times me-2"></i>Hủy bỏ
+              </button>
+              <button class="btn btn-success" onclick="updateImport()">
+                <i class="fas fa-save me-2"></i>Cập nhật phiếu nhập
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
 
+    <footer class="mt-4">
+      <p class="text-center text-muted">&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="assets/js/inputproduct.js"></script>
   <script src="assets/js/info_admin.js"></script>
 </body>
