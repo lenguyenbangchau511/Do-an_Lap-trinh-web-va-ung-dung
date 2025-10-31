@@ -3,10 +3,232 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hồ sơ cá nhân - Bloom</title>
+  <title>Địa chỉ giao hàng - Bloom</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    /* ========== ADDRESSES STYLES ========== */
+    .addresses-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .address-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(20, 50, 40, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .address-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, var(--green-main) 0%, #3a9c7f 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .address-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(15, 45, 35, 0.12);
+    }
+
+    .address-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .address-card.default-address {
+      border: 2px solid var(--green-main);
+      background: linear-gradient(135deg, rgba(46, 125, 104, 0.03) 0%, rgba(58, 156, 127, 0.05) 100%);
+    }
+
+    .address-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .address-header h3 {
+      color: #1a4d2b;
+      font-size: 1.3rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+    }
+
+    .address-header h3 i {
+      color: var(--green-main);
+      font-size: 1.1rem;
+    }
+
+    .default-badge {
+      background: linear-gradient(135deg, var(--green-main) 0%, #3a9c7f 100%);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(46, 125, 104, 0.3);
+    }
+
+    .address-content {
+      margin-bottom: 20px;
+    }
+
+    .address-text {
+      color: #1a4d2b;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .address-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #e0e0e0, transparent);
+      margin: 20px 0;
+    }
+
+    .address-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-sm {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--green-main);
+      color: var(--green-main);
+    }
+
+    .btn-outline:hover {
+      background: var(--green-main);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(46, 125, 104, 0.3);
+    }
+
+    .set-default-btn {
+      border-color: #ffc107;
+      color: #ffc107;
+    }
+
+    .set-default-btn:hover {
+      background: #ffc107;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+    }
+
+    .add-new-address {
+      text-align: center;
+      padding: 40px 20px;
+      border: 2px dashed #e0e0e0;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .add-new-address:hover {
+      border-color: var(--green-main);
+      background: rgba(46, 125, 104, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green-main) 0%, #3a9c7f 100%);
+      color: white;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(46, 125, 104, 0.4);
+    }
+
+    /* Responsive Design for Addresses */
+    @media (max-width: 768px) {
+      .address-card {
+        padding: 25px 20px;
+      }
+      
+      .address-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .address-actions {
+        flex-direction: column;
+      }
+      
+      .address-actions .btn-sm {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .address-text {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .address-card {
+        padding: 20px 15px;
+        border-radius: 12px;
+      }
+      
+      .address-header h3 {
+        font-size: 1.1rem;
+      }
+      
+      .btn-primary {
+        padding: 12px 24px;
+        font-size: 1rem;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- SITE WRAPPER -->
@@ -15,29 +237,28 @@
     <!-- HEADER -->
     <header class="bloom-header">
       <div class="bloom-container">
-      <div class="bloom-logo">
-        <a href="5_DaDangNhap.html" class="logo-link" aria-label="Bloom - Trở về trang chủ">
-          <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
-            <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
-            <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
-            <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
-            <circle cx="50" cy="50" r="12" fill="#9370db"/>
-            <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
-          </svg>
-          <span class="logo-text">Bloom</span>
-        </a>
-      </div>
+        <div class="bloom-logo">
+          <a href="5_DaDangNhap.html" class="logo-link" aria-label="Bloom - Trở về trang chủ">
+            <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+              <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+              <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+              <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+              <circle cx="50" cy="50" r="12" fill="#9370db"/>
+              <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+            </svg>
+            <span class="logo-text">Bloom</span>
+          </a>
+        </div>
 
         <nav class="bloom-nav" aria-label="Menu chính">
-          <a href="5_DaDangNhap.html">Trang chủ</a>
           <a href="6_GioHang.html" title="Giỏ hàng" aria-label="Giỏ hàng">
             <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
           </a>
           <a href="9_LichSuDonHang.html" title="Lịch sử đơn hàng" aria-label="Lịch sử đơn hàng">
             <i class="fa-regular fa-clock" aria-hidden="true"></i>
           </a>
-          <a href="3_ThongTinCaNhan.html" title="Tài khoản" aria-label="Tài khoản" class="active">
+          <a href="3_ThongTinCaNhan.html" title="Tài khoản" aria-label="Tài khoản">
             <i class="fa-regular fa-circle-user" aria-hidden="true"></i>
           </a>
           <a href="index.html" class="logout-btn" title="Đăng xuất" aria-label="Đăng xuất">
@@ -54,7 +275,7 @@
 
     <!-- MAIN CONTENT -->
     <main class="profile-container" aria-labelledby="profile-heading">
-      <h1 id="profile-heading" class="visually-hidden">Hồ sơ cá nhân</h1>
+      <h1 id="profile-heading" class="visually-hidden">Địa chỉ giao hàng</h1>
       
       <div class="profile-sidebar">
         <div class="profile-avatar">
@@ -70,11 +291,11 @@
         </div>
         
         <nav class="profile-menu" aria-label="Menu hồ sơ">
-          <a href="3_ThongTinCaNhan.html" class="active" aria-current="page">
+          <a href="14_SuaThongTinCaNhan.html">
             <i class="fas fa-user" aria-hidden="true"></i>
             Thông tin cá nhân
           </a>
-          <a href="#">
+          <a href="#" class="shipping-address-btn active" aria-current="page">
             <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
             Địa chỉ giao hàng
           </a>
@@ -82,13 +303,9 @@
             <i class="fas fa-history" aria-hidden="true"></i>
             Lịch sử đơn hàng
           </a>
-          <a href="#">
+          <a href="#" class="favorite-products-btn">
             <i class="fas fa-heart" aria-hidden="true"></i>
             Sản phẩm yêu thích
-          </a>
-          <a href="#">
-            <i class="fas fa-cog" aria-hidden="true"></i>
-            Cài đặt tài khoản
           </a>
           <a href="index.html" class="logout-menu-item">
             <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
@@ -99,103 +316,104 @@
       
       <div class="profile-content">
         <div class="profile-header">
-          <h2>Thông tin cá nhân</h2>
-          <p>Quản lý thông tin cá nhân của bạn</p>
+          <h2>Địa chỉ giao hàng</h2>
+          <p>Quản lý địa chỉ giao hàng của bạn</p>
         </div>
         
-        <form class="profile-form" id="profileForm">
-          <div class="form-section">
-            <h3><i class="fas fa-user-circle" aria-hidden="true"></i> Thông tin cơ bản</h3>
-            
-            <div class="form-row">
-              <div class="form-group">
-                <label for="firstName">Họ và tên đệm *</label>
-                <input 
-                  type="text" 
-                  id="firstName" 
-                  name="firstName" 
-                  value="Nguyễn Văn" 
-                  required
-                  aria-required="true"
-                >
-              </div>
-              <div class="form-group">
-                <label for="lastName">Tên *</label>
-                <input 
-                  type="text" 
-                  id="lastName" 
-                  name="lastName" 
-                  value="A" 
-                  required
-                  aria-required="true"
-                >
-              </div>
+        <div class="addresses-container">
+          <!-- Địa chỉ mặc định -->
+          <div class="address-card default-address">
+            <div class="address-header">
+              <h3><i class="fas fa-home"></i> Địa chỉ mặc định</h3>
+              <span class="default-badge">Mặc định</span>
             </div>
-            
-            <div class="form-row">
-              <div class="form-group">
-                <label for="email">Email *</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  name="email" 
-                  value="nguyenvana@example.com" 
-                  required
-                  aria-required="true"
-                >
-              </div>
-              
-              <div class="form-group">
-                <label for="phone">Số điện thoại *</label>
-                <input 
-                  type="tel" 
-                  id="phone" 
-                  name="phone" 
-                  value="0901234567" 
-                  required
-                  aria-required="true"
-                >
-              </div>
+            <div class="address-content">
+              <p class="address-text">273 An Dương Vương, Phường Chợ Quán, Quận 5, TP.HCM</p>
+            </div>
+            <div class="address-divider"></div>
+            <div class="address-actions">
+              <button class="btn-outline btn-sm edit-btn">
+                <i class="fas fa-edit"></i> Chỉnh sửa
+              </button>
+              <button class="btn-outline btn-sm delete-btn">
+                <i class="fas fa-trash"></i> Xóa
+              </button>
             </div>
           </div>
 
-          <div class="form-section">
-            <h3><i class="fas fa-info-circle" aria-hidden="true"></i> Thông tin bổ sung</h3>
-            
-            <div class="form-row">
-              <div class="form-group">
-                <label for="birthday">Ngày sinh</label>
-                <input 
-                  type="date" 
-                  id="birthday" 
-                  name="birthday" 
-                  value="1990-01-01"
-                >
-              </div>
-              
-              <div class="form-group">
-                <label for="gender">Giới tính</label>
-                <select id="gender" name="gender">
-                  <option value="">Chọn giới tính</option>
-                  <option value="male" selected>Nam</option>
-                  <option value="female">Nữ</option>
-                  <option value="other">Khác</option>
-                </select>
-              </div>
+          <!-- Địa chỉ 1 -->
+          <div class="address-card">
+            <div class="address-header">
+              <h3><i class="fas fa-map-marker-alt"></i> Địa chỉ 1</h3>
+            </div>
+            <div class="address-content">
+              <p class="address-text">273 An Dương Vương, Phường Chợ Quán, Quận 5, TP.HCM</p>
+            </div>
+            <div class="address-divider"></div>
+            <div class="address-actions">
+              <button class="btn-outline btn-sm set-default-btn">
+                <i class="fas fa-star"></i> Đặt mặc định
+              </button>
+              <button class="btn-outline btn-sm edit-btn">
+                <i class="fas fa-edit"></i> Chỉnh sửa
+              </button>
+              <button class="btn-outline btn-sm delete-btn">
+                <i class="fas fa-trash"></i> Xóa
+              </button>
             </div>
           </div>
 
-          <div class="form-actions">
-            <button type="button" class="btn-secondary" onclick="resetForm()">
-              <i class="fas fa-undo" aria-hidden="true"></i>
-              Đặt lại
-            </button>
-            <button type="submit" class="btn-primary">
-              <i class="fas fa-save" aria-hidden="true"></i>
-              Cập nhật thông tin
+          <!-- Địa chỉ 2 -->
+          <div class="address-card">
+            <div class="address-header">
+              <h3><i class="fas fa-map-marker-alt"></i> Địa chỉ 2</h3>
+            </div>
+            <div class="address-content">
+              <p class="address-text">105 Bà Huyện Thanh Quan, Phường Xuân Điện, Quận Bình Thạnh, TP.HCM</p>
+            </div>
+            <div class="address-divider"></div>
+            <div class="address-actions">
+              <button class="btn-outline btn-sm set-default-btn">
+                <i class="fas fa-star"></i> Đặt mặc định
+              </button>
+              <button class="btn-outline btn-sm edit-btn">
+                <i class="fas fa-edit"></i> Chỉnh sửa
+              </button>
+              <button class="btn-outline btn-sm delete-btn">
+                <i class="fas fa-trash"></i> Xóa
+              </button>
+            </div>
+          </div>
+
+          <!-- Địa chỉ 3 -->
+          <div class="address-card">
+            <div class="address-header">
+              <h3><i class="fas fa-map-marker-alt"></i> Địa chỉ 3</h3>
+            </div>
+            <div class="address-content">
+              <p class="address-text">04 Tôn Đức Thắng, Phường Bến Nghé, Quận 1, TP.HCM</p>
+            </div>
+            <div class="address-divider"></div>
+            <div class="address-actions">
+              <button class="btn-outline btn-sm set-default-btn">
+                <i class="fas fa-star"></i> Đặt mặc định
+              </button>
+              <button class="btn-outline btn-sm edit-btn">
+                <i class="fas fa-edit"></i> Chỉnh sửa
+              </button>
+              <button class="btn-outline btn-sm delete-btn">
+                <i class="fas fa-trash"></i> Xóa
+              </button>
+            </div>
+          </div>
+
+          <!-- Nút thêm địa chỉ mới -->
+          <div class="add-new-address">
+            <button class="btn-primary add-address-btn">
+              <i class="fas fa-plus"></i> Thêm địa chỉ mới
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </main>
 
@@ -274,89 +492,6 @@
       }
     });
 
-    // Form handling
-    const profileForm = document.getElementById('profileForm');
-    const originalFormData = {
-      firstName: 'Nguyễn Văn',
-      lastName: 'A',
-      email: 'nguyenvana@example.com',
-      phone: '0901234567',
-      birthday: '1990-01-01',
-      gender: 'male'
-    };
-
-    // Lưu dữ liệu gốc khi trang load
-    document.addEventListener('DOMContentLoaded', function() {
-      // Không cần làm gì vì giá trị đã được set trong HTML
-    });
-
-    // Reset form về giá trị gốc
-    function resetForm() {
-      if (confirm('Bạn có chắc muốn đặt lại tất cả thông tin về giá trị ban đầu?')) {
-        document.getElementById('firstName').value = originalFormData.firstName;
-        document.getElementById('lastName').value = originalFormData.lastName;
-        document.getElementById('email').value = originalFormData.email;
-        document.getElementById('phone').value = originalFormData.phone;
-        document.getElementById('birthday').value = originalFormData.birthday;
-        document.getElementById('gender').value = originalFormData.gender;
-        
-        // Hiệu ứng visual feedback
-        const form = document.getElementById('profileForm');
-        form.classList.add('reset-animation');
-        setTimeout(() => {
-          form.classList.remove('reset-animation');
-        }, 1000);
-      }
-    }
-
-    // Xử lý submit form
-    profileForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Lấy dữ liệu form
-      const formData = {
-        firstName: document.getElementById('firstName').value.trim(),
-        lastName: document.getElementById('lastName').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        birthday: document.getElementById('birthday').value,
-        gender: document.getElementById('gender').value
-      };
-
-      // Validate cơ bản
-      if (!formData.firstName || !formData.lastName) {
-        showNotification('Vui lòng nhập đầy đủ họ và tên', 'error');
-        return;
-      }
-
-      if (!formData.email) {
-        showNotification('Vui lòng nhập email', 'error');
-        return;
-      }
-
-      if (!formData.phone) {
-        showNotification('Vui lòng nhập số điện thoại', 'error');
-        return;
-      }
-
-      // Simulate API call
-      const submitBtn = this.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-      
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang cập nhật...';
-      submitBtn.disabled = true;
-
-      setTimeout(() => {
-        // Success simulation
-        showNotification('Cập nhật thông tin thành công!', 'success');
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        
-        // Update original data
-        Object.assign(originalFormData, formData);
-      }, 1500);
-    });
-
     // Hiển thị thông báo
     function showNotification(message, type = 'info') {
       const notification = document.createElement('div');
@@ -379,18 +514,55 @@
       }, 5000);
     }
 
-    // Change avatar button (placeholder functionality)
-    document.querySelector('.change-avatar-btn').addEventListener('click', function() {
-      showNotification('Tính năng đổi ảnh đại diện sẽ sớm được cập nhật!', 'info');
-    });
+    // Xử lý cho trang địa chỉ giao hàng
+    document.addEventListener('DOMContentLoaded', function() {
+      // Xử lý nút "Đặt mặc định"
+      document.querySelectorAll('.set-default-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          showNotification('Đã đặt địa chỉ làm mặc định!', 'success');
+        });
+      });
 
-    // Logout confirmation
-    document.querySelectorAll('.logout-btn, .logout-menu-item').forEach(btn => {
-      btn.addEventListener('click', function(e) {
+      // Xử lý nút "Chỉnh sửa"
+      document.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          showNotification('Tính năng chỉnh sửa địa chỉ sẽ sớm được cập nhật!', 'info');
+        });
+      });
+
+      // Xử lý nút "Xóa"
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          if (confirm('Bạn có chắc muốn xóa địa chỉ này?')) {
+            showNotification('Đã xóa địa chỉ thành công!', 'success');
+          }
+        });
+      });
+
+      // Xử lý nút "Thêm địa chỉ mới"
+      document.querySelector('.add-address-btn').addEventListener('click', function() {
+        showNotification('Tính năng thêm địa chỉ mới sẽ sớm được cập nhật!', 'info');
+      });
+
+      // Change avatar button
+      document.querySelector('.change-avatar-btn').addEventListener('click', function() {
+        showNotification('Tính năng đổi ảnh đại diện sẽ sớm được cập nhật!', 'info');
+      });
+
+      // Favorite products button
+      document.querySelector('.favorite-products-btn').addEventListener('click', function(e) {
         e.preventDefault();
-        if (confirm('Bạn có chắc muốn đăng xuất?')) {
-          window.location.href = 'index.html';
-        }
+        showNotification('Tính năng sản phẩm yêu thích sẽ sớm được cập nhật!', 'info');
+      });
+
+      // Logout confirmation
+      document.querySelectorAll('.logout-btn, .logout-menu-item').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (confirm('Bạn có chắc muốn đăng xuất?')) {
+            window.location.href = 'index.html';
+          }
+        });
       });
     });
   </script>

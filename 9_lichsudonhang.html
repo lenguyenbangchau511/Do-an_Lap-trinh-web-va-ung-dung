@@ -30,7 +30,6 @@
       </div>
 
         <nav class="bloom-nav" aria-label="Menu chính">
-          <a href="5_DaDangNhap.html">Trang chủ</a>
           <a href="6_GioHang.html" title="Giỏ hàng" aria-label="Giỏ hàng">
             <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
           </a>
@@ -113,7 +112,7 @@
           </button>
               <button class="btn-secondary" onclick="reorder('BL202400123')">
                 <i class="fas fa-redo" aria-hidden="true"></i>
-                Đặt lại
+                Đặt lại đơn hàng
               </button>
             </div>
           </div>
@@ -146,7 +145,7 @@
             </button>
               <button class="btn-secondary" onclick="reorder('BL202400122')">
                 <i class="fas fa-redo" aria-hidden="true"></i>
-                Đặt lại
+                Đặt lại đơn hàng
               </button>
             </div>
           </div>
@@ -178,7 +177,7 @@
               </button>
               <button class="btn-secondary" onclick="reorder('BL202400121')">
                 <i class="fas fa-redo" aria-hidden="true"></i>
-                Đặt lại
+                Đặt lại đơn hàng
               </button>
             </div>
           </div>
@@ -211,7 +210,7 @@
               </button>
               <button class="btn-secondary" onclick="reorder('BL202400120')">
                 <i class="fas fa-redo" aria-hidden="true"></i>
-                Đặt lại
+                Đặt lại đơn hàng
               </button>
             </div>
           </div>
@@ -309,9 +308,9 @@
       window.location.href = '10_DonHangDaMua.html';
     }
 
-    // Hàm đặt lại đơn hàng
+    // Hàm Đặt lại đơn hàng đơn hàng
     function reorder(orderId) {
-      if (confirm(`Bạn có muốn đặt lại đơn hàng ${orderId}?`)) {
+      if (confirm(`Bạn có muốn Đặt lại đơn hàng đơn hàng ${orderId}?`)) {
         // Thêm sản phẩm vào giỏ hàng
         const toast = document.createElement('div');
         toast.className = 'cart-toast success';

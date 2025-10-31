@@ -1,7 +1,3 @@
-/* ========== STYLE.CSS - Tổng hợp toàn bộ CSS ========== */
-/* Tổng hợp từ 12 file CSS riêng lẻ thành một file duy nhất */
-/* Giữ nguyên thứ tự từ 1 → 12 theo tên file gốc */
-
 /* ========== CSS Reset và Biến toàn cục ========== */
 :root {
   --mint-1: #eaf8f0;
@@ -1073,6 +1069,223 @@ body {
   color: inherit;
   background: none;
   border: none;
+}
+
+/* ========== ADDRESSES STYLES ========== */
+.addresses-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.address-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 25px rgba(20, 50, 40, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.address-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, var(--green-main) 0%, #3a9c7f 100%);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.address-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(15, 45, 35, 0.12);
+}
+
+.address-card:hover::before {
+  transform: scaleX(1);
+}
+
+.address-card.default-address {
+  border: 2px solid var(--green-main);
+  background: linear-gradient(135deg, rgba(46, 125, 104, 0.03) 0%, rgba(58, 156, 127, 0.05) 100%);
+}
+
+.address-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.address-header h3 {
+  color: #1a4d2b;
+  font-size: 1.3rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.address-header h3 i {
+  color: var(--green-main);
+  font-size: 1.1rem;
+}
+
+.default-badge {
+  background: linear-gradient(135deg, var(--green-main) 0%, #3a9c7f 100%);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(46, 125, 104, 0.3);
+}
+
+.address-content {
+  margin-bottom: 25px;
+}
+
+.address-text {
+  color: #1a4d2b;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.address-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.address-meta span {
+  color: var(--muted);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.address-meta span::before {
+  content: '•';
+  color: var(--green-main);
+  font-weight: bold;
+}
+
+.address-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-sm {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.set-default-btn {
+  border-color: #ffc107;
+  color: #ffc107;
+}
+
+.set-default-btn:hover {
+  background: #ffc107;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.add-new-address {
+  text-align: center;
+  padding: 40px 20px;
+  border: 2px dashed #e0e0e0;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.add-new-address:hover {
+  border-color: var(--green-main);
+  background: rgba(46, 125, 104, 0.05);
+  transform: translateY(-2px);
+}
+
+.add-address-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.add-address-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(46, 125, 104, 0.4);
+}
+
+/* Responsive Design for Addresses */
+@media (max-width: 768px) {
+  .address-card {
+    padding: 25px 20px;
+  }
+  
+  .address-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .address-actions {
+    flex-direction: column;
+  }
+  
+  .address-actions .btn-sm {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .address-meta {
+    gap: 6px;
+  }
+  
+  .address-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .address-card {
+    padding: 20px 15px;
+    border-radius: 12px;
+  }
+  
+  .address-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .add-address-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ========== 4_ChiTietSanPham.css ========== */
@@ -2758,89 +2971,59 @@ body {
   border: none;
 }
 
-/* Container cho 2 nút hành động */
+/* CSS cho hành động sản phẩm - nút + và Mua ngay với hiệu ứng đẹp */
 .product-actions {
   display: flex;
   gap: 10px;
-  width: 100%;
-  justify-content: center;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
-/* Nút Mua ngay */
-.btn-buy-now {
-  background: linear-gradient(135deg, #2e7d68 0%, #3a9c7f 100%);
-  color: #fff;
+.product-actions .btn-add-cart {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--green-main), var(--green-light));
   border: none;
-  padding: 12px 20px;
-  border-radius: 25px;
+  color: white;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  width: 100%;
-  max-width: 120px;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  font-size: 0.9rem;
-  flex: 1;
-}
-
-.btn-buy-now:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(46, 125, 104, 0.4);
-}
-
-/* Điều chỉnh lại nút Thêm vào giỏ */
-.product .btn-outline {
-  background: transparent;
-  border: 2px solid #2e7d68;
-  color: #2e7d68;
-  padding: 12px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  width: 100%;
-  max-width: 120px;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  font-size: 0.9rem;
-  flex: 1;
-}
-
-.product .btn-outline:hover {
-  background: #2e7d68;
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(46, 125, 104, 0.3);
-}
-
-/* Responsive cho mobile */
-@media (max-width: 480px) {
-  .product-actions {
-    flex-direction: row; /* Giữ nguyên hàng ngang trên mobile */
-    gap: 8px;
-  }
-  
-  .product .btn-outline,
-  .btn-buy-now {
-    max-width: 100%;
-    padding: 10px 15px;
-    font-size: 0.85rem;
-  }
-}
-
-/* Đảm bảo các nút có cùng chiều cao */
-.product-actions a,
-.product-actions button {
-  min-height: 44px;
+  font-size: 1.4rem;
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 1.2;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(46, 125, 104, 0.3);
 }
+
+.product-actions .btn-add-cart:hover {
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 4px 12px rgba(46, 125, 104, 0.4);
+}
+
+.product-actions .btn-buy-now {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  text-align: center;
+  text-decoration: none;
+  background: var(--green-main);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(46, 125, 104, 0.3);
+}
+
+.product-actions .btn-buy-now:hover {
+  background: var(--green-dark);
+  color: var(--green-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(46, 125, 104, 0.4);
+}
+
 
 /* ========== 6_GioHang.css ========== */
 /* 6_GIOHANG.CSS - Trang giỏ hàng */
@@ -4643,6 +4826,79 @@ body {
   color: inherit;
   background: none;
   border: none;
+}
+
+/* Sửa nút trong lịch sử đơn hàng */
+.order-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.order-actions .btn-outline,
+.order-actions .btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+    min-height: 44px;
+    box-sizing: border-box;
+}
+
+.order-actions .btn-outline {
+    background: transparent;
+    border: 2px solid var(--green-main);
+    color: var(--green-main);
+}
+
+.order-actions .btn-outline:hover {
+    background: var(--green-main);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.order-actions .btn-secondary {
+    background: transparent;
+    border: 2px solid var(--muted);
+    color: var(--muted);
+}
+
+.order-actions .btn-secondary:hover {
+    background: var(--muted);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+    .order-actions {
+        flex-direction: column;
+    }
+    
+    .order-actions .btn-outline,
+    .order-actions .btn-secondary {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .order-actions .btn-outline,
+    .order-actions .btn-secondary {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
 }
 
 /* ========== 10_DonHangDaMua.css ========== */
@@ -6587,4 +6843,169 @@ body{
   }
 }
 
-/* ========== KẾT THÚC STYLE.CSS ========== */
+
+/* TIM KIEM */
+/* Header Search Styles */
+.header-search {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 25px;
+    padding: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    max-width: 300px;
+    margin-right: 15px;
+}
+
+.header-search:focus-within {
+    border-color: var(--green-main);
+    box-shadow: 0 4px 15px rgba(46, 125, 104, 0.2);
+}
+
+#header-search-input {
+    border: none;
+    outline: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    width: 100%;
+    background: transparent;
+}
+
+.header-search-btn {
+    background: linear-gradient(135deg, var(--green-main) 0%, #3a9c7f 100%);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.header-search-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(46, 125, 104, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-search {
+        max-width: 200px;
+        margin-right: 10px;
+    }
+    
+    #header-search-input {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .header-search-btn {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-search {
+        max-width: 150px;
+    }
+    
+    #header-search-input::placeholder {
+        font-size: 0.8rem;
+    }
+}
+
+/* Breadcrumb Styles */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 25px 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.breadcrumb a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.breadcrumb a:hover {
+    color: var(--green-main);
+}
+
+.breadcrumb i {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.breadcrumb span {
+    color: var(--green-main);
+    font-weight: 500;
+}
+
+/* Search Page Styles */
+.search-page {
+    padding: 20px 0 60px;
+}
+
+.search-page-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(46, 125, 104, 0.1);
+}
+
+.search-page-header h1 {
+    font-family: 'Playfair Display', serif;
+    color: #1a4d2b;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.search-query-info {
+    color: var(--muted);
+    font-size: 1.1rem;
+}
+
+.search-query-info strong {
+    color: var(--green-main);
+}
+
+/* Responsive cho search page */
+@media (max-width: 768px) {
+    .search-page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .search-query-info {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-page-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .breadcrumb {
+        padding: 20px 15px;
+        font-size: 0.9rem;
+    }
+}

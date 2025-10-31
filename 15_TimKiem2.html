@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tìm kiếm sản phẩm - Bloom</title>
+  <meta name="description" content="Tìm kiếm hoa tươi cao cấp tại Bloom - Những bó hoa, lẵng hoa và kệ hoa đẹp nhất">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- SITE WRAPPER -->
+  <div class="site-wrapper">
+
+    <!-- HEADER ĐÃ ĐĂNG NHẬP -->
+    <header class="bloom-header">
+      <div class="bloom-container">
+        <div class="bloom-logo">
+          <a href="5_DaDangNhap.html" class="logo-link" aria-label="Bloom - Trở về trang chủ">
+            <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+              <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+              <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+              <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+              <circle cx="50" cy="50" r="12" fill="#9370db"/>
+              <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+            </svg>
+            <span class="logo-text">Bloom</span>
+          </a>
+        </div>
+
+        <nav class="bloom-nav" aria-label="Menu chính">
+          <!-- Thanh search trên header -->
+          <div class="header-search">
+            <input 
+              type="text" 
+              placeholder="Nhập tên sản phẩm..." 
+              id="header-search-input"
+              aria-label="Tìm kiếm sản phẩm"
+            >
+            <button class="header-search-btn" onclick="redirectToSearch()" aria-label="Tìm kiếm">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+          
+          <a href="6_GioHang.html" title="Giỏ hàng" aria-label="Giỏ hàng">
+            <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+          </a>
+          <a href="9_LichSuDonHang.html" title="Lịch sử đơn hàng" aria-label="Lịch sử đơn hàng">
+            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+          </a>
+          <a href="3_ThongTinCaNhan.html" title="Tài khoản" aria-label="Tài khoản">
+            <i class="fa-regular fa-circle-user" aria-hidden="true"></i>
+          </a>
+          <a href="index.html" class="logout-btn" title="Đăng xuất" aria-label="Đăng xuất">
+            <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+          </a>
+        </nav>
+        
+        <!-- Menu mobile -->
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb container">
+      <a href="5_DaDangNhap.html"><i class="fas fa-home"></i> Trang chủ</a>
+      <i class="fas fa-chevron-right"></i>
+      <span>Tìm kiếm</span>
+    </div>
+
+    <!-- MAIN SEARCH CONTENT -->
+    <main class="search-page container">
+      <!-- Tiêu đề tìm kiếm -->
+      <div class="search-page-header">
+        <div class="search-query-info" id="search-query-info">
+          <!-- Hiển thị từ khóa tìm kiếm -->
+        </div>
+      </div>
+
+      <!-- LAYOUT CHÍNH VỚI SIDEBAR VÀ NỘI DUNG -->
+      <div class="search-layout">
+        <!-- SIDEBAR TÌM KIẾM BÊN TRÁI -->
+        <aside class="search-sidebar">
+          <div class="search-sidebar-content">
+            <h3 class="sidebar-title">Tìm kiếm nâng cao</h3>
+            
+            <form class="advanced-search-form" id="advanced-search-form">
+              <div class="search-group">
+                <label for="product-name">Tên sản phẩm</label>
+                <input type="text" id="product-name" placeholder="Nhập tên sản phẩm...">
+              </div>
+              
+              <div class="search-group">
+                <label for="category">Phân loại</label>
+                <select id="category">
+                  <option value="">Tất cả phân loại</option>
+                  <option value="bo-hoa">Bó hoa</option>
+                  <option value="lang-hoa">Lẵng hoa</option>
+                  <option value="ke-hoa">Kệ hoa</option>
+                </select>
+              </div>
+
+              <div class="search-group">
+                <label for="min-price">Khoảng giá</label>
+                <div class="price-range-group">
+                  <div class="price-input-group">
+                    <input type="number" id="min-price" placeholder="0" min="0" aria-label="Giá tối thiểu">
+                    <span class="currency">₫</span>
+                  </div>
+                  <span class="price-range-separator">-</span>
+                  <div class="price-input-group">
+                    <input type="number" id="max-price" placeholder="10,000,000" min="0" aria-label="Giá tối đa">
+                    <span class="currency">₫</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="search-actions">
+                <button type="reset" class="btn-secondary" id="reset-btn">
+                  <i class="fas fa-redo" aria-hidden="true"></i>
+                  Đặt lại
+                </button>
+                <button type="submit" class="search-submit" id="advanced-search-btn">
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                  Tìm kiếm
+                </button>
+              </div>
+            </form>
+          </div>
+        </aside>
+
+        <!-- KẾT QUẢ TÌM KIẾM BÊN PHẢI -->
+        <section class="search-results" id="search-results" aria-labelledby="search-results-title">
+          <div class="results-header">
+            <h2 id="search-results-title">Kết quả tìm kiếm</h2>
+            <div class="results-info">
+              <span class="results-count">Tìm thấy <strong id="results-count">0</strong> sản phẩm</span>
+              <div class="sort-options">
+                <label for="sort-by">Sắp xếp:</label>
+                <select id="sort-by" aria-label="Sắp xếp kết quả">
+                  <option value="popular">Phổ biến nhất</option>
+                  <option value="newest">Mới nhất</option>
+                  <option value="price-low">Giá thấp đến cao</option>
+                  <option value="price-high">Giá cao đến thấp</option>
+                  <option value="name">Tên A-Z</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-grid" id="search-results-grid" role="list" aria-label="Danh sách sản phẩm tìm thấy">
+            <!-- Kết quả tìm kiếm sẽ hiển thị ở đây -->
+          </div>
+
+          <!-- PHÂN TRANG -->
+          <nav class="pagination" id="search-pagination" aria-label="Phân trang kết quả tìm kiếm">
+            <!-- Phân trang sẽ được render bằng JavaScript -->
+          </nav>
+        </section>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" aria-labelledby="footer-heading">
+      <div class="container footer-inner">
+        <h2 id="footer-heading" class="visually-hidden">Thông tin liên hệ</h2>
+        <div class="footer-main">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <svg width="60" height="60" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9"/>
+                <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20" fill="#eaf8f0"/>
+                <circle cx="40" cy="35" r="8" fill="#b19cd9"/>
+                <circle cx="60" cy="35" r="8" fill="#b19cd9"/>
+                <circle cx="50" cy="50" r="12" fill="#9370db"/>
+                <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68"/>
+              </svg>
+              <span>Bloom</span>
+            </div>
+            <p class="footer-tagline">Lan tỏa hương sắc thiên nhiên</p>
+          </div>
+
+          <div class="footer-contact">
+            <h3>Thông Tin Liên Hệ</h3>
+            <div class="contact-info">
+              <div class="contact-item">
+                <i class="fas fa-globe" aria-hidden="true"></i>
+                <span>bloom.vn</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                <span>123 Đường Hoa, Quận 1, TP.HCM</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                <a href="tel:+84901234567">090 123 4567</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope" aria-hidden="true"></i>
+                <a href="mailto:info@bloom.vn">info@bloom.vn</a>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-clock" aria-hidden="true"></i>
+                <span>T2 – CN: 8h30 – 21h00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Dữ liệu mẫu cho sản phẩm - DÙNG CÙNG DỮ LIỆU VỚI 5_DaDangNhap.html
+    const sampleProducts = [
+      {
+        id: 1,
+        name: "Nhiệt Ái",
+        price: 700000,
+        category: "bo-hoa",
+        image: "images/hoa1.jpg",
+        description: "Bó hoa hồng đỏ thể hiện trọn vẹn sự mãnh liệt và lãng mạn của tình yêu",
+        popular: true
+      },
+      {
+        id: 2,
+        name: "Peach",
+        price: 770000,
+        category: "bo-hoa",
+        image: "images/hoa2.jpg",
+        description: "Bó hoa hồng phấn dịu dàng và thanh lịch, hoàn hảo cho những dịp đặc biệt",
+        popular: true
+      },
+      {
+        id: 3,
+        name: "Blueberry",
+        price: 250000,
+        category: "bo-hoa",
+        image: "images/hoa3.jpg",
+        description: "Sắc tím quyến rũ và bí ẩn, phù hợp cho những người yêu thích sự độc đáo",
+        popular: false
+      },
+      {
+        id: 4,
+        name: "Lemon",
+        price: 650000,
+        category: "bo-hoa",
+        image: "images/hoa4.jpg",
+        description: "Bó hoa tươi sáng và tràn đầy năng lượng với sắc vàng rực rỡ",
+        popular: true
+      },
+      {
+        id: 5,
+        name: "Vườn Xuân Ca",
+        price: 670000,
+        category: "bo-hoa",
+        image: "images/hoa5.jpg",
+        description: "Sự kết hợp hài hòa của nhiều loại hoa tạo nên vẻ đẹp tự nhiên và tinh tế",
+        popular: false
+      },
+      {
+        id: 6,
+        name: "Shimmer Grace",
+        price: 1150000,
+        category: "lang-hoa",
+        image: "images/langhoa1.webp",
+        description: "Lẵng hoa trắng tinh khôi và thanh khiết, sang trọng cho không gian hiện đại",
+        popular: true
+      },
+      {
+        id: 7,
+        name: "BlueSky",
+        price: 1450000,
+        category: "lang-hoa",
+        image: "images/langhoa2.jpg",
+        description: "Thiết kế độc đáo với tông màu xanh dịu mát, mang đến cảm giác bình yên",
+        popular: false
+      },
+      {
+        id: 8,
+        name: "Sen Xanh",
+        price: 1500000,
+        category: "lang-hoa",
+        image: "images/langhoa3.png",
+        description: "Lẵng hoa sen thanh tao và quý phái, lấy cảm hứng từ nghệ thuật truyền thống",
+        popular: true
+      },
+      {
+        id: 9,
+        name: "Sắc Màu",
+        price: 3500000,
+        category: "ke-hoa",
+        image: "images/kehoa1.jpg",
+        description: "Kệ hoa đa sắc màu rực rỡ, tạo điểm nhấn ấn tượng cho không gian rộng",
+        popular: true
+      },
+      {
+        id: 10,
+        name: "Hồng Phát",
+        price: 1900000,
+        category: "ke-hoa",
+        image: "images/kehoa2.jpg",
+        description: "Kệ hoa mang đến may mắn và tài lộc, thiết kế tinh xảo và ý nghĩa",
+        popular: false
+      },
+      {
+        id: 11,
+        name: "Tương Lai",
+        price: 2100000,
+        category: "ke-hoa",
+        image: "images/kehoa3.jpg",
+        description: "Kệ hoa hiện đại hướng đến tương lai, phù hợp với không gian đương đại",
+        popular: true
+      },
+      {
+        id: 12,
+        name: "Hồng Mộng",
+        price: 550000,
+        category: "bo-hoa",
+        image: "images/hoa1.jpg",
+        description: "Bó hoa hồng phấn dịu dàng như giấc mơ ngọt ngào",
+        popular: true
+      },
+      {
+        id: 13,
+        name: "Tím Thủy Chung",
+        price: 480000,
+        category: "bo-hoa",
+        image: "images/hoa2.jpg",
+        description: "Sắc tím thủy chung, biểu tượng của tình yêu vĩnh cửu",
+        popular: false
+      },
+      {
+        id: 14,
+        name: "Sunshine",
+        price: 720000,
+        category: "bo-hoa",
+        image: "images/hoa3.jpg",
+        description: "Bó hoa rực rỡ như ánh nắng mặt trời, mang lại năng lượng tích cực",
+        popular: true
+      },
+      {
+        id: 15,
+        name: "Royal Elegance",
+        price: 1250000,
+        category: "lang-hoa",
+        image: "images/langhoa3.png",
+        description: "Lẵng hoa hoàng gia với thiết kế tinh tế và sang trọng",
+        popular: true
+      },
+      {
+        id: 16,
+        name: "Golden Harvest",
+        price: 3200000,
+        category: "ke-hoa",
+        image: "images/hoa1.jpg",
+        description: "Kệ hoa mùa thu với sắc vàng rực rỡ, mang đến không gian ấm áp",
+        popular: false
+      }
+    ];
+
+    // Biến toàn cục
+    let searchTimeout;
+    let currentSort = 'popular';
+    let currentSearchResults = [];
+
+    // Cấu hình phân trang
+    const paginationConfig = {
+      currentPage: 1,
+      itemsPerPage: 8,
+      totalPages: 1
+    };
+
+    // Hàm chuyển hướng đến trang tìm kiếm
+    function redirectToSearch() {
+        const searchInput = document.getElementById('header-search-input');
+        const searchTerm = searchInput.value.trim();
+        
+        if (searchTerm) {
+            window.location.href = `15_TimKiem2.html?q=${encodeURIComponent(searchTerm)}`;
+        } else {
+            window.location.href = '15_TimKiem2.html';
+        }
+    }
+
+    // Hàm xử lý URL parameters
+    function getSearchQueryFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('q') || '';
+    }
+
+    // Hàm hiển thị từ khóa tìm kiếm
+    function displaySearchQuery() {
+        const searchQuery = getSearchQueryFromURL();
+        const queryInfo = document.getElementById('search-query-info');
+        
+        if (searchQuery) {
+            queryInfo.innerHTML = `
+                <h1>Kết quả tìm kiếm cho: <strong>"${searchQuery}"</strong></h1>
+            `;
+            
+            // Điền từ khóa vào ô tìm kiếm nâng cao
+            document.getElementById('product-name').value = searchQuery;
+            
+            // Tự động thực hiện tìm kiếm
+            performSearch({ name: searchQuery });
+        } else {
+            queryInfo.innerHTML = '<h1>Tìm kiếm sản phẩm</h1>';
+            // Hiển thị tất cả sản phẩm nếu không có từ khóa
+            displaySearchResults(sampleProducts, currentSort, 1);
+        }
+    }
+
+    // Hàm thực hiện tìm kiếm
+    function performSearch(filters) {
+        const results = searchProducts(filters);
+        currentSearchResults = results;
+        displaySearchResults(results, currentSort, 1);
+    }
+
+    // Hàm tìm kiếm sản phẩm
+    function searchProducts(filters) {
+        return sampleProducts.filter(product => {
+            // Lọc theo tên sản phẩm
+            if (filters.name && !product.name.toLowerCase().includes(filters.name.toLowerCase())) {
+            return false;
+            }
+            
+            // Lọc theo phân loại
+            if (filters.category && product.category !== filters.category) {
+            return false;
+            }
+            
+            // Lọc theo khoảng giá
+            if (filters.minPrice && product.price < filters.minPrice) {
+            return false;
+            }
+            if (filters.maxPrice && product.price > filters.maxPrice) {
+            return false;
+            }
+            
+            return true;
+        });
+    }
+
+    // Hàm phân trang sản phẩm
+    function paginateProducts(products, page = 1) {
+        const startIndex = (page - 1) * paginationConfig.itemsPerPage;
+        const endIndex = startIndex + paginationConfig.itemsPerPage;
+        return products.slice(startIndex, endIndex);
+    }
+
+    // Hàm cập nhật phân trang
+    function updatePagination(products, paginationId, currentPage = 1) {
+        const totalProducts = products.length;
+        const totalPages = Math.ceil(totalProducts / paginationConfig.itemsPerPage);
+        
+        paginationConfig.totalPages = totalPages;
+        paginationConfig.currentPage = currentPage;
+        
+        const paginationContainer = document.getElementById(paginationId);
+        
+        if (totalPages <= 1) {
+            paginationContainer.style.display = 'none';
+            return;
+        }
+        
+        paginationContainer.style.display = 'flex';
+        renderPagination(paginationContainer, currentPage, totalPages, paginationId);
+    }
+
+    // Hàm render phân trang
+    function renderPagination(container, currentPage, totalPages, paginationId) {
+        let paginationHTML = '';
+        
+        // Nút Previous
+        if (currentPage > 1) {
+            paginationHTML += `
+            <a href="#" class="page-nav" aria-label="Trang trước" onclick="changePage(${currentPage - 1}, '${paginationId}')">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </a>
+            `;
+        } else {
+            paginationHTML += `
+            <a href="#" class="page-nav disabled" aria-label="Trang trước" aria-disabled="true">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </a>
+            `;
+        }
+        
+        // Các số trang
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+        
+        // Điều chỉnh nếu gần cuối
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+        
+        // Hiển thị trang đầu nếu cần
+        if (startPage > 1) {
+            paginationHTML += `
+            <a href="#" class="page-number" aria-label="Trang 1" onclick="changePage(1, '${paginationId}')">1</a>
+            `;
+            if (startPage > 2) {
+            paginationHTML += `<span class="page-ellipsis" aria-hidden="true">...</span>`;
+            }
+        }
+        
+        // Các trang chính
+        for (let i = startPage; i <= endPage; i++) {
+            const isActive = i === currentPage;
+            paginationHTML += `
+            <a href="#" class="page-number ${isActive ? 'active' : ''}" 
+               aria-label="Trang ${i}" ${isActive ? 'aria-current="page"' : ''}
+               onclick="changePage(${i}, '${paginationId}')">
+            ${i}
+            </a>
+            `;
+        }
+        
+        // Hiển thị trang cuối nếu cần
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+            paginationHTML += `<span class="page-ellipsis" aria-hidden="true">...</span>`;
+            }
+            paginationHTML += `
+            <a href="#" class="page-number" aria-label="Trang ${totalPages}" onclick="changePage(${totalPages}, '${paginationId}')">${totalPages}</a>
+            `;
+        }
+        
+        // Nút Next
+        if (currentPage < totalPages) {
+            paginationHTML += `
+            <a href="#" class="page-nav" aria-label="Trang sau" onclick="changePage(${currentPage + 1}, '${paginationId}')">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </a>
+            `;
+        } else {
+            paginationHTML += `
+            <a href="#" class="page-nav disabled" aria-label="Trang sau" aria-disabled="true">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </a>
+            `;
+        }
+        
+        container.innerHTML = paginationHTML;
+    }
+
+    // Hàm chuyển trang
+    function changePage(page, paginationId) {
+        paginationConfig.currentPage = page;
+        
+        const paginatedProducts = paginateProducts(currentSearchResults, page);
+        displaySearchResultsGrid(paginatedProducts);
+        
+        // Scroll lên đầu phần kết quả
+        document.getElementById('search-results').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+
+    // Hàm hiển thị kết quả tìm kiếm
+    function displaySearchResults(products, sortBy = 'popular', page = 1) {
+        const resultsCount = document.getElementById('results-count');
+        const resultsSection = document.getElementById('search-results');
+        
+        const sortedProducts = sortProducts(products, sortBy);
+        currentSearchResults = sortedProducts;
+        const paginatedProducts = paginateProducts(sortedProducts, page);
+        
+        resultsCount.textContent = sortedProducts.length;
+        resultsCount.setAttribute('aria-live', 'polite');
+        
+        displaySearchResultsGrid(paginatedProducts);
+        
+        // Cập nhật phân trang cho kết quả tìm kiếm
+        updatePagination(sortedProducts, 'search-pagination', page);
+        
+        resultsSection.hidden = false;
+    }
+
+    // Hàm hiển thị grid kết quả
+    function displaySearchResultsGrid(products) {
+        const resultsContainer = document.getElementById('search-results-grid');
+        
+        if (products.length === 0) {
+            resultsContainer.innerHTML = `
+            <div class="no-results">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <h3>Không tìm thấy sản phẩm phù hợp</h3>
+                <p>Hãy thử điều chỉnh tiêu chí tìm kiếm của bạn</p>
+            </div>
+            `;
+            document.getElementById('search-pagination').style.display = 'none';
+        } else {
+            resultsContainer.innerHTML = '';
+            products.forEach(product => {
+            const productElement = createProductElement(product);
+            resultsContainer.appendChild(productElement);
+            });
+        }
+    }
+
+    function sortProducts(products, sortBy) {
+        switch (sortBy) {
+            case 'newest':
+            return [...products].sort((a, b) => b.id - a.id);
+            case 'price-low':
+            return [...products].sort((a, b) => a.price - b.price);
+            case 'price-high':
+            return [...products].sort((a, b) => b.price - a.price);
+            case 'name':
+            return [...products].sort((a, b) => a.name.localeCompare(b.name));
+            default: // popular
+            return [...products].sort((a, b) => (b.popular === a.popular) ? 0 : b.popular ? -1 : 1);
+        }
+    }
+
+    function handleImageError(img) {
+        img.src = 'https://images.unsplash.com/photo-1487070183333-13a8a54b5f14?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+        img.alt = 'Hình ảnh sản phẩm tạm thời không khả dụng';
+    }
+
+    // Hàm tạo HTML cho sản phẩm (ĐÃ ĐĂNG NHẬP - CÓ NÚT THÊM VÀO GIỎ)
+    function createProductElement(product) {
+        const productDiv = document.createElement('article');
+        productDiv.className = 'product';
+        productDiv.setAttribute('role', 'listitem');
+        productDiv.innerHTML = `
+            <a href="4_ChiTietSanPham.html">
+            <img 
+                src="${product.image}" 
+                alt="${product.name} - ${product.description}" 
+                loading="lazy"
+                onerror="handleImageError(this)"
+            >
+            </a>
+            <h3>${product.name}</h3>
+            <p class="price">${product.price.toLocaleString('vi-VN')}₫</p>
+            <div class="product-actions">
+              <button class="btn-outline" onclick="addToCart(${product.id})">Thêm vào giỏ</button>
+              <a href="6_GioHang.html?buynow=${product.id}" class="btn-buy-now">Mua ngay</a>
+            </div>
+        `;
+        return productDiv;
+    }
+
+    // Hàm thêm vào giỏ hàng (ĐÃ ĐĂNG NHẬP)
+    function addToCart(productId) {
+        const product = sampleProducts.find(p => p.id === productId);
+        if (product) {
+            // Tạo thông báo toast
+            const toast = document.createElement('div');
+            toast.className = 'cart-toast success';
+            toast.innerHTML = `
+            <i class="fas fa-check-circle" aria-hidden="true"></i>
+            <span>Đã thêm "${product.name}" vào giỏ hàng!</span>
+            <button onclick="this.parentElement.remove()" aria-label="Đóng thông báo">
+                <i class="fas fa-times"></i>
+            </button>
+            `;
+            document.body.appendChild(toast);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+            if (toast.parentElement) {
+                toast.remove();
+            }
+            }, 3000);
+        }
+    }
+
+    // JavaScript chính khi trang load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Hiển thị từ khóa tìm kiếm từ URL
+        displaySearchQuery();
+
+        // Xử lý tìm kiếm nâng cao
+        const advancedSearchForm = document.getElementById('advanced-search-form');
+        
+        advancedSearchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const filters = {
+            name: document.getElementById('product-name').value.trim(),
+            category: document.getElementById('category').value,
+            minPrice: document.getElementById('min-price').value ? parseInt(document.getElementById('min-price').value) : null,
+            maxPrice: document.getElementById('max-price').value ? parseInt(document.getElementById('max-price').value) : null
+            };
+            
+            performSearch(filters);
+        });
+        
+        // Xử lý sắp xếp
+        const sortSelect = document.getElementById('sort-by');
+        sortSelect.addEventListener('change', function() {
+            currentSort = this.value;
+            displaySearchResults(currentSearchResults, this.value, paginationConfig.currentPage);
+        });
+        
+        // Đặt lại form
+        const resetBtn = document.getElementById('reset-btn');
+        resetBtn.addEventListener('click', function() {
+            // Reset tất cả input trong form tìm kiếm nâng cao
+            document.getElementById('product-name').value = '';
+            document.getElementById('category').value = '';
+            document.getElementById('min-price').value = '';
+            document.getElementById('max-price').value = '';
+            
+            // Hiển thị tất cả sản phẩm
+            displaySearchResults(sampleProducts, currentSort, 1);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.bloom-header');
+            if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+            } else {
+            header.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-toggle')?.addEventListener('click', function() {
+            const nav = document.querySelector('.bloom-nav');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            
+            nav.classList.toggle('active');
+            this.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Cho phép nhấn Enter trên header search
+        document.getElementById('header-search-input')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+            redirectToSearch();
+            }
+        });
+
+        // Logout confirmation
+        document.querySelector('.logout-btn')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+            window.location.href = 'index.html';
+            }
+        });
+    });
+
+    // Thêm CSS animation cho toast
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+      }
+      .cart-toast {
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: var(--green-main);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .cart-toast button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+      }
+      .cart-toast button:hover {
+        background: rgba(255,255,255,0.2);
+      }
+      .cart-toast.success {
+        background: var(--green-main);
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+
+  <!-- CSS STYLES -->
+  <style>
+    :root {
+      --green-main: #2e7d68;
+      --green-light: #4caf93;
+      --green-pale: #eaf8f0;
+      --muted: #6b8b7a;
+      --card-bg: #ffffff;
+      --shadow: 0 2px 15px rgba(0,0,0,0.05);
+    }
+
+    /* HEADER STYLES */
+    .bloom-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.65);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: var(--shadow);
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .bloom-header.scrolled {
+      background: rgba(25, 25, 25, 0.85);
+      box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+    }
+
+    .bloom-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .bloom-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--green-main);
+      cursor: pointer;
+      user-select: none;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      transition: transform 0.3s ease;
+    }
+
+    .bloom-logo:hover .logo-icon {
+      transform: rotate(-5deg) scale(1.08);
+    }
+
+    .bloom-logo:focus-visible {
+      outline: 2px solid var(--green-main);
+      outline-offset: 4px;
+      border-radius: 8px;
+    }
+
+    /* HEADER SEARCH */
+    .header-search {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 25px;
+      padding: 5px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      max-width: 300px;
+      margin-right: 15px;
+    }
+
+    .header-search:focus-within {
+      border-color: var(--green-main);
+      box-shadow: 0 4px 15px rgba(46, 125, 104, 0.2);
+    }
+
+    #header-search-input {
+      border: none;
+      outline: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      width: 100%;
+      background: transparent;
+    }
+
+    .header-search-btn {
+      background: linear-gradient(135deg, var(--green-main) 0%, #3a9c7f 100%);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .header-search-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(46, 125, 104, 0.3);
+    }
+
+    /* NAV STYLES */
+    .bloom-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .bloom-nav a {
+      color: #222;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease, transform 0.2s ease;
+      display: flex;
+      align-items: center;
+      border-radius: 6px;
+    }
+
+    .bloom-nav a i {
+      font-size: 18px;
+    }
+
+    .bloom-nav a:hover {
+      color: var(--green-main);
+      transform: translateY(-2px);
+    }
+
+    .bloom-nav a:focus-visible {
+      outline: 2px solid var(--green-main);
+      outline-offset: 4px;
+    }
+
+    .bloom-header.scrolled .bloom-nav a {
+      color: #f5f5f5;
+    }
+
+    .bloom-header.scrolled .bloom-nav a:hover {
+      color: #b19cd9;
+    }
+
+    .bloom-header.scrolled .bloom-nav a:focus-visible {
+      outline-color: #b19cd9;
+    }
+
+    /* LOGOUT BUTTON */
+    .logout-btn {
+      color: #222;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .logout-btn:hover {
+      color: #c44569;
+      transform: translateY(-2px);
+    }
+
+    .logout-btn i {
+      font-size: 16px;
+    }
+
+    /* MOBILE MENU */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--green-main);
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 6px;
+    }
+
+    .mobile-menu-toggle:focus-visible {
+      outline: 2px solid var(--green-main);
+      outline-offset: 2px;
+    }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 25px 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--green-main);
+    }
+
+    .breadcrumb i {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    .breadcrumb span {
+      color: var(--green-main);
+      font-weight: 500;
+    }
+
+    /* SEARCH PAGE STYLES */
+    .search-page {
+      padding: 20px 0 60px;
+    }
+
+    .search-page-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgba(46, 125, 104, 0.1);
+    }
+
+    .search-page-header h1 {
+      font-family: 'Playfair Display', serif;
+      color: #1a4d2b;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .search-query-info {
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .search-query-info strong {
+      color: var(--green-main);
+    }
+
+    /* CSS cho layout mới với sidebar bên trái */
+    .search-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 40px;
+      margin-top: 30px;
+    }
+
+    .search-sidebar {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(20, 50, 40, 0.08);
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .sidebar-title {
+      font-family: 'Playfair Display', serif;
+      color: #1a4d2b;
+      margin-bottom: 25px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--green-pale);
+    }
+
+    .search-sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .search-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .search-group label {
+      font-weight: 600;
+      color: var(--green-main);
+      font-size: 0.95rem;
+    }
+
+    .search-group input,
+    .search-group select {
+      padding: 14px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: white;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .search-group input:focus,
+    .search-group select:focus {
+      outline: none;
+      border-color: var(--green-main);
+      box-shadow: 0 0 0 3px rgba(46, 125, 104, 0.1);
+      background: white;
+    }
+
+    .price-range-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .price-input-group {
+      position: relative;
+      flex: 1;
+    }
+
+    .price-input-group input {
+      width: 100%;
+      padding-right: 40px;
+    }
+
+    .price-range-separator {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .currency {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .search-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .search-actions button {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background: var(--green-pale);
+      color: var(--green-main);
+      border: 2px solid var(--green-pale);
+    }
+
+    .btn-secondary:hover {
+      background: #d9f0e6;
+      border-color: var(--green-light);
+    }
+
+    .search-submit {
+      background: var(--green-main);
+      color: white;
+      border: 2px solid var(--green-main);
+    }
+
+    .search-submit:hover {
+      background: var(--green-light);
+      border-color: var(--green-light);
+    }
+
+    /* Kết quả tìm kiếm */
+    .search-results {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(20, 50, 40, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .results-header h2 {
+      font-family: 'Playfair Display', serif;
+      color: #1a4d2b;
+      font-size: 1.8rem;
+    }
+
+    .results-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+    }
+
+    .sort-options {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sort-options select {
+      padding: 8px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      background: white;
+      font-size: 0.9rem;
+    }
+
+    .sort-options select:focus {
+      outline: none;
+      border-color: var(--green-main);
+      box-shadow: 0 0 0 2px rgba(46, 125, 104, 0.1);
+    }
+
+    /* Product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .product {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(20, 50, 40, 0.08);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #2e7d68 0%, #3a9c7f 100%);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .product:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(15, 45, 35, 0.15);
+    }
+
+    .product:hover::before {
+      transform: scaleX(1);
+    }
+
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .product:hover img {
+      transform: scale(1.05);
+    }
+
+    .product h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: #1a4d2b;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    .price {
+      color: #2e7d68;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    /* PRODUCT ACTIONS - ĐÃ ĐĂNG NHẬP */
+    .product-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      width: 100%;
+    }
+
+    .product-actions .btn-outline {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      text-align: center;
+      text-decoration: none;
+      background: transparent;
+      border: 2px solid #2e7d68;
+      color: #2e7d68;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .product-actions .btn-outline:hover {
+      background: #2e7d68;
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(46, 125, 104, 0.3);
+    }
+
+    .product-actions .btn-buy-now {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      text-align: center;
+      text-decoration: none;
+      background: #2e7d68;
+      color: white;
+      border: 2px solid #2e7d68;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .product-actions .btn-buy-now:hover {
+      background: #1a4d2b;
+      border-color: #1a4d2b;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(46, 125, 104, 0.3);
+    }
+
+    /* Phân trang */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 40px;
+    }
+
+    .page-nav,
+    .page-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 40px;
+      padding: 0 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 500;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .page-nav.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background: #f5f5f5;
+    }
+
+    .page-number.active,
+    .page-number:hover,
+    .page-nav:not(.disabled):hover {
+      background: var(--green-main);
+      color: white;
+      border-color: var(--green-main);
+      transform: translateY(-2px);
+    }
+
+    .page-ellipsis {
+      padding: 0 10px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* No results */
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .no-results i {
+      font-size: 3rem;
+      color: #ddd;
+      margin-bottom: 20px;
+    }
+
+    .no-results h3 {
+      color: #6b8b7a;
+      margin-bottom: 15px;
+    }
+
+    .no-results p {
+      color: #6b8b7a;
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .search-layout {
+        grid-template-columns: 280px 1fr;
+        gap: 30px;
+      }
+      
+      .search-sidebar {
+        padding: 25px;
+      }
+      
+      .search-results {
+        padding: 25px;
+      }
+      
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .search-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .search-sidebar {
+        position: static;
+        order: 2;
+      }
+      
+      .search-results {
+        order: 1;
+      }
+      
+      .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      
+      .results-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .bloom-container {
+        padding: 10px 20px;
+        flex-wrap: wrap;
+      }
+
+      .header-search {
+        order: 2;
+        max-width: 200px;
+        margin-right: 10px;
+        margin-left: 0;
+      }
+
+      .bloom-logo {
+        order: 1;
+      }
+
+      .bloom-nav {
+        order: 3;
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
+
+      .bloom-nav.active {
+        display: flex;
+      }
+
+      .bloom-header.scrolled .bloom-nav {
+        background: rgba(25, 25, 25, 0.95);
+      }
+
+      .mobile-menu-toggle {
+        display: block;
+        order: 4;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .search-sidebar,
+      .search-results {
+        padding: 20px;
+        border-radius: 16px;
+      }
+      
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .search-actions {
+        flex-direction: column;
+      }
+      
+      .price-range-group {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .price-range-separator {
+        display: none;
+      }
+
+      .header-search {
+        max-width: 150px;
+      }
+
+      #header-search-input::placeholder {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</body>
+</html>
