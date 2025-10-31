@@ -17,28 +17,28 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let products = [
-    { id: 1, name: "Nhiệt Ái", category: "Bó hoa", cost: 150000, profit: 35 },
-    { id: 2, name: "Peach", category: "Bó hoa", cost: 200000, profit: 40 },
-    { id: 3, name: "Blueberry", category: "Bó hoa", cost: 320000, profit: 30 },
-    { id: 4, name: "Lemon", category: "Bó hoa", cost: 280000, profit: 45 },
+    { id: 1, name: "Nhiệt Ái", category: "Bó hoa", cost: 600000, profit: 14.3 },
+    { id: 2, name: "Peach", category: "Bó hoa", cost: 570000, profit: 26 },
+    { id: 3, name: "Blueberry", category: "Bó hoa", cost: 180000, profit: 28 },
+    { id: 4, name: "Lemon", category: "Bó hoa", cost: 520000, profit: 20 },
     {
       id: 5,
       name: "Shimmer Grace",
       category: "Lẳng hoa",
-      cost: 250000,
-      profit: 25,
+      cost: 900000,
+      profit: 21.75,
     },
-    { id: 6, name: "Blue Sky", category: "Lẳng hoa", cost: 450000, profit: 30 },
+    { id: 6, name: "Blue Sky", category: "Lẳng hoa", cost: 1000000, profit: 31.03 },
     {
       id: 7,
       name: "Sen Xanh",
       category: "Lẳng hoa",
-      cost: 220000,
-      profit: 38,
+      cost: 1150000,
+      profit: 30,
     },
-    { id: 8, name: "Sắc Màu", category: "Kệ hoa", cost: 350000, profit: 20 },
-    { id: 9, name: "Hồng Phát", category: "Kệ hoa", cost: 260000, profit: 22 },
-    { id: 10, name: "Tương Lai", category: "Kệ hoa", cost: 280000, profit: 28 },
+    { id: 8, name: "Sắc Màu", category: "Kệ hoa", cost: 1450000, profit: 31 },
+    { id: 9, name: "Hồng Phát", category: "Kệ hoa", cost: 2950000, profit: 15.7 },
+    { id: 10, name: "Tương Lai", category: "Kệ hoa", cost: 1150000, profit: 28 },
   ];
 
   // *************** BIẾN VÀ HÀM CHO CHỨC NĂNG SỬA SẢN PHẨM ***************
@@ -395,106 +395,107 @@ document.addEventListener("DOMContentLoaded", () => {
   showTab("price-profit");
   setupModalEvents();
 
-  // --- Chức năng lọc và tìm kiếm ---
+//   // --- Chức năng lọc và tìm kiếm ---
 
-  // Lọc cho Tỷ lệ lợi nhuận theo danh mục
-  const categorySearchBtn = document.querySelector("#price-profit .search-btn");
-  if (categorySearchBtn) {
-    categorySearchBtn.addEventListener("click", () => {
-      const searchTerm = document.getElementById("search-price").value.toLowerCase();
-      const profitRange = document.getElementById("profit-range").value;
+//   // Lọc cho Tỷ lệ lợi nhuận theo danh mục
+//   const categorySearchBtn = document.querySelector("#price-profit .search-btn");
+//   if (categorySearchBtn) {
+//     categorySearchBtn.addEventListener("click", () => {
+//       const searchTerm = document.getElementById("search-price").value.toLowerCase();
+//       const profitRange = document.getElementById("profit-range").value;
 
-      let filtered = categories.filter((cat) => {
-        const matchesSearch = cat.name.toLowerCase().includes(searchTerm);
-        let matchesProfitRange = true;
+//       let filtered = categories.filter((cat) => {
+//         const matchesSearch = cat.name.toLowerCase().includes(searchTerm);
+//         let matchesProfitRange = true;
 
-        if (profitRange) {
-          if (profitRange === "35+") {
-            matchesProfitRange = cat.profit >= 35;
-          } else {
-            const [minStr, maxStr] = profitRange.split("-");
-            const min = parseFloat(minStr);
-            const max = parseFloat(maxStr);
-            matchesProfitRange = cat.profit >= min && cat.profit <= max;
-          }
-        }
-        return matchesSearch && matchesProfitRange;
-      });
-      renderCategoryProfitTable(filtered);
-    });
-  }
+//         if (profitRange) {
+//           if (profitRange === "35+") {
+//             matchesProfitRange = cat.profit >= 35;
+//           } else {
+//             const [minStr, maxStr] = profitRange.split("-");
+//             const min = parseFloat(minStr);
+//             const max = parseFloat(maxStr);
+//             matchesProfitRange = cat.profit >= min && cat.profit <= max;
+//           }
+//         }
+//         return matchesSearch && matchesProfitRange;
+//       });
+//       renderCategoryProfitTable(filtered);
+//     });
+//   }
 
-  const categoryResetBtn = document.querySelector("#price-profit .reset-btn");
-  if (categoryResetBtn) {
-    categoryResetBtn.addEventListener("click", () => {
-      document.getElementById("search-price").value = "";
-      document.getElementById("profit-range").value = "";
-      renderCategoryProfitTable();
-    });
-  }
+//   const categoryResetBtn = document.querySelector("#price-profit .reset-btn");
+//   if (categoryResetBtn) {
+//     categoryResetBtn.addEventListener("click", () => {
+//       document.getElementById("search-price").value = "";
+//       document.getElementById("profit-range").value = "";
+//       renderCategoryProfitTable();
+//     });
+//   }
 
-  // Lọc cho Tỷ lệ lợi nhuận theo sản phẩm
-  const productSearchBtn = document.querySelector("#product-profit .search-btn");
-  if (productSearchBtn) {
-    productSearchBtn.addEventListener("click", () => {
-      const searchTerm = document.getElementById("search-product").value.toLowerCase();
-      const categoryFilter = document.getElementById("product-price-filter").value;
+//   // Lọc cho Tỷ lệ lợi nhuận theo sản phẩm
+//   const productSearchBtn = document.querySelector("#product-profit .search-btn");
+//   if (productSearchBtn) {
+//     productSearchBtn.addEventListener("click", () => {
+//       const searchTerm = document.getElementById("search-product").value.toLowerCase();
+//       const categoryFilter = document.getElementById("product-price-filter").value;
 
-      let filtered = products.filter((prod) => {
-        const matchesSearch = prod.name.toLowerCase().includes(searchTerm);
-        const matchesCategory = categoryFilter === "" || prod.category === categoryFilter;
-        return matchesSearch && matchesCategory;
-      });
-      renderProductProfitTable(filtered);
-    });
-  }
+//       let filtered = products.filter((prod) => {
+//         const matchesSearch = prod.name.toLowerCase().includes(searchTerm);
+//         const matchesCategory = categoryFilter === "" || prod.category === categoryFilter;
+//         return matchesSearch && matchesCategory;
+//       });
+//       renderProductProfitTable(filtered);
+//     });
+//   }
 
-  const productResetBtn = document.querySelector("#product-profit .reset-btn");
-  if (productResetBtn) {
-    productResetBtn.addEventListener("click", () => {
-      document.getElementById("search-product").value = "";
-      document.getElementById("product-price-filter").value = "";
-      renderProductProfitTable();
-    });
-  }
+//   const productResetBtn = document.querySelector("#product-profit .reset-btn");
+//   if (productResetBtn) {
+//     productResetBtn.addEventListener("click", () => {
+//       document.getElementById("search-product").value = "";
+//       document.getElementById("product-price-filter").value = "";
+//       renderProductProfitTable();
+//     });
+//   }
 
-  // Lọc cho Tra cứu giá bán
-  const lookupSearchBtn = document.querySelector("#price-lookup .search-btn");
-  if (lookupSearchBtn) {
-    lookupSearchBtn.addEventListener("click", () => {
-      const searchTerm = document.getElementById("lookup-search-product").value.toLowerCase();
-      const categoryFilter = document.getElementById("lookup-product-price-filter").value;
-      const priceRange = document.getElementById("price-range-filter").value;
+//   // Lọc cho Tra cứu giá bán
+//   const lookupSearchBtn = document.querySelector("#price-lookup .search-btn");
+//   if (lookupSearchBtn) {
+//     lookupSearchBtn.addEventListener("click", () => {
+//       const searchTerm = document.getElementById("lookup-search-product").value.toLowerCase();
+//       const categoryFilter = document.getElementById("lookup-product-price-filter").value;
+//       const priceRange = document.getElementById("price-range-filter").value;
 
-      let filtered = products.filter((prod) => {
-        const matchesSearch = prod.name.toLowerCase().includes(searchTerm);
-        const matchesCategory = categoryFilter === "" || prod.category === categoryFilter;
-        let matchesPriceRange = true;
+//       let filtered = products.filter((prod) => {
+//         const matchesSearch = prod.name.toLowerCase().includes(searchTerm);
+//         const matchesCategory = categoryFilter === "" || prod.category === categoryFilter;
+//         let matchesPriceRange = true;
 
-        if (priceRange) {
-          const sellingPrice = calculateSellingPrice(prod.cost, prod.profit);
-          if (priceRange === "500000+") {
-            matchesPriceRange = sellingPrice >= 500000;
-          } else {
-            const [minStr, maxStr] = priceRange.split("-");
-            const min = parseInt(minStr);
-            const max = parseInt(maxStr);
-            matchesPriceRange = sellingPrice >= min && sellingPrice <= max;
-          }
-        }
-        return matchesSearch && matchesCategory && matchesPriceRange;
-      });
-      renderPriceLookupTable(filtered);
-    });
-  }
+//         if (priceRange) {
+//           const sellingPrice = calculateSellingPrice(prod.cost, prod.profit);
+//           if (priceRange === "500000+") {
+//             matchesPriceRange = sellingPrice >= 500000;
+//           } else {
+//             const [minStr, maxStr] = priceRange.split("-");
+//             const min = parseInt(minStr);
+//             const max = parseInt(maxStr);
+//             matchesPriceRange = sellingPrice >= min && sellingPrice <= max;
+//           }
+//         }
+//         return matchesSearch && matchesCategory && matchesPriceRange;
+//       });
+//       renderPriceLookupTable(filtered);
+//     });
+//   }
 
-  const lookupResetBtn = document.querySelector("#price-lookup .reset-btn");
-  if (lookupResetBtn) {
-    lookupResetBtn.addEventListener("click", () => {
-      document.getElementById("lookup-search-product").value = "";
-      document.getElementById("lookup-product-price-filter").value = "";
-      document.getElementById("price-range-filter").value = "";
-      renderPriceLookupTable();
-    });
-  }
+//   const lookupResetBtn = document.querySelector("#price-lookup .reset-btn");
+//   if (lookupResetBtn) {
+//     lookupResetBtn.addEventListener("click", () => {
+//       document.getElementById("lookup-search-product").value = "";
+//       document.getElementById("lookup-product-price-filter").value = "";
+//       document.getElementById("price-range-filter").value = "";
+//       renderPriceLookupTable();
+//     });
+//   }
+
 });

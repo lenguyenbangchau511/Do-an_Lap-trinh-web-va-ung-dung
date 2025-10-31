@@ -1300,7 +1300,7 @@ footer p{
       gap: 10px;
     }
 
-    .search-btn, .reset-btn {
+    .search-btn, .reset-btn,   .search-btn2, .reset-btn2,  .search-btn3, .reset-btn3 {
       padding: 10px 20px;
       border: none;
       border-radius: 8px;
@@ -1309,8 +1309,15 @@ footer p{
       transition: all 0.3s ease;
     }
 
-    .search-btn {
+    .search-btn ,  .search-btn2 ,  .search-btn3{
       background: linear-gradient(135deg, #2e7d68, #4caf93);
+      color: white;
+    }
+
+    
+
+    .reset-btn,.reset-btn2,.reset-btn3 {
+      background: #6c757d;
       color: white;
     }
 
@@ -1318,13 +1325,23 @@ footer p{
       transform: translateY(-2px);
       box-shadow: 0 4px 15px rgba(46, 125, 104, 0.3);
     }
-
-    .reset-btn {
-      background: #6c757d;
-      color: white;
-    }
-
     .reset-btn:hover {
+      background: #5a6268;
+      transform: translateY(-2px);
+    }
+    .search-btn2:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(46, 125, 104, 0.3);
+    }
+    .reset-btn2:hover {
+      background: #5a6268;
+      transform: translateY(-2px);
+    }
+    .search-btn3:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(46, 125, 104, 0.3);
+    }
+    .reset-btn3:hover {
       background: #5a6268;
       transform: translateY(-2px);
     }

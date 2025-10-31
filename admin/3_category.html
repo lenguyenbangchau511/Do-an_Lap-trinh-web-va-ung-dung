@@ -112,6 +112,12 @@
           <div class="searchCategory">
             <input id="searchCategory" class="control__search" placeholder="Tìm kiếm...">
             <button class="search__btn"><i class="search__btn__icon fa-solid fa-magnifying-glass"></i></button>
+            <script>
+            document.querySelector('.search__btn').addEventListener('click', function () {
+              // Tải lại trang hiện tại
+              alert("Đang hiển thị dữ liệu cần tìm");
+            });
+          </script>
           </div>
           <button id="reloadBtn" class="btn btn-secondary" style="margin-left: 20px;"><i
               class="fa-solid fa-arrows-rotate"></i> Tải lại</button>

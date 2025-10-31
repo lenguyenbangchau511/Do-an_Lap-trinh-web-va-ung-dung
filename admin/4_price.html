@@ -236,6 +236,14 @@
               <i class="fas fa-redo"></i> Đặt lại
             </button>
           </div>
+          <script>
+            document.querySelector(".search-btn").addEventListener('click', function () {
+                alert("Đang hiển thị danh sách bạn cần tìm.")
+              });
+              document.querySelector(".reset-btn").addEventListener('click', function () {
+                location.reload();
+              });
+          </script>
         </div>
         <table class="data-table">
           <thead>
@@ -266,12 +274,20 @@
             </select>
           </div>
           <div class="filter-actions">
-            <button class="search-btn">
+            <button class="search-btn2">
               <i class="fas fa-search"></i> Tìm kiếm
             </button>
-            <button class="reset-btn">
+            <button class="reset-btn2">
               <i class="fas fa-redo"></i> Đặt lại
             </button>
+            <script>
+              document.querySelector(".search-btn2").addEventListener('click', function () {
+                alert("Đang hiển thị danh sách bạn cần tìm.")
+              });
+              document.querySelector(".reset-btn2").addEventListener('click', function () {
+                location.reload();
+              });
+            </script>
           </div>
         </div>
         <table class="data-table">
@@ -307,19 +323,27 @@
             <label for="price-range-filter">Khoảng giá bán</label>
             <select id="price-range-filter" class="form-select">
               <option value="">Tất cả</option>
-              <option value="0-100000">Dưới 500,000 VND</option>
-              <option value="100000-300000">500,000 - 1,000,000 VND</option>
-              <option value="300000-500000">1,000,000 - 1,500,000 VND</option>
-              <option value="500000+">Trên 1,500,000 VND</option>
+              <option value="0-500000">Dưới 500,000 VND</option>
+              <option value="500000-1000000">500,000 - 1,000,000 VND</option>
+              <option value="1000000-1500000">1,000,000 - 1,500,000 VND</option>
+              <option value="1500000+">Trên 1,500,000 VND</option>
             </select>
           </div>
           <div class="filter-actions">
-            <button class="search-btn">
+            <button class="search-btn3">
               <i class="fas fa-search"></i> Tìm kiếm
             </button>
-            <button class="reset-btn">
+            <button class="reset-btn3">
               <i class="fas fa-redo"></i> Đặt lại
             </button>
+            <script>
+              document.querySelector(".search-btn3").addEventListener('click', function () {
+                alert("Đang hiển thị danh sách bạn cần tìm.")
+              });
+              document.querySelector(".reset-btn3").addEventListener('click', function () {
+                location.reload();
+              });
+            </script>
           </div>
         </div>
         <table class="data-table">
@@ -368,6 +392,25 @@
         </form>
       </div>
     </div>
+    <ul id="pagination">
+      </li>
+      <li class="pagination-item">
+        <a href="4_price.html" class="pagination-item__link active">1</a>
+      </li>
+      <li class="pagination-item">
+        <a href="4_price.html" class="pagination-item__link " target="_self">2</a>
+      </li>
+      <li class="pagination-item">
+        <a href="4_price.html" class="pagination-item__link " target="_self">3</a>
+      </li>
+      <li class="pagination-item">
+        <a href="4_price.html" class="pagination-item__link " target="_self">4</a>
+      </li>
+      <li class="pagination-item">
+        <a href="4_price.html" class="pagination-item__link " target="_self">5</a>
+      </li>
+    </ul>
+
 
     <footer class="mt-4">
       <p class="text-center text-muted">&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>

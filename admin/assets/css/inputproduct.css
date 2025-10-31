@@ -203,7 +203,7 @@
     }
 
     .remove-product:hover {
-      color: #bd2130;
+      color: #ffffff;
       transform: scale(1.1);
     }
 
@@ -883,4 +883,32 @@ footer p{
   padding: 10px;
   width: 300px;
   margin-left: 10px;
+}
+#searchUser {
+  width: 400px;
+  padding: 8px 5px;
+  border-radius: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.355);
+}
+
+.searchUser {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--mint-2);
+  border-radius: 7px;
+  width: 400px;
+  padding: 8px 5px;
+  border-radius: 7px;
+  border: none;
+}
+
+.searchUser .search__btn {
+  border: 1px solid var(--mint-2);
+  padding: 8px 15px;
+  border-radius: 7px;
+  font-size: 17px;
+}
+
+.searchUser .search__btn:hover {
+  background-color: #bad3c5;
 }

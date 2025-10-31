@@ -111,6 +111,11 @@
           <i class="fa-solid fa-magnifying-glass"></i>
           Tìm
         </button>
+        <script>
+          document.getElementById('searchButton').addEventListener('click', function () {
+              alert("Đang hiển thị danh sách bạn cần tìm.")
+            });
+        </script>
         <style>
           .date-filter-container {
             display: flex;
@@ -159,8 +164,13 @@
         <button class="search-btn" id="reloadButton"
           style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%);">
           <i class="fa-solid fa-rotate-right"></i>
-          Làm mới
+          Đặt lại
         </button>
+        <script>
+          document.getElementById('reloadButton').addEventListener('click', function () {
+              location.reload();
+            });
+        </script>
       </div>
 
       <div class="card shadow-sm">
@@ -526,18 +536,42 @@
           staticBillModal.show();
         }
       });
+      /* ==================== HÀM RANDOM ẢNH ==================== */
 
-      function renderOrderProducts(products) {
-        const productTableBody = document.querySelector('#staticBillModal .product-table tbody');
-        if (!productTableBody) return;
 
-        productTableBody.innerHTML = '';
+     /* ==================== HÀM RANDOM ẢNH ==================== */
+function getRandomProductImage() {
+  const productImages = [
+    '../images/hoa1.jpg',
+    '../images/hoa2.jpg',
+    '../images/hoa3.jpg',
+    '../images/hoa4.jpg',
+    '../images/langhoa1.webp',
+    '../images/langhoa2.jpg',
+    '../images/langhoa3.png',
+    '../images/kehoa1.jpg',
+    '../images/kehoa2.jpg',
+    '../images/kehoa3.jpg'
+  ];
+  
+  const randomIndex = Math.floor(Math.random() * productImages.length);
+  return productImages[randomIndex];
+}
 
-        products.forEach(product => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
+function renderOrderProducts(products) {
+  const productTableBody = document.querySelector('#staticBillModal .product-table tbody');
+  if (!productTableBody) return;
+
+  productTableBody.innerHTML = '';
+
+  products.forEach(product => {
+    // Gán ảnh random cho mỗi sản phẩm
+    const randomImage = getRandomProductImage();
+    
+    const row = document.createElement('tr');
+    row.innerHTML = `
       <td>
-        <img src="../images/hoa1.jpg" alt="${product.name}" 
+        <img src="${randomImage}" alt="${product.name}" 
              style="width:50px;height:auto;object-fit:cover;">
       </td>
       <td>${escapeHtml(product.name)}</td>
@@ -546,6 +580,7 @@
       <td>${formatCurrency(product.price * product.quantity)}</td>
     `;
           productTableBody.appendChild(row);
+          
         });
       }
 
@@ -560,28 +595,7 @@
         return div.innerHTML;
       }
 
-      // -------------------- SEARCH & FILTER --------------------
-      function normalize(str) {
-        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-      }
-
-      document.getElementById('searchOrder').addEventListener('input', applyFilters);
-      document.getElementById('filterStatus').addEventListener('change', applyFilters);
-
-      function applyFilters() {
-        const keyword = normalize(document.getElementById('searchOrder').value);
-        const statusFilter = document.getElementById('filterStatus').value;
-
-        const filtered = orders.filter(o => {
-          const matchKeyword = normalize(o.code).includes(keyword) ||
-            normalize(o.customer).includes(keyword) ||
-            o.products.some(p => normalize(p.name).includes(keyword));
-          const matchStatus = statusFilter === '' || o.status === statusFilter;
-          return matchKeyword && matchStatus;
-        });
-
-        renderTable(filtered);
-      }
+     
 
       // -------------------- IN HÓA ĐƠN --------------------
       document.querySelector('#staticBillModal .btn-primary').addEventListener('click', () => {
