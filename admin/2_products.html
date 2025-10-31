@@ -258,7 +258,50 @@
                   <option value="Kệ hoa">Kệ hoa</option>
                 </select>
                 <label for="p_price" class="form-label mt-3 fw-semibold">Giá bán (VNĐ)</label>
-                <input type="number" id="p_price" class="form-control" placeholder="VD: 250000" min="0">
+                <input type="text" id="p_price" class="form-control" placeholder="VD: 250000" min="0">
+                <script>
+                  // Hàm định dạng số với dấu phẩy
+function formatNumberWithCommas(input) {
+    // Lấy giá trị và chỉ giữ lại số
+    let value = input.value.replace(/\D/g, '');
+    
+    // Nếu rỗng thì để trống
+    if (!value) {
+        input.value = '';
+        return;
+    }
+    
+    // Định dạng số với dấu phẩy sau mỗi 3 số
+    input.value = parseInt(value, 10).toLocaleString('vi-VN');
+}
+
+// Hàm lấy giá trị số (bỏ dấu phẩy)
+function getNumericValue(input) {
+    return parseInt(input.value.replace(/\D/g, ''), 10) || 0;
+}
+
+// Gán sự kiện khi người dùng nhập
+document.getElementById('p_price').addEventListener('input', function(e) {
+    // Lưu vị trí con trỏ trước khi định dạng
+    const cursorPosition = e.target.selectionStart;
+    const originalLength = e.target.value.length;
+    
+    // Định dạng số
+    formatNumberWithCommas(this);
+    
+    // Điều chỉnh lại vị trí con trỏ sau khi định dạng
+    const newLength = this.value.length;
+    const lengthDiff = newLength - originalLength;
+    this.setSelectionRange(cursorPosition + lengthDiff, cursorPosition + lengthDiff);
+});
+
+// Khi lưu sản phẩm, lấy giá trị số
+document.getElementById('saveProduct').addEventListener('click', function() {
+    const priceValue = getNumericValue(document.getElementById('p_price'));
+    console.log('Giá số:', priceValue); // 1234000
+    console.log('Giá hiển thị:', document.getElementById('p_price').value); // 1,234,000
+});
+                </script>
                 <label for="p_status" class="form-label mt-3 fw-semibold">Trạng thái</label>
                 <select id="p_status" class="form-select">
                   <option value="Hoạt động">Hoạt động</option>
