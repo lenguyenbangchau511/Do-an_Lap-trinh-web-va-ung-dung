@@ -536,6 +536,8 @@
           staticBillModal.show();
         }
       });
+      /* ==================== HÀM RANDOM ẢNH ==================== */
+
 
       function renderOrderProducts(products) {
         const productTableBody = document.querySelector('#staticBillModal .product-table tbody');
@@ -547,7 +549,7 @@
           const row = document.createElement('tr');
           row.innerHTML = `
       <td>
-        <img src="../images/hoa1.jpg" alt="${product.name}" 
+        <img src="../images/hoa5.jpg" alt="${product.name}" 
              style="width:50px;height:auto;object-fit:cover;">
       </td>
       <td>${escapeHtml(product.name)}</td>
@@ -556,6 +558,7 @@
       <td>${formatCurrency(product.price * product.quantity)}</td>
     `;
           productTableBody.appendChild(row);
+          
         });
       }
 
