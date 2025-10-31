@@ -134,7 +134,26 @@
               <button class="btn btn-secondary" id="resetImportBtn">
                 <i class="fas fa-redo me-2"></i>Đặt lại
               </button>
+              
             </div>
+            <div class="searchUser col-md-12">
+              <input id="searchUser" class="control__search" placeholder="Tìm kiếm theo mã phiếu">
+              <button class="search__btn" id="search__btn2"><i class="search__btn__icon fa-solid fa-magnifying-glass" ></i></button>
+            </div>
+            <script>
+            document.getElementById('searchImportBtn').addEventListener('click', function () {
+              // Tải lại trang hiện tại
+              location.reload();
+            });
+            document.getElementById('resetImportBtn').addEventListener('click', function () {
+              // Tải lại trang hiện tại
+              location.reload();
+            });
+            document.getElementById('search__btn2').addEventListener('click', function () {
+              // Tải lại trang hiện tại
+              location.reload();
+            });
+          </script>
           </div>
         </div>
 
@@ -400,6 +419,24 @@
         </div>
       </div>
     </div>
+    <ul id="pagination">
+              </li>
+              <li class="pagination-item">
+                <a href="6_inputproduct.html" class="pagination-item__link active">1</a>
+              </li>
+              <li class="pagination-item">
+                <a href="6_inputproduct.html" class="pagination-item__link " target="_self">2</a>
+              </li>
+              <li class="pagination-item">
+                <a href="6_inputproduct.html" class="pagination-item__link " target="_self">3</a>
+              </li>
+              <li class="pagination-item">
+                <a href="6_inputproduct.html" class="pagination-item__link " target="_self">4</a>
+              </li>
+              <li class="pagination-item">
+                <a href="6_inputproduct.html" class="pagination-item__link " target="_self">5</a>
+              </li>
+            </ul>
 
     <footer class="mt-4">
       <p class="text-center text-muted">&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>

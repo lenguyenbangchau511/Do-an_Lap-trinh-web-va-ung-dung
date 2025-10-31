@@ -1,16 +1,16 @@
 // Dữ liệu mẫu
 const PRODUCTS = [
-  { id: 1, name: "Nhiệt Ái", cost: 150000, imageUrl: "/images/hoa1.jpg" },
-  { id: 2, name: "Peach", cost: 200000, imageUrl: "/images/hoa2.jpg" },
-  { id: 3, name: "Lemon", cost: 120000, imageUrl: "/images/hoa3.jpg" },
-  { id: 4, name: "Blueberry", cost: 250000, imageUrl: "/images/hoa4.jpg" },
-  { id: 5, name: "Vườn Xuân Ca", cost: 180000, imageUrl: "/images/hoa5.jpg" },
-  { id: 6, name: "Shimmer Grace", cost: 300000, imageUrl: "/images/kehoa1.jpg" },
-  { id: 7, name: "Bluesky", cost: 190000, imageUrl: "/images/kehoa2.jpg" },
-  { id: 8, name: "Sen Xanh", cost: 210000, imageUrl: "/images/kehoa3.jpg" },
-  { id: 9, name: "Hồng Phát", cost: 210000, imageUrl: "/images/langhoa1.webp" },
-  { id: 10, name: "Sắc Màu", cost: 210000, imageUrl: "/images/langhoa2.jpg" },
-  { id: 11, name: "Tương Lai", cost: 210000, imageUrl: "/images/langhoa3.png" },
+  { id: 1, name: "Nhiệt Ái", cost: 600000, imageUrl: "/images/hoa1.jpg" },
+  { id: 2, name: "Peach", cost: 570000, imageUrl: "/images/hoa2.jpg" },
+  { id: 3, name: "Lemon", cost: 520000, imageUrl: "/images/hoa3.jpg" },
+  { id: 4, name: "Blueberry", cost: 180000, imageUrl: "/images/hoa4.jpg" },
+  { id: 5, name: "Vườn Xuân Ca", cost: 560000, imageUrl: "/images/hoa5.jpg" },
+  { id: 6, name: "Shimmer Grace", cost: 900000, imageUrl: "/images/kehoa1.jpg" },
+  { id: 7, name: "Bluesky", cost: 1000000, imageUrl: "/images/kehoa2.jpg" },
+  { id: 8, name: "Sen Xanh", cost: 1150000, imageUrl: "/images/kehoa3.jpg" },
+  { id: 9, name: "Hồng Phát", cost: 2950000, imageUrl: "/images/langhoa1.webp" },
+  { id: 10, name: "Sắc Màu", cost: 1450000, imageUrl: "/images/langhoa2.jpg" },
+  { id: 11, name: "Tương Lai", cost: 1150000, imageUrl: "/images/langhoa3.png" },
 ];
 
 let importData = [];
@@ -419,50 +419,6 @@ function searchImports() {
 
 // ==================== INITIAL DATA & EVENT LISTENERS ====================
 
-/**
- * Tạo dữ liệu mẫu ban đầu
- */
-function createInitialData() {
-  const currentYear = new Date().getFullYear();
-  const currentMonth = new Date().getMonth();
-
-  for (let i = 1; i <= 15; i++) {
-    const maPhieu = `MP${String(i).padStart(3, "0")}`;
-    const randomDay = Math.floor(Math.random() * 28) + 1;
-    const date = new Date(currentYear, currentMonth, randomDay);
-    const ngayNhap = date.toLocaleDateString("vi-VN");
-
-    // Chọn ngẫu nhiên 2-4 sản phẩm
-    const numProducts = Math.floor(Math.random() * 3) + 2;
-    const shuffledProducts = [...PRODUCTS].sort(() => Math.random() - 0.5);
-    const selectedProducts = shuffledProducts.slice(0, numProducts);
-
-    const productsList = selectedProducts.map(prod => {
-      const quantity = Math.floor(Math.random() * 10) + 5; // 5-15 sản phẩm
-      const giaNhap = Math.max(prod.cost - Math.floor(Math.random() * 20000), prod.cost * 0.8); // Giảm tối đa 20%
-
-      return {
-        id: prod.id,
-        name: prod.name,
-        giaNhap: giaNhap,
-        soLuong: quantity,
-      };
-    });
-
-    const totalQuantity = productsList.reduce((sum, prod) => sum + prod.soLuong, 0);
-    const totalValue = productsList.reduce((sum, prod) => sum + (prod.giaNhap * prod.soLuong), 0);
-
-    importData.push({
-      id: i,
-      maPhieu: maPhieu,
-      ngayNhap: ngayNhap,
-      tongSoLuong: totalQuantity,
-      soLuongSP: productsList.length,
-      tongGiaTri: totalValue,
-      products: productsList,
-    });
-  }
-}
 
 /**
  * Khởi tạo ứng dụng
@@ -496,17 +452,17 @@ function createInitialData() {
     const ngayNhap = date.toLocaleDateString("vi-VN");
     
     // Random trạng thái: 70% hoàn thành, 30% chờ xử lý
-    const status = Math.random() > 0.3 ? 'completed' : 'pending';
+    const status = i < 4 ? 'completed' : 'pending';
 
     // Chọn ngẫu nhiên 2-4 sản phẩm
-    const numProducts = Math.floor(Math.random() * 3) + 2;
+    const numProducts = 3;
     const shuffledProducts = [...PRODUCTS].sort(() => Math.random() - 0.5);
     const selectedProducts = shuffledProducts.slice(0, numProducts);
 
     const productsList = selectedProducts.map(prod => {
       const quantity = Math.floor(Math.random() * 10) + 5; // 5-15 sản phẩm
-      const giaNhap = Math.max(prod.cost - Math.floor(Math.random() * 20000), prod.cost * 0.8);
-
+      const giaNhap = Math.round(Math.max(prod.cost - Math.floor(Math.random() * 30000), prod.cost * 0.8)/10000)*10000;
+      let giaNhap2 = giaNhap.toLocaleString('en-US');
       return {
         id: prod.id,
         name: prod.name,

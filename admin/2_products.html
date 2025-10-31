@@ -306,16 +306,16 @@
 
     /* ==================== DỮ LIỆU MẶC ĐỊNH ==================== */
     const defaultProducts = [
-      { code: 'P001', name: 'Nhiệt Ái', category: 'Bó hoa', qty: 15, costPrice: 150000, salePrice: 250000, status: 'Hoạt động', image: '../images/hoa1.jpg', desc: 'Mềm Mại' },
-      { code: 'P002', name: 'Sắc Màu', category: 'Kệ hoa', qty: 4, costPrice: 200000, salePrice: 350000, status: 'Hoạt động', image: '../images/kehoa1.jpg', desc: 'Ưu ái' },
-      { code: 'P003', name: 'Peach', category: 'Bó hoa', qty: 30, costPrice: 120000, salePrice: 220000, status: 'Hoạt động', image: '../images/hoa2.jpg', desc: 'Đẹp' },
-      { code: 'P004', name: 'Shimmer Grace', category: 'Lẵng hoa', qty: 8, costPrice: 250000, salePrice: 400000, status: 'Ẩn', image: '../images/langhoa1.webp', desc: 'Thơm' },
-      { code: 'P005', name: 'BlueSky', category: 'Lẵng hoa', qty: 6, costPrice: 300000, salePrice: 450000, status: 'Hoạt động', image: '../images/langhoa2.jpg', desc: 'Noel' },
-      { code: 'P006', name: 'Blueberry', category: 'Bó hoa', qty: 20, costPrice: 180000, salePrice: 320000, status: 'Hoạt động', image: '../images/hoa3.jpg', desc: 'Sinh nhật' },
-      { code: 'P007', name: 'Lemon', category: 'Bó hoa', qty: 12, costPrice: 160000, salePrice: 280000, status: 'Ẩn', image: '../images/hoa4.jpg', desc: 'Giáng sinh' },
-      { code: 'P008', name: 'Sen Xanh', category: 'Lẵng hoa', qty: 10, costPrice: 220000, salePrice: 370000, status: 'Hoạt động', image: '../images/langhoa3.png', desc: 'Đám cưới' },
-      { code: 'P009', name: 'Hồng Phát', category: 'Kệ hoa', qty: 6, costPrice: 260000, salePrice: 400000, status: 'Hoạt động', image: '../images/kehoa2.jpg', desc: 'Lịch sự' },
-      { code: 'P010', name: 'Tương Lai', category: 'Kệ hoa', qty: 5, costPrice: 280000, salePrice: 450000, status: 'Hoạt động', image: '../images/kehoa3.jpg', desc: 'Trang trọng' },
+      { code: 'P001', name: 'Nhiệt Ái', category: 'Bó hoa', qty: 15, costPrice: 600000, salePrice: 700000, status: 'Hoạt động', image: '../images/hoa1.jpg', desc: 'Mềm Mại' },
+      { code: 'P002', name: 'Sắc Màu', category: 'Kệ hoa', qty: 4, costPrice: 1450000, salePrice: 3500000, status: 'Hoạt động', image: '../images/kehoa1.jpg', desc: 'Ưu ái' },
+      { code: 'P003', name: 'Peach', category: 'Bó hoa', qty: 30, costPrice: 570000, salePrice: 770000, status: 'Hoạt động', image: '../images/hoa2.jpg', desc: 'Đẹp' },
+      { code: 'P004', name: 'Shimmer Grace', category: 'Lẵng hoa', qty: 8, costPrice: 900000, salePrice: 1150000, status: 'Ẩn', image: '../images/langhoa1.webp', desc: 'Sinh nhật' },
+      { code: 'P005', name: 'BlueSky', category: 'Lẵng hoa', qty: 6, costPrice: 1000000, salePrice: 1450000, status: 'Hoạt động', image: '../images/langhoa2.jpg', desc: 'Noel' },
+      { code: 'P006', name: 'Blueberry', category: 'Bó hoa', qty: 20, costPrice: 180000, salePrice: 250000, status: 'Hoạt động', image: '../images/hoa3.jpg', desc: 'Sinh nhật' },
+      { code: 'P007', name: 'Lemon', category: 'Bó hoa', qty: 12, costPrice: 520000, salePrice: 650000, status: 'Ẩn', image: '../images/hoa4.jpg', desc: 'Giáng sinh' },
+      { code: 'P008', name: 'Sen Xanh', category: 'Lẵng hoa', qty: 10, costPrice: 1150000, salePrice: 1500000, status: 'Hoạt động', image: '../images/langhoa3.png', desc: 'Đám cưới' },
+      { code: 'P009', name: 'Hồng Phát', category: 'Kệ hoa', qty: 6, costPrice: 2950000, salePrice: 3500000, status: 'Hoạt động', image: '../images/kehoa2.jpg', desc: 'Lịch sự' },
+      { code: 'P010', name: 'Tương Lai', category: 'Kệ hoa', qty: 5, costPrice: 1450000, salePrice: 2100000, status: 'Hoạt động', image: '../images/kehoa3.jpg', desc: 'Trang trọng' },
     ];
 
     let products = defaultProducts;
@@ -429,24 +429,30 @@
     });
 
     /* ==================== CHỈNH SỬA ==================== */
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.edit-btn');
-      if (!btn) return;
-      const index = parseInt(btn.dataset.index);
-      const p = products[index];
-      if (!p) return;
+    /* ==================== CHỈNH SỬA ==================== */
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.edit-btn');
+  if (!btn) return;
+  const index = parseInt(btn.dataset.index);
+  const p = products[index];
+  if (!p) return;
 
-      modalTitle.textContent = 'Chỉnh sửa sản phẩm';
-      document.getElementById('p_code').value = p.code;
-      document.getElementById('p_name').value = p.name;
-      document.getElementById('p_category').value = p.category;
-      document.getElementById('p_desc').value = p.desc || '';
-      previewImg.src = p.image || '../images/hoa1.jpg';
-      previewImg.dataset.uploaded = p.image;
+  modalTitle.textContent = 'Chỉnh sửa sản phẩm';
+  document.getElementById('p_code').value = p.code;
+  document.getElementById('p_name').value = p.name;
+  document.getElementById('p_category').value = p.category;
+  document.getElementById('p_desc').value = p.desc || '';
+  
+  // Thêm các trường còn thiếu
+  document.getElementById('p_price').value = p.salePrice || '';
+  document.getElementById('p_status').value = p.status || 'Hoạt động';
+  
+  previewImg.src = p.image || '../images/hoa1.jpg';
+  previewImg.dataset.uploaded = p.image;
 
-      editIndex = index;
-      productModal.show();
-    });
+  editIndex = index;
+  productModal.show();
+});
 
     /* ==================== XÓA ==================== */
     document.addEventListener('click', (e) => {
@@ -459,29 +465,6 @@
         showToast('Xóa sản phẩm thành công!', 'danger');
       }
     });
-
-    /* ==================== TÌM KIẾM & LỌC ==================== */
-    const searchInput = document.getElementById('searchProduct');
-    const categorySelect = document.getElementById('filterCategory2');
-    const statusSelect = document.getElementById('filterStatus2'); // thêm select trạng thái
-
-    function filterProducts() {
-      const keyword = searchInput.value.trim().toLowerCase();
-      const category = categorySelect.value;
-      const status = statusSelect.value;
-
-      const filtered = products.filter(p => {
-        const matchesKeyword =
-          p.name.toLowerCase().includes(keyword) ||
-          p.code.toLowerCase().includes(keyword);
-        const matchesCategory = !category || p.category.toLowerCase() === category.toLowerCase();
-        const matchesStatus = !status || p.status.toLowerCase() === status.toLowerCase(); // kiểm tra trạng thái
-
-        return matchesKeyword && matchesCategory && matchesStatus;
-      });
-
-      renderTable(filtered);
-    }
 
     // Gán sự kiện
     searchInput.addEventListener('input', filterProducts);

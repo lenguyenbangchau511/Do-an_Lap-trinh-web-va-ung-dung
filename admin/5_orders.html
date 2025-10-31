@@ -111,6 +111,11 @@
           <i class="fa-solid fa-magnifying-glass"></i>
           Tìm
         </button>
+        <script>
+          document.getElementById('searchButton').addEventListener('click', function () {
+              alert("Đang hiển thị danh sách bạn cần tìm.")
+            });
+        </script>
         <style>
           .date-filter-container {
             display: flex;
@@ -161,6 +166,11 @@
           <i class="fa-solid fa-rotate-right"></i>
           Làm mới
         </button>
+        <script>
+          document.getElementById('reloadButton').addEventListener('click', function () {
+              location.reload();
+            });
+        </script>
       </div>
 
       <div class="card shadow-sm">
@@ -560,28 +570,7 @@
         return div.innerHTML;
       }
 
-      // -------------------- SEARCH & FILTER --------------------
-      function normalize(str) {
-        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-      }
-
-      document.getElementById('searchOrder').addEventListener('input', applyFilters);
-      document.getElementById('filterStatus').addEventListener('change', applyFilters);
-
-      function applyFilters() {
-        const keyword = normalize(document.getElementById('searchOrder').value);
-        const statusFilter = document.getElementById('filterStatus').value;
-
-        const filtered = orders.filter(o => {
-          const matchKeyword = normalize(o.code).includes(keyword) ||
-            normalize(o.customer).includes(keyword) ||
-            o.products.some(p => normalize(p.name).includes(keyword));
-          const matchStatus = statusFilter === '' || o.status === statusFilter;
-          return matchKeyword && matchStatus;
-        });
-
-        renderTable(filtered);
-      }
+     
 
       // -------------------- IN HÓA ĐƠN --------------------
       document.querySelector('#staticBillModal .btn-primary').addEventListener('click', () => {
