@@ -11,50 +11,142 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
     rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="price.css" />
-  <link rel="stylesheet" href="admin.css">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="assets/css/price.css">
+  <style>
+    /* Thêm vào assets/css/price.css */
+.toast-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #dc3545;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  z-index: 10000;
+  transform: translateX(400px);
+  transition: transform 0.3s ease;
+  max-width: 300px;
+  word-wrap: break-word;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.toast-message.show {
+  transform: translateX(0);
+}
+
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profit-input {
+  width: 80px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background-color: white;
+  margin: 5% auto;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  z-index: 3000;
+  transform: translateX(400px);
+  transition: transform 0.3s ease;
+  display: none;
+}
+
+.notification.show {
+  transform: translateX(0);
+  display: block;
+}
+
+.success-notification {
+  background: linear-gradient(135deg, #28a745, #20c997);
+}
+  </style>
 </head>
 
 <body>
   <!-- sidebar -->
   <div class="sidebar">
-    <div class="sidebar">
-      <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
-        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9" />
-          <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
-            fill="#eaf8f0" />
-          <circle cx="40" cy="35" r="8" fill="#b19cd9" />
-          <circle cx="60" cy="35" r="8" fill="#b19cd9" />
-          <circle cx="50" cy="50" r="12" fill="#9370db" />
-          <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
-        </svg>
-        <span>Bloom</span>
-      </div>
-      <a href="0_dashboard.html"><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
-      <a href="1_users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
-      <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
-      <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
-      <a href="4_price.html" class="active"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
-      <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
-      <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
-      <a href="7_inventory.html"><i class="fa-solid fa-boxes-stacked me-2"></i> Quản lý tồn kho</a>
-      <div class="logout_admin"><a href="index.html" id="logout-link">Đăng xuất</a></div>
-      <script>
-        document.getElementById("logout-link").addEventListener("click", function (event) {
-          event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
-          const confirmLogout = confirm("Bạn có chắc chắn muốn đăng xuất không?");
+        <div class="sidebar">
+            <div class="bloom-logo" aria-label="Bloom - Trở về trang chủ">
+                <svg class="logo-icon" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                    <circle cx="50" cy="50" r="45" fill="#2e7d68" opacity="0.9" />
+                    <path d="M50 20 C60 15, 75 25, 75 40 C75 55, 60 65, 50 70 C40 65, 25 55, 25 40 C25 25, 40 15, 50 20"
+                        fill="#eaf8f0" />
+                    <circle cx="40" cy="35" r="8" fill="#b19cd9" />
+                    <circle cx="60" cy="35" r="8" fill="#b19cd9" />
+                    <circle cx="50" cy="50" r="12" fill="#9370db" />
+                    <path d="M50 70 L45 85 L55 85 Z" fill="#2e7d68" />
+                </svg>
+                <span>Bloom</span>
+            </div>
+            <a href="0_dashboard.html" ><i class="fa-sharp fa-solid fa-house"></i></i> Tổng quan</a>
+            <a href="1_users.html"><i class="fa-solid fa-users me-2"></i>Quản lý khách hàng</a>
+            <a href="2_products.html"><i class="fa-solid fa-bread-slice me-2"></i>Quản lý sản phẩm</a>
+            <a href="3_category.html"><i class="fa-solid fa-folder-tree me-2"></i>Quản lý danh mục</a>
+            <a href="4_price.html" ><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</a>
+            <a href="5_orders.html"><i class="fa-regular fa-rectangle-list"></i> Quản lý đơn hàng</a>
+            <a href="6_inputproduct.html"><i class="fa-regular fa-pen-to-square"></i> Quản lý nhập hàng</a>
+            <a href="7_inventory.html"><i class="fa-solid fa-boxes-stacked me-2"></i></i> Quản lý tồn kho</a>
+            <div class="logout_admin"><a href="index.html" id="logout-link">Đăng xuất</a></div>
+            <script>
+                document.getElementById("logout-link").addEventListener("click", function (event) {
+                    event.preventDefault(); // Ngăn chặn chuyển trang ngay lập tức
+                    const confirmLogout = confirm("Bạn có chắc chắn muốn đăng xuất không?");
 
-          if (confirmLogout) {
-            window.location.href = this.href; // Chuyển đến trang đăng xuất nếu xác nhận
-          }
-        });
-      </script>
+                    if (confirmLogout) {
+                        window.location.href = this.href; // Chuyển đến trang đăng xuất nếu xác nhận
+                    }
+                });
+            </script>
+        </div>
     </div>
-  </div>
 
-  <main>
+  <main class="main-content">
     <!-- header  -->
     <div class="header">
       <div class="header__title"><i class="fa-regular fa-money-bill-1"></i> Quản lý giá bán</div>
@@ -98,72 +190,188 @@
         <div class="dropdown-overlay" id="dropdownOverlay"></div>
       </div>
     </div>
-    <div class="filter-section">
-      <label for="category">Chọn Danh mục:</label>
-      <select id="category" onchange="filterCategory()">
-        <option value="all">Hiện tất cả</option>
-        <option value="bohoa">Bó hoa</option>
-        <option value="langhoa">Lẵng hoa</option>
-        <option value="kehoa">Kệ hoa</option>
-      </select>
-      <button id="editBtn" onclick="openEditPopup()">
-        <i class="fas fa-edit"></i> Chỉnh sửa
-      </button>
-    </div>
 
-    <table id="priceTable">
-      <thead>
-        <tr>
-          <th>STT</th>
-          <th>Mã SP</th>
-          <th>Tên sản phẩm</th>
-          <th>Giá vốn (VND)</th>
-          <th>Giá bán (VND)</th>
-          <th>Lợi nhuận (%)</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
-    </table>
-
-    <section id="history">
-      <h3><i class="fas fa-scroll"></i> Lịch sử chỉnh sửa</h3>
-      <ul id="historyList"></ul>
-    </section>
-  </main>
-
-  <!-- 🔹 Popup chỉnh sửa -->
-  <div id="editPopup" class="popup">
-    <div class="popup-content">
-      <h3><i class="fas fa-pen"></i> Chỉnh sửa giá sản phẩm</h3>
-
-      <label>Mã sản phẩm:</label>
-      <input type="text" id="productCode" placeholder="VD: P001" />
-
-      <label>Tên sản phẩm:</label>
-      <input type="text" id="productName" readonly style="background-color: #f0f0f0" />
-
-      <label>Giá vốn (VND):</label>
-      <input type="number" id="costPrice" placeholder="60000" />
-
-      <label>Giá bán (VND):</label>
-      <input type="number" id="sellPrice" placeholder="78000" />
-
-      <label>Lợi nhuận (%):</label>
-      <input type="text" id="profitPercent" readonly style="background-color: #f0f0f0; font-weight: bold" />
-
-      <div class="popup-actions">
-        <button onclick="saveEdit()"><i class="fas fa-check"></i> Lưu</button>
-        <button onclick="closePopup()">
-          <i class="fas fa-times"></i> Hủy
+    <div class="container-fluid" data-aos="fade-up">
+      <div class="tabs">
+        <button class="tab-button active" onclick="showTab('price-profit')">
+          Tỷ lệ lợi nhuận theo danh mục
+        </button>
+        <button class="tab-button" onclick="showTab('product-profit')">
+          Tỷ lệ lợi nhuận theo sản phẩm
+        </button>
+        <button class="tab-button" onclick="showTab('price-lookup')">
+          Tra cứu giá bán
         </button>
       </div>
+
+      <div id="price-profit" class="tab-content active">
+        <div class="filter-section">
+          <div class="filter-group">
+            <label for="search-price">Tìm kiếm danh mục</label>
+            <input type="text" id="search-price" class="form-control" placeholder="Nhập tên danh mục..." />
+          </div>
+          <div class="filter-group">
+            <label for="profit-range">Khoảng tỷ lệ lợi nhuận</label>
+            <select id="profit-range" class="form-select">
+              <option value="">Tất cả</option>
+              <option value="0-15">0% - 15%</option>
+              <option value="15-25">15% - 25%</option>
+              <option value="25-35">25% - 35%</option>
+              <option value="35+">35%+</option>
+            </select>
+          </div>
+          <div class="filter-actions">
+            <button class="search-btn">
+              <i class="fas fa-search"></i> Tìm kiếm
+            </button>
+            <button class="reset-btn">
+              <i class="fas fa-redo"></i> Đặt lại
+            </button>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>TÊN DANH MỤC</th>
+              <th>TỶ LỆ LỢI NHUẬN (%)</th>
+              <th>THAO TÁC</th>
+            </tr>
+          </thead>
+          <tbody id="price-profit-body"></tbody>
+        </table>
+      </div>
+
+      <div id="product-profit" class="tab-content">
+        <div class="filter-section">
+          <div class="filter-group">
+            <label for="search-product">Tìm kiếm sản phẩm</label>
+            <input type="text" id="search-product" class="form-control" placeholder="Nhập tên sản phẩm..." />
+          </div>
+          <div class="filter-group">
+            <label for="product-price-filter">Danh mục</label>
+            <select id="product-price-filter" class="form-select">
+              <option value="">Tất cả danh mục</option>
+              <option value="Bó hoa">Bó hoa</option>
+              <option value="Lẳng hoa">Lẳng hoa</option>
+              <option value="Kệ hoa">Kệ hoa</option>
+            </select>
+          </div>
+          <div class="filter-actions">
+            <button class="search-btn">
+              <i class="fas fa-search"></i> Tìm kiếm
+            </button>
+            <button class="reset-btn">
+              <i class="fas fa-redo"></i> Đặt lại
+            </button>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>SẢN PHẨM</th>
+              <th>DANH MỤC</th>
+              <th>TỶ LỆ LỢI NHUẬN (%)</th>
+              <th>THAO TÁC</th>
+            </tr>
+          </thead>
+          <tbody id="product-profit-body"></tbody>
+        </table>
+      </div>
+
+      <div id="price-lookup" class="tab-content">
+        <div class="filter-section">
+          <div class="filter-group">
+            <label for="lookup-search-product">Tìm kiếm sản phẩm</label>
+            <input type="text" id="lookup-search-product" class="form-control" placeholder="Nhập tên sản phẩm..." />
+          </div>
+          <div class="filter-group">
+            <label for="lookup-product-price-filter">Danh mục</label>
+            <select id="lookup-product-price-filter" class="form-select">
+              <option value="">Tất cả danh mục</option>
+              <option value="Bó hoa">Bó hoa</option>
+              <option value="Lẳng hoa">Lẳng hoa</option>
+              <option value="Kệ hoa">Kệ hoa</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="price-range-filter">Khoảng giá bán</label>
+            <select id="price-range-filter" class="form-select">
+              <option value="">Tất cả</option>
+              <option value="0-100000">Dưới 100,000 VND</option>
+              <option value="100000-300000">100,000 - 300,000 VND</option>
+              <option value="300000-500000">300,000 - 500,000 VND</option>
+              <option value="500000+">Trên 500,000 VND</option>
+            </select>
+          </div>
+          <div class="filter-actions">
+            <button class="search-btn">
+              <i class="fas fa-search"></i> Tìm kiếm
+            </button>
+            <button class="reset-btn">
+              <i class="fas fa-redo"></i> Đặt lại
+            </button>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>SẢN PHẨM</th>
+              <th>DANH MỤC</th>
+              <th>GIÁ VỐN</th>
+              <th>TỶ LỆ LỢI NHUẬN (%)</th>
+              <th>GIÁ BÁN</th>
+              <th>THAO TÁC</th>
+            </tr>
+          </thead>
+          <tbody id="price-lookup-body"></tbody>
+        </table>
+      </div>
     </div>
-  </div>
+
+    <div id="editPriceModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>Sửa Thông Tin Giá Sản Phẩm</h3>
+        <form id="editPriceForm">
+          <div class="form-group">
+            <label for="modal-product-name">Tên Sản Phẩm:</label>
+            <select id="modal-product-name" class="form-select" required></select>
+            <input type="hidden" id="modal-product-id" />
+          </div>
+          <div class="form-group">
+            <label for="modal-cost-price">Giá Vốn (VND):</label>
+            <input type="number" id="modal-cost-price" class="form-control" name="costPrice" required min="0" placeholder="Nhập giá vốn" />
+          </div>
+          <div class="form-group">
+            <label for="modal-profit-rate">Tỷ Lệ Lợi Nhuận (%):</label>
+            <input type="number" id="modal-profit-rate" class="form-control" name="profitRate" required min="0" max="100" step="0.1"
+              placeholder="Nhập tỷ lệ lợi nhuận" />
+          </div>
+          <div class="form-group">
+            <label for="modal-selling-price">Giá Bán Ước Tính (VND):</label>
+            <input type="text" id="modal-selling-price" class="form-control" disabled value="0 VND" />
+          </div>
+          <button type="submit" class="save-btn">Lưu</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="success-notification" class="notification success-notification">
+      Cập nhật giá sản phẩm thành công!
+    </div>
+
+    <footer class="mt-4">
+      <p class="text-center text-muted">&copy; 2024 Bloom - Shop hoa tươi. All rights reserved.</p>
+    </footer>
+  </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="price.js"></script>
-  <script src="info_admin.js"></script>
+  <script src="assets/js/info_admin.js"></script>
+  <script src="assets/js/price.js"></script>
 </body>
 
 </html>

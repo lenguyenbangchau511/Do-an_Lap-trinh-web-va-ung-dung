@@ -12,8 +12,8 @@
     rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="inputproduct.css" />
-    <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="assets/css/inputproduct.css" />
+    <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 
 <body>
@@ -98,77 +98,175 @@
             </div>
         </div>
     <button id="addNewBtn"> + Thêm phiếu nhập mới</button>
+<div id="list-view" class="content-view active">
+          <div class="content-header">
+            <button class="action-btn add-btn" onclick="showView('add-view')">
+              <i class="fas fa-plus"></i> Thêm phiếu nhập
+            </button>
+          </div>
 
-    <!-- Form thêm phiếu nhập -->
-    <div id="inputForm" class="hidden">
-      <h3>Thêm Thông Tin Phiếu Nhập</h3>
+          <!-- Thanh tìm kiếm/Lọc -->
+          <div class="filter-box">
+            <h4>Tra cứu phiếu nhập</h4>
+            <div class="filter-inputs">
+              <div class="filter-group date-group">
+                <label for="date-from">Từ ngày</label>
+                <input type="date" id="date-from" />
+              </div>
+              <div class="filter-group date-group">
+                <label for="date-to">Đến ngày</label>
+                <input type="date" id="date-to" />
+              </div>
+              <div class="filter-actions">
+                <button class="search-btn">
+                  <i class="fas fa-search"></i> Tìm kiếm
+                </button>
+                <button class="reset-btn">
+                  <i class="fas fa-redo"></i> Đặt lại
+                </button>
+              </div>
+            </div>
+          </div>
 
-      <!-- Khung thông báo -->
-      <div id="messageBox" class="message-box"></div>
+          <!-- Bảng Danh sách Phiếu Nhập -->
+          <table class="data-table import-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>MÃ PHIẾU</th>
+                <th>NGÀY NHẬP</th>
+                <th>SỐ LƯỢNG SẢN PHẨM</th>
+                <th>TỔNG GIÁ TRỊ</th>
+                <th>THAO TÁC</th>
+              </tr>
+            </thead>
+            <tbody id="import-list-body">
+              <!-- Dữ liệu phiếu nhập sẽ được chèn ở đây -->
+            </tbody>
+          </table>
 
-      <label>Tên SP:</label>
-      <select id="tensp">
-        <option value="">-- Chọn sản phẩm --</option>
-        <option value="Nhiệt Ái">Nhiệt Ái</option>
-        <option value="Peach">Peach</option>
-        <option value="Blueberry">Blueberry</option>
-        <option value="Lemon">Lemon</option>
-        <option value="Shimmer Grace">Shimmer Grace</option>
-        <option value="Bluesky">Bluesky</option>
-        <option value="Sen Xanh">Sen Xanh</option>
-        <option value="Sắc Màu">Sắc Màu</option>
-        <option value="Hồng Phát">Hồng Phát</option>
-        <option value="Tương Lai">Tương Lai</option>
-      </select><br />
+        
+        </div>
+        <div id="detail-view" class="content-view">
+          <div class="detail-card">
+            <h3 class="detail-title">Chi tiết phiếu nhập hàng</h3>
+            <div class="detail-content">
+              <div class="section-header pink-bg">
+                Thông tin phiếu nhập <span id="detail-code"></span>
+              </div>
+              <div class="info-grid">
+                <div>
+                  <label>Mã phiếu nhập</label>
+                  <span id="detail-ma-phieu"></span>
+                </div>
+                <div>
+                  <label>Ngày nhập</label>
+                  <span id="detail-ngay-nhap"></span>
+                </div>
+                <div>
+                  <label>Số lượng sản phẩm</label>
+                  <span id="detail-so-luong"></span>
+                </div>
+              </div>
 
-      <label>Mã SP:</label>
-      <input type="text" id="masp" readonly /><br />
+              <div class="section-header pink-bg">Danh sách sản phẩm nhập</div>
+              <table class="data-table detail-table">
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>SẢN PHẨM</th>
+                    <th>GIÁ NHẬP</th>
+                    <th>SỐ LƯỢNG</th>
+                    <th>THÀNH TIỀN</th>
+                  </tr>
+                </thead>
+                <tbody id="detail-products-body">
+                  <!-- Chi tiết sản phẩm sẽ được chèn ở đây -->
+                </tbody>
+              </table>
 
-      <label>Số lượng thêm vào:</label>
-      <input type="number" id="soluong" min="1" value="1" /><br />
+              <div class="summary-box">
+                <p>Tổng số sản phẩm: <span id="summary-items"></span></p>
+                <p>Tổng số lượng nhập: <span id="summary-quantity"></span></p>
+                <p class="total-value">
+                  Tổng giá trị phiếu nhập: <span id="summary-total"></span> VND
+                </p>
+              </div>
 
-      <label>Số lượng hiện có:</label>
-      <input type="number" id="tonkho" min="0" value="0" readonly /><br />
+              <div class="detail-actions">
+                <button
+                  class="action-btn secondary-btn"
+                  onclick="showView('list-view')"
+                >
+                  <i class="fas fa-arrow-left"></i> Quay về
+                </button>
+                <button class="action-btn print-btn" onclick="printImport()">
+                  <i class="fas fa-print"></i> In phiếu nhập
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <label>Giá nhập (VNĐ):</label>
-      <input type="number" id="gianhap" min="1000" value="10000" /><br />
+        <!-- Màn hình THÊM PHIẾU NHẬP (Ẩn) -->
+        <div id="add-view" class="content-view">
+          <div class="detail-card">
+            <h3 class="detail-title">Thêm thông tin phiếu nhập</h3>
+            <div class="detail-content">
+              <div class="section-header pink-bg">Thông tin phiếu nhập</div>
+              <div class="info-grid add-info-grid">
+                <div class="input-group required">
+                  <label for="add-date">Ngày nhập</label>
+                  <input type="date" id="add-date" value="2025-10-31" />
+                </div>
+                <div class="input-group">
+                  <label for="add-code">Mã phiếu nhập</label>
+                  <input type="text" id="add-code" value="#MP006" disabled />
+                </div>
+              </div>
 
-      <label>Tình trạng:</label>
-      <select id="tinhtrang">
-        <option value="Tốt">Tốt</option>
-        <option value="Hư hỏng">Hư hỏng</option>
-      </select><br />
+              <div class="section-header pink-bg">Danh sách sản phẩm nhập</div>
+              <div id="add-product-list">
+                <!-- Các trường nhập sản phẩm sẽ được thêm vào đây -->
+              </div>
 
-      <label>Nhà cung cấp:</label>
-      <input type="text" id="nhacungcap" placeholder="VD: FlowerFarm" /><br />
+              <button
+                class="action-btn add-product-row-btn"
+                onclick="addProductRow()"
+              >
+                <i class="fas fa-plus"></i> Thêm sản phẩm
+              </button>
 
-      <button id="saveBtn">Lưu phiếu nhập</button>
-      <button id="cancelBtn">Hủy</button>
+              <div class="summary-box add-summary-box">
+                <p>Tổng số sản phẩm: <span id="add-summary-items">0</span></p>
+                <p>
+                  Tổng số lượng nhập: <span id="add-summary-quantity">0</span>
+                </p>
+                <p class="total-value">
+                  Tổng giá trị: <span id="add-summary-total">0</span> VND
+                </p>
+              </div>
+
+              <div class="detail-actions">
+                <button
+                  class="action-btn secondary-btn"
+                  onclick="showView('list-view')"
+                >
+                  <i class="fas fa-times"></i> Hủy bỏ
+                </button>
+                <button class="action-btn save-btn" onclick="saveNewImport()">
+                  <i class="fas fa-save"></i> Lưu phiếu nhập
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    
 
-    <!-- Danh sách phiếu nhập -->
-    <div class="list-section">
-      <h3 style="text-align: center;">📋 Danh sách Phiếu Nhập</h3>
-      <table id="dataTable">
-        <thead>
-          <tr>
-            <th>Mã SP</th>
-            <th>Tên SP</th>
-            <th>Số lượng</th>
-            <th>Thời gian</th>
-            <th>Giá nhập</th>
-            <th>Tình trạng</th>
-            <th>Tồn kho</th>
-            <th>Nhà cung cấp</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <script src="inputproduct.js"></script>
-  <script src="info_admin.js"></script>
+  <script src="assets/js/inputproduct.js"></script>
+  <script src="assets/js/info_admin.js"></script>
 </body>
 
 </html>
