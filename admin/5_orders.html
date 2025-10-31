@@ -164,7 +164,7 @@
         <button class="search-btn" id="reloadButton"
           style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%);">
           <i class="fa-solid fa-rotate-right"></i>
-          Làm mới
+          Đặt lại
         </button>
         <script>
           document.getElementById('reloadButton').addEventListener('click', function () {
@@ -539,17 +539,39 @@
       /* ==================== HÀM RANDOM ẢNH ==================== */
 
 
-      function renderOrderProducts(products) {
-        const productTableBody = document.querySelector('#staticBillModal .product-table tbody');
-        if (!productTableBody) return;
+     /* ==================== HÀM RANDOM ẢNH ==================== */
+function getRandomProductImage() {
+  const productImages = [
+    '../images/hoa1.jpg',
+    '../images/hoa2.jpg',
+    '../images/hoa3.jpg',
+    '../images/hoa4.jpg',
+    '../images/langhoa1.webp',
+    '../images/langhoa2.jpg',
+    '../images/langhoa3.png',
+    '../images/kehoa1.jpg',
+    '../images/kehoa2.jpg',
+    '../images/kehoa3.jpg'
+  ];
+  
+  const randomIndex = Math.floor(Math.random() * productImages.length);
+  return productImages[randomIndex];
+}
 
-        productTableBody.innerHTML = '';
+function renderOrderProducts(products) {
+  const productTableBody = document.querySelector('#staticBillModal .product-table tbody');
+  if (!productTableBody) return;
 
-        products.forEach(product => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
+  productTableBody.innerHTML = '';
+
+  products.forEach(product => {
+    // Gán ảnh random cho mỗi sản phẩm
+    const randomImage = getRandomProductImage();
+    
+    const row = document.createElement('tr');
+    row.innerHTML = `
       <td>
-        <img src="../images/hoa5.jpg" alt="${product.name}" 
+        <img src="${randomImage}" alt="${product.name}" 
              style="width:50px;height:auto;object-fit:cover;">
       </td>
       <td>${escapeHtml(product.name)}</td>
