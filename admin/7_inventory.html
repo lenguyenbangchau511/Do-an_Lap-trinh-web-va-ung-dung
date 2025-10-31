@@ -297,7 +297,7 @@
                 <i class="fa-solid fa-filter me-2"></i>Lọc
               </button>
             </div>
-            <input id="searchHistory" class="form-control" placeholder="Tìm kiếm theo tên sản phẩm..." style="width: 300px;">
+            <input id="searchHistory" class="form-control" placeholder="Tìm kiếm theo tên sản phẩm..." style="width: 400px;">
           </div>
 
           <div class="card shadow-sm">
@@ -313,6 +313,7 @@
                       <th>Nhập</th>
                       <th>Xuất</th>
                       <th>Tồn cuối kỳ</th>
+                      <th>Trạng thái</th>
                     </tr>
                   </thead>
                   <tbody id="historyTableBody"></tbody>
@@ -357,24 +358,24 @@
 
     // Dữ liệu tồn kho hiện tại
     let inventory = [
-      { code: 'P001', name: 'Peach', quantity: 43, unit: 'bó', price: 600000, status: 'Còn hàng', image: getRandomProductImage() },
-      { code: 'P002', name: 'BlueSky', quantity: 1, unit: 'bó', price: 180000, status: 'Sắp hết', image: getRandomProductImage() },
-      { code: 'P003', name: 'Hồng Phát', quantity: 10, unit: 'kệ', price: 2450000, status: 'Còn hàng', image: getRandomProductImage() },
-      { code: 'P004', name: 'Sen Xanh', quantity: 72, unit: 'lẵng', price: 1450000, status: 'Còn hàng', image: getRandomProductImage() },
-      { code: 'P005', name: 'Tương Lai', quantity: 3, unit: 'bó', price: 1150000, status: 'Sắp hết', image: getRandomProductImage() },
-      { code: 'P006', name: 'BlueBerry', quantity: 3, unit: 'bó', price: 180000, status: 'Sắp hết', image: getRandomProductImage() },
-      { code: 'P007', name: 'Nhiệt Ái', quantity: 20, unit: 'bó', price: 600000, status: 'Còn hàng', image: getRandomProductImage() },
+      { code: 'P001', name: 'Peach', quantity: 43, unit: 'bó', price: 600000, status: 'Còn hàng', image: "/images/hoa1.jpg" },
+      { code: 'P002', name: 'BlueSky', quantity: 1, unit: 'bó', price: 180000, status: 'Sắp hết', image: "/images/hoa3.jpg" },
+      { code: 'P003', name: 'Hồng Phát', quantity: 10, unit: 'kệ', price: 2450000, status: 'Còn hàng', image: "/images/hoa2.jpg" },
+      { code: 'P004', name: 'Sen Xanh', quantity: 72, unit: 'lẵng', price: 1450000, status: 'Còn hàng', image: "/images/hoa4.jpg" },
+      { code: 'P005', name: 'Tương Lai', quantity: 3, unit: 'bó', price: 1150000, status: 'Sắp hết', image: "/images/hoa5.jpg" },
+      { code: 'P006', name: 'BlueBerry', quantity: 3, unit: 'bó', price: 180000, status: 'Sắp hết', image: "/images/kehoa1.jpg" },
+      { code: 'P007', name: 'Nhiệt Ái', quantity: 20, unit: 'bó', price: 600000, status: 'Còn hàng', image: "/images/kehoa2.jpg" },
     ];
 
     // Dữ liệu lịch sử nhập xuất
     let inventoryHistory = [
-      { id: 1, name: 'Peach', startQuantity: 40, import: 15, export: 12, endQuantity: 43, image: getRandomProductImage() },
-      { id: 2, name: 'BlueSky', startQuantity: 5, import: 6, export: 4, endQuantity: 1, image: getRandomProductImage() },
-      { id: 3, name: 'Hồng Phát', startQuantity: 8, import: 5, export: 3, endQuantity: 10, image: getRandomProductImage() },
-      { id: 4, name: 'Sen Xanh', startQuantity: 65, import: 20, export: 13, endQuantity: 72, image: getRandomProductImage() },
-      { id: 5, name: 'Tương Lai', startQuantity: 10, import: 3, export: 7, endQuantity: 3, image: getRandomProductImage() },
-      { id: 6, name: 'BlueBerry', startQuantity: 8, import: 0, export: 5, endQuantity: 3, image: getRandomProductImage() },
-      { id: 7, name: 'Nhiệt Ái', startQuantity: 15, import: 10, export: 0, endQuantity: 20, image: getRandomProductImage() },
+      { id: 1, name: 'Peach', startQuantity: 40, import: 15, export: 12, endQuantity: 43,status: 'Còn hàng', image: getRandomProductImage() },
+      { id: 2, name: 'BlueSky', startQuantity: 5, import: 6, export: 4, endQuantity: 1,status: 'Sắp hết', image: getRandomProductImage() },
+      { id: 3, name: 'Hồng Phát', startQuantity: 8, import: 5, export: 3, endQuantity: 10,status: 'Còn hàng', image: getRandomProductImage() },
+      { id: 4, name: 'Sen Xanh', startQuantity: 65, import: 20, export: 13, endQuantity: 72,status: 'Còn hàng', image: getRandomProductImage() },
+      { id: 5, name: 'Tương Lai', startQuantity: 10, import: 3, export: 7, endQuantity: 3,status: 'Sắp hết', image: getRandomProductImage() },
+      { id: 6, name: 'BlueBerry', startQuantity: 8, import: 0, export: 5, endQuantity: 3,status: 'Sắp hết', image: getRandomProductImage() },
+      { id: 7, name: 'Nhiệt Ái', startQuantity: 15, import: 10, export: 0, endQuantity: 20,status: 'Còn hàng', image: getRandomProductImage() },
     ];
 
     const tbody = document.getElementById('inventoryTableBody');
@@ -412,6 +413,21 @@
       return '';
     }
 
+    function getStatusBadge2(status, endQuantity) {
+      if (status === 'Sắp hết' || endQuantity <= 5) {
+        return '<span class="badge warning-badge"><i class="fa-solid fa-triangle-exclamation me-1"></i>Sắp hết</span>';
+      } else {
+        return '<span class="badge success-badge"><i class="fa-solid fa-check-circle me-1"></i>Còn hàng</span>';
+      }
+    }
+
+    function getRowClass2(status, endQuantity) {
+      if (status === 'Sắp hết' || endQuantity <= 5) {
+        return 'warning-row';
+      }
+      return '';
+    }
+
     // Render bảng tồn kho hiện tại
     function renderInventoryTable(data) {
       tbody.innerHTML = '';
@@ -439,6 +455,8 @@
     function renderHistoryTable(data) {
       historyTbody.innerHTML = '';
       data.forEach((item, i) => {
+        const rowClass = getRowClass2(item.status, item.endQuantity);
+        const statusBadge = getStatusBadge2(item.status, item.endQuantity);
         historyTbody.innerHTML += `
           <tr>
             <td>P00${i + 1}</td>
@@ -450,6 +468,7 @@
             <td class="text-success fw-bold">+${item.import}</td>
             <td class="text-danger fw-bold">-${item.export}</td>
             <td class="text-primary fw-bold">${item.endQuantity}</td>
+            <td>${statusBadge}</td>
           </tr>`;
       });
     }
