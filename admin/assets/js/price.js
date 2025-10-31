@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <input type="number" class="profit-input form-control" value="${cat.profit}" min="0" max="100" step="0.1" data-id="${cat.id}"> %
         </td>
         <td>
-          <button class="action-btn save-category-btn btn btn-primary btn-sm" data-id="${cat.id}">Lưu</button>
+          <button class="action-btn save-category-btn btn btn-success btn-sm" data-id="${cat.id}">Lưu</button>
         </td>
       `;
     });
@@ -292,7 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function calculateSellingPrice(cost, profitPercentage) {
     if (cost <= 0 || profitPercentage >= 100) return 0;
     const price = cost / (1 - profitPercentage / 100);
-    return Math.floor(price);
+    return Math.round(Math.floor(price) / 1000) * 1000;
   }
 
   // Hàm render bảng tỷ lệ lợi nhuận theo sản phẩm
@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <input type="number" class="profit-input form-control" value="${prod.profit}" min="0" max="100" step="0.1" data-id="${prod.id}"> %
         </td>
         <td>
-          <button class="action-btn save-product-btn btn btn-primary btn-sm" data-id="${prod.id}">Lưu</button>
+          <button class="action-btn save-product-btn btn btn-success btn-sm" data-id="${prod.id}">Lưu</button>
         </td>
       `;
     });
